@@ -1,0 +1,139 @@
+% ============================================================================ %
+%
+%           Šablona bakalářské/diplomové práce
+%
+% Autor:    Ing. Jozef Říha (2006-05-04), od té doby šablonu udržuje
+%           Ing. Pavel Tomášek, Ph.D. (tomasek@utb.cz)
+%
+% Verze:    2021-05-04
+%
+% Kódování: UTF-8 (kontrolní řetězec: žluťoučký kůň úpěl ďábelšké ódy)
+%
+% Sazba:    pdflatex prace.tex && pdflatex prace.tex
+%           (nutné dvakrát pro korektní vložení citací a jiných referencí),
+%           v případě umístění literatury do externího bib souboru je třeba volat
+%           pdflatex prace.tex && bibtex prace && pdflatex prace.tex && pdflatex prace.tex
+%
+% Tip:      Ve správně vysázeném českém textu by na konci řádku neměla zůstant
+%           samotná jednopísmenná předložka či spojka. Na takové místo se vkládá
+%           nezalomitelná mezera pomocí symbolu ~. Existuje program, který umí
+%           zpracovat celý TeX dokument najednou podle českých konvencí:
+%           http://petr.olsak.net/ftp/olsak/vlna/
+%
+% Pozor:    Vzhledem k požadovanému standardu PDF/A nesmí vložené obrázky 
+%           obsahovat alfa kanál (průhlednost).
+%
+% ============================================================================ %
+
+
+\documentclass[a4paper,12pt]{article}
+
+% Definice vzhledu a nastavení se načítá z následujícího souboru (netřeba editovat)
+\input{tex/UTB.tex}
+
+% Uživatelské definice -- upravte dle požadavků
+\nastavfakultu{FAI}
+	% FAI  -- pro Fakultu aplikované informatiky
+	% FAME -- pro Fakultu managementu a ekonomiky
+	% FHS  -- pro Fakultu humanitních studií
+	% FLKR -- pro Fakultu logistiky a krizového řízení
+	% FMK  -- pro Fakutlu mutimediálních komunikací
+	% FT   -- pro Fakultu technologickou
+	% UNI  -- pro Univerzitní institut
+\nastavtyp{BP}
+	% BP   -- bakalářská práce
+	% DP   -- diplomová práce
+\nastavrok{xxxx}
+	% zadejte rok místo "xxxx"
+\nastavjazyk{CZ}
+	% CZ   -- práce bude v českém jazyce
+	% EN   -- práce bude v anglickém jazyce
+
+% Lze přidat vertikalni odsazeni nad (prvni parametr) a pod (druhy parametr)
+% obrázky, tabulky i rovnice/soustavy rovnic
+\nastavmezerukolemobrazku{0mm}{0mm}
+\nastavmezerukolemtabulek{0mm}{0mm}
+\nastavmezerukolemrovnic{0mm}{0mm}
+
+\nastavautora{Titul Jméno Příjmení}
+\nastavnazevcz{Název práce česky (max. 2 řádky)}
+\nastavnazeven{Název práce anglicky (max. 2 řádky)} % Jen u anglicky psané práce
+\nastavabstraktcz{Text abstraktu česky}
+\nastavabstrakten{Text of the abstract}
+\nastavklicovaslovacz{Přehled klíčových slov}
+\nastavklicovaslovaen{Some keywords}
+
+% Následující příkaz nastaví standard PDF/A-1b
+\aplikujpdfa
+
+
+% ============================================================================ %
+\begin{document}
+
+\titulnistrana
+
+\zadani
+
+\prohlaseni
+
+\abstraktaklicovaslova
+
+
+% ============================================================================ %
+\clearpage
+\thispagestyle{empty}
+Zde je místo pro případné poděkování, motto, úryvky knih, básní atp.
+
+
+% ============================================================================ %
+\obsah  % Obsah je generován automaticky
+
+
+% ============================================================================ %
+\OdsazovaniOdstavcuStart % Nastaví odsazování odstavců dle zvoleného jazyka
+
+\input{tex/text.tex} % Hlavni text prace
+
+\OdsazovaniOdstavcuStop
+
+
+% ============================================================================ %
+%\seznamlit{
+  % Na toto místo je třeba vložit veškeré citované bibliografické položky.
+  %\bibitem{HRW1997}Halliday, D.; Resnick, R.; Walker, J.: \emph{Fundamentals of Physics}. John Wiley \&~Sons, Inc., páté vydání, 1997, ISBN 978-0-471-28323-2.
+  %\bibitem{Delorme2006}Delorme, A.: \emph{Encyclopedia of Medical Devices and Instrumentation}, ročník 6, kapitola Statistical Methods. Wiley Interscience, 2006, ISBN 978-0-471-73287-7, s. 240–264, doi:10.1002/0471732877.emd318.
+  %\bibitem{Bourreau2006}Bourreau, D.; Peden, A.; Maguer, S. L.: A Quasi-Optical Free-Space Measurement Setup Without Time-Domain Gating for Material Characterization in the W-Band. \emph{Instrumentation and Measurement}, IEEE Transactions on, ročník 55, č. 6, prosinec 2006: s. 2022–2028, ISSN 0018-9456.
+  %\bibitem{Judish1999}Judish, R. M.; Splett, J.: Robust Statistical Analysis of Vector Network Analyzer Intercomparisons. In IMTC/99. \emph{Proceedings of the 16th IEEE Instrumentation and Measurement Technology Conference (Cat. No.99CH36309)}, ročník 3, květen 1999, ISSN 1091-5281, s. 1320–1324, doi:10.1109/IMTC.1999.776019.
+  %\bibitem{Valente2005}Valente, F.: \emph{Variational Bayesian Methods for Audio Indexing}. Dizertační práce, Université Nice Sophia Antipolis, září 2005.
+  %\bibitem{Fralick1997}Fralick, D. T.: W-band Free Space Permittivity Measurement Setup for Candidate Radome Materials. Technická zpráva, NASA Langley Technical Report Server, 1997.
+  %\bibitem{WWWCST}3DEXPERIENCE® Company - Dassault Systèmes®: CST Studio Suite 3D EM simulation and analysis software [online]. https://www.3ds.com/products-  services/simulia/products/cst-studio-suite/, 2020, [cit. 2020-01-26].
+%}
+% Pro generování literatury lze alternativně použít i příkaz "\seznamlitbib", 
+% který se postará o plnohodnotné vkládání referencí pomocí "bibliography". 
+% V takovém případě se využívají bibliografické údaje uložené v souboru 
+% tex/literatura.bib. Ty se automaticky upravuji dle zvolené citační normy 
+% (v šabloně je nastavena česká norma).
+\seznamlitbib
+
+
+% ============================================================================ %
+\input{tex/zkratky.tex} % Seznam zkratek
+
+
+% ============================================================================ %
+\seznamobr  % Seznam je generován automaticky
+
+
+% ============================================================================ %
+\seznamtab  % Seznam je generován automaticky
+
+
+% ============================================================================ %
+\input{tex/prilohy.tex} % Prilohy
+
+
+% ============================================================================ %
+
+\end{document}
+
+% ============================================================================ %
