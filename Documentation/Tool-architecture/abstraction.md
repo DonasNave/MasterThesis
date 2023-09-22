@@ -1,0 +1,54 @@
+# Configuration and deployment abstraction
+
+## Data structure
+
+- Application
+  - Projects
+    - Service
+      - Code (reference to a git repository)
+      - Configuration
+        - Environmental values
+        - Build commands
+        - Entrypoint
+        - Resources
+          - CPU
+          - RAM
+          - Memory
+    - Database
+      - Configuration
+        - Users
+        - Passwords
+        - Environmental values
+        - Resources
+          - CPU
+          - RAM
+          - Memory
+    - Monitor
+      - Configuration
+        - Environmental values
+        - Build commands
+        - Entrypoint
+    - Rev. proxy
+      - Configuration
+        - Environmental values
+        - Build commands
+        - Entrypoint
+        - Certificates
+  - Abstract deploy environment configuration
+    - Network
+      - Name
+      - Subnet
+      - Gateway
+    - Service discovery
+      - Name
+      - Port
+    - Volumes
+      - Name
+      - Path
+    - Resources
+      - Nodes
+        - CPU
+        - RAM
+      - Network
+        - Ingress
+        - Egress
