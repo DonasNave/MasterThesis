@@ -2,7 +2,7 @@
 
 ## Guide
 
-- [Idea](./Documentation/Assignment/Idea.md)
+- [Idea](./Documentation/Assignment/idea.md)
 - Tool Architecture
   - [Core Framework](./Documentation/Tool-architecture/framework.md)
   - [Plugin System](./Documentation/Tool-architecture/plugin.md)
