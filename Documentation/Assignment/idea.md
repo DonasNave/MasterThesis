@@ -10,29 +10,95 @@ Another challenge is development standardization and norms. Developing software 
 
 \* Currently there is no EU standardization for Server systems, but it is expected to be introduced in near future.
 
-## How do current systems work
+## How current systems work
 
-Server systems consist of microservices. They are developed with combination of dotnet framework and Angular. Each microservice is developed as a separate project.
-
-Current deployment is done via building each project into a docker image. Those images are deployed to a server using docker swarm. Docker swarm uses YML files to configure the deployment.
+Our application consist of microservices. They are developed with combination of dotnet framework, Angular and React. Each microservice is developed as a separate project. Each project is built into a docker image. Those images are deployed to a server using docker swarm. Docker swarm uses YML files to configure the deployment.
 
 ## What is needed
 
-These challenges present a need for tool that:
+Supporting server software for train vehicles and it's challenges present a need for tool that:
 
-- abstracts logic behind configuration and deployment from the tools currently used (docker swarm/kubernetes) Such tool's code must be
-- is available to the company (open source, or company owned) and modifiable to suit the company's needs
+- abstracts logic behind build, configuration and deployment of application from the tools currently used (docker swarm/kubernetes)
+- has code available to the company (open source, or company owned) and is modifiable to suit the company's needs
 - is developed in accordance with the standards set by the company (and by proxy EU legislation)
 - is easily modifiable without need for extensive knowledge of the tool's codebase (framework that supports plugins with adequate api)
 - usable in a CI/CD pipeline (must be able to be run from command line)
 
 ## Desired result
 
-Custom OS dotnet CLI tool, that is composed of core framework that maintains abstracted configuration and deployment logic, a set of rules that are used to validate the configuration and a set of rules that are used to deploy the configuration. This framework will support plugins that will use it's api to attain project/application data and transform it into specific configuration and deployment files.
+Custom OS dotnet CLI tool, that is composed of core framework and plugins. Framework provides via API configuration and deployment logic from abstracted config files. Specific plugin implementation provides implementation logic to be used by framework when deploying application.
 
 This tool will be used in at least development environment of my company. In the remaining time before finishing the thesis, feedback and issues will be collected and addressed.
 
-Simply put, if there is a decision to take all those services and move them to kubernetes, the only thing that would need to be done is to write a plugin that would transform the configuration and deployment rules to kubernetes YML files. (and so on for other deployment options)
+Simply put, if there is a decision to take application deployment and move it to kubernetes, the only thing that need to be done is to write a plugin that would transform the configuration and deployment rules to kubernetes YML files. (and so on for other deployment options).
+
+Tool will use new human readable configuration files (likely json, abstracted from specific tool) related to:
+
+- Service
+  - Build description
+  - Appsettings (existed before)
+  - Deployment specifics
+    - Networking
+    - Resources
+    - Service discovery
+    - Dependencies (other services/versions)
+- Application
+  - Service list
+  - Deployment specifics
+    - Actions
+    - Service coupling
+    - Networking
+    - Resources
+    - Service discovery
+- Server specifics
+  - Networking
+  - Resources
+    - CPU, RAM, Memory
+  - Service discovery
+  - Dependencies (other services/versions)
+
+*Sidenote: This is a very rough idea of what the configuration files will look like. It is expected that the configuration files will be changed and refined during the development of the tool.*
+
+*Sidenote: Some presumptions are currently made about the tool's implementation as well as target environment. They are subject to change.*
+
+### Functionality
+
+- Building of service using abstract/primitive information into required format (docker image, podman, simple dlls/app) and it's configuration
+- Creating configuration for application environment
+- Creating configuration for server environment
+- Running build and deploy actions *
+- Running tests *
+
+*Sidenote: Tool will be likely tightly integrated into CI/CD pipelines, thus it's functions will border with pipelines actions. Currently it is hard to predict where will the fine line in responsibility distribution will be drawn. This is subject to change.*
+
+### Expected workflow
+
+- User provides required abstracted configuration and plugin to the tool
+- Tool validates the configuration
+- Tool builds and configures the services
+- Tool validates the services
+- Tool implements/translates the configuration to the required format for application and server environment
+- Tool prepares the server environment
+- Tool deploys the services to the server environment
+
+### Documentation
+
+Master's thesis will be written in latex. It will contain:
+
+- introduction
+- theory
+  - related work
+  - methodology
+- implementation
+- testing
+- results
+- conclusion
+
+Tool itself will be documented in a markdown files. It will contain:
+
+- overview
+- how to use
+- how to develop plugins
 
 ## Proposed tools
 
@@ -100,11 +166,22 @@ Simply put, if there is a decision to take all those services and move them to k
 
 Reporting
 
-- company
 - supervisor (professor)
+- company
 
 ## Supporting material
 
 ### Literature
 
+#### Books
+
+#### Articles
+
 ### Software
+
+- [Docker](https://www.docker.com/)
+- [Docker swarm](https://docs.docker.com/engine/swarm/)
+- [Kubernetes](https://kubernetes.io/)
+- [dotnet](https://dotnet.microsoft.com/)
+- [dotnet tools CLI](https://docs.microsoft.com/en-us/dotnet/core/tools/global-tools)
+- [NuGet](https://www.nuget.org/)
