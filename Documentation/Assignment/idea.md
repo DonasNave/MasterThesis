@@ -32,14 +32,16 @@ AoT compilation is a process of compiling source code into machine code before r
          - file upload service (sporadic use)
          - weather service (constant use)
          - stock market scraper (periodic use)
+       - Request runner (management service)
+         - runs requests on the services in specified time intervals
      - Client
-       - Blazor SPA
+       - Blazor SPA (single page application)
+         - Integrate dashboards for monitoring?
      - Database
        - PostgreSQL
      - Monitoring
        - Grafana
        - Prometheus
-       - Loki?
        - dotnet monitor
        - edgeshark
      - Auth provider?
