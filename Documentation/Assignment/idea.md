@@ -134,7 +134,7 @@ Master's thesis will be written in latex. It will contain:
 - database
   - postgresql
 - networking
-  - nginx/envoy
+  - nginx
 - monitoring
   - grafana
   - prometheus
@@ -154,7 +154,6 @@ Master's thesis will be written in latex. It will contain:
 Reporting
 
 - supervisor (professor)
-- company
 
 ## Possible extension
 
