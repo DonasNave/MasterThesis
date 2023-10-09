@@ -1,0 +1,73 @@
+version: '3.7'
+
+volumes:
+  grafana_storage: { }
+  prometheus_data: { }
+
+networks:
+  - stack-network:
+
+services:
+  envoy:
+    image: envoyproxy/envoy:v1.16.0
+    ports:
+      - "10000:10000"
+    volumes:
+      - ./envoy.yaml:/etc/envoy/envoy.yaml
+    networks:
+      - stack-network
+      
+  grafana:
+    image: grafana/grafana-enterprise
+    container_name: grafana
+    depends_on:
+      - prometheus
+    restart: unless-stopped
+    environment:
+      - GF_LOG_LEVEL=debug
+    ports:
+      - '3000:3000'
+    volumes:
+      - 'grafana_storage:/var/lib/grafana'
+    networks:
+      - stack-network
+    
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./prometheus/:/etc/prometheus/
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+    ports:
+      - 9090:9090
+    networks:
+      - stack-network
+  db:
+    image: postgres/postgres:latest
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: example
+    networks:
+      - stack-network
+      
+  dozzle:
+    container_name: dozzle
+    image: amir20/dozzle:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 8080:8080
+    environment:
+      DOZZLE_LEVEL: trace
+    healthcheck:
+      test: [ "CMD", "/dozzle", "healthcheck" ]
+      interval: 3s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
+    networks:
+      - stack-network
