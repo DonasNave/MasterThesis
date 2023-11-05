@@ -46,13 +46,23 @@ services:
       - 9090:9090
     networks:
       - stack-network
-  db:
+
+  database:
+    container_name: postgre
     image: postgres/postgres:latest
     restart: always
     environment:
       POSTGRES_PASSWORD: example
     networks:
       - stack-network
+        
+  database-client:
+    container_name: pgadmin
+    image: dpage/pgadmin4:latest
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: dev@dev.com
+      PGADMIN_DEFAULT_PASSWORD: example
       
   dozzle:
     container_name: dozzle
