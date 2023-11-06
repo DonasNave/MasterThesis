@@ -1,5 +1,5 @@
 var builder = WebApplication.CreateBuilder(args);
-// File Upload Service
+// Signal Readings Service
 
 // Add services to the container.
 
