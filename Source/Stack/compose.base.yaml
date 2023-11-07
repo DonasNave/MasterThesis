@@ -1,25 +1,28 @@
 version: '3.7'
 
 volumes:
-  grafana_storage: { }
-  prometheus_data: { }
+  grafana_storage:
+  prometheus_data:
+  postgres:
+  pgadmin:
 
 networks:
-  - stack-network:
+  stack-network:
 
 services:
-  envoy:
+  proxy:
     image: envoyproxy/envoy:v1.16.0
+    container_name: proxy
     ports:
       - "10000:10000"
     volumes:
       - ./envoy.yaml:/etc/envoy/envoy.yaml
     networks:
       - stack-network
-      
-  grafana:
+  
+  data-visualization:
     image: grafana/grafana-enterprise
-    container_name: grafana
+    container_name: data-visualization
     depends_on:
       - prometheus
     restart: unless-stopped
@@ -31,7 +34,7 @@ services:
       - 'grafana_storage:/var/lib/grafana'
     networks:
       - stack-network
-    
+  
   prometheus:
     image: prom/prometheus:latest
     volumes:
@@ -48,24 +51,37 @@ services:
       - stack-network
 
   database:
-    container_name: postgre
-    image: postgres/postgres:latest
-    restart: always
+    container_name: postgre_db
+    image: postgres/postgres
     environment:
-      POSTGRES_PASSWORD: example
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "5432:5432"
     networks:
-      - stack-network
-        
+      - postgres
+    restart: unless-stopped
+  
   database-client:
     container_name: pgadmin
-    image: dpage/pgadmin4:latest
-    restart: always
+    image: dpage/pgadmin4
     environment:
-      PGADMIN_DEFAULT_EMAIL: dev@dev.com
-      PGADMIN_DEFAULT_PASSWORD: example
-      
-  dozzle:
-    container_name: dozzle
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-admin@admin.com}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    ports:
+      - "${PGADMIN_PORT:-5050}:80"
+    networks:
+      - postgres
+    restart: unless-stopped
+  
+  stack-monitor:
+    container_name: stack-monitor
     image: amir20/dozzle:latest
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
