@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex prace"] 1699469772 "prace.aux" "prace.bbl" "prace" 1699469834 0
+["bibtex prace"] 1703528925 "prace.aux" "prace.bbl" "prace" 1703528926 0
   "./tex/czechiso-cz.bst" 1575625038 29703 12ad42702c1c655683c2ecb327cb403f ""
-  "./tex/literatura.bib" 1614664620 3087 349adea536c1873db145f7704c42fd65 ""
+  "./tex/literatura.bib" 1703528925 3049 59a825cf31264ee49b7ee4d6b3806168 ""
   "prace.aux" 1699469834 4334 37a7f8884c46db0e0e8b85fd8e87d503 "pdflatex"
   (generated)
   "prace.bbl"
   "prace.blg"
   (rewritten before read)
-["pdflatex"] 1699469833 "/Users/noe/School/Thesis/Thesis/prace.tex" "prace.pdf" "prace" 1699469834 0
+["pdflatex"] 1699469833 "/Users/noe/School/Thesis/Thesis/prace.tex" "prace.pdf" "prace" 1703528926 0
   "/Users/noe/School/Thesis/Thesis/prace.tex" 1699469833 6317 2602549e136ab76f342ae96ce641032d ""
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
@@ -148,7 +148,7 @@
   "graphics/logo/fai_logo_cz.png" 1482249702 40081 2b838a823da818dabc5ecadddc2c15cd ""
   "graphics/sRGBIEC1966-2.1.icm" 1482163438 3144 1d3fda2edb4a89ab60a23c5f7c7d81dd ""
   "prace.aux" 1699469834 4334 37a7f8884c46db0e0e8b85fd8e87d503 "pdflatex"
-  "prace.bbl" 1699469772 2061 385a251970b41c18698f57720b26289e "bibtex prace"
+  "prace.bbl" 1703528926 2061 385a251970b41c18698f57720b26289e "bibtex prace"
   "prace.loa" 1699469834 53 2db9a9512333481986bb9ee5eeef7679 "pdflatex"
   "prace.lof" 1699469834 190 d725ba222ad43ab616900683c062305a "pdflatex"
   "prace.lot" 1699469834 187 6e2c2fa0621fd03451a2480e4a5f2323 "pdflatex"

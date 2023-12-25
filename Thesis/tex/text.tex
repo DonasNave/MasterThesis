@@ -1,0 +1,94 @@
+% ============================================================================ %
+% Encoding: UTF-8 (žluťoučký kůň úpěl ďábelšké ódy)
+% ============================================================================ %
+
+% ============================================================================ %
+\nn{Úvod}
+První řádek prvního odstavce v kapitole či podkapitole se neodsazuje, ostatní ano. Vertikální odsazení mezy odstavci je typycké pro anglickou sazbu; czech babel toto respektuje, netřeba do textu přidávat jakékoliv explicitní formátování, viz ukázka sazby tohoto textu s následujícím odstavcem).
+
+Formátování druhého odstavce. Text text text text text text text text text text text text.
+
+
+% ============================================================================ %
+\cast{Teoretická část}
+
+\n{1}{Nadpisy a podnadpisy}
+Na této stránce je k vidění způsob tvorby různých úrovní nadpisů.
+
+\n{2}{Podnadpis A}
+Text
+
+\n{2}{Podnadpis B}
+Text
+
+\n{2}{Podnadpis C}
+Text
+
+\n{3}{Podpodnadpis alfa}
+Text
+
+\n{3}{Podpodnadpis beta}
+Text
+
+\n{3}{Podpodnadpis gama}
+Text
+
+\n{2}{Podnadpis D}
+Text
+
+
+\n{1}{Vkládání obrázků, tabulek a citací}
+Níže následují ukázky vložení obrázku, tabulky a různorodých citací.
+
+
+\n{2}{Obrázek}
+Obrázek \ref{fig:logo} prezentuje logo Fakulty aplikované informatiky.
+
+% Obrázek lze vkládat pomocí následujícího zjednodušeného stylu, nebo klasickým LaTex způsobem
+% Pozor! Obrázek nesmí obsahovat alfa kanál (průhlednost). Jde to totiž proti požadovanému standardu PDF/A.
+\obr{Popisek obrázku}{fig:logo}{0.5}{graphics/logo/fai_logo_cz.png}
+
+
+\n{2}{Tabulka}
+Tabulka \ref{tab:priklad} obsahuje dva řádky a celkem 7 sloupců.
+
+% Tabulku lze vkládat pomocí následujícího zjednodušeného stylu, nebo klasickým LaTex způsobem
+\tab{Popisek tabulky}{tab:priklad}{0.65}{|l|c|c|c|c|c|r|}{
+  \hline
+   & 1 & 2 & 3 & 4 & 5 & Cena [Kč] \\ \hline
+  \emph{F} & (jedna) & (dva) & (tři) & (čtyři) & (pět) & 300 \\ \hline
+}
+
+
+\n{2}{Citování}
+Následuje ukázka odkazování na různé zdroje:
+\begin{itemize}
+	\item kniha \cite{HRW1997},
+	\item kapitola v knize \cite{Delorme2006},
+	\item článek v odborném žurnálu \cite{Bourreau2006},
+	\item konferenční příspěvek \cite{Judish1999},
+	\item doktorská práce \cite{Valente2005},
+	\item technická zpráva \cite{Fralick1997},
+	\item webová stránka \cite{WWWCST}.
+\end{itemize}
+
+
+% ============================================================================ %
+
+% Pokud Vaše práce obsahuje analytickou část, stačí odkomentovat nasledujících dva řádky
+%\cast{Analytická část}
+%\n{1}{Nadpis}
+
+
+% ============================================================================ %
+\cast{Praktická část}
+\n{1}{Nadpis první kapitoly praktické části}
+Text
+
+
+% ============================================================================ %
+\nn{Závěr}
+Text závěru.
+
+
+% ============================================================================ %

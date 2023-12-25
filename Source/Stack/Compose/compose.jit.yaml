@@ -1,0 +1,24 @@
+version: '3.7'
+
+services:
+  fus-service:
+    image: fus-service
+    container_name: fus-service
+    build:
+      context: ../Services/JIT/FUS/FUS
+      dockerfile: Dockerfile
+    ports:
+      - "15001:5000"
+    networks:
+      - stack-network
+
+  srs-service:
+    image: srs-service
+    container_name: srs-service
+    build:
+      context: ../Services/JIT/SRS/SRS
+      dockerfile: Dockerfile
+    ports:
+      - "15002:5000"
+    networks:
+      - stack-network
