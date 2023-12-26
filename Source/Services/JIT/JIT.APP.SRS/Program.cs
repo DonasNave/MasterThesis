@@ -2,6 +2,7 @@ using JIT.APP.Models;
 using Npgsql;
 using OpenTelemetry.Exporter;
 using OpenTelemetry.Logs;
+using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 
@@ -15,7 +16,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Add OpenTelemetry Tracing
+// Add OpenTelemetry ...
 builder.Services
     .AddOpenTelemetry()
     .ConfigureResource(resourceBuilder =>
@@ -25,12 +26,12 @@ builder.Services
             serviceVersion: typeof(Program).Assembly.GetName().Version?.ToString() ?? "unknown",
             serviceInstanceId: Environment.MachineName);
     })
+    // ... Tracing ...
     .WithTracing(providerBuilder =>
     {
         providerBuilder
             .AddAspNetCoreInstrumentation()
             .AddNpgsql()
-            //.AddSource(nameof(EventConsumer)) 
             .AddOtlpExporter(options =>
             {
                 options.Endpoint =
@@ -43,7 +44,30 @@ builder.Services
                 options.Protocol = OtlpExportProtocol.Grpc;
             });
     })
-    .WithMetrics(/* we'll look at this later */);
+    // ... Metrics 
+    .WithMetrics(metrics =>
+    {
+        metrics
+            .AddRuntimeInstrumentation()
+            .AddAspNetCoreInstrumentation()
+            .AddHttpClientInstrumentation()
+            .AddMeter(
+                "System.Runtime",
+                "Microsoft.AspNetCore.Hosting",
+                "Microsoft.AspNetCore.Server.Kestrel",
+                "Npgsql")
+            .AddOtlpExporter(options =>
+            {
+                options.Endpoint =
+                    builder
+                        .Configuration
+                        .GetSection(nameof(OpenTelemetrySettings))
+                        .Get<OpenTelemetrySettings>()!
+                        .Endpoint;
+
+                options.Protocol = OtlpExportProtocol.Grpc;
+            });
+    });
 
 // Add OpenTelemetry Logging
 builder.Logging.AddOpenTelemetry(options =>
