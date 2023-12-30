@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JIT.APP.SRS.Tests.Integrati
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JIT.APP.Models", "JIT.APP.Models\JIT.APP.Models.csproj", "{650E8091-7738-4858-8705-4A83F9A983FB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JIT.APP.Extensions", "JIT.APP.Extensions\JIT.APP.Extensions.csproj", "{740E477C-F6EC-4B31-8C2C-3A4B6BDC72FC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +44,9 @@ Global
 		{650E8091-7738-4858-8705-4A83F9A983FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{650E8091-7738-4858-8705-4A83F9A983FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{650E8091-7738-4858-8705-4A83F9A983FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{740E477C-F6EC-4B31-8C2C-3A4B6BDC72FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{740E477C-F6EC-4B31-8C2C-3A4B6BDC72FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{740E477C-F6EC-4B31-8C2C-3A4B6BDC72FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{740E477C-F6EC-4B31-8C2C-3A4B6BDC72FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

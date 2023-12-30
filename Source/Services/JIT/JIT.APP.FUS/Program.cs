@@ -1,10 +1,10 @@
+using FUS.Data;
+using FUS.Services;
+using FUS.Services.Interfaces;
+using JIT.APP.Extensions;
 using JIT.APP.Models;
-using Npgsql;
-using OpenTelemetry.Exporter;
-using OpenTelemetry.Logs;
-using OpenTelemetry.Metrics;
+using Microsoft.EntityFrameworkCore;
 using OpenTelemetry.Resources;
-using OpenTelemetry.Trace;
 
 var builder = WebApplication.CreateBuilder(args);
 // File Upload Service
@@ -16,84 +16,34 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+var settings =
+    builder.Configuration.GetSection(nameof(OpenTelemetrySettings)).Get<OpenTelemetrySettings>()!;
+const string serviceName = "JIT-FUS";
+var serviceVersion = typeof(Program).Assembly.GetName().Version?.ToString() ?? "unknown";
+
 // Add OpenTelemetry ...
 builder.Services
     .AddOpenTelemetry()
+    // ... Resource ...
     .ConfigureResource(resourceBuilder =>
     {
         resourceBuilder.AddService(
-            serviceName: "JIT-FUS",
-            serviceVersion: typeof(Program).Assembly.GetName().Version?.ToString() ?? "unknown",
+            serviceName: serviceName,
+            serviceVersion: serviceVersion,
             serviceInstanceId: Environment.MachineName);
     })
     // ... Tracing ...
-    .WithTracing(providerBuilder =>
-    {
-        providerBuilder
-            .AddAspNetCoreInstrumentation()
-            .AddNpgsql()
-            .AddOtlpExporter(options =>
-            {
-                options.Endpoint =
-                    builder
-                        .Configuration
-                        .GetSection(nameof(OpenTelemetrySettings))
-                        .Get<OpenTelemetrySettings>()!
-                        .Endpoint;
-
-                options.Protocol = OtlpExportProtocol.Grpc;
-            });
-    })
+    .SetupMyOtelTracing(settings)
     // ... Metrics 
-    .WithMetrics(metrics =>
-    {
-        metrics
-            .AddRuntimeInstrumentation()
-            .AddAspNetCoreInstrumentation()
-            .AddHttpClientInstrumentation()
-            .AddMeter(
-                "System.Runtime",
-                "Microsoft.AspNetCore.Hosting",
-                "Microsoft.AspNetCore.Server.Kestrel",
-                "Npgsql")
-            .AddOtlpExporter(options =>
-            {
-                options.Endpoint =
-                    builder
-                        .Configuration
-                        .GetSection(nameof(OpenTelemetrySettings))
-                        .Get<OpenTelemetrySettings>()!
-                        .Endpoint;
-
-                options.Protocol = OtlpExportProtocol.Grpc;
-            });
-    });
+    .SetupMyOtelMetrics(settings);
 
 // Add OpenTelemetry Logging
-builder.Logging.AddOpenTelemetry(options =>
-{
-    options.SetResourceBuilder(
-        ResourceBuilder
-            .CreateDefault()
-            .AddService(
-                serviceName: "JIT-FUS",
-                serviceVersion: typeof(Program).Assembly.GetName().Version?.ToString() ?? "unknown",
-                serviceInstanceId: Environment.MachineName));
+builder.Logging.SetupMyOtelLogging(settings, serviceName, serviceVersion);
 
-    options.IncludeScopes = true;
-    options.IncludeFormattedMessage = true;
-    options.ParseStateValues = true;
+builder.Services.AddTransient<IFileService, FileService>();
 
-    options.AddOtlpExporter(exporterOptions =>
-    {
-        exporterOptions.Endpoint =
-            builder
-                .Configuration
-                .GetSection(nameof(OpenTelemetrySettings))
-                .Get<OpenTelemetrySettings>()!
-                .Endpoint;
-    });
-});
+builder.Services.AddDbContext<FileContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 
@@ -103,6 +53,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.MapPost("/api/file/upload", async (IFormFile file, IFileService fileService) =>
+    await fileService.Upload(file));
+
+app.MapGet("/api/file/download/{id:int}", async (int id, IFileService fileService) =>
+    await fileService.Download(id));
 
 app.UseHttpsRedirection();
 

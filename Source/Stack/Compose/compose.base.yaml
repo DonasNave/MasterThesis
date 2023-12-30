@@ -96,10 +96,10 @@ services:
 
   database:
     container_name: postgre_db
-    image: postgres/postgres
+    image: postgres
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password}
       PGDATA: /data/postgres
     volumes:
       - postgres:/data/postgres
