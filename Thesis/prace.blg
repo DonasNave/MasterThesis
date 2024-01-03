@@ -2,11 +2,13 @@ This is BibTeX, Version 0.99d (TeX Live 2023)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: prace.aux
 The style file: tex/czechiso-cz.bst
-I found no \citation commands---while reading file prace.aux
 Database file #1: tex/literatura.bib
+Warning--I didn't find a database entry for "dotnet"
+Warning--I didn't find a database entry for "jit"
+Warning--I didn't find a database entry for "aot"
 You've used 0 entries,
             2797 wiz_defined-function locations,
-            597 strings with 4866 characters,
+            600 strings with 4878 characters,
 and the built_in function-call counts, 32 in all, are:
 = -- 0
 > -- 0
@@ -45,4 +47,4 @@ warning$ -- 0
 while$ -- 0
 width$ -- 0
 write$ -- 9
-(There was 1 error message)
+(There were 3 warnings)
