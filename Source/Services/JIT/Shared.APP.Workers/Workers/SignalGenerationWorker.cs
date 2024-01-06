@@ -1,21 +1,23 @@
+using JIT.APP.Workers.Settings;
 using Quartz;
 
 namespace JIT.APP.Workers.Workers;
 
-public class SignalGenerationWorker(HttpClient httpClient) : IJob
+public class SignalGenerationWorker(HttpClient httpClient, WorkerSettings settings) : IJob
 {
     public async Task Execute(IJobExecutionContext context)
     {
-        // Hit the signal generation endpoint
-        var response = await httpClient.GetAsync("http://your-api-server/api/signals/10"); // Adjust the URL and parameters as needed
+        var worker = settings.GetWorker(nameof(SignalGenerationWorker));
+        
+        if (worker is null) return;
+        
+        var response = await httpClient.GetAsync(worker.Endpoint); 
 
         if (response.IsSuccessStatusCode)
         {
-            // Process the response if needed
         }
         else
         {
-            // Handle the error
         }
     }
 }

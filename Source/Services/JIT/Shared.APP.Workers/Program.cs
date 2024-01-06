@@ -1,5 +1,5 @@
-
 using JIT.APP.Models;
+using JIT.APP.Workers.Settings;
 using Npgsql;
 using OpenTelemetry.Exporter;
 using OpenTelemetry.Logs;
@@ -9,6 +9,11 @@ using OpenTelemetry.Trace;
 
 var builder = WebApplication.CreateBuilder(args);
 // Signal Readings Service
+
+// Add settings to the app
+var workerSettings = builder.Configuration.GetSection("WorkerSettings").Get<WorkerSettings>();
+if (workerSettings is not null)
+    builder.Services.AddSingleton(workerSettings);
 
 // Add services to the container.
 
