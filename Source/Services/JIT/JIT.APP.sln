@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JIT.APP.Models", "JIT.APP.M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JIT.APP.Extensions", "JIT.APP.Extensions\JIT.APP.Extensions.csproj", "{740E477C-F6EC-4B31-8C2C-3A4B6BDC72FC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.APP.Workers", "Shared.APP.Workers\Shared.APP.Workers.csproj", "{6843FAF6-9D4C-41CB-9AD3-A0F69459F969}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,5 +50,9 @@ Global
 		{740E477C-F6EC-4B31-8C2C-3A4B6BDC72FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{740E477C-F6EC-4B31-8C2C-3A4B6BDC72FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{740E477C-F6EC-4B31-8C2C-3A4B6BDC72FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6843FAF6-9D4C-41CB-9AD3-A0F69459F969}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6843FAF6-9D4C-41CB-9AD3-A0F69459F969}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6843FAF6-9D4C-41CB-9AD3-A0F69459F969}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6843FAF6-9D4C-41CB-9AD3-A0F69459F969}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

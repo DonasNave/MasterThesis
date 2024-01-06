@@ -1,3 +1,4 @@
+
 using JIT.APP.Models;
 using Npgsql;
 using OpenTelemetry.Exporter;
@@ -5,14 +6,11 @@ using OpenTelemetry.Logs;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
-using SRS.Services;
-using SRS.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 // Signal Readings Service
 
 // Add services to the container.
-builder.Services.AddTransient<IReadingService, ReadingService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -25,7 +23,7 @@ builder.Services
     .ConfigureResource(resourceBuilder =>
     {
         resourceBuilder.AddService(
-            serviceName: "JIT-SRS",
+            serviceName: "JIT-Workers",
             serviceVersion: typeof(Program).Assembly.GetName().Version?.ToString() ?? "unknown",
             serviceInstanceId: Environment.MachineName);
     })
@@ -79,7 +77,7 @@ builder.Logging.AddOpenTelemetry(options =>
         ResourceBuilder
             .CreateDefault()
             .AddService(
-                serviceName: "JIT-SRS",
+                serviceName: "JIT-Workers",
                 serviceVersion: typeof(Program).Assembly.GetName().Version?.ToString() ?? "unknown",
                 serviceInstanceId: Environment.MachineName));
 
@@ -114,8 +112,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-
-app.MapGet("/api/signals/{count:int}", async (int count, IReadingService readingService) =>
-    await readingService.GetRandomSignals(count));
+//Map minimal API endpoints
 
 app.Run();
