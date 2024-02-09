@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Set the base directory of your Kubernetes manifests
+BASE_DIR="./Stack/K8s"
+# ENV_DIR="$BASE_DIR/environments/dev-JIT"
+
+# Check if the base directory exists
+if [ ! -d "$BASE_DIR" ]; then
+  echo "Base directory does not exist: $BASE_DIR"
+  exit 1
+fi
+
+# Function to apply Kubernetes manifests
+apply_manifests() {
+  local dir=$1
+  echo "Applying manifests in directory: $dir"
+  find $dir -name '*.yaml' -o -name '*.yml' | while read -r file; do
+    echo "Applying $file"
+    kubectl apply -f "$file"
+  done
+  echo "--------------------------------"
+}
+
+# Apply base manifests
+apply_manifests "$BASE_DIR/base"
+# apply_manifests "$ENV_DIR"
+
+echo "Deployment complete."
