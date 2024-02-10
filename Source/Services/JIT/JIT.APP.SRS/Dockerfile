@@ -6,19 +6,19 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
-COPY ["JIT.APP.FUS/JIT.APP.FUS.csproj", "JIT.APP.FUS/"]
+COPY ["JIT.APP.SRS/JIT.APP.SRS.csproj", "JIT.APP.SRS/"]
 COPY ["JIT.APP.Extensions/JIT.APP.Extensions.csproj", "JIT.APP.Extensions/"]
 COPY ["JIT.APP.Models/JIT.APP.Models.csproj", "JIT.APP.Models/"]
-RUN dotnet restore "JIT.APP.FUS/JIT.APP.FUS.csproj"
+RUN dotnet restore "JIT.APP.SRS/JIT.APP.SRS.csproj"
 
 COPY . .
-WORKDIR "/src/JIT.APP.FUS"
-RUN dotnet build "JIT.APP.FUS.csproj" -c Release -o /app/build
+WORKDIR "/src/JIT.APP.SRS"
+RUN dotnet build "JIT.APP.SRS.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "JIT.APP.FUS.csproj" -c Release -o /app/publish
+RUN dotnet publish "JIT.APP.SRS.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "JIT.APP.FUS.dll"]
+ENTRYPOINT ["dotnet", "JIT.APP.SRS.dll"]
