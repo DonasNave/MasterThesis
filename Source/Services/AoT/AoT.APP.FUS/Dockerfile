@@ -14,7 +14,7 @@ RUN dotnet restore -r linux-$TARGETARCH
 
 # copy and publish app and libraries
 COPY . .
-RUN dotnet publish --no-restore -o /app FUS.csproj
+RUN dotnet publish --no-restore -o /app AoT.APP.FUS.csproj
 RUN rm /app/*.dbg /app/*.Development.json
 
 
@@ -23,4 +23,4 @@ FROM mcr.microsoft.com/dotnet/runtime-deps:8.0-jammy-chiseled
 WORKDIR /app
 COPY --from=build /app .
 USER $APP_UID
-ENTRYPOINT ["./FUS"]
+ENTRYPOINT ["./AoT.APP.FUS"]
