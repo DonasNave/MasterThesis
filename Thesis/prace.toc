@@ -6,47 +6,62 @@
 \contentsline {subsubsection}{\numberline {1.1.1}Historie}{11}{subsubsection.1.1.1}%
 \contentsline {subsubsection}{\numberline {1.1.2}CLR}{12}{subsubsection.1.1.2}%
 \contentsline {subsubsection}{\numberline {1.1.3}Výhody a nevýhody}{12}{subsubsection.1.1.3}%
-\contentsline {subsection}{\numberline {1.2}AoT kompilace}{12}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.2}AoT kompilace}{13}{subsection.1.2}%
 \contentsline {subsection}{\numberline {1.3}Princip}{13}{subsection.1.3}%
 \contentsline {subsubsection}{\numberline {1.3.1}Výhody a nevýhody}{13}{subsubsection.1.3.1}%
-\contentsline {section}{\numberline {2}Microservice architektura}{14}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Historie}{14}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}Popis}{14}{subsection.2.2}%
-\contentsline {subsubsection}{\numberline {2.2.1}Virtualizace a kontejnerizace}{14}{subsubsection.2.2.1}%
-\contentsline {subsubsection}{\numberline {2.2.2}Orchestrace}{14}{subsubsection.2.2.2}%
-\contentsline {subsubsection}{\numberline {2.2.3}Základní principy}{14}{subsubsection.2.2.3}%
-\contentsline {paragraph}{\itshape \bfseries {Komunikace}}{14}{section*.5}%
-\contentsline {paragraph}{\itshape \bfseries {Škálování}}{14}{section*.6}%
-\contentsline {paragraph}{\itshape \bfseries {Odolnost}}{14}{section*.7}%
-\contentsline {paragraph}{\itshape \bfseries {Vývoj}}{15}{section*.8}%
-\contentsline {subsection}{\numberline {2.3}Výhody a nevýhody}{15}{subsection.2.3}%
-\contentsline {section}{\numberline {3}Monitorování aplikace}{16}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Druhy dat}{16}{subsection.3.1}%
-\contentsline {subsubsection}{\numberline {3.1.1}Metriky}{16}{subsubsection.3.1.1}%
-\contentsline {subsubsection}{\numberline {3.1.2}Traces}{16}{subsubsection.3.1.2}%
-\contentsline {subsubsection}{\numberline {3.1.3}Logy}{16}{subsubsection.3.1.3}%
-\contentsline {subsection}{\numberline {3.2}Sběr dat}{16}{subsection.3.2}%
-\contentsline {subsubsection}{\numberline {3.2.1}OpenTelemetry}{16}{subsubsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.3}Správa dat}{16}{subsection.3.3}%
-\contentsline {section}{\texorpdfstring {\makebox [0.85cm]{II\hfill } Praktická část}{II\ Praktická část}}{17}{part.2}%
-\contentsline {section}{\numberline {4}Tvorba tech stacku}{18}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Požadavky na aplikaci}{18}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Výběr technlogií}{18}{subsection.4.2}%
-\contentsline {subsection}{\numberline {4.3}Návrh a implementace služeb}{18}{subsection.4.3}%
-\contentsline {subsection}{\numberline {4.4}Konfigurace aplikace}{18}{subsection.4.4}%
-\contentsline {section}{\numberline {5}Testování scénářů}{19}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Popis scénářů}{19}{subsection.5.1}%
-\contentsline {subsection}{\numberline {5.2}Zpracování a vizualizace dat}{19}{subsection.5.2}%
-\contentsline {subsubsection}{\numberline {5.2.1}Monitorování v reálném čase}{19}{subsubsection.5.2.1}%
-\contentsline {subsubsection}{\numberline {5.2.2}Sběr historických dat}{19}{subsubsection.5.2.2}%
-\contentsline {section}{\texorpdfstring {\makebox [0.85cm]{III\hfill } Analytická část}{III\ Analytická část}}{20}{part.3}%
-\contentsline {section}{\numberline {6}Vyhodnocení výsledků}{21}{section.6}%
-\contentsline {subsection}{\numberline {6.1}Charakteristika testovacího prostředí}{21}{subsection.6.1}%
-\contentsline {subsection}{\numberline {6.2}Výsledky testování}{21}{subsection.6.2}%
-\contentsline {subsection}{\numberline {6.3}Doporučení pro použití AoT kompilace v platformě dotnet}{21}{subsection.6.3}%
-\contentsline {section}{Závěr}{22}{section*.9}%
-\contentsline {section}{Seznam použité literatury }{23}{section*.11}%
-\contentsline {section}{Seznam použitých symbolů a zkratek}{24}{section*.13}%
-\contentsline {section}{Seznam obrázků}{25}{section*.15}%
-\contentsline {section}{Seznam tabulek}{26}{section*.16}%
-\contentsline {section}{Seznam příloh}{27}{section*.17}%
+\contentsline {section}{\numberline {2}Microservice architektura}{15}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Historie}{15}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Popis}{15}{subsection.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.1}Virtualizace a kontejnerizace}{15}{subsubsection.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.2}Orchestrace}{16}{subsubsection.2.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.3}Základní principy}{16}{subsubsection.2.2.3}%
+\contentsline {paragraph}{\itshape \bfseries {Komunikace}}{16}{section*.5}%
+\contentsline {paragraph}{\itshape \bfseries {Škálování}}{16}{section*.6}%
+\contentsline {paragraph}{\itshape \bfseries {Odolnost}}{16}{section*.7}%
+\contentsline {paragraph}{\itshape \bfseries {Vývoj}}{16}{section*.8}%
+\contentsline {subsection}{\numberline {2.3}Výhody a nevýhody}{17}{subsection.2.3}%
+\contentsline {subsubsection}{\numberline {2.3.1}Výhody}{17}{subsubsection.2.3.1}%
+\contentsline {paragraph}{\itshape \bfseries {Zvýšená agilita}}{17}{section*.9}%
+\contentsline {paragraph}{\itshape \bfseries {Škálovatelnost}}{17}{section*.10}%
+\contentsline {paragraph}{\itshape \bfseries {Odolnost}}{17}{section*.11}%
+\contentsline {paragraph}{\itshape \bfseries {Technologická rozmanitost}}{17}{section*.12}%
+\contentsline {paragraph}{\itshape \bfseries {Flexibilita nasazení}}{17}{section*.13}%
+\contentsline {paragraph}{\itshape \bfseries {Modularita}}{17}{section*.14}%
+\contentsline {subsubsection}{\numberline {2.3.2}Nevýhody}{17}{subsubsection.2.3.2}%
+\contentsline {paragraph}{\itshape \bfseries {Komplexnost}}{17}{section*.15}%
+\contentsline {paragraph}{\itshape \bfseries {Správa dat}}{17}{section*.16}%
+\contentsline {paragraph}{\itshape \bfseries {Zpoždění sítě}}{18}{section*.17}%
+\contentsline {paragraph}{\itshape \bfseries {Provozní režie}}{18}{section*.18}%
+\contentsline {paragraph}{\itshape \bfseries {Složitost vývoje a testování}}{18}{section*.19}%
+\contentsline {paragraph}{\itshape \bfseries {Integrace služeb}}{18}{section*.20}%
+\contentsline {subsection}{\numberline {2.4}Závěr}{18}{subsection.2.4}%
+\contentsline {section}{\numberline {3}Monitorování aplikace}{19}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Druhy dat}{19}{subsection.3.1}%
+\contentsline {subsubsection}{\numberline {3.1.1}Metriky}{19}{subsubsection.3.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.2}Traces}{19}{subsubsection.3.1.2}%
+\contentsline {subsubsection}{\numberline {3.1.3}Logy}{19}{subsubsection.3.1.3}%
+\contentsline {subsection}{\numberline {3.2}Sběr dat}{19}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}OpenTelemetry}{19}{subsubsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.3}Správa dat}{19}{subsection.3.3}%
+\contentsline {section}{\texorpdfstring {\makebox [0.85cm]{II\hfill } Praktická část}{II\ Praktická část}}{20}{part.2}%
+\contentsline {section}{\numberline {4}Tvorba tech stacku}{21}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Požadavky na aplikaci}{21}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Výběr technlogií}{21}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Návrh a implementace služeb}{21}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Konfigurace aplikace}{21}{subsection.4.4}%
+\contentsline {section}{\numberline {5}Testování scénářů}{22}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Popis scénářů}{22}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Zpracování a vizualizace dat}{22}{subsection.5.2}%
+\contentsline {subsubsection}{\numberline {5.2.1}Monitorování v reálném čase}{22}{subsubsection.5.2.1}%
+\contentsline {subsubsection}{\numberline {5.2.2}Sběr historických dat}{22}{subsubsection.5.2.2}%
+\contentsline {section}{\texorpdfstring {\makebox [0.85cm]{III\hfill } Analytická část}{III\ Analytická část}}{23}{part.3}%
+\contentsline {section}{\numberline {6}Vyhodnocení výsledků}{24}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Charakteristika testovacího prostředí}{24}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Výsledky testování}{24}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Doporučení pro použití AoT kompilace v platformě dotnet}{24}{subsection.6.3}%
+\contentsline {section}{Závěr}{25}{section*.21}%
+\contentsline {section}{Seznam použité literatury }{26}{section*.23}%
+\contentsline {section}{Seznam použitých symbolů a zkratek}{27}{section*.25}%
+\contentsline {section}{Seznam obrázků}{28}{section*.27}%
+\contentsline {section}{Seznam tabulek}{29}{section*.28}%
+\contentsline {section}{Seznam příloh}{30}{section*.29}%
