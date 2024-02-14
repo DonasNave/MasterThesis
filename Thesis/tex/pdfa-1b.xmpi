@@ -14,7 +14,7 @@ xmlns:prism = "http://prismstandard.org/namespaces/basic/2.0/">
 </rdf:Description> 
 <rdf:Description rdf:about="doi:"> 
 <dc:format>application/pdf</dc:format> 
-<dc:title>Název práce česky (max. 2 řádky)</dc:title> 
+<dc:title>Analýza služeb kompilovaných v režimu Ahead-of-Time a Just-In-Time na platformě .NET</dc:title> 
 <dc:creator><rdf:Seq><rdf:li>Bc. Noe Švanda</rdf:li></rdf:Seq></dc:creator> 
 <dc:subject><rdf:Bag><rdf:li>Přehled klíčových slov</rdf:li></rdf:Bag></dc:subject> 
 <prism:aggregationType>journal</prism:aggregationType> 
@@ -37,9 +37,9 @@ xmlns:prism = "http://prismstandard.org/namespaces/basic/2.0/">
 <pdfaid:conformance>B</pdfaid:conformance> 
 <xap:CreatorTool></xap:CreatorTool> 
 <xapRights:Marked>True</xapRights:Marked> 
-<xap:ModifyDate>2024-02-13T22:05:18+01:00</xap:ModifyDate> 
-<xap:CreateDate>2024-02-13T22:05:18+01:00</xap:CreateDate> 
-<xap:MetadataDate>2024-02-13T22:05:18+01:00</xap:MetadataDate> 
+<xap:ModifyDate>2024-02-14T22:13:40+01:00</xap:ModifyDate> 
+<xap:CreateDate>2024-02-14T22:13:40+01:00</xap:CreateDate> 
+<xap:MetadataDate>2024-02-14T22:13:40+01:00</xap:MetadataDate> 
 </rdf:Description> 
 </rdf:RDF> 
 </x:xmpmeta> 
