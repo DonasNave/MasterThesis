@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.8)  24 FEB 2024 11:00
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.8)  24 FEB 2024 11:23
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -883,7 +883,7 @@ LaTeX Font Info:    Trying to load font information for OT1+phv on input line 73
  (/usr/local/texlive/2023/texmf-dist/tex/latex/psnfss/ot1phv.fd
 File: ot1phv.fd 2020/03/25 scalable font definitions for OT1/phv.
 )
-<graphics/logo/fai_logo_cz.png, id=269, 325.68428pt x 76.49358pt>
+<graphics/logo/fai_logo_cz.png, id=265, 325.68428pt x 76.49358pt>
 File: graphics/logo/fai_logo_cz.png Graphic file (type png)
 <use graphics/logo/fai_logo_cz.png>
 Package pdftex.def Info: graphics/logo/fai_logo_cz.png  used on input line 73.
@@ -966,35 +966,35 @@ Overfull \hbox (4.10199pt too wide) in paragraph at lines 116--117
 ] [22
 
 
-] [23]) (./tex/chapters/analytics.tex [24
+] [23] [24]) (./tex/chapters/analytics.tex [25
 
-] [25
-
-
-]) (./tex/chapters/conclusion.tex [26
+] [26
 
 
-]) [27
+]) (./tex/chapters/conclusion.tex [27
+
+
+]) [28
 
 ] (./prace.bbl
 
 LaTeX Warning: Empty `thebibliography' environment on input line 10.
 
-) (./tex/zkratky.tex [28
+) (./tex/zkratky.tex [29
 
-]) [29
+]) [30
 
 ] (./prace.lof)
 \tf@lof=\write7
 \openout7 = `prace.lof'.
 
- [30
+ [31
 
 ] (./prace.lot)
 \tf@lot=\write8
 \openout8 = `prace.lot'.
 
- [31
+ [32
 
 
 ] (./tex/prilohy.tex (./prace.loa)
@@ -1006,7 +1006,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1--6
 
  []
 
-[32
+[33
 
 ]
 pdfTeX warning (ext4): destination with the same identifier (name{section.1}) has been already used, duplicate ignored
@@ -1026,27 +1026,27 @@ See the caption package documentation for explanation.
 File: se-pdfdoc.def 2019/11/29 v1.12 stringenc: PDFDocEncoding
 ) (/usr/local/texlive/2023/texmf-dist/tex/generic/stringenc/se-utf8.def
 File: se-utf8.def 2019/11/29 v1.12 stringenc: UTF-8
-) [33
+) [34
 
 ] (./prace.aux)
 
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `prace.out' has not changed.
-(rerunfilecheck)             Checksum: 992A5E7F5F14B7D022D8E09C8B7FC51C;10290.
+(rerunfilecheck)             Checksum: 57CBE5F17BADF19D4789AA7E9C04DBFF;10012.
  ) 
 Here is how much of TeX's memory you used:
- 14587 strings out of 476025
- 240282 string characters out of 5790017
- 1864388 words of memory out of 5000000
- 34622 multiletter control sequences out of 15000+600000
+ 14598 strings out of 476025
+ 240381 string characters out of 5790017
+ 1863388 words of memory out of 5000000
+ 34621 multiletter control sequences out of 15000+600000
  530737 words of font info for 64 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  80i,11n,79p,1038b,603s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbi1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
-Output written on prace.pdf (33 pages, 370214 bytes).
+Output written on prace.pdf (34 pages, 375091 bytes).
 PDF statistics:
- 590 PDF objects out of 1000 (max. 8388607)
- 128 named destinations out of 1000 (max. 500000)
- 546 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 603 PDF objects out of 1000 (max. 8388607)
+ 140 named destinations out of 1000 (max. 500000)
+ 538 words of extra memory for PDF output out of 10000 (max. 10000000)
 

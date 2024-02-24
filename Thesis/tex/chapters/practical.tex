@@ -3,7 +3,7 @@
 \n{1}{Tvorba tech stacku}
 Na této stránce je k vidění způsob tvorby různých úrovní nadpisů.
 
-\n{2}{Požadavky na aplikaci}
+\n{2}{Požadavky na SW}
 
 Aplikace pro svůj účel nezávislého testování výkonu a škálovatelnosti mikroslužeb vyžaduje několik požadavků, které jsou rozděleny na funkční a nefunkční.
 
@@ -45,9 +45,43 @@ Hardware, na kterém bude aplikace provozována, musí výkonnostně dostačovat
 
 \n{3}{Předpoklady služeb}
 
+\n{3}{Implementace služeb}
+
+\n{4}{SRS - Signal Readings Service}
+
+Služba v systému hraje roli čtecího zařízení, které čte data ze zdroje a poskytuje je ostatním službám. Tato služba simulu základní kámen celého systému, značně ovlivňuje výkon a škálovatelnost celého systému. Očekává se velké množství požadavků na tuto službu.
+
+Za účelem zjednodušení implementace není využito čtení dat ze skutečného zdroje, ale jsou generována náhodná data. Načež data jsou následně poskytována se simulovaným zdržením, časově založenému na měření skutečného zdržení systému při čtení dat ze vzdáleného zdroje u obdobného systému. Tato služba je implementována jako REST API (TODO: pokud konečná implementace bude gRPC, změň tuto sekci), které poskytuje data ve formátu JSON. (TODO: Obrázek návrhu architektury a rozhraní služby).
+
+\n{4}{FUS - File Upload Service}
+
+Služba v systému hraje roli zapisovacího zařízení, které zapisuje data do zdroje. Tato služba hraje roli méně vytíženého služby, která nemá značný vliv na fungování systému jako celku. Požadavky, jenž musí vyřídit nejsou kritické a nutné řešit s minimální odezvou.
+
+Služba je implementována s REST API rozhraním. (TODO: Obrázek návrhu architektury a rozhraní služby).
+
+\n{4}{TWS - Test Workers Service}
+
 \n{2}{Konfigurace aplikace}
 
 \n{3}{Konfigurace služeb}
+
+\n{4}{Grafana}
+
+\n{4}{Prometheus}
+
+\n{4}{Loki}
+
+\n{4}{Tempo}
+
+\n{4}{OpenTelemetry}
+
+\n{4}{Postgres}
+
+\n{4}{SRS - Signal Readings Service}
+
+\n{4}{FUS - File Upload Service}
+
+\n{4}{TWS - Test Workers Service}
 
 \n{3}{Konfigurace monitorovacích nástrojů}
 
@@ -56,11 +90,7 @@ Hardware, na kterém bude aplikace provozována, musí výkonnostně dostačovat
 \n{1}{Testování scénářů}
 Na této stránce je k vidění způsob tvorby různých úrovní nadpisů.
 
-\n{2}{Požadavky na testovací prostředí}
-
-\n{3}{Softwarové požadavky}
-
-\n{3}{Hardwarové požadavky}
+\n{2}{Požadavky na scénáře}
 
 \n{2}{Popis scénářů}
 
