@@ -44,10 +44,16 @@ Jedná se o funkcionalitu vydanou bez plné podpory v roce 2022 s dotnet framewo
 
 Filozofie Microsoftu ohledně AoT kompilace je, že vývojáři by měli mít možnost využít AoT kompilace, pokud je to vhodné, aniž by museli použít jiný programovací jazyk a sadu nástrojů.
 
-\n{2}{Princip}
+\n{3}{Princip}
 Text
 
-\n{3}{Přehled dostupné funkcionality}
+\n{4}{Deklarace rozhraní}
+
+\n{4}{Trimming}
+
+\n{3}{Přehled podpory}
+
+\n{4}{Funkcionalita}
 
 Následující přehled představuje rozsah funkcionality implementované v rámci dotnet frameworku 8.0, konkrétně APS.NET k datu zvěřejnění práce.
 
@@ -67,6 +73,19 @@ Následující přehled představuje rozsah funkcionality implementované v rám
     \item \textbf{Rewrite}
     \item \textbf{StaticFiles}
     \item \textbf{WebSockets}
+\end{itemize}
+
+\n{4}{Cíle kompilace}
+
+Dotnet poskytuje podporu pro kompilaci zdrojového kódu v režimu AoT pouze pro určité operační systémy:
+
+\begin{itemize}
+    \item \textbf{Windows} - plná podpora
+    \item \textbf{Linux} - plná podpora
+    \item \textbf{macOS} - plná podpora
+    \item \textbf{Android} - částečná podpora
+    \item \textbf{iOS} - částečná podpora
+    \item \textbf{WebAssembly} - částečná podpora
 \end{itemize}
 
 \n{3}{Výhody}
@@ -135,6 +154,12 @@ Robustnosti mikroslužeb je dosaženo pomocí strategií, jako jsou přerušova�
 \n{4}{Vývoj}
 
 Mikroslužby umožňují agilní vývojové postupy. Týmy mohou vyvíjet, testovat a nasazovat služby nezávisle, což umožňuje rychlejší iteraci a zpětnou vazbu. Nedílnou součástí jsou pipelines pro kontinuální integraci a doručování (CI/CD), které umožňují automatizované testování a nasazení. Tento přístup podporuje kulturu DevOps a podporuje užší spolupráci mezi vývojovými a provozními týmy.
+
+\n{3}{Serverless a mikroslužby}
+
+Serverless je model vývoje aplikací, který umožňuje vývojářům psát a nasazovat kód bez starostí o infrastrukturu. Tento model je založen na konceptu funkcí jako služby (FaaS), které jsou jednotlivé kusy kódu, které jsou spouštěny na základě událostí. Serverless a mikroslužby se často používají společně, protože oba modely podporují škálovatelnost, agilitu a odolnost. Serverless může být výhodný pro mikroslužby, které jsou založeny na událostech, jako jsou zpracování obrázků, zpracování zpráv nebo plánování úloh.
+
+
 
 \n{2}{Výhody a nevýhody}
 

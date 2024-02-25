@@ -85,6 +85,8 @@ Pro implementaci testovacích služeb byl zvolena technologie dotnet, konkrétn�
 
 Služby musí být implementovány tak, aby v obou kompilačních verzích poskytovaly totožnou funkcionalitu. Jejich chování musí být konfigurovatelné na úrovni kontejneru, který je spouští. Zároveň musí sbírat data o svém chování a poskytovat je monitorovacím nástrojům.
 
+AoT kompilované služby budou otestovány s ohledem na možné kompilační optimalizace, které ovlivňují výsledný program. Toto chování je ovlivňeno atributem OptimizationPreference, který je součástí konfigurace služby.
+
 \n{3}{Implementace služeb}
 
 \n{4}{SRS - Signal Readings Service}
