@@ -47,7 +47,29 @@ Filozofie Microsoftu ohledně AoT kompilace je, že vývojáři by měli mít mo
 \n{2}{Princip}
 Text
 
-\n{3}{Výhody a nevýhody}
+\n{3}{Přehled dostupné funkcionality}
+
+Následující přehled představuje rozsah funkcionality implementované v rámci dotnet frameworku 8.0, konkrétně APS.NET k datu zvěřejnění práce.
+
+\begin{itemize}
+    \item \textbf{REST minimal API}
+    \item \textbf{gRPC API}
+    \item \textbf{JWT Authentication}
+    \item \textbf{CORS}
+    \item \textbf{HealthChecks}
+    \item \textbf{HttpLogging}
+    \item \textbf{Localization}
+    \item \textbf{OutputCaching}
+    \item \textbf{RateLimiting}
+    \item \textbf{RequestDecompression}
+    \item \textbf{ResponseCaching}
+    \item \textbf{ResponseCompression}
+    \item \textbf{Rewrite}
+    \item \textbf{StaticFiles}
+    \item \textbf{WebSockets}
+\end{itemize}
+
+\n{3}{Výhody}
 
 Mezi hlavní výhody se řadí zprostředkování následujícího:
 \begin{itemize}
@@ -55,10 +77,21 @@ Mezi hlavní výhody se řadí zprostředkování následujícího:
     \item \textbf{Paměťová zátěž} - CLR umožňuje dynamicky načítat knihovny za běhu aplikace. Tímto je umožněno vytvářet aplikace, které jsou schopny měnit své chování za běhu.
 \end{itemize}
 
+\n{3}{Nevýhody}
+
 Zatímco za nevýhody CLR se dá považovat:
 \begin{itemize}
     \item  \textbf{Absence nástrojů z CLR} - Mnoho nástrojů, které jsou dostupné v CLR, nejsou dostupné v AoT kompilaci. Mezi tyto nástroje patří například reflexe, dynamické načítání knihoven a další.
     \item \textbf{Transformace kódu na pozadí} - Za účelem zachování obdobné definice API využívají vybrané knihovny techniku transformace kódu na pozadí. Tím je zajištěno, že uživatel může jednoduše využít funkcionalitu, jako například routování REST endpointů stejným způsobem jako v CLR kódu. Tím je ale značně abstrahována podoba a funkce kódu, který je vytvořen.
+    \item \textbf{Absence dynamického načítání} - například Assembly.LoadFile.
+    \item \textbf{Bez generování kódu za běhu} - například System.Reflection.Emit.
+    \item \textbf{Žádné C++/CLI} - např. System.Runtime.InteropServices.WindowsRuntime
+    \item \textbf{Windows: absence COM} - např. System.Runtime.InteropServices.ComTypes
+    \item \textbf{Vyžaduje trimming (ořezávání)}, které má omezení. 
+    \item \textbf{Kompilace do jediného souboru} 
+    \item \textbf{Připojení běhových knihoven} - požadované běhové knihovny jsou součástí výsledného aplikačního souboru. To zvyšuje velikost samoteného programu ve srovnání s aplikacemi závislými na frameworku.
+    \item \textbf{System.Linq.Expressions} - výsledný kód používá svou interpretovanou podobu, která je pomalejší než run-time generovaný kompilovaný kód.
+    \item \textbf{Kompatibilita knihoven s AoT} - né všechny knihovny runtime jsou plně anotovány tak, aby byly kompatibilní s Native AOT. To znamená, že některá varování v knihovnách runtime nejsou pro koncové vývojáře použitelná.
 \end{itemize}
 
 \n{1}{Microservice architektura}

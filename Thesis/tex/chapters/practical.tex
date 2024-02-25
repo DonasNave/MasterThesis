@@ -33,17 +33,57 @@ Hardware, na kterém bude aplikace provozována, musí výkonnostně dostačovat
 
 \n{2}{Výběr technlogií}
 
+Součástí tvorby tech stacku je výběr technologií, které budou použity pro implementaci aplikace. Výběr technologií je závislý na požadavcích na aplikaci a HW, na kterém bude aplikace provozována.
+
 \n{3}{Kontejnerizace a orchestrace}
+
+Základním prvkem nasazení aplikace je kontejnerizace a orchestrace. Kontejnerizace zajišťuje, že aplikace bude spouštěna v izolovaném prostředí, které je nezávislé na hostitelském systému. Orchestrace zajišťuje, že aplikace bude spouštěna na dostupných zdrojích a bude schopna zvládnout zátěž, která je na ni kladena.
+
+Pro kontejnerizaci byla zvolena technologie Docker. Docker je open-source platforma pro kontejnerizaci aplikací, která umožňuje vytvářet, spouštět a spravovat kontejnery.
+
+Pro orchestraci byla vybrána technologie Kubernetes. Kubernetes je open-source platforma pro orchestraci kontejnerů, která umožňuje automatizovat nasazování, škálování a správu aplikací. Kubernetes je schopný pracovat s kontejnery, které jsou vytvořeny pomocí Dockeru.
 
 \n{3}{Persistenční vrstva}
 
+Pro persistenci relačních dat byla zvolena technologie PostgreSQL. PostgreSQL je open-source relační databázový systém, který je schopný zvládnout velké množství dat a zároveň poskytovat vysoký výkon.
+
 \n{3}{Komunikační protokoly}
+
+Pro komunikaci mezi službami byl zvolen protokol HTTP. Verze HTTP/2 byla zvolena pro její schopnost zvládnout vysoký počet požadavků a zároveň poskytovat vysoký výkon.
 
 \n{3}{Monitorovací nástroje}
 
-\n{2}{Návrh a implementace služeb}
+Pro monitorování aplikace byl zvolen Grafana observability stack pro jeho pokrytí komplexní škály monitorovacích dat. Grafana observability stack zahrnuje nástroje pro sběr, vizualizaci a analýzu dat.
+
+\n{4}{Grafana}
+
+je open-source platforma pro vizualizaci a analýzu dat. Grafana umožňuje vizualizovat data z různých zdrojů, včetně časových řad, protokolů a tras.
+
+\n{4}{Prometheus}
+ 
+je open-source systém pro sběr a vizualizaci metrik. Prometheus umožňuje sbírat metriky z různých zdrojů, včetně aplikací, systémů a služeb.
+
+\n{4}{Loki}
+
+je open-source systém pro sběr a vizualizaci protokolů. Loki umožňuje sbírat protokoly z různých zdrojů, včetně aplikací, systémů a služeb.
+
+\n{4}{Tempo}
+
+je open-source systém pro sběr a vizualizaci tras. Tempo umožňuje sbírat trasy z různých zdrojů, včetně aplikací, systémů a služeb.
+
+\n{4}{OpenTelemetry}
+
+je open-source systém pro sběr a vizualizaci metrik, protokolů a tras. OpenTelemetry umožňuje sbírat metriky, protokoly a trasy z různých zdrojů, včetně aplikací, systémů a služeb.
+
+\n{3}{Testovací služby}
+
+Pro implementaci testovacích služeb byl zvolena technologie dotnet, konkrétně jazyk C\#. Dotnet je open-source platforma pro vývoj a provozování aplikací, která umožňuje vytvářet výkonné a škálovatelné aplikace. Služby budou implementovány jako mikroslužby, které budou spouštěny v kontejnerech. Služby jsou vytvořeny ve dvou verzích, které se liší v použitém způsobu kompilace, a to JIT a AoT.
+
+\n{2}{Návrh a implementace testovacích služeb}
 
 \n{3}{Předpoklady služeb}
+
+Služby musí být implementovány tak, aby v obou kompilačních verzích poskytovaly totožnou funkcionalitu. Jejich chování musí být konfigurovatelné na úrovni kontejneru, který je spouští. Zároveň musí sbírat data o svém chování a poskytovat je monitorovacím nástrojům.
 
 \n{3}{Implementace služeb}
 
