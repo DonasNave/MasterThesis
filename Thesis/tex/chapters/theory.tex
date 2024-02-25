@@ -212,8 +212,6 @@ Trasy se používají ke sledování toku požadavků v aplikaci, zejména v dis
 
 Metriky jsou kvantitativní údaje, které poskytují přehled o výkonu a stavu aplikace. Mezi běžné metriky patří doba odezvy, využití systémových prostředků (CPU, paměť, diskové I/O), chybovost a propustnost. Sledování těchto metrik pomáhá při proaktivním ladění výkonu a plánování kapacity.
 
-\n{4}{Správa dat}
-
 \n{2}{Sběr dat}
 
 Efektivita monitorování aplikací do značné míry závisí na schopnosti efektivně shromažďovat relevantní data.
@@ -221,6 +219,32 @@ Efektivita monitorování aplikací do značné míry závisí na schopnosti efe
 \n{3}{Collectory}
 
 Kolektory jsou nástroje nebo agenti, kteří shromažďují data z různých zdrojů v rámci aplikace a jejího prostředí. Mohou být nasazeny jako součást infrastruktury aplikace nebo mohou být provozovány jako externí služby. Kolektory jsou zodpovědné za shromažďování protokolů, stop a metrik a za předávání těchto dat do monitorovacích řešení, kde je lze analyzovat a vizualizovat. Efektivní sběr dat je nezbytný pro monitorování v reálném čase a pro zajištění toho, aby shromážděná data přesně odrážela stav a výkon aplikace.
+
+\n{2}{Vizualizace dat}
+
+Vizualizace dat je klíčovým aspektem monitorování aplikací, který umožňuje rychle porozumět stavu a chování aplikací. Vizualizace může zahrnovat různé typy grafů, tabulek, dashboardů a dalších nástrojů, které umožňují zobrazit data v uživatelsky přívětivé podobě. Vizualizace dat umožňuje týmům identifikovat vzory, problémy a příležitosti, které by jinak mohly zůstat skryty v datech.
+
+\n{2}{Implementace monitorování}
+
+Implementace monitorování aplikací zahrnuje několik klíčových kroků, včetně definice klíčových metrik, výběru monitorovacích nástrojů, nasazení kolektorů a vizualizaci dat. Týmy by měly také vytvořit procesy pro řešení problémů, které byly identifikovány prostřednictvím monitorování, a pro využití dat k plánování kapacity a optimalizaci výkonu.
+
+\n{3}{Sběr dat v monitorovaných službách}
+
+Implementace sběru dat zahrnuje inkorporaci funkcionality monitorování a zprostředkování dat v rámci předdefinovaného rozhraní. Sběr je realizován zpravidla sérií čítačů a zapisovačů, které jsou využívány k získávání dat z různých zdrojů. Takto sbíraná datá jsou kategorizována a značkována pro identifikaci.
+
+Realizace monitorování je zajištěna buďto použitím existujících implementací v rámci sw knihoven nebo vytvořením vlastní implementace dle potřeb aplikace a monitorovacích protokolů.
+
+\n{3}{Nasazení služeb pro správu a kolekci dat}
+
+Nasazení služeb pro správu a kolekci dat je zajištěno pomocí nástrojů, které jsou schopny zprostředkovat sběr dat z různých zdrojů a zároveň zajišťují jejich zpracování a zobrazení. Tímto je zajištěno, že data jsou zpracována a zobrazena v reálném čase.
+
+\n{3}{Vizualizace dat}
+
+Vizualizace dat je zajištěna pomocí nástrojů, které jsou schopny zobrazit data v uživatelsky přívětivé podobě. Tímto je zajištěno, že data jsou zobrazena v reálném čase a jsou přehledná a srozumitelná.
+
+\n{2}{Konfigurace}
+
+Konfigurace monitorování je zajištěna pomocí konfiguračních souborů, které definují chování monitorovacích nástrojů a sběr dat. Ovlivnit chování monitorovacího systému může být provedeno jak na straně monitorovacích nástrojů, respektive služeb, tak i na straně aplikací a služeb, které jsou monitorovány.
 
 \n{2}{Závěr}
 

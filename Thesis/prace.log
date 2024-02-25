@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.8)  25 FEB 2024 12:00
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.8)  25 FEB 2024 12:35
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -883,7 +883,7 @@ LaTeX Font Info:    Trying to load font information for OT1+phv on input line 73
  (/usr/local/texlive/2023/texmf-dist/tex/latex/psnfss/ot1phv.fd
 File: ot1phv.fd 2020/03/25 scalable font definitions for OT1/phv.
 )
-<graphics/logo/fai_logo_cz.png, id=277, 325.68428pt x 76.49358pt>
+<graphics/logo/fai_logo_cz.png, id=301, 325.68428pt x 76.49358pt>
 File: graphics/logo/fai_logo_cz.png Graphic file (type png)
 <use graphics/logo/fai_logo_cz.png>
 Package pdftex.def Info: graphics/logo/fai_logo_cz.png  used on input line 73.
@@ -903,98 +903,98 @@ Package pdftex.def Info: graphics/logo/fai_logo_cz.png  used on input line 73.
 
 ] (./prace.toc [7
 
-])
+] [8])
 \tf@toc=\write6
 \openout6 = `prace.toc'.
 
- [8] (./tex/chapters/intro.tex) (./tex/chapters/theory.tex [9
+ [9] (./tex/chapters/intro.tex) (./tex/chapters/theory.tex [10
 
 
-] [10
+] [11
 
 
 ]
 
-LaTeX Warning: Citation `dotnet' on page 11 undefined on input line 4.
+LaTeX Warning: Citation `dotnet' on page 12 undefined on input line 4.
 
 
-LaTeX Warning: Citation `dotnet' on page 11 undefined on input line 8.
+LaTeX Warning: Citation `dotnet' on page 12 undefined on input line 8.
 
 
-LaTeX Warning: Citation `jit' on page 11 undefined on input line 11.
+LaTeX Warning: Citation `jit' on page 12 undefined on input line 11.
 
 
 Overfull \hbox (3.43867pt too wide) in paragraph at lines 18--19
 \T1/cmr/m/n/12 spo-le£-nosti Micro-soft, která po-sky-tuje spra-vo-vané pro-st°edí pro spou²-t¥ní apli-kací .NET.
  []
 
-[11
+[12
 
 
-] [12]
+] [13]
 
-LaTeX Warning: Citation `aot' on page 13 undefined on input line 43.
+LaTeX Warning: Citation `aot' on page 14 undefined on input line 43.
 
-[13] [14] [15]
+[14] [15] [16]
 
-LaTeX Warning: Citation `monolith' on page 16 undefined on input line 98.
-
-
-LaTeX Warning: Citation `microservice' on page 16 undefined on input line 100.
+LaTeX Warning: Citation `monolith' on page 17 undefined on input line 98.
 
 
-LaTeX Warning: Citation `fowler' on page 16 undefined on input line 103.
+LaTeX Warning: Citation `microservice' on page 17 undefined on input line 100.
 
 
-LaTeX Warning: Citation `newman' on page 16 undefined on input line 103.
+LaTeX Warning: Citation `fowler' on page 17 undefined on input line 103.
 
 
-LaTeX Warning: Citation `docker' on page 16 undefined on input line 105.
+LaTeX Warning: Citation `newman' on page 17 undefined on input line 103.
 
-[16
 
-] [17]
+LaTeX Warning: Citation `docker' on page 17 undefined on input line 105.
+
+[17
+
+] [18]
 Overfull \hbox (4.10199pt too wide) in paragraph at lines 149--150
  []\T1/cmr/bx/it/10.95 ’kálovatelnost[] \T1/cmr/m/n/12 Sluºby lze ²ká-lo-vat ne-zá-visle, coº umoº-¬uje p°es-n¥j²í p°i-d¥-lo-vání zdroj·
  []
 
-[18] [19] [20
+[19] [20] [21
 
-]) (./tex/chapters/practical.tex [21] [22
-
-
-] [23
+] [22]) (./tex/chapters/practical.tex [23] [24
 
 
-] [24] [25] [26]) (./tex/chapters/analytics.tex [27
-
-] [28
+] [25
 
 
-]) (./tex/chapters/conclusion.tex [29
+] [26] [27] [28]) (./tex/chapters/analytics.tex [29
+
+] [30
 
 
-]) [30
+]) (./tex/chapters/conclusion.tex [31
+
+
+]) [32
 
 ] (./prace.bbl
 
 LaTeX Warning: Empty `thebibliography' environment on input line 10.
 
-) (./tex/zkratky.tex [31
+) (./tex/zkratky.tex [33
 
-]) [32
+]) [34
 
 ] (./prace.lof)
 \tf@lof=\write7
 \openout7 = `prace.lof'.
 
- [33
+ [35
 
 ] (./prace.lot)
 \tf@lot=\write8
 \openout8 = `prace.lot'.
 
- [34
+ [36
 
 
 ] (./tex/prilohy.tex (./prace.loa)
@@ -1006,7 +1006,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1--6
 
  []
 
-[35
+[37
 
 ]
 pdfTeX warning (ext4): destination with the same identifier (name{section.1}) has been already used, duplicate ignored
@@ -1026,27 +1026,27 @@ See the caption package documentation for explanation.
 File: se-pdfdoc.def 2019/11/29 v1.12 stringenc: PDFDocEncoding
 ) (/usr/local/texlive/2023/texmf-dist/tex/generic/stringenc/se-utf8.def
 File: se-utf8.def 2019/11/29 v1.12 stringenc: UTF-8
-) [36
+) [38
 
 ] (./prace.aux)
 
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `prace.out' has not changed.
-(rerunfilecheck)             Checksum: 4A0606BE991E60F96DDC91BC89DC199D;10512.
+(rerunfilecheck)             Checksum: 1755CAC38D35603C2E8347E48E2177EF;11656.
  ) 
 Here is how much of TeX's memory you used:
- 14611 strings out of 476025
- 240570 string characters out of 5790017
- 1864388 words of memory out of 5000000
- 34624 multiletter control sequences out of 15000+600000
+ 14624 strings out of 476025
+ 240783 string characters out of 5790017
+ 1865388 words of memory out of 5000000
+ 34630 multiletter control sequences out of 15000+600000
  530737 words of font info for 64 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 80i,11n,79p,1038b,603s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 80i,12n,79p,1038b,603s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbi1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
-Output written on prace.pdf (36 pages, 384268 bytes).
+Output written on prace.pdf (38 pages, 391874 bytes).
 PDF statistics:
- 633 PDF objects out of 1000 (max. 8388607)
- 150 named destinations out of 1000 (max. 500000)
- 562 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 675 PDF objects out of 1000 (max. 8388607)
+ 157 named destinations out of 1000 (max. 500000)
+ 610 words of extra memory for PDF output out of 10000 (max. 10000000)
 
