@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: k6-test-scenario1
+spec:
+  template:
+    spec:
+      containers:
+      - name: k6
+        image: grafana/k6:latest
+        volumeMounts:
+        - name: scenarios-volume
+          mountPath: /scenarios
+        command: ["k6", "run", "/scenarios/scenario1/script.js"]
+      volumes:
+      - name: scenarios-volume
+        persistentVolumeClaim:
+          claimName: scenarios-pvc
+      restartPolicy: Never
