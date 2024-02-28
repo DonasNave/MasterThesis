@@ -2,9 +2,9 @@ using FUS.Data;
 using FUS.Services;
 using FUS.Services.Interfaces;
 using JIT.APP.Extensions;
-using JIT.APP.Models;
 using Microsoft.EntityFrameworkCore;
 using OpenTelemetry.Resources;
+using Shared.APP.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 // File Upload Service

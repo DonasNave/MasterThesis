@@ -1,4 +1,4 @@
-﻿using JIT.APP.Models;
+﻿using Shared.APP.Models;
 using Microsoft.Extensions.Logging;
 using Npgsql;
 using OpenTelemetry;
@@ -34,7 +34,7 @@ public static class OtelExtensions
             });
         });
     }
-    
+
     public static OpenTelemetryBuilder SetupMyOtelTracing(this OpenTelemetryBuilder builder, OpenTelemetrySettings settings)
     {
         builder.WithTracing(tracingBuilder =>
@@ -48,11 +48,11 @@ public static class OtelExtensions
                     options.Protocol = OtlpExportProtocol.Grpc;
                 });
         });
-        
+
         return builder;
     }
-    
-    public static OpenTelemetryBuilder SetupMyOtelMetrics(this OpenTelemetryBuilder builder, OpenTelemetrySettings settings, 
+
+    public static OpenTelemetryBuilder SetupMyOtelMetrics(this OpenTelemetryBuilder builder, OpenTelemetrySettings settings,
         IEnumerable<string>? meterNames = null)
     {
         string[] defaultMeters =
@@ -60,7 +60,7 @@ public static class OtelExtensions
 
         if (meterNames is not null)
             defaultMeters = meterNames.Union(defaultMeters).ToArray();
-        
+
         builder.WithMetrics(metricsBuilder =>
         {
             metricsBuilder
@@ -74,7 +74,7 @@ public static class OtelExtensions
                     options.Protocol = OtlpExportProtocol.Grpc;
                 });
         });
-        
+
         return builder;
     }
 }

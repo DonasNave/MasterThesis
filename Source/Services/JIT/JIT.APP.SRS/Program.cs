@@ -1,10 +1,10 @@
-using JIT.APP.Models;
 using Npgsql;
 using OpenTelemetry.Exporter;
 using OpenTelemetry.Logs;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
+using Shared.APP.Models;
 using SRS.Services;
 using SRS.Services.Interfaces;
 

@@ -1,4 +1,4 @@
-﻿namespace JIT.APP.Models;
+﻿namespace Shared.APP.Models;
 
 public class OpenTelemetrySettings
 {

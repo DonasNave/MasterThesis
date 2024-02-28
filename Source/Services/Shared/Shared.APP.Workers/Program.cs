@@ -1,4 +1,3 @@
-using JIT.APP.Models;
 using JIT.APP.Workers.Settings;
 using Npgsql;
 using OpenTelemetry.Exporter;
@@ -6,6 +5,7 @@ using OpenTelemetry.Logs;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
+using Shared.APP.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 // Signal Readings Service
@@ -28,7 +28,7 @@ builder.Services
     .ConfigureResource(resourceBuilder =>
     {
         resourceBuilder.AddService(
-            serviceName: "JIT-Workers",
+            serviceName: "Shared-Workers",
             serviceVersion: typeof(Program).Assembly.GetName().Version?.ToString() ?? "unknown",
             serviceInstanceId: Environment.MachineName);
     })
@@ -82,7 +82,7 @@ builder.Logging.AddOpenTelemetry(options =>
         ResourceBuilder
             .CreateDefault()
             .AddService(
-                serviceName: "JIT-Workers",
+                serviceName: "Shared-Workers",
                 serviceVersion: typeof(Program).Assembly.GetName().Version?.ToString() ?? "unknown",
                 serviceInstanceId: Environment.MachineName));
 

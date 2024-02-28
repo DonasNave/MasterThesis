@@ -11,11 +11,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JIT.APP.SRS", "JIT.APP.SRS\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JIT.APP.SRS.Tests.Integration", "JIT.APP.SRS.Tests.Integration\JIT.APP.SRS.Tests.Integration.csproj", "{1E03EB18-719E-4C34-A136-098E586632C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JIT.APP.Models", "JIT.APP.Models\JIT.APP.Models.csproj", "{650E8091-7738-4858-8705-4A83F9A983FB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JIT.APP.Models", "..\Shared\Shared.APP.Models\Shared.APP.Models.csproj", "{650E8091-7738-4858-8705-4A83F9A983FB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JIT.APP.Extensions", "JIT.APP.Extensions\JIT.APP.Extensions.csproj", "{740E477C-F6EC-4B31-8C2C-3A4B6BDC72FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.APP.Workers", "Shared.APP.Workers\Shared.APP.Workers.csproj", "{6843FAF6-9D4C-41CB-9AD3-A0F69459F969}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.APP.Workers", "..\Shared\Shared.APP.Workers\Shared.APP.Workers.csproj", "{6843FAF6-9D4C-41CB-9AD3-A0F69459F969}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
