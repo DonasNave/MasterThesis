@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.8)  25 FEB 2024 17:25
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.8)  28 FEB 2024 23:07
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -883,7 +883,7 @@ LaTeX Font Info:    Trying to load font information for OT1+phv on input line 73
  (/usr/local/texlive/2023/texmf-dist/tex/latex/psnfss/ot1phv.fd
 File: ot1phv.fd 2020/03/25 scalable font definitions for OT1/phv.
 )
-<graphics/logo/fai_logo_cz.png, id=313, 325.68428pt x 76.49358pt>
+<graphics/logo/fai_logo_cz.png, id=317, 325.68428pt x 76.49358pt>
 File: graphics/logo/fai_logo_cz.png Graphic file (type png)
 <use graphics/logo/fai_logo_cz.png>
 Package pdftex.def Info: graphics/logo/fai_logo_cz.png  used on input line 73.
@@ -954,7 +954,7 @@ LaTeX Warning: Citation `docker' on page 18 undefined on input line 124.
 [18
 
 ] [19]
-Overfull \hbox (4.10199pt too wide) in paragraph at lines 174--175
+Overfull \hbox (4.10199pt too wide) in paragraph at lines 176--177
  []\T1/cmr/bx/it/10.95 ’kálovatelnost[] \T1/cmr/m/n/12 Sluºby lze ²ká-lo-vat ne-zá-visle, coº umoº-¬uje p°es-n¥j²í p°i-d¥-lo-vání zdroj·
  []
 
@@ -1037,20 +1037,20 @@ File: se-utf8.def 2019/11/29 v1.12 stringenc: UTF-8
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `prace.out' has not changed.
-(rerunfilecheck)             Checksum: D1221E2C38FCAFF90931EE4C1873C1F3;11945.
+(rerunfilecheck)             Checksum: 19E673A72454244DBB6899C098151D9F;12054.
  ) 
 Here is how much of TeX's memory you used:
- 14637 strings out of 476025
- 240938 string characters out of 5790017
+ 14639 strings out of 476025
+ 240968 string characters out of 5790017
  1865388 words of memory out of 5000000
- 34633 multiletter control sequences out of 15000+600000
+ 34634 multiletter control sequences out of 15000+600000
  530737 words of font info for 64 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  80i,12n,79p,1038b,603s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbi1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
-Output written on prace.pdf (41 pages, 399284 bytes).
+Output written on prace.pdf (41 pages, 400912 bytes).
 PDF statistics:
- 707 PDF objects out of 1000 (max. 8388607)
- 167 named destinations out of 1000 (max. 500000)
- 634 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 712 PDF objects out of 1000 (max. 8388607)
+ 168 named destinations out of 1000 (max. 500000)
+ 642 words of extra memory for PDF output out of 10000 (max. 10000000)
 

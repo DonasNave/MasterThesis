@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex prace"] 1708876193 "prace.aux" "prace.bbl" "prace" 1708878336 0
+["bibtex prace"] 1709158034 "prace.aux" "prace.bbl" "prace" 1709158035 0
   "./tex/czechiso-cz.bst" 1575625038 29703 12ad42702c1c655683c2ecb327cb403f ""
-  "./tex/literatura.bib" 1703528925 3049 59a825cf31264ee49b7ee4d6b3806168 ""
-  "prace.aux" 1708878336 16058 c5daa12b51d0af654724382f0581641b "pdflatex"
+  "./tex/literatura.bib" 1709143052 3395 a81597f95c05fd2a28c41297d9f8f513 ""
+  "prace.aux" 1709158035 16153 ac41458a15d591abd055b44be4e2ee17 "pdflatex"
   (generated)
   "prace.bbl"
   "prace.blg"
   (rewritten before read)
-["pdflatex"] 1708878335 "/Users/noe/School/Thesis/Thesis/prace.tex" "prace.pdf" "prace" 1708878336 0
+["pdflatex"] 1709158034 "/Users/noe/School/Thesis/Thesis/prace.tex" "prace.pdf" "prace" 1709158035 0
   "/Users/noe/School/Thesis/Thesis/prace.tex" 1708768832 6501 efd2a5565dad48a909588484d36e25cd ""
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
@@ -147,22 +147,22 @@
   "/usr/local/texlive/2023/texmf.cnf" 1678822455 577 1b2b1af17af2508fb20dd85783af4050 ""
   "graphics/logo/fai_logo_cz.png" 1482249702 40081 2b838a823da818dabc5ecadddc2c15cd ""
   "graphics/sRGBIEC1966-2.1.icm" 1482163438 3144 1d3fda2edb4a89ab60a23c5f7c7d81dd ""
-  "prace.aux" 1708878336 16058 c5daa12b51d0af654724382f0581641b "pdflatex"
-  "prace.bbl" 1708876193 396 f445ad9a8e145ab1ac5a3573993e042d "bibtex prace"
-  "prace.loa" 1708878336 53 2db9a9512333481986bb9ee5eeef7679 "pdflatex"
-  "prace.lof" 1708878336 28 547b6876d67ce21cda4a540d80e4431c "pdflatex"
-  "prace.lot" 1708878336 28 547b6876d67ce21cda4a540d80e4431c "pdflatex"
-  "prace.out" 1708878336 11945 d1221e2c38fcaff90931ee4c1873c1f3 "pdflatex"
+  "prace.aux" 1709158035 16153 ac41458a15d591abd055b44be4e2ee17 "pdflatex"
+  "prace.bbl" 1709158034 396 f445ad9a8e145ab1ac5a3573993e042d "bibtex prace"
+  "prace.loa" 1709158035 53 2db9a9512333481986bb9ee5eeef7679 "pdflatex"
+  "prace.lof" 1709158035 28 547b6876d67ce21cda4a540d80e4431c "pdflatex"
+  "prace.lot" 1709158035 28 547b6876d67ce21cda4a540d80e4431c "pdflatex"
+  "prace.out" 1709158035 12054 19e673a72454244dbb6899c098151d9f "pdflatex"
   "prace.tex" 1708768832 6501 efd2a5565dad48a909588484d36e25cd ""
-  "prace.toc" 1708878336 10243 0d0fa3c9290ab581812b182c703e67a2 "pdflatex"
+  "prace.toc" 1709158035 10297 41d7d31e72e492ffcfc400471cb01f3a "pdflatex"
   "tex/UTB.tex" 1620129266 35782 25c508b0b4ff1c697ba6e86521ffa4db ""
   "tex/chapters/analytics.tex" 1708876249 464 5fa6628e8e6c35b9408436ecca472af5 ""
   "tex/chapters/conclusion.tex" 1708768520 27 881870d0cf453e35d982f125e77f58fc ""
   "tex/chapters/intro.tex" 1708768771 422 a84dbf43d27bc436a458c491654410a2 ""
-  "tex/chapters/practical.tex" 1708878335 8546 1933921c28dedd93d23b145c8b1c4c60 ""
-  "tex/chapters/theory.tex" 1708875681 24971 9df16dd6de392958fa8d25dc0865ac9e ""
+  "tex/chapters/practical.tex" 1709158033 9000 954cc8118995e2608740c1b91dd5ae03 ""
+  "tex/chapters/theory.tex" 1709157915 25491 9d1d05ef559f311f1c8e692fae8e433e ""
   "tex/pdfa-1b.xmp" 1614352388 3907 6766aa8a31a1fd44df65fdb8ffc02b99 ""
-  "tex/pdfa-1b.xmpi" 1708878335 2200 edd601c4b03133937781cd70891dc190 "pdflatex"
+  "tex/pdfa-1b.xmpi" 1709158034 2200 32c9e05023d1ac94ded3306a6f557c8a "pdflatex"
   "tex/prilohy.tex" 1417337264 373 de592ce0905bc58712eee5c782571e41 ""
   "tex/zkratky.tex" 1614244824 456 29a83d4b9370035efd4ef424d6e17deb ""
   (generated)

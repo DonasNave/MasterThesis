@@ -75,6 +75,10 @@ je open-source systém pro sběr a vizualizaci tras. Tempo umožňuje sbírat tr
 
 je open-source systém pro sběr a vizualizaci metrik, protokolů a tras. OpenTelemetry umožňuje sbírat metriky, protokoly a trasy z různých zdrojů, včetně aplikací, systémů a služeb.
 
+\n{4}{K6}
+
+K6 je nástroj pro výkonové testování, který umožňuje vývojářům testovat výkon svých aplikací. K6 umožňuje vývojářům vytvářet a spouštět testy, které simuluji reálné uživatelské scénáře. Tímto je zajištěno, že aplikace je schopna zvládnout požadavky uživatelů. K6 je nástroj, který je možné využít pro testování mikroslužeb, protože umožňuje vývojářům vytvářet testy, které simuluji reálné uživatelské scénáře.
+
 \n{3}{Testovací služby}
 
 Pro implementaci testovacích služeb byl zvolena technologie dotnet, konkrétně jazyk C\#. Dotnet je open-source platforma pro vývoj a provozování aplikací, která umožňuje vytvářet výkonné a škálovatelné aplikace. Služby budou implementovány jako mikroslužby, které budou spouštěny v kontejnerech. Služby jsou vytvořeny ve dvou verzích, které se liší v použitém způsobu kompilace, a to JIT a AoT.
@@ -100,8 +104,6 @@ Za účelem zjednodušení implementace není využito čtení dat ze skutečné
 Služba v systému hraje roli zapisovacího zařízení, které zapisuje data do zdroje. Tato služba hraje roli méně vytíženého služby, která nemá značný vliv na fungování systému jako celku. Požadavky, jenž musí vyřídit nejsou kritické a nutné řešit s minimální odezvou.
 
 Služba je implementována s REST API rozhraním. (TODO: Obrázek návrhu architektury a rozhraní služby).
-
-\n{4}{TWS - Test Workers Service}
 
 \n{2}{Konfigurace aplikace}
 
