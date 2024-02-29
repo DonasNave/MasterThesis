@@ -1,23 +1,24 @@
 \cast{Teoretická část}
 
 \n{1}{Kompilace kódu v platformě dotnet}
-Platforma dotnet od společnosti Microsoft představuje sadu nástrojů k vývoji aplikací v jazyce C\# a jeho derivátech. Tato platforma je multiplatformní a umožňuje vývoj aplikací pro operační systémy Windows, Linux a macOS. Vývojáři mohou využívat nástroje pro vývoj webových aplikací, desktopových aplikací, mobilních aplikací a dalších. Platforma dotnet je postavena na dvou hlavních principech. Prvním z nich je \textit{Common Language Runtime} (dále jen CLR), systémové prostředí zodpovídající za běh aplikací. Druhým principem je \textit{Common Language Infrastructure} (dále jen CLI), konzolový nástroj-rozhraní, zodpovědné za kompilaci a spouštění aplikací. \cite{dotnet}
 
-Využití runtime prostředí má historický původ. V dřívějších dobách byly programátoři limitování možnostmi programovacích jazyků a nástrojů kompilujících kód do spustitelných binárních souborů. Ve snazu omezit tyto limity vzniklo několik projektů, které měly za cíl vytvořit prostředí, ve kterém by bylo možné spouštět kód v různých programovacích jazycích. Jedním z těchto projektů byl projekt \textit{Java Virtual Machine} (dále jen JVM), který vznikl v roce 1995. Díky tomy bylo umožňeno kompilovat kód v jazyce Java do univerzálního byte code, který je spustitelný na systémech s JVM. Zároveň tento proces tvorby a spouštění aplikací umožnil programátorům využít vyšší úroveň abstrakce a konceptů aplikační architektury.
+Platforma dotnet od společnosti Microsoft představuje sadu nástrojů k vývoji aplikací v jazyce C\# a jeho derivátech. Tato platforma je multiplatformní a umožňuje vývoj aplikací pro operační systémy jako Windows, Linux, macOS ale i pro mobilní platformy. Vývojáři mohou využívat nástroje pro vývoj webových aplikací, desktopových aplikací, mobilních aplikací a dalších. Platforma dotnet je postavena na dvou hlavních principech. Prvním z nich je \textit{Common Language Runtime} (dále jen CLR), systémové prostředí zodpovídající za běh aplikací. Druhým principem je \textit{Common Language Infrastructure} (dále jen CLI), konzolový nástroj-rozhraní, zodpovědné za kompilaci a spouštění aplikací. \cite{Richter2012}
 
-Microsoft v reakci na JVM vydal v roce 2000 první .NET Framework, který umožňoval spouštět kód v jazyce C\# na operačním systému Windows. Cílem prvních verzí .NET Framework nebylo primárně umožnit vývoj pro různé zařízení a operační systémy, ale zprostředkovat lepší nástroje pro vývoj aplikací. Konečně, v roce 2014 se dostavila i multiplaformnost dotnetu. Byl vydán .NET Core, který umožňoval spouštět kód v jazyce C\# na operačních systémech Windows, Linux a macOS. \cite{dotnet}
+\n{2}{Historie}
+
+Využití runtime prostředí, respektive v originální podobě virtuálního stroje, má historický původ. V dřívějších dobách byly programátoři limitování nutností kompilace kódu do nativní reprezentace pro architekturu konkrétního systému. Kód vytvořen pro jednu konkrétní architekturu se zpravidla neobešel bez modifikací, pokud měl fungovat i na odlišné architektuře.
+
+V průběhu 90. let 20. století představila společnost Sun-Microsystems virtuální stroj Java Virtual Machine (JVM). Jedná se o komponentu runtime prostředí Javy, která zprostředkovává spuštění specifického kódu, správu paměti, vytváření tříd a typů a další. Kompilací Javy do tzv. Bytecode (Intermediate Language, zkráceně IL), tedy provedením mezikroku v procesu transformace zdrojového kódu do strojového kódu, je získána reprezentace programu, jenž běží na každém zařízení s implementovaným JVM. V rámci JVM dochází k finálnímu kroku a to interpretaci (JIT kompilaci) Bytecode do cílové architektury systému. 
+
+Microsoft v reakci na JVM vydal v roce 2000 první .NET Framework, který umožňoval spouštět kód v jazyce C\# na operačním systému Windows. Cílem prvních verzí .NET Framework nebylo primárně umožnit vývoj pro různé zařízení a operační systémy, ale zprostředkovat lepší nástroje pro vývoj aplikací. KV roce 2014 byla vydána první multiplatformní verze dotnetu. Byl vydán .NET Core, který umožňoval spouštět kód v jazyce C\# na operačních systémech Windows, Linux a macOS. \cite{Richter2012}
 
 \n{2}{JIT kompilace}
-JIT kompilace je proces, při kterém je kód kompilován do určité univerzální podoby, jenž v době spuštění aplikace je předkládán v běhovém prostředí na strojový kód. V případě dotnetu je tímto jazykem IL (Intermediate language) a výstupem kompilace dotnet aplikace jsou soubory s příponou .dll (mohou být i jiné). Takto vytvořený dll soubor je možné referencovat z jiných .dll souborů nebo jej přímo spustit přes CLI příkazem dotnet, pokud obsahuje vstupní funkci. Po spuštění je obsah .dll souboru načten běhovým prostředím CLR a kompilován na strojový kód.\cite{jit}
-
-\n{3}{Historie}
-Text
+JIT kompilace je proces, při kterém je kód kompilován do určité univerzální podoby, jenž v době spuštění aplikace je předkládán v běhovém prostředí na strojový kód. V případě dotnetu je tímto jazykem IL (Intermediate language) a výstupem kompilace dotnet aplikace jsou soubory s příponou .dll (mohou být i jiné). Takto vytvořený dll soubor je možné referencovat z jiných .dll souborů nebo jej přímo spustit přes CLI příkazem dotnet, pokud obsahuje vstupní funkci. Po spuštění je obsah .dll souboru načten běhovým prostředím CLR a kompilován na strojový kód.
 
 \n{3}{CLR}
-
 Common Language Runtime (CLR) je součást virtuálního stroje frameworku .NET společnosti Microsoft, která poskytuje spravované prostředí pro spouštění aplikací .NET. Podporuje více programovacích jazyků, včetně jazyků C\#, VB.NET a F\#, a umožňuje jejich bezproblémovou spolupráci. CLR je zodpovědný za několik důležitých funkcí, které zvyšují produktivitu vývojářů a výkon aplikací. Spravuje paměť prostřednictvím automatického garbage collection, který pomáhá předcházet únikům paměti a optimalizuje využití prostředků. CLR také zajišťuje typovou bezpečnost a ověřuje, zda jsou všechny operace typově bezpečné, aby se minimalizovaly chyby při programování.
 
-Klíčovou vlastností CLR je bezpečnost, která nabízí mechanismy, jako je zabezpečení přístupu ke kódu (CAS), které zabraňují neoprávněným operacím. Jeho podpora kompilace JIT (just-in-time) znamená, že kód zprostředkujícího jazyka je zkompilován do nativního kódu těsně před spuštěním, což zajišťuje optimální výkon na cílovém hardwaru. CLR usnadňuje zpracování chyb v různých jazycích a poskytuje konzistentní přístup k řešení výjimek. Navíc obsahuje nástroje pro ladění a profilování, které vývojářům pomáhají efektivně identifikovat a odstraňovat problémy s výkonem.
+Klíčovými vlasnostmi jsou CLR jsou multiplatformnost kódu, reflexe, optimalizace kódu pro konkrétní architekturu a bezpečnost. CLR nabízí mechanismy, jako je zabezpečení přístupu ke kódu (CAS), které zabraňují neoprávněným operacím. Jeho podpora kompilace JIT (just-in-time) znamená, že kód zprostředkujícího jazyka je zkompilován do nativního kódu těsně před spuštěním, což zajišťuje optimální výkon na cílovém hardwaru. CLR usnadňuje zpracování chyb v různých jazycích a poskytuje konzistentní přístup k řešení výjimek. Navíc obsahuje nástroje pro ladění a profilování, které vývojářům pomáhají efektivně identifikovat a odstraňovat problémy s výkonem.
 
 \n{3}{Výhody a nevýhody}
 
@@ -40,7 +41,7 @@ Zatímco za nevýhody CLR se dá považovat:
 \n{2}{AoT kompilace}
 AoT kompilace je proces, při kterém je kód kompilován do podoby sytémově nativního kódu před spuštěním aplikace. V případě dotnetu je tímto jazykem C\# a výstupem kompilace dotnet aplikace je spustitelný soubor ve formátu podporovaném operačním systémem konfigurovaným v procesu kompilace. Takto vytvořený soubor je možné spustit přímo bez potřeby CLR nebo využití dotnet CLI. 
 
-Jedná se o funkcionalitu vydanou bez plné podpory v roce 2022 s dotnet framework verzí 7. Vyráznější podporu získala v roce 2023 s vydáním dotent 8. \cite{aot}
+Jedná se o funkcionalitu vydanou bez plné podpory v roce 2022 s dotnet framework verzí 7. Vyráznější podporu získala v roce 2023 s vydáním dotent 8.
 
 Filozofie Microsoftu ohledně AoT kompilace je, že vývojáři by měli mít možnost využít AoT kompilace, pokud je to vhodné, aniž by museli použít jiný programovací jazyk a sadu nástrojů.
 
@@ -114,14 +115,14 @@ Zatímco za nevýhody CLR se dá považovat:
 \end{itemize}
 
 \n{1}{Microservice architektura}
-Při vývoji softwaru je možné využít několik architektur, které se liší v několika aspektech. Jednou z těchto architektur je monolitická architektura. V této architektuře je celá aplikace rozdělena do několika vrstev, které jsou využívány k oddělení logiky aplikace. \cite{monolith}
+Při vývoji softwaru je možné využít několik architektur, které se liší v několika aspektech. Jednou z těchto architektur je monolitická architektura. V této architektuře je celá aplikace rozdělena do několika vrstev, které jsou využívány k oddělení logiky aplikace.
 
-Microservice architektura je architektura, která je založena na principu oddělení aplikace do několika samostatných služeb. Každá z těchto služeb je zodpovědná za určitou část funkcionality aplikace. Služby jsou navzájem nezávislé a komunikují mezi sebou pomocí definovaných rozhraní. \cite{microservice}
+Microservice architektura je architektura, která je založena na principu oddělení aplikace do několika samostatných služeb. Každá z těchto služeb je zodpovědná za určitou část funkcionality aplikace. Služby jsou navzájem nezávislé a komunikují mezi sebou pomocí definovaných rozhraní. \cite{Richardson2018}
 
 \n{2}{Historie}
-Původ microservice architektury nelze přesně definovat, důležitý moment však nastal v roce 2011, kdy Martin Fowler publikoval článek \textit{Microservices} na svém blogu. V tomto článku popsal výhody a nevýhody této architektury a zároveň popsal způsob, jakým je možné tuto architekturu využít. \cite{fowler} Dalším popularizačním momentem pro popularizaci bylo vydání knihy \textit{Building Microservices} od Sama Newmana v roce 2015. Tato kniha popisuje způsob, jakým je možné využít microservice architekturu v praxi. \cite{newman}
+Původ microservice architektury nelze přesně definovat, důležitý moment však nastal v roce 2011, kdy Martin Fowler publikoval článek \textit{Microservices} na svém blogu. V tomto článku popsal výhody a nevýhody této architektury a zároveň popsal způsob, jakým je možné tuto architekturu využít. Dalším popularizačním momentem pro popularizaci bylo vydání knihy \textit{Building Microservices} od Sama Newmana v roce 2015. Tato kniha popisuje způsob, jakým je možné využít microservice architekturu v praxi.
 
-Opravdový přelom přišel postupně, nástupem a popularizací virtualizace a kontejnerizace v průběhu let 2013 až 2015. Tímto bylo umožněno vytvářet a spouštět mikroslužby v izolovaných prostředích. Tímto bylo umožněno vytvářet mikroslužby, které jsou nezávislé na operačním systému a hardwaru, na kterém jsou spouštěny. Nejdůležitější v tomto ohledu je nepochybně projekt Docker, který byl vydán v roce 2013. Díky Dockeru bylo možno jednoduše definovat, vytvářet a spouštět kontejnerizované aplikace. \cite{docker}
+Opravdový přelom přišel postupně, nástupem a popularizací virtualizace a kontejnerizace v průběhu let 2013 až 2015. Tímto bylo umožněno vytvářet a spouštět mikroslužby v izolovaných prostředích. Tímto bylo umožněno vytvářet mikroslužby, které jsou nezávislé na operačním systému a hardwaru, na kterém jsou spouštěny. Nejdůležitější v tomto ohledu je nepochybně projekt Docker, který byl vydán v roce 2013. Díky Dockeru bylo možno jednoduše definovat, vytvářet a spouštět kontejnerizované aplikace.
 
 \n{2}{Popis}
 

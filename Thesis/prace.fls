@@ -918,10 +918,6 @@ INPUT ./tex/chapters/conclusion.tex
 INPUT tex/chapters/conclusion.tex
 INPUT ./tex/chapters/conclusion.tex
 INPUT tex/chapters/conclusion.tex
-INPUT ./prace.bbl
-INPUT prace.bbl
-INPUT ./prace.bbl
-INPUT prace.bbl
 INPUT ./tex/zkratky.tex
 INPUT tex/zkratky.tex
 INPUT ./tex/zkratky.tex

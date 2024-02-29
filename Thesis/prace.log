@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.8)  28 FEB 2024 23:07
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.8)  29 FEB 2024 23:16
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -913,48 +913,18 @@ Package pdftex.def Info: graphics/logo/fai_logo_cz.png  used on input line 73.
 ] [11
 
 
+] [12
+
+
 ]
-
-LaTeX Warning: Citation `dotnet' on page 12 undefined on input line 4.
-
-
-LaTeX Warning: Citation `dotnet' on page 12 undefined on input line 8.
-
-
-LaTeX Warning: Citation `jit' on page 12 undefined on input line 11.
-
-
-Overfull \hbox (3.43867pt too wide) in paragraph at lines 18--19
+Overfull \hbox (3.43867pt too wide) in paragraph at lines 19--20
 \T1/cmr/m/n/12 spo-le£-nosti Micro-soft, která po-sky-tuje spra-vo-vané pro-st°edí pro spou²-t¥ní apli-kací .NET.
  []
 
-[12
-
-
-] [13]
-
-LaTeX Warning: Citation `aot' on page 14 undefined on input line 43.
-
-[14] [15] [16] [17]
-
-LaTeX Warning: Citation `monolith' on page 18 undefined on input line 117.
-
-
-LaTeX Warning: Citation `microservice' on page 18 undefined on input line 119.
-
-
-LaTeX Warning: Citation `fowler' on page 18 undefined on input line 122.
-
-
-LaTeX Warning: Citation `newman' on page 18 undefined on input line 122.
-
-
-LaTeX Warning: Citation `docker' on page 18 undefined on input line 124.
-
-[18
+[13] [14] [15] [16] [17] [18
 
 ] [19]
-Overfull \hbox (4.10199pt too wide) in paragraph at lines 176--177
+Overfull \hbox (4.10199pt too wide) in paragraph at lines 177--178
  []\T1/cmr/bx/it/10.95 ’kálovatelnost[] \T1/cmr/m/n/12 Sluºby lze ²ká-lo-vat ne-zá-visle, coº umoº-¬uje p°es-n¥j²í p°i-d¥-lo-vání zdroj·
  []
 
@@ -980,11 +950,7 @@ Overfull \hbox (4.10199pt too wide) in paragraph at lines 176--177
 
 ]) [35
 
-] (./prace.bbl
-
-LaTeX Warning: Empty `thebibliography' environment on input line 10.
-
-) (./tex/zkratky.tex [36
+] (./tex/zkratky.tex [36
 
 ]) [37
 
@@ -1033,24 +999,21 @@ File: se-utf8.def 2019/11/29 v1.12 stringenc: UTF-8
 ) [41
 
 ] (./prace.aux)
-
-LaTeX Warning: There were undefined references.
-
 Package rerunfilecheck Info: File `prace.out' has not changed.
-(rerunfilecheck)             Checksum: 19E673A72454244DBB6899C098151D9F;12054.
+(rerunfilecheck)             Checksum: 90E9BF97687F5405410659FED9038CD3;12036.
  ) 
 Here is how much of TeX's memory you used:
- 14639 strings out of 476025
- 240968 string characters out of 5790017
+ 14646 strings out of 476025
+ 241119 string characters out of 5790017
  1865388 words of memory out of 5000000
- 34634 multiletter control sequences out of 15000+600000
+ 34636 multiletter control sequences out of 15000+600000
  530737 words of font info for 64 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  80i,12n,79p,1038b,603s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbi1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
-Output written on prace.pdf (41 pages, 400912 bytes).
+Output written on prace.pdf (41 pages, 413929 bytes).
 PDF statistics:
- 712 PDF objects out of 1000 (max. 8388607)
- 168 named destinations out of 1000 (max. 500000)
+ 725 PDF objects out of 1000 (max. 8388607)
+ 176 named destinations out of 1000 (max. 500000)
  642 words of extra memory for PDF output out of 10000 (max. 10000000)
 
