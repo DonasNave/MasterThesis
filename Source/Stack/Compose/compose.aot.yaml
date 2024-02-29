@@ -11,8 +11,6 @@ services:
       - "15001:5000"
     networks:
       - stack-network
-
-  #FUS-monitor
   
   srs-service:
     image: srs-service
@@ -24,5 +22,3 @@ services:
       - "15002:5000"
     networks:
       - stack-network
-
-  #SRS-monitor

@@ -1,0 +1,12 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: srs-service-aot
+  namespace: default
+spec:
+  template:
+    spec:
+      containers:
+      - image: your-application-image
+        ports:
+        - containerPort: 8080

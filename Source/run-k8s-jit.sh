@@ -4,6 +4,7 @@
 BASE_DIR="./Stack/K8s"
 STORAGE_DIR="./Stack/persistent-storage"
 ENV_DIR="$BASE_DIR/environments/dev-JIT"
+TEST_DIR="$BASE_DIR/tests"
 
 # Check if the base directory exists
 if [ ! -d "$BASE_DIR" ]; then
@@ -26,5 +27,6 @@ apply_manifests() {
 apply_manifests "$BASE_DIR/base"
 apply_manifests "$STORAGE_DIR"
 apply_manifests "$ENV_DIR"
+apply_manifests "$TEST_DIR"
 
 echo "Deployment complete."

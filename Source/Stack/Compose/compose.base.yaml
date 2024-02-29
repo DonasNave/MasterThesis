@@ -141,3 +141,11 @@ services:
       start_period: 30s
     networks:
       stack-network:
+
+  k6:
+    image: grafana/k6:latest
+    volumes:
+      - ../../Tests/scenarios:/scenarios
+    entrypoint: ["tail", "-f", "/dev/null"] # keep the container running for the tests
+    networks:
+      stack-network:
