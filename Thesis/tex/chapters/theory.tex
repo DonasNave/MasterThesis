@@ -1,56 +1,112 @@
 \cast{Teoretická část}
 
-\n{1}{Kompilace kódu v platformě dotnet}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                    DOTNET                                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\n{1}{Platforma dotnet}
 
 Platforma dotnet od společnosti Microsoft představuje sadu nástrojů k vývoji aplikací v jazyce C\# a jeho derivátech. Tato platforma je multiplatformní a umožňuje vývoj aplikací pro operační systémy jako Windows, Linux, macOS ale i pro mobilní platformy. Vývojáři mohou využívat nástroje pro vývoj webových aplikací, desktopových aplikací, mobilních aplikací a dalších. Platforma dotnet je postavena na dvou hlavních principech. Prvním z nich je \textit{Common Language Runtime} (dále jen CLR), systémové prostředí zodpovídající za běh aplikací. Druhým principem je \textit{Common Language Infrastructure} (dále jen CLI), konzolový nástroj-rozhraní, zodpovědné za kompilaci a spouštění aplikací. \cite{Richter2012}
 
 \n{2}{Historie}
 
-Využití runtime prostředí, respektive v originální podobě virtuálního stroje, má historický původ. V dřívějších dobách byly programátoři limitování nutností kompilace kódu do nativní reprezentace pro architekturu konkrétního systému. Kód vytvořen pro jednu konkrétní architekturu se zpravidla neobešel bez modifikací, pokud měl fungovat i na odlišné architektuře.
+Využití runtime prostředí, respektive v originální podobě virtuálního stroje, má historický původ. V dřívějších dobách byly programátoři limitování nutností kompilace kódu do nativní reprezentace přímo pro architekturu systému. Kód vytvořen pro jednu konkrétní architekturu se zpravidla neobešel bez modifikací, pokud měl fungovat i na odlišné architektuře.
 
 V průběhu 90. let 20. století představila společnost Sun-Microsystems virtuální stroj Java Virtual Machine (JVM). Jedná se o komponentu runtime prostředí Javy, která zprostředkovává spuštění specifického kódu, správu paměti, vytváření tříd a typů a další. Kompilací Javy do tzv. Bytecode (Intermediate Language, zkráceně IL), tedy provedením mezikroku v procesu transformace zdrojového kódu do strojového kódu, je získána reprezentace programu, jenž běží na každém zařízení s implementovaným JVM. V rámci JVM dochází k finálnímu kroku a to interpretaci (JIT kompilaci) Bytecode do cílové architektury systému. 
 
 Microsoft v reakci na JVM vydal v roce 2000 první .NET Framework, který umožňoval spouštět kód v jazyce C\# na operačním systému Windows. Cílem prvních verzí .NET Framework nebylo primárně umožnit vývoj pro různé zařízení a operační systémy, ale zprostředkovat lepší nástroje pro vývoj aplikací. KV roce 2014 byla vydána první multiplatformní verze dotnetu. Byl vydán .NET Core, který umožňoval spouštět kód v jazyce C\# na operačních systémech Windows, Linux a macOS. \cite{Richter2012}
 
-\n{2}{JIT kompilace}
-JIT kompilace je proces, při kterém je kód kompilován do určité univerzální podoby, jenž v době spuštění aplikace je předkládán v běhovém prostředí na strojový kód. V případě dotnetu je tímto jazykem IL (Intermediate language) a výstupem kompilace dotnet aplikace jsou soubory s příponou .dll (mohou být i jiné). Takto vytvořený dll soubor je možné referencovat z jiných .dll souborů nebo jej přímo spustit přes CLI příkazem dotnet, pokud obsahuje vstupní funkci. Po spuštění je obsah .dll souboru načten běhovým prostředím CLR a kompilován na strojový kód.
+\n{2}{Nástroje dotnet}
+
+\n{2}{Kompilace zdrojového kódu}
+
+Kompilace je proces transformace zdrojového kódu do jiné podoby. Kód je zpravidla kompilován do podoby bližší cílové architektuře, ať je touto architekturou OS, případně konkrétní HW, nebo runtime prostředí (virtuální stroj). V rámci platformy dotnet jsou k dispozici 2 hlavní fundamentálně odlišné režimy kompilace zdrojového kódu: kompilace pro běhové prostředí (CLR) a kompilace do nativního kódu přímo pro cílovou architekturu (Native AoT).
+
+\n{3}{Kompilace pro CLR}
+
+Standartním výstupem sestavení aplikace v dotnetu je transformace zdrojového kódu z vybraného podporovaného jazyka do IL. Tento výstupní IL se v dotnet konkrétně navývaná Common Intermediate language (CIL) nebo také Microsoft Intermediate Language (MSIL). V případě jazyka C\# na platformě Windows slouží ke kompilaci spustitelný soubor \emph{csc.exe}. 
+
+\n{4}{Výstup} 
+
+IL kód spolu s metadaty jsou umístěny do souborů s příponou \emph{.dll}, případně zabaleny do spustilného souboru dle cílové platformy a výstupu. Takovýto výstup je následně připraven buďto ke spuštění za pomocí CLR, případně pro využití a referenci při tvorbě dalšího dotnet kódu.
+
+Kód IL je sada instrukcí nezávislá na procesoru, kterou může spustit běhové prostředí .NET (CLR).
+
+\n{3}{Kompilace do nativního kódu}
+
+Přímá nativní AoT kompilace je proces, při kterém je kód kompilován do podoby sytémově nativního kódu při sestavení programu ze zdrojového kódu. V případě dotnetu je tato funkcionalita dostupná při použití jazyka C\# a speciálních projektových atributů. 
+
+Jedná se o funkcionalitu vydanou bez plné podpory v roce 2022 s dotnet framework verzí 7. Vyráznější podporu získala v roce 2023 s vydáním dotent 8. Filozofie Microsoftu ohledně AoT kompilace je, že vývojáři by měli mít možnost využít AoT kompilace, pokud je to vhodné, aniž by museli použít jiný programovací jazyk a sadu nástrojů.
+
+\n{4}{Výstup}
+
+Výstupem nativní AoT kompilace dotnet aplikace je spustitelný soubor ve formátu podporovaném operačním systémem konfigurovaným v procesu kompilace. Takto vytvořený soubor je možné spustit přímo bez potřeby CLR. 
+
+\n{3}{Popis procesu}
+
+\begin{itemize}
+    \item[1.] Analýza zdrojového kódu, provádí kontrolu syntaxe
+    \item[2.] Kontrola syntaxe
+    \item[3.] Transformace vybrané syntaxe - například pro C\# je to transformace "High level C\#" na "Low level C\#"
+    \item[4.] Generování pre-build kódu 
+    \item[5.] Překlad kódu
+\end{itemize}
+
+\n{3}{Výstupy kompilace}
+
+Dotnet poskytuje 
+
+\begin{itemize}
+    \item Self-contained x Framework-depentend
+\end{itemize}
+
+\n{2}{Běh kódu}
+
+Spuštění, respektive běh kódu na HW počítačového zařízení vyžaduje instrukční sadu, které daná architektura rozumí, tedy nativní kód. V případě nativní AoT kompilace v dotnet tento kód získáme již při sestavení aplikace, v případě 
 
 \n{3}{CLR}
-Common Language Runtime (CLR) je součást virtuálního stroje frameworku .NET společnosti Microsoft, která poskytuje spravované prostředí pro spouštění aplikací .NET. Podporuje více programovacích jazyků, včetně jazyků C\#, VB.NET a F\#, a umožňuje jejich bezproblémovou spolupráci. CLR je zodpovědný za několik důležitých funkcí, které zvyšují produktivitu vývojářů a výkon aplikací. Spravuje paměť prostřednictvím automatického garbage collection, který pomáhá předcházet únikům paměti a optimalizuje využití prostředků. CLR také zajišťuje typovou bezpečnost a ověřuje, zda jsou všechny operace typově bezpečné, aby se minimalizovaly chyby při programování.
 
-Klíčovými vlasnostmi jsou CLR jsou multiplatformnost kódu, reflexe, optimalizace kódu pro konkrétní architekturu a bezpečnost. CLR nabízí mechanismy, jako je zabezpečení přístupu ke kódu (CAS), které zabraňují neoprávněným operacím. Jeho podpora kompilace JIT (just-in-time) znamená, že kód zprostředkujícího jazyka je zkompilován do nativního kódu těsně před spuštěním, což zajišťuje optimální výkon na cílovém hardwaru. CLR usnadňuje zpracování chyb v různých jazycích a poskytuje konzistentní přístup k řešení výjimek. Navíc obsahuje nástroje pro ladění a profilování, které vývojářům pomáhají efektivně identifikovat a odstraňovat problémy s výkonem.
+Common Language Runtime (CLR) je běhové prostředí frameworku dotnet. Poskytuje spravované prostředí pro spouštění aplikací dotnet. Podporuje více programovacích jazyků, včetně jazyků C\#, VB.NET a F\#, a umožňuje jejich bezproblémovou spolupráci. Spravuje paměť prostřednictvím automatického garbage collection, který pomáhá předcházet únikům paměti a optimalizuje využití prostředků. CLR také zajišťuje typovou bezpečnost a ověřuje, zda jsou všechny operace typově bezpečné, aby se minimalizovaly chyby při programování.
 
-\n{3}{Výhody a nevýhody}
+\n{4}{Funkce}
 
-Mezi hlavní výhody se řadí zprostředkování následujícího:
+CLR je zodpovědný za několik důležitých funkcí, které zvyšují produktivitu vývojářů a výkon aplikací.
+
 \begin{itemize}
-    \item  \textbf{Reflexe} - CLR umožňuje využívat reflexi, která umožňuje získat informace o kódu za běhu aplikace. Tímto je umožněno vytvářet aplikace, které jsou schopny měnit své chování za běhu.
-    \item \textbf{Dynamické načítání} - CLR umožňuje dynamicky načítat knihovny za běhu aplikace. Tímto je umožněno vytvářet aplikace, které jsou schopny měnit své chování za běhu.
-    \item \textbf{Větší bezpečnost} - CLR zajišťuje, že aplikace nemůže přistupovat k paměti, která jí nebyla přidělena. Tímto je zajištěna bezpečnost aplikace a zabráněno chybám, které by mohly vést k pádu aplikace.
-    \item \textbf{Správa paměti} - CLR zajišťuje správu paměti pomocí GC. Tímto je zajištěno, že paměť je uvolněna vždy, když ji aplikace již nepotřebuje. Tímto je zabráněno tzv. memory leakům, které by mohly vést k pádu aplikace.
-    \item \textbf{Větší přenositelnost} - CLR zajišťuje, že aplikace je spustitelná na všech operačních systémech, na kterých je dostupné běhové prostředí CLR.
+    \item Správa paměti - spravuje alokaci paměti, obsluhuje GC
+    \item Bezpečnost
+    \item Zpracování vyjímek - obsluhuje zpracování chyb/vyjímek v programu
+    \item Generování typů 
+    \item Reflexe
 \end{itemize}
 
-Zatímco za nevýhody CLR se dá považovat:
-\begin{itemize}
-    \item  \textbf{Výkonnost} - I když určité optimalizace jsou prováděny pro konkrétní systém a architekturu, výkon CLR je nižší než výkon nativního kódu. Dalším výkonnostním měřítkem je rychlost startu aplikace, která je pro CLR vyšší než v případě nativního kódu.
-    \item \textbf{Operační paměť} - CLR využívá více operační paměti, jak pro aplikaci, tak i pro běhové prostředí.
-    \item \textbf{Velikost aplikace} - Přítomnost CLR nehraje zásádní roli v případě monolitických aplikací, ale v případě mikroslužeb je nutné CLR přidat ke každé službě. Tímto se zvyšuje velikost jedné aplikační instance.
-\end{itemize}
+Klíčovými vlasnostmi jsou CLR jsou multiplatformnost kódu, reflexe, optimalizace kódu pro konkrétní architekturu a bezpečnost. CLR nabízí mechanismy, jako je zabezpečení přístupu ke kódu (CAS), které zabraňují neoprávněným operacím. Kompilace JIT (just-in-time) znamená, že kód zprostředkujícího jazyka je zkompilován do nativního kódu těsně před spuštěním, což zajišťuje optimální výkon na cílovém hardwaru. CLR usnadňuje zpracování chyb v různých jazycích a poskytuje konzistentní přístup k řešení výjimek. Navíc obsahuje nástroje pro ladění a profilování, které vývojářům pomáhají efektivně identifikovat a odstraňovat problémy s výkonem.
 
-\n{2}{AoT kompilace}
-AoT kompilace je proces, při kterém je kód kompilován do podoby sytémově nativního kódu před spuštěním aplikace. V případě dotnetu je tímto jazykem C\# a výstupem kompilace dotnet aplikace je spustitelný soubor ve formátu podporovaném operačním systémem konfigurovaným v procesu kompilace. Takto vytvořený soubor je možné spustit přímo bez potřeby CLR nebo využití dotnet CLI. 
+Aby mohl být kód z IL reprezentace spuštěn na systému, respektive HW stroje, musí být dodatečně kompilován. Za tímto účelem existuje v CLR několik technik, které s sebou přínáší různé benefity a negativa a mají využití v specifických scénářích.
 
-Jedná se o funkcionalitu vydanou bez plné podpory v roce 2022 s dotnet framework verzí 7. Vyráznější podporu získala v roce 2023 s vydáním dotent 8.
+\n{4}{JIT kompilace}
 
-Filozofie Microsoftu ohledně AoT kompilace je, že vývojáři by měli mít možnost využít AoT kompilace, pokud je to vhodné, aniž by museli použít jiný programovací jazyk a sadu nástrojů.
+Při JIT kompilaci v rámci CLR dochází ke kompilaci kódu do nativní podoby těsně před spuštěním kódu. Kompilace veškerého kódu aplikace JIT umožňuje optimalizovat běh programu současnému stavu systému. Za běhu je prováděna inspekce kódu, dochází ke kontrole validity, typování a adresace IL kódu. Kompilovány jsou pouze ty části kódu, jenž jsou relevantní pro aktuální stav programu.
 
-\n{3}{Princip}
-Text
+\n{4}{AoT kompilace}
 
-\n{4}{Deklarace rozhraní}
+V CLR místo čekání na spuštění se kód IL kompiluje přímo do nativního kódu pro cílovou platformu pomocí nástrojů AOT (např. CrossGen, ILCompiler). Výsledný nativní kód lze nasadit a spustit přímo na cílové platformě bez nutnosti kompilace JIT. Využivá se v scénářích vyžadující rychlé spuštění, konzistentní výkonnost při běhu nebo prostředí. Oproti nativní AoT kompilaci při sestavení umožňuje dodat nativní kód až na úrovni konkrétního nasazení/systému z obecného IL kódu. Podobně však ztrácí mnoho z výhod CLR plynoucích z JIT kompilace. 
 
-\n{4}{Trimming}
+\n{4}{R2R kompilace}
+
+Zdrojový kód je při sestavení zkompilován do podoby nativního kódu pomocí nástroje crossgen, čímž vzniknou sestavy R2R. Za běhu se sestavy R2R načtou a spustí s minimální kompilací JIT, protože většina kódu je již v nativní podobě. CLR může přesto JIT kompilovat některé části kódu, které nelze staticky zkompilovat předem. Využití je v aplikacích, které potřebují zkrátit dobu spouštění, ale zachovat určitou funkcionalitu nebo úroveň optimalizace poskytovanou JIT kompilací.
+
+\n{3}{Nativní kód}
+
+Běh nativního kódu je závislý na konkrétní architektuře systému, pro které jsou spustitelné soubory vytvořeny.
+
+\n{2}{Tvorba programu pro CLR}
+
+\n{2}{Tvorba nativního programu}
+
+\n{3}{Deklarace rozhraní}
+
+\n{3}{Trimming}
 
 \n{3}{Přehled podpory}
 
@@ -89,30 +145,67 @@ Dotnet poskytuje podporu pro kompilaci zdrojového kódu v režimu AoT pouze pro
     \item \textbf{WebAssembly} - částečná podpora
 \end{itemize}
 
-\n{3}{Výhody}
+\n{2}{Srovnání}
+
+\n{3}{JIT}
+
+\n{4}{Výhody}
 
 Mezi hlavní výhody se řadí zprostředkování následujícího:
+
+\begin{itemize}
+    \item  \textbf{Reflexe} - CLR umožňuje využívat reflexi, která umožňuje získat informace o kódu za běhu aplikace. Tímto je umožněno vytvářet aplikace, které jsou schopny měnit své chování za běhu.
+    \item \textbf{Dynamické načítání} - CLR umožňuje dynamicky načítat knihovny za běhu aplikace. Tímto je umožněno vytvářet aplikace, které jsou schopny měnit své chování za běhu.
+    \item \textbf{Větší bezpečnost} - CLR zajišťuje, že aplikace nemůže přistupovat k paměti, která jí nebyla přidělena. Tímto je zajištěna bezpečnost aplikace a zabráněno chybám, které by mohly vést k pádu aplikace.
+    \item \textbf{Správa paměti} - CLR zajišťuje správu paměti pomocí GC. Tímto je zajištěno, že paměť je uvolněna vždy, když ji aplikace již nepotřebuje. Tímto je zabráněno tzv. memory leakům, které by mohly vést k pádu aplikace.
+    \item \textbf{Větší přenositelnost} - CLR zajišťuje, že aplikace je spustitelná na všech operačních systémech, na kterých je dostupné běhové prostředí CLR.
+\end{itemize}
+
+\n{4}{Nevýhody}
+
+Zatímco za nevýhody CLR se dá považovat:
+
+\begin{itemize}
+    \item  \textbf{Výkonnost} - I když určité optimalizace jsou prováděny pro konkrétní systém a architekturu, výkon CLR je nižší než výkon nativního kódu. Dalším výkonnostním měřítkem je rychlost startu aplikace, která je pro CLR vyšší než v případě nativního kódu.
+    \item \textbf{Operační paměť} - CLR využívá více operační paměti, jak pro aplikaci, tak i pro běhové prostředí.
+    \item \textbf{Velikost aplikace} - Přítomnost CLR nehraje zásádní roli v případě monolitických aplikací, ale v případě mikroslužeb je nutné CLR přidat ke každé službě. Tímto se zvyšuje velikost jedné aplikační instance.
+\end{itemize}
+
+\n{3}{AoT}
+
+\n{4}{Výhody}
+
+Mezi hlavní výhody se řadí zprostředkování následujícího:
+
 \begin{itemize}
     \item  \textbf{Výkonnost} - CLR umožňuje využívat reflexi, která umožňuje získat informace o kódu za běhu aplikace. Tímto je umožněno vytvářet aplikace, které jsou schopny měnit své chování za běhu.
     \item \textbf{Paměťová zátěž} - CLR umožňuje dynamicky načítat knihovny za běhu aplikace. Tímto je umožněno vytvářet aplikace, které jsou schopny měnit své chování za běhu.
 \end{itemize}
 
-\n{3}{Nevýhody}
+\n{4}{Nevýhody}
 
 Zatímco za nevýhody CLR se dá považovat:
+
 \begin{itemize}
     \item  \textbf{Absence nástrojů z CLR} - Mnoho nástrojů, které jsou dostupné v CLR, nejsou dostupné v AoT kompilaci. Mezi tyto nástroje patří například reflexe, dynamické načítání knihoven a další.
-    \item \textbf{Transformace kódu na pozadí} - Za účelem zachování obdobné definice API využívají vybrané knihovny techniku transformace kódu na pozadí. Tím je zajištěno, že uživatel může jednoduše využít funkcionalitu, jako například routování REST endpointů stejným způsobem jako v CLR kódu. Tím je ale značně abstrahována podoba a funkce kódu, který je vytvořen.
     \item \textbf{Absence dynamického načítání} - například Assembly.LoadFile.
     \item \textbf{Bez generování kódu za běhu} - například System.Reflection.Emit.
     \item \textbf{Žádné C++/CLI} - např. System.Runtime.InteropServices.WindowsRuntime
     \item \textbf{Windows: absence COM} - např. System.Runtime.InteropServices.ComTypes
-    \item \textbf{Vyžaduje trimming (ořezávání)}, které má omezení. 
+    \item \textbf{Vyžaduje trimming (ořezávání)} - má určitá omezení, je však klíčový pro rozumnou velikost výsledného programu
     \item \textbf{Kompilace do jediného souboru} 
     \item \textbf{Připojení běhových knihoven} - požadované běhové knihovny jsou součástí výsledného aplikačního souboru. To zvyšuje velikost samoteného programu ve srovnání s aplikacemi závislými na frameworku.
     \item \textbf{System.Linq.Expressions} - výsledný kód používá svou interpretovanou podobu, která je pomalejší než run-time generovaný kompilovaný kód.
-    \item \textbf{Kompatibilita knihoven s AoT} - né všechny knihovny runtime jsou plně anotovány tak, aby byly kompatibilní s Native AOT. To znamená, že některá varování v knihovnách runtime nejsou pro koncové vývojáře použitelná.
+    \item \textbf{Kompatibilita knihoven s AoT} - né všechny knihovny runtime jsou plně anotovány tak, aby byly kompatibilní s Native AoT. To znamená, že některá varování v knihovnách runtime nejsou pro koncové vývojáře použitelná.
 \end{itemize}
+
+\n{2}{Závěr}
+
+xx
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                 MICROSERVICE                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \n{1}{Microservice architektura}
 Při vývoji softwaru je možné využít několik architektur, které se liší v několika aspektech. Jednou z těchto architektur je monolitická architektura. V této architektuře je celá aplikace rozdělena do několika vrstev, které jsou využívány k oddělení logiky aplikace.
@@ -219,6 +312,10 @@ Mikroslužby sice zvyšují flexibilitu vývoje, ale také komplikují testován
 \n{2}{Závěr}
 
 Architektura mikroslužeb je metoda vývoje softwarových systémů, které jsou rozděleny do malých, nezávislých služeb komunikujících prostřednictvím přesně definovaných rozhraní API. Tyto služby jsou vysoce udržovatelné a testovatelné, volně provázané, nezávisle nasaditelné a organizované podle obchodních schopností. Tento přístup k architektuře umožňuje organizacím dosáhnout větší agility a škálování jejich aplikací.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                  MONITORING                                   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \n{1}{Monitorování aplikace}
 
