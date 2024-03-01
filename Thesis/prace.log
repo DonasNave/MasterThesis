@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.8)  1 MAR 2024 16:07
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.8)  1 MAR 2024 19:35
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -916,50 +916,54 @@ Package pdftex.def Info: graphics/logo/fai_logo_cz.png  used on input line 73.
 ] [12
 
 
-] [13] [14] [15] [16] [17] [18] [19
+] [13] [14] [15]
+LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 121.
+ (/usr/local/texlive/2023/texmf-dist/tex/latex/base/t1cmtt.fd
+File: t1cmtt.fd 2022/07/10 v2.5l Standard LaTeX font definitions
+) [16] [17] [18] [19] [20] [21
 
-] [20]
-Overfull \hbox (4.10199pt too wide) in paragraph at lines 270--271
+] [22]
+Overfull \hbox (4.10199pt too wide) in paragraph at lines 301--302
  []\T1/cmr/bx/it/10.95 ’kálovatelnost[] \T1/cmr/m/n/12 Sluºby lze ²ká-lo-vat ne-zá-visle, coº umoº-¬uje p°es-n¥j²í p°i-d¥-lo-vání zdroj·
  []
 
-[21] [22] [23
+[23] [24] [25
 
-] [24]) (./tex/chapters/practical.tex [25] [26
-
-
-] [27
+] [26]) (./tex/chapters/practical.tex [27] [28
 
 
-] [28] [29] [30]) (./tex/chapters/analytics.tex [31
-
-] [32
+] [29
 
 
-] [33
-
+] [30] [31] [32]) (./tex/chapters/analytics.tex [33
 
 ] [34
 
-]) (./tex/chapters/conclusion.tex [35
 
-]) [36
+] [35
 
-] (./tex/zkratky.tex [37
+
+] [36
+
+]) (./tex/chapters/conclusion.tex [37
 
 ]) [38
+
+] (./tex/zkratky.tex [39
+
+]) [40
 
 ] (./prace.lof)
 \tf@lof=\write7
 \openout7 = `prace.lof'.
 
- [39
+ [41
 
 ] (./prace.lot)
 \tf@lot=\write8
 \openout8 = `prace.lot'.
 
- [40
+ [42
 
 
 ] (./tex/prilohy.tex (./prace.loa)
@@ -971,7 +975,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1--6
 
  []
 
-[41
+[43
 
 ]
 pdfTeX warning (ext4): destination with the same identifier (name{section.1}) has been already used, duplicate ignored
@@ -991,24 +995,24 @@ See the caption package documentation for explanation.
 File: se-pdfdoc.def 2019/11/29 v1.12 stringenc: PDFDocEncoding
 ) (/usr/local/texlive/2023/texmf-dist/tex/generic/stringenc/se-utf8.def
 File: se-utf8.def 2019/11/29 v1.12 stringenc: UTF-8
-) [42
+) [44
 
 ] (./prace.aux)
 Package rerunfilecheck Info: File `prace.out' has not changed.
-(rerunfilecheck)             Checksum: 152F85513F86EBAE5CBFA5339E8A2F21;13454.
+(rerunfilecheck)             Checksum: F3340EA69ACAAE14C80B6117178E08FE;13524.
  ) 
 Here is how much of TeX's memory you used:
- 14684 strings out of 476025
- 241681 string characters out of 5790017
+ 14720 strings out of 476025
+ 242435 string characters out of 5790017
  1865388 words of memory out of 5000000
- 34655 multiletter control sequences out of 15000+600000
- 530737 words of font info for 64 fonts, out of 8000000 for 9000
+ 34672 multiletter control sequences out of 15000+600000
+ 531050 words of font info for 65 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  80i,12n,79p,1038b,603s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbi1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
-Output written on prace.pdf (42 pages, 427928 bytes).
+</usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbi1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
+Output written on prace.pdf (44 pages, 456966 bytes).
 PDF statistics:
- 791 PDF objects out of 1000 (max. 8388607)
- 195 named destinations out of 1000 (max. 500000)
+ 820 PDF objects out of 1000 (max. 8388607)
+ 210 named destinations out of 1000 (max. 500000)
  722 words of extra memory for PDF output out of 10000 (max. 10000000)
 
