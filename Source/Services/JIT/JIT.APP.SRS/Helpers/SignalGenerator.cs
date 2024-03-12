@@ -1,4 +1,4 @@
-using SRS.Models;
+using Shared.APP.Models.Signal;
 
 namespace SRS.Helpers;
 
@@ -6,9 +6,9 @@ public static class SignalGenerator
 {
     private static readonly Random Random = new();
 
-    public static async Task<List<SignalModel>> GenerateRandomSignalsAsync(int numberOfSignals)
+    public static async Task<List<Signal>> GenerateRandomSignalsAsync(int numberOfSignals)
     {
-        var signals = new List<SignalModel>();
+        var signals = new List<Signal>();
 
         // Simulate baseline delay
         await Task.Delay(500);
@@ -18,7 +18,7 @@ public static class SignalGenerator
             // Simulate a delay per signal
             await Task.Delay(Random.Next(1, 20));
 
-            var signal = new SignalModel
+            var signal = new Signal
             {
                 Value = (float)(Random.NextDouble() * 100),
                 Time = DateTime.Now,

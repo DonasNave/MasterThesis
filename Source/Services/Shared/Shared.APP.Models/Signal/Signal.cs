@@ -1,6 +1,6 @@
-namespace SRS.Models;
+namespace Shared.APP.Models.Signal;
 
-public class SignalModel()
+public class Signal
 {
     public float Value { get; set; }
     public DateTime Time { get; set; }

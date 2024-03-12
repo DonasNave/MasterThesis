@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Shared\Shared.APP.Models\Shared.APP.Models.csproj" />
+    <ProjectReference Include="..\JIT.APP.Extensions\JIT.APP.Extensions.csproj" />
   </ItemGroup>
 
   <ItemGroup>

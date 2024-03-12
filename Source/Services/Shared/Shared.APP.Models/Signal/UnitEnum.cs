@@ -1,4 +1,4 @@
-namespace SRS.Models;
+namespace Shared.APP.Models.Signal;
 
 public enum UnitEnum
 {

@@ -1,3 +1,4 @@
+using System.Diagnostics.Metrics;
 using FUS.Data;
 using FUS.Services;
 using FUS.Services.Interfaces;
@@ -45,6 +46,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+var meter = new Meter("FUSMeter", "1.0.0");
+var counterUploads = meter.CreateCounter<long>("download_api_calls_counter");
+var counterDownloads = meter.CreateCounter<long>("upload_api_calls_counter");
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -55,10 +60,16 @@ if (app.Environment.IsDevelopment())
 }
 
 app.MapPost("/api/file/upload", async (IFormFile file, IFileService fileService) =>
-    await fileService.Upload(file));
+{
+    counterUploads.Add(1);
+    return await fileService.Upload(file);
+});
 
 app.MapGet("/api/file/download/{id:int}", async (int id, IFileService fileService) =>
-    await fileService.Download(id));
+{
+    counterDownloads.Add(1);
+    return await fileService.Download(id);
+});
 
 app.UseHttpsRedirection();
 

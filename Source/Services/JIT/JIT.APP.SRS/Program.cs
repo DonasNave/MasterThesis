@@ -1,9 +1,6 @@
-using Npgsql;
-using OpenTelemetry.Exporter;
-using OpenTelemetry.Logs;
-using OpenTelemetry.Metrics;
+using System.Diagnostics.Metrics;
+using JIT.APP.Extensions;
 using OpenTelemetry.Resources;
-using OpenTelemetry.Trace;
 using Shared.APP.Models;
 using SRS.Services;
 using SRS.Services.Interfaces;
@@ -19,85 +16,29 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+var settings =
+    builder.Configuration.GetSection(nameof(OpenTelemetrySettings)).Get<OpenTelemetrySettings>()!;
+const string serviceName = "JIT-SRS";
+var serviceVersion = typeof(Program).Assembly.GetName().Version?.ToString() ?? "unknown";
+
 // Add OpenTelemetry ...
 builder.Services
     .AddOpenTelemetry()
+    // ... Resource ...
     .ConfigureResource(resourceBuilder =>
     {
         resourceBuilder.AddService(
-            serviceName: "JIT-SRS",
-            serviceVersion: typeof(Program).Assembly.GetName().Version?.ToString() ?? "unknown",
+            serviceName: serviceName,
+            serviceVersion: serviceVersion,
             serviceInstanceId: Environment.MachineName);
     })
     // ... Tracing ...
-    .WithTracing(providerBuilder =>
-    {
-        providerBuilder
-            .AddAspNetCoreInstrumentation()
-            .AddNpgsql()
-            .AddOtlpExporter(options =>
-            {
-                options.Endpoint =
-                    builder
-                        .Configuration
-                        .GetSection(nameof(OpenTelemetrySettings))
-                        .Get<OpenTelemetrySettings>()!
-                        .Endpoint;
-
-                options.Protocol = OtlpExportProtocol.Grpc;
-            });
-    })
+    .SetupMyOtelTracing(settings)
     // ... Metrics 
-    .WithMetrics(metrics =>
-    {
-        metrics
-            .AddRuntimeInstrumentation()
-            .AddAspNetCoreInstrumentation()
-            .AddHttpClientInstrumentation()
-            .AddMeter(
-                "System.Runtime",
-                "Microsoft.AspNetCore.Hosting",
-                "Microsoft.AspNetCore.Server.Kestrel",
-                "Npgsql")
-            .AddOtlpExporter(options =>
-            {
-                options.Endpoint =
-                    builder
-                        .Configuration
-                        .GetSection(nameof(OpenTelemetrySettings))
-                        .Get<OpenTelemetrySettings>()!
-                        .Endpoint;
+    .SetupMyOtelMetrics(settings);
 
-                options.Protocol = OtlpExportProtocol.Grpc;
-            });
-    });
-
-// Add OpenTelemetry Logging
-builder.Logging.AddOpenTelemetry(options =>
-{
-    options.SetResourceBuilder(
-        ResourceBuilder
-            .CreateDefault()
-            .AddService(
-                serviceName: "JIT-SRS",
-                serviceVersion: typeof(Program).Assembly.GetName().Version?.ToString() ?? "unknown",
-                serviceInstanceId: Environment.MachineName));
-
-    options.IncludeScopes = true;
-    options.IncludeFormattedMessage = true;
-    options.ParseStateValues = true;
-
-    options.AddOtlpExporter(exporterOptions =>
-    {
-        exporterOptions.Endpoint =
-            builder
-                .Configuration
-                .GetSection(nameof(OpenTelemetrySettings))
-                .Get<OpenTelemetrySettings>()!
-                .Endpoint;
-    });
-});
-
+var meter = new Meter("SRSMeter", "1.0.0");
+var counterSignals = meter.CreateCounter<long>("signal_api_calls_counter");
 
 var app = builder.Build();
 
@@ -114,8 +55,11 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-
 app.MapGet("/api/signals/{count:int}", async (int count, IReadingService readingService) =>
-    await readingService.GetRandomSignals(count));
+{
+    var signals = await readingService.GetRandomSignals(count);
+    counterSignals.Add(1);
+    return signals;
+});
 
 app.Run();
