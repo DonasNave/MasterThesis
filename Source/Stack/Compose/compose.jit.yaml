@@ -1,12 +1,21 @@
 version: '3.7'
 
+volumes:
+  grafana_storage:
+  prometheus_data:
+  postgres:
+  pgadmin:
+
+networks:
+  stack-network:
+
 services:
   fus-service:
     image: fus-service
     container_name: fus-service
     build:
-      context: ../Services/JIT/FUS/FUS
-      dockerfile: Dockerfile
+      context: ../../DTA/Services
+      dockerfile: DTA.JIT.FUS/Dockerfile
     ports:
       - "15001:5000"
     networks:
@@ -16,9 +25,19 @@ services:
     image: srs-service
     container_name: srs-service
     build:
-      context: ../Services/JIT/SRS/SRS
-      dockerfile: Dockerfile
+      context: ../../DTA/Services
+      dockerfile: DTA.JIT.SRS/Dockerfile
     ports:
       - "15002:5000"
+    networks:
+      - stack-network
+
+  otel-lgtm:
+    image: grafana/otel-lgtm
+    ports:
+      - "3000:3000"
+      - "4317:4317"
+      - "4318:4318"
+    restart: unless-stopped
     networks:
       - stack-network
