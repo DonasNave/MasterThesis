@@ -10,7 +10,12 @@ using DTA.Shared.Models;
 var builder = WebApplication.CreateBuilder(args);
 // File Upload Service
 
+// Setup logging to console
+builder.Logging.AddConsole();
+builder.Logging.SetMinimumLevel(LogLevel.Debug);
+
 // Add services to the container.
+builder.Configuration.AddEnvironmentVariables(prefix: "DAT_JIT_FUS_");
 
 builder.Services.AddDbContext<FileContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -19,7 +24,7 @@ builder.Services.AddTransient<IFileService, FileService>();
 
 var settings =
     builder.Configuration.GetSection(nameof(OpenTelemetrySettings)).Get<OpenTelemetrySettings>()!;
-const string serviceName = "JIT-FUS";
+const string serviceName = "DAT-JIT-FUS";
 var serviceVersion = typeof(Program).Assembly.GetName().Version?.ToString() ?? "unknown";
 
 // Add OpenTelemetry ...
@@ -46,7 +51,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var meter = new Meter("FUSMeter", "1.0.0");
+var meter = new Meter("DAT-JIT-FUS-Meter", "1.0.0");
 var counterUploads = meter.CreateCounter<long>("download_api_calls_counter");
 var counterDownloads = meter.CreateCounter<long>("upload_api_calls_counter");
 
@@ -56,11 +61,14 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
 app.MapControllers();
+
+// Swagger redirect
+app.MapGet("/", context => 
+{
+    context.Response.Redirect("/swagger/index.html");
+    return Task.CompletedTask;
+});
 
 app.MapPost("/api/file/upload", async (IFormFile file, IFileService fileService) =>
 {

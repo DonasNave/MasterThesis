@@ -8,7 +8,7 @@ volumes:
 
 networks:
   stack-network:
-
+  
 services:
   fus-service:
     image: fus-service
@@ -16,8 +16,11 @@ services:
     build:
       context: ../../DTA/Services
       dockerfile: DTA.JIT.FUS/Dockerfile
+    environment:
+      - "DAT_JIT_FUS_Logging__LogLevel__Default=Debug"
+      - "DAT_JIT_FUS_Logging__LogLevel__OpenTelemetry=Debug"
     ports:
-      - "15001:5000"
+      - "15001:8080"
     networks:
       - stack-network
 
@@ -27,13 +30,17 @@ services:
     build:
       context: ../../DTA/Services
       dockerfile: DTA.JIT.SRS/Dockerfile
+    environment:
+      - "DAT_JIT_SRS_Logging__LogLevel__Default=Debug"
+      - "DAT_JIT_FUS_Logging__LogLevel__OpenTelemetry=Debug"
     ports:
-      - "15002:5000"
+      - "15002:8080"
     networks:
       - stack-network
 
   otel-lgtm:
     image: grafana/otel-lgtm
+    container_name: otel-stack
     ports:
       - "3000:3000"
       - "4317:4317"
