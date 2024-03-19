@@ -2,5 +2,5 @@
 
 public class OpenTelemetrySettings
 {
-    public required Uri Endpoint { get; init; }
+    public required Uri ExporterEndpoint { get; init; }
 }

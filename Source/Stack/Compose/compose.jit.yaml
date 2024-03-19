@@ -19,6 +19,7 @@ services:
     environment:
       - "DAT_JIT_FUS_Logging__LogLevel__Default=Debug"
       - "DAT_JIT_FUS_Logging__LogLevel__OpenTelemetry=Debug"
+      - "DAT_JIT_FUS_OpenTelemetrySettings__ExporterEndpoint=http://otel-lgtm:4317"
     ports:
       - "15001:8080"
     networks:
@@ -32,7 +33,8 @@ services:
       dockerfile: DTA.JIT.SRS/Dockerfile
     environment:
       - "DAT_JIT_SRS_Logging__LogLevel__Default=Debug"
-      - "DAT_JIT_FUS_Logging__LogLevel__OpenTelemetry=Debug"
+      - "DAT_JIT_SRS_Logging__LogLevel__OpenTelemetry=Debug"
+      - "DAT_JIT_SRS_OpenTelemetrySettings__ExporterEndpoint=http://otel-lgtm:4317"
     ports:
       - "15002:8080"
     networks:

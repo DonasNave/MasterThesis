@@ -17,6 +17,8 @@ builder.Services.AddTransient<IReadingService, ReadingService>();
 
 builder.Configuration.AddEnvironmentVariables(prefix: "DAT_JIT_SRS_");
 
+builder.Services.AddHealthChecks();
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -24,26 +26,21 @@ builder.Services.AddSwaggerGen();
 
 var settings =
     builder.Configuration.GetSection(nameof(OpenTelemetrySettings)).Get<OpenTelemetrySettings>()!;
+
 const string serviceName = "DAT-JIT-SRS";
+const string meterName = "DAT-JIT-SRS-Meter";
 var serviceVersion = typeof(Program).Assembly.GetName().Version?.ToString() ?? "unknown";
 
 // Add OpenTelemetry ...
-builder.Services
-    .AddOpenTelemetry()
-    // ... Resource ...
-    .ConfigureResource(resourceBuilder =>
-    {
-        resourceBuilder.AddService(
-            serviceName: serviceName,
-            serviceVersion: serviceVersion,
-            serviceInstanceId: Environment.MachineName);
-    })
-    // ... Tracing ...
-    .SetupMyOtelTracing(settings)
-    // ... Metrics 
-    .SetupMyOtelMetrics(settings);
+builder.SetupOpenTelemetry(options =>
+{
+    options.OpenTelemetrySettings = settings;
+    options.ServiceName = serviceName;
+    options.ServiceVersion = serviceVersion;
+    options.MeterNames = [meterName];
+});
 
-var meter = new Meter("DAT-JIT-SRS-Meter", "1.0.0");
+var meter = new Meter(meterName, serviceVersion);
 var counterSignals = meter.CreateCounter<long>("signal_api_calls_counter");
 
 var app = builder.Build();
@@ -60,6 +57,8 @@ app.MapGet("/", context =>
     context.Response.Redirect("/swagger/index.html");
     return Task.CompletedTask;
 });
+
+app.MapDefaultEndpoints();
 
 app.MapGet("/api/signals/{count:int}", async (int count, IReadingService readingService) =>
 {

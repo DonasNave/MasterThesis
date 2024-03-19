@@ -45,7 +45,7 @@ builder.Services
                         .Configuration
                         .GetSection(nameof(OpenTelemetrySettings))
                         .Get<OpenTelemetrySettings>()!
-                        .Endpoint;
+                        .ExporterEndpoint;
 
                 options.Protocol = OtlpExportProtocol.Grpc;
             });
@@ -69,7 +69,7 @@ builder.Services
                         .Configuration
                         .GetSection(nameof(OpenTelemetrySettings))
                         .Get<OpenTelemetrySettings>()!
-                        .Endpoint;
+                        .ExporterEndpoint;
 
                 options.Protocol = OtlpExportProtocol.Grpc;
             });
@@ -97,7 +97,7 @@ builder.Logging.AddOpenTelemetry(options =>
                 .Configuration
                 .GetSection(nameof(OpenTelemetrySettings))
                 .Get<OpenTelemetrySettings>()!
-                .Endpoint;
+                .ExporterEndpoint;
     });
 });
 

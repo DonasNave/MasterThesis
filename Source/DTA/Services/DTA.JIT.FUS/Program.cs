@@ -4,7 +4,6 @@ using FUS.Services;
 using FUS.Services.Interfaces;
 using DTA.JIT.Extensions;
 using Microsoft.EntityFrameworkCore;
-using OpenTelemetry.Resources;
 using DTA.Shared.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +16,8 @@ builder.Logging.SetMinimumLevel(LogLevel.Debug);
 // Add services to the container.
 builder.Configuration.AddEnvironmentVariables(prefix: "DAT_JIT_FUS_");
 
+builder.Services.AddHealthChecks();
+
 builder.Services.AddDbContext<FileContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -24,34 +25,25 @@ builder.Services.AddTransient<IFileService, FileService>();
 
 var settings =
     builder.Configuration.GetSection(nameof(OpenTelemetrySettings)).Get<OpenTelemetrySettings>()!;
+
 const string serviceName = "DAT-JIT-FUS";
+const string meterName = "DAT-JIT-FUS-Meter";
 var serviceVersion = typeof(Program).Assembly.GetName().Version?.ToString() ?? "unknown";
 
 // Add OpenTelemetry ...
-builder.Services
-    .AddOpenTelemetry()
-    // ... Resource ...
-    .ConfigureResource(resourceBuilder =>
-    {
-        resourceBuilder.AddService(
-            serviceName: serviceName,
-            serviceVersion: serviceVersion,
-            serviceInstanceId: Environment.MachineName);
-    })
-    // ... Tracing ...
-    .SetupMyOtelTracing(settings)
-    // ... Metrics 
-    .SetupMyOtelMetrics(settings);
-
-// Add OpenTelemetry Logging
-builder.Logging.SetupMyOtelLogging(settings, serviceName, serviceVersion);
+builder.SetupOpenTelemetry(options =>
+{
+    options.OpenTelemetrySettings = settings;
+    options.ServiceName = serviceName;
+    options.ServiceVersion = serviceVersion;
+    options.MeterNames = [meterName];
+});
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var meter = new Meter("DAT-JIT-FUS-Meter", "1.0.0");
+var meter = new Meter(meterName, serviceVersion);
 var counterUploads = meter.CreateCounter<long>("download_api_calls_counter");
 var counterDownloads = meter.CreateCounter<long>("upload_api_calls_counter");
 
@@ -69,6 +61,8 @@ app.MapGet("/", context =>
     context.Response.Redirect("/swagger/index.html");
     return Task.CompletedTask;
 });
+
+app.MapDefaultEndpoints();
 
 app.MapPost("/api/file/upload", async (IFormFile file, IFileService fileService) =>
 {

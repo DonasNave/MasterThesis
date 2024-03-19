@@ -1,7 +1,10 @@
 ﻿using DTA.Shared.Models;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Npgsql;
-using OpenTelemetry;
 using OpenTelemetry.Exporter;
 using OpenTelemetry.Logs;
 using OpenTelemetry.Metrics;
@@ -12,69 +15,88 @@ namespace DTA.JIT.Extensions;
 
 public static class OtelExtensions
 {
-    public static void SetupMyOtelLogging(this ILoggingBuilder builder, OpenTelemetrySettings settings, string serviceName, string serviceVersion)
+    public static void SetupOpenTelemetry(this IHostApplicationBuilder builder,
+        Action<TelemetryConfiguration> optionsAction)
     {
-        builder.AddOpenTelemetry(options =>
+        // Options
+        TelemetryConfiguration config = new();
+        optionsAction(config);
+        
+        // Logging
+        builder.Logging.AddOpenTelemetry(options =>
         {
             options.SetResourceBuilder(
                 ResourceBuilder
                     .CreateDefault()
                     .AddService(
-                        serviceName: serviceName,
-                        serviceVersion: serviceVersion,
+                        serviceName: config.ServiceName,
+                        serviceVersion: config.ServiceVersion,
                         serviceInstanceId: Environment.MachineName));
 
             options.IncludeScopes = true;
             options.IncludeFormattedMessage = true;
             options.ParseStateValues = true;
-
-            options.AddOtlpExporter(exporterOptions =>
-            {
-                exporterOptions.Endpoint = settings.Endpoint;
-            });
         });
-    }
-
-    public static OpenTelemetryBuilder SetupMyOtelTracing(this OpenTelemetryBuilder builder, OpenTelemetrySettings settings)
-    {
-        builder.WithTracing(tracingBuilder =>
-        {
-            tracingBuilder
-                .AddAspNetCoreInstrumentation()
-                .AddNpgsql()
-                .AddOtlpExporter(options =>
-                {
-                    options.Endpoint = settings.Endpoint;
-                    options.Protocol = OtlpExportProtocol.Grpc;
-                });
-        });
-
-        return builder;
-    }
-
-    public static OpenTelemetryBuilder SetupMyOtelMetrics(this OpenTelemetryBuilder builder, OpenTelemetrySettings settings,
-        IEnumerable<string>? meterNames = null)
-    {
+        
+        // Metrics
         string[] defaultMeters =
-            ["System.Runtime", "Microsoft.AspNetCore.Hosting", "Microsoft.AspNetCore.Server.Kestrel", "Npgsql"];
+            ["System.Runtime", "System.Net.Http", "Microsoft.AspNetCore.Hosting", "Microsoft.AspNetCore.Server.Kestrel", "Npgsql"];
 
-        if (meterNames is not null)
+        if (config.MeterNames is { Length: > 0 } meterNames)
             defaultMeters = meterNames.Union(defaultMeters).ToArray();
+        
+        builder.Services.AddOpenTelemetry()
+            // Metrics
+            .WithMetrics(options =>
+            {
+                options
+                    .AddRuntimeInstrumentation()
+                    .AddAspNetCoreInstrumentation()
+                    .AddHttpClientInstrumentation()
+                    .AddMeter(defaultMeters);
+            })
+            // Tracing
+            .WithTracing(options =>
+            {
+                if (builder.Environment.IsDevelopment())
+                    options.SetSampler<AlwaysOnSampler>();
+                
+                options
+                    .AddAspNetCoreInstrumentation()
+                    .AddHttpClientInstrumentation()
+                    .AddNpgsql();
+            });
 
-        builder.WithMetrics(metricsBuilder =>
+        // Exporters
+        builder.Services.Configure<OpenTelemetryLoggerOptions>(logging => logging.AddOtlpExporter(options => {
+            options.Endpoint = config.OpenTelemetrySettings.ExporterEndpoint;
+            options.Protocol = OtlpExportProtocol.Grpc;
+        }));
+        builder.Services.ConfigureOpenTelemetryTracerProvider(tracing => tracing.AddOtlpExporter(options =>
         {
-            metricsBuilder
-                .AddRuntimeInstrumentation()
-                .AddAspNetCoreInstrumentation()
-                .AddHttpClientInstrumentation()
-                .AddMeter(defaultMeters)
-                .AddOtlpExporter(options =>
-                {
-                    options.Endpoint = settings.Endpoint;
-                    options.Protocol = OtlpExportProtocol.Grpc;
-                });
+            options.Endpoint = config.OpenTelemetrySettings.ExporterEndpoint;
+            options.Protocol = OtlpExportProtocol.Grpc;
+        
+        }));
+        builder.Services.ConfigureOpenTelemetryMeterProvider(metrics => metrics.AddOtlpExporter(options =>
+        {
+            options.Endpoint = config.OpenTelemetrySettings.ExporterEndpoint;
+            options.Protocol = OtlpExportProtocol.Grpc;
+        }));
+    }
+    
+    public static void MapDefaultEndpoints(this WebApplication app)
+    {
+        app.MapHealthChecks("/health");
+        
+        app.MapHealthChecks("/alive", new HealthCheckOptions
+        {
+            Predicate = registration => registration.Tags.Contains("live"),
         });
-
-        return builder;
+        
+        app.MapHealthChecks("/ready", new HealthCheckOptions
+        {
+            Predicate = registration => registration.Tags.Contains("ready"),
+        });
     }
 }
