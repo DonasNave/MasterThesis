@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fus-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fus-service
+  template:
+    metadata:
+      labels:
+        app: fus-service
+    spec:
+      containers:
+      - name: fus-service
+        image: fus-service
+        resources:
+          limits:
+            cpu: "1"
+            memory: "1Gi"
+          requests:
+            cpu: "0.5"
+            memory: "512Mi"
+        env:
+        - name: DAT_JIT_FUS_Logging__LogLevel__Default
+          value: "Debug"
+        - name: DAT_JIT_FUS_Logging__LogLevel__OpenTelemetry
+          value: "Debug"
+        - name: DAT_JIT_FUS_OpenTelemetrySettings__ExporterEndpoint
+          value: "http://lgtm:4317"

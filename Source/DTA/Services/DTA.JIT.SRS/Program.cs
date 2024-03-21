@@ -1,6 +1,5 @@
 using System.Diagnostics.Metrics;
 using DTA.JIT.Extensions;
-using OpenTelemetry.Resources;
 using DTA.Shared.Models;
 using SRS.Services;
 using SRS.Services.Interfaces;
@@ -9,8 +8,16 @@ var builder = WebApplication.CreateBuilder(args);
 // Signal Readings Service
 
 // Setup logging to console
-builder.Logging.AddConsole();
-builder.Logging.SetMinimumLevel(LogLevel.Debug);
+var loggerFactory = LoggerFactory.Create(loggingBuilder =>
+{
+    loggingBuilder
+        .AddConsole()
+        .SetMinimumLevel(LogLevel.Debug); // Adjust the log level as needed
+});
+
+ILogger logger = loggerFactory.CreateLogger<Program>();
+logger.LogInformation("Logging from the configuration phase");
+
 
 // Add services to the container.
 builder.Services.AddTransient<IReadingService, ReadingService>();
@@ -27,9 +34,13 @@ builder.Services.AddSwaggerGen();
 var settings =
     builder.Configuration.GetSection(nameof(OpenTelemetrySettings)).Get<OpenTelemetrySettings>()!;
 
+logger.LogInformation("OpenTelemetry settings {@Settings}", settings);
+
 const string serviceName = "DAT-JIT-SRS";
 const string meterName = "DAT-JIT-SRS-Meter";
 var serviceVersion = typeof(Program).Assembly.GetName().Version?.ToString() ?? "unknown";
+
+logger.LogInformation("Service name: {ServiceName}, version: {ServiceVersion}", serviceName, serviceVersion);
 
 // Add OpenTelemetry ...
 builder.SetupOpenTelemetry(options =>
@@ -46,8 +57,12 @@ var counterSignals = meter.CreateCounter<long>("signal_api_calls_counter");
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-app.UseSwagger();
-app.UseSwaggerUI();
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.MapControllers();
 
@@ -60,10 +75,11 @@ app.MapGet("/", context =>
 
 app.MapDefaultEndpoints();
 
-app.MapGet("/api/signals/{count:int}", async (int count, IReadingService readingService) =>
+app.MapGet("/api/signals/{count:int}", async (int count, IReadingService readingService)  =>
 {
     var signals = await readingService.GetRandomSignals(count);
     counterSignals.Add(1);
+    logger.LogInformation("Signal API called {Count} signals", count);
     return signals;
 });
 

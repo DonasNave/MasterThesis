@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: srs-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: srs-service
+  template:
+    metadata:
+      labels:
+        app: srs-service
+    spec:
+      containers:
+      - name: srs-service
+        image: srs-service
+        resources:
+          limits:
+            cpu: "1"
+            memory: "1Gi"
+          requests:
+            cpu: "0.5"
+            memory: "512Mi"
+        env:
+        - name: DAT_JIT_SRS_Logging__LogLevel__Default
+          value: "Debug"
+        - name: DAT_JIT_SRS_Logging__LogLevel__OpenTelemetry
+          value: "Debug"
+        - name: DAT_JIT_SRS_OpenTelemetrySettings__ExporterEndpoint
+          value: "http://lgtm:4317"

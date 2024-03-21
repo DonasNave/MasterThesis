@@ -4,7 +4,6 @@ volumes:
   grafana_storage:
   prometheus_data:
   postgres:
-  pgadmin:
 
 networks:
   stack-network:
@@ -20,8 +19,6 @@ services:
       - "DAT_JIT_FUS_Logging__LogLevel__Default=Debug"
       - "DAT_JIT_FUS_Logging__LogLevel__OpenTelemetry=Debug"
       - "DAT_JIT_FUS_OpenTelemetrySettings__ExporterEndpoint=http://otel-lgtm:4317"
-    ports:
-      - "15001:8080"
     networks:
       - stack-network
 
@@ -35,18 +32,42 @@ services:
       - "DAT_JIT_SRS_Logging__LogLevel__Default=Debug"
       - "DAT_JIT_SRS_Logging__LogLevel__OpenTelemetry=Debug"
       - "DAT_JIT_SRS_OpenTelemetrySettings__ExporterEndpoint=http://otel-lgtm:4317"
-    ports:
-      - "15002:8080"
     networks:
       - stack-network
 
   otel-lgtm:
     image: grafana/otel-lgtm
     container_name: otel-stack
-    ports:
-      - "3000:3000"
-      - "4317:4317"
-      - "4318:4318"
+    volumes:
+      - ./configuration/grafana-provisioning/grafana.ini:/etc/grafana/grafana.ini
+      - ./configuration/grafana-provisioning/dashboards:/etc/grafana/provisioning/dashboards
+    environment:
+      - GF_SERVER_ROOT_URL=http://localhost/grafana/
     restart: unless-stopped
     networks:
       - stack-network
+
+  database:
+    container_name: postgre_db
+    image: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password}
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+    networks:
+      stack-network:
+    restart: unless-stopped
+
+  proxy:
+    image: nginx:alpine
+    restart: always
+    container_name: proxy
+    ports:
+      - "80:80"
+    volumes:
+      - ./configuration/proxy/nginx.conf:/etc/nginx/nginx.conf
+      - ./configuration/proxy/www:/usr/share/nginx/html/custom 
+    networks:
+      stack-network:

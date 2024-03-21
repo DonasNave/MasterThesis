@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lgtm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lgtm
+  template:
+    metadata:
+      labels:
+        app: lgtm
+    spec:
+      containers:
+      - name: lgtm
+        image: grafana/otel-lgtm
+        resources:
+          limits:
+            cpu: "1"
+            memory: "1Gi"
+          requests:
+            cpu: "500m"
+            memory: "500Mi"
+        volumeMounts:
+        - name: grafana-config-volume
+          mountPath: /etc/grafana/grafana.ini
+          subPath: grafana.ini
+      volumes:
+      - name: grafana-config-volume
+        configMap:
+          name: grafana-config

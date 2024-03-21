@@ -1,21 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx
+  name: nginx-static
 spec:
+  replicas: 1
   selector:
     matchLabels:
-      app: nginx
+      app: nginx-static
   template:
     metadata:
       labels:
-        app: nginx
+        app: nginx-static
     spec:
       containers:
       - name: nginx
         image: nginx:alpine
-        ports:
-        - containerPort: 80
         resources:
           limits:
             cpu: "0.5"
@@ -24,10 +23,9 @@ spec:
             cpu: "0.1"
             memory: "128Mi"
         volumeMounts:
-        - name: nginx-config-volume
-          mountPath: /etc/nginx/nginx.conf
-          subPath: nginx.conf
+        - name: html-volume
+          mountPath: /usr/share/nginx/html
       volumes:
-      - name: nginx-config-volume
+      - name: html-volume
         configMap:
-          name: nginx-config
+          name: nginx-html

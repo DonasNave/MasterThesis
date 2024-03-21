@@ -3,7 +3,6 @@
 # Set the base directory of your Kubernetes manifests
 BASE_DIR="./Stack/K8s"
 STORAGE_DIR="./Stack/persistent-storage"
-ENV_DIR="$BASE_DIR/environments/dev-AoT"
 TEST_DIR="$BASE_DIR/tests"
 
 # Check if the base directory exists
@@ -26,7 +25,6 @@ apply_manifests() {
 # Apply base manifests
 apply_manifests "$BASE_DIR/base"
 apply_manifests "$STORAGE_DIR"
-apply_manifests "$ENV_DIR"
 apply_manifests "$TEST_DIR"
 
 echo "Deployment complete."
