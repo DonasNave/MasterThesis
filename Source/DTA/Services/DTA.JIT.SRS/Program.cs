@@ -22,7 +22,7 @@ logger.LogInformation("Logging from the configuration phase");
 // Add services to the container.
 builder.Services.AddTransient<IReadingService, ReadingService>();
 
-builder.Configuration.AddEnvironmentVariables(prefix: "DAT_JIT_SRS_");
+builder.Configuration.AddEnvironmentVariables(prefix: "DTA_JIT_SRS_");
 
 builder.Services.AddHealthChecks();
 
@@ -36,8 +36,8 @@ var settings =
 
 logger.LogInformation("OpenTelemetry settings {@Settings}", settings);
 
-const string serviceName = "DAT-JIT-SRS";
-const string meterName = "DAT-JIT-SRS-Meter";
+const string serviceName = "DTA-JIT-SRS";
+const string meterName = "DTA-JIT-SRS-Meter";
 var serviceVersion = typeof(Program).Assembly.GetName().Version?.ToString() ?? "unknown";
 
 logger.LogInformation("Service name: {ServiceName}, version: {ServiceVersion}", serviceName, serviceVersion);

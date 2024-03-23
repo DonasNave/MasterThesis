@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
       - name: lgtm
-        image: grafana/otel-lgtm
+        image: docker.io/library/dta-lgtm:latest
+        imagePullPolicy: IfNotPresent
         resources:
           limits:
             cpu: "1"

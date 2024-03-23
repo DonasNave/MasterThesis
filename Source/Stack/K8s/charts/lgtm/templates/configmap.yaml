@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-configmap
+data:
+  grafana.ini: |-
+    {{ .Values.grafanaIni | nindent 4 }}

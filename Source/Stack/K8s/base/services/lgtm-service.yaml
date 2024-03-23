@@ -6,6 +6,11 @@ spec:
   selector:
     app: lgtm
   ports:
-      - protocol: TCP
+      - name: grafana-port
+        protocol: TCP
+        port: 3000
+        targetPort: 3000
+      - name: otel-port
+        protocol: TCP
         port: 4317
         targetPort: 4317

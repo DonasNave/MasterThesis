@@ -1,20 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: fus-service
+  name: fus-jit
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: fus-service
+      app: fus-jit
   template:
     metadata:
       labels:
-        app: fus-service
+        app: fus-jit
     spec:
       containers:
-      - name: fus-service
-        image: fus-service
+      - name: fus-jit
+        image: docker.io/library/dta-fus:jit-latest
+        imagePullPolicy: IfNotPresent
         resources:
           limits:
             cpu: "1"

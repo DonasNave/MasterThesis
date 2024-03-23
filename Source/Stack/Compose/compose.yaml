@@ -10,33 +10,33 @@ networks:
   
 services:
   fus-service:
-    image: fus-service
+    image: dta-fus:jit-latest
     container_name: fus-service
     build:
       context: ../../DTA/Services
       dockerfile: DTA.JIT.FUS/Dockerfile
     environment:
-      - "DAT_JIT_FUS_Logging__LogLevel__Default=Debug"
-      - "DAT_JIT_FUS_Logging__LogLevel__OpenTelemetry=Debug"
-      - "DAT_JIT_FUS_OpenTelemetrySettings__ExporterEndpoint=http://otel-lgtm:4317"
+      - "DTA_JIT_FUS_Logging__LogLevel__Default=Debug"
+      - "DTA_JIT_FUS_Logging__LogLevel__OpenTelemetry=Debug"
+      - "DTA_JIT_FUS_OpenTelemetrySettings__ExporterEndpoint=http://otel-lgtm:4317"
     networks:
       - stack-network
 
   srs-service:
-    image: srs-service
+    image: dta-srs:jit-latest
     container_name: srs-service
     build:
       context: ../../DTA/Services
       dockerfile: DTA.JIT.SRS/Dockerfile
     environment:
-      - "DAT_JIT_SRS_Logging__LogLevel__Default=Debug"
-      - "DAT_JIT_SRS_Logging__LogLevel__OpenTelemetry=Debug"
-      - "DAT_JIT_SRS_OpenTelemetrySettings__ExporterEndpoint=http://otel-lgtm:4317"
+      - "DTA_JIT_SRS_Logging__LogLevel__Default=Debug"
+      - "DTA_JIT_SRS_Logging__LogLevel__OpenTelemetry=Debug"
+      - "DTA_JIT_SRS_OpenTelemetrySettings__ExporterEndpoint=http://otel-lgtm:4317"
     networks:
       - stack-network
 
   otel-lgtm:
-    image: grafana/otel-lgtm
+    image: dta-lgtm:latest
     container_name: otel-stack
     volumes:
       - ./configuration/grafana-provisioning/grafana.ini:/etc/grafana/grafana.ini
@@ -46,19 +46,6 @@ services:
     restart: unless-stopped
     networks:
       - stack-network
-
-  database:
-    container_name: postgre_db
-    image: postgres
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER:-postgres}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password}
-      PGDATA: /data/postgres
-    volumes:
-      - postgres:/data/postgres
-    networks:
-      stack-network:
-    restart: unless-stopped
 
   proxy:
     image: nginx:alpine

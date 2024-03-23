@@ -1,20 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: srs-service
+  name: srs-jit
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: srs-service
+      app: srs-jit
   template:
     metadata:
       labels:
-        app: srs-service
+        app: srs-jit
     spec:
       containers:
-      - name: srs-service
-        image: srs-service
+      - name: srs-jit
+        image: docker.io/library/dta-srs:jit-latest
+        imagePullPolicy: IfNotPresent
         resources:
           limits:
             cpu: "1"

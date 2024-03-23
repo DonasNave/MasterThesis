@@ -14,7 +14,7 @@ builder.Logging.AddConsole();
 builder.Logging.SetMinimumLevel(LogLevel.Debug);
 
 // Add services to the container.
-builder.Configuration.AddEnvironmentVariables(prefix: "DAT_JIT_FUS_");
+builder.Configuration.AddEnvironmentVariables(prefix: "DTA_JIT_FUS_");
 
 builder.Services.AddHealthChecks();
 
@@ -26,8 +26,8 @@ builder.Services.AddTransient<IFileService, FileService>();
 var settings =
     builder.Configuration.GetSection(nameof(OpenTelemetrySettings)).Get<OpenTelemetrySettings>()!;
 
-const string serviceName = "DAT-JIT-FUS";
-const string meterName = "DAT-JIT-FUS-Meter";
+const string serviceName = "DTA-JIT-FUS";
+const string meterName = "DTA-JIT-FUS-Meter";
 var serviceVersion = typeof(Program).Assembly.GetName().Version?.ToString() ?? "unknown";
 
 // Add OpenTelemetry ...
