@@ -1,0 +1,64 @@
+replicaCount: 1
+
+image:
+  repository: nginx
+  tag: alpine
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 80
+
+ingress:
+  enabled: true
+  className: ""
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  hosts:
+    - host: dta.local
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: nginx-proxy
+              port:
+                number: 80
+  tls: []
+
+nginx:
+  configPath: /etc/nginx/nginx.conf
+  htmlContentPath: /usr/share/nginx/html/custom/index.html
+
+persistence: {}
+
+volumeMounts:
+        - name: nginx-config
+          mountPath: /etc/nginx/nginx.conf
+          subPath: nginx.conf
+        - name: html-content
+          mountPath: /usr/share/nginx/html
+          
+volumes:
+  - name: nginx-config
+    configMap:
+      name: "nginx-configmap"
+      items:
+        - key: nginx.conf
+          path: nginx.conf
+  - name: html-content
+    configMap:
+      name: "nginx-configmap"
+      items:
+        - key: index.html
+          path: index.html
+
+serviceAccount:
+  create: true
+  name: "nginx-api-access"
+
+autoscaling:
+  enabled: false
+
+resources: {}

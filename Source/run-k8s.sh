@@ -39,4 +39,6 @@ apply_manifests "$SERVICE_DIR"
 
 #apply_manifests "$TEST_DIR"
 
+helm install dta-lgtm-release ./Stack/K8s/charts/lgtm
+
 echo "Deployment complete."

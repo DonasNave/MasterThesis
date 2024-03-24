@@ -1,0 +1,5 @@
+apiVersion: v2
+name: nginx-proxy
+description: A Helm chart for running an Nginx proxy to serve static pages and route traffic
+version: 0.1.0
+appVersion: "1.16.0"
