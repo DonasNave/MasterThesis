@@ -4,4 +4,4 @@ metadata:
   name: grafana-configmap
 data:
   grafana.ini: |-
-    {{ .Values.grafanaIni | nindent 4 }}
+    {{ .Files.Get "files/grafana.ini" | nindent 4 }}

@@ -34,11 +34,11 @@ nginx:
 persistence: {}
 
 volumeMounts:
-        - name: nginx-config
-          mountPath: /etc/nginx/nginx.conf
-          subPath: nginx.conf
-        - name: html-content
-          mountPath: /usr/share/nginx/html
+  - name: nginx-config
+    mountPath: /etc/nginx/nginx.conf
+    subPath: nginx.conf
+  - name: html-content
+    mountPath: /usr/share/nginx/html
           
 volumes:
   - name: nginx-config
