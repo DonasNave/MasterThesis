@@ -36,8 +36,9 @@ services:
       - stack-network
 
   otel-lgtm:
-    image: dta-lgtm:latest
-    container_name: otel-stack
+    build:
+      context: ../../Tools/LGTM
+      dockerfile: ./Dockerfile
     volumes:
       - ./configuration/grafana-provisioning/grafana.ini:/etc/grafana/grafana.ini
       - ./configuration/grafana-provisioning/dashboards:/etc/grafana/provisioning/dashboards

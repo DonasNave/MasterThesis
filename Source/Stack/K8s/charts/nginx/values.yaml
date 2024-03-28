@@ -38,7 +38,7 @@ volumeMounts:
     mountPath: /etc/nginx/nginx.conf
     subPath: nginx.conf
   - name: html-content
-    mountPath: /usr/share/nginx/html
+    mountPath: /usr/share/nginx/www
           
 volumes:
   - name: nginx-config
@@ -60,5 +60,17 @@ serviceAccount:
 
 autoscaling:
   enabled: false
+
+podAnnotations: {}
+podLabels: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+securityContext: {}
+
+imagePullSecrets: []
+nodeSelector: {}
+affinity: {}
+tolerations: []
 
 resources: {}
