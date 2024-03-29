@@ -1,20 +1,33 @@
 using System.Diagnostics.Metrics;
+using DTA.Extensions;
 using FUS.Data;
 using FUS.Services;
 using FUS.Services.Interfaces;
-using DTA.JIT.Extensions;
+using DTA.Models;
 using Microsoft.EntityFrameworkCore;
-using DTA.Shared.Models;
 
+#if AOT
+var builder = WebApplication.CreateSlimBuilder(args);
+#else
 var builder = WebApplication.CreateBuilder(args);
-// File Upload Service
+#endif
 
 // Setup logging to console
 builder.Logging.AddConsole();
 builder.Logging.SetMinimumLevel(LogLevel.Debug);
 
 // Add services to the container.
-builder.Configuration.AddEnvironmentVariables(prefix: "DTA_JIT_FUS_");
+#if AOT
+const string prefix = "DTA_AOT_FUS_";
+const string serviceName = "DTA-AOT-FUS";
+const string meterName = "DTA-AOT-FUS-Meter";
+#else
+const string prefix = "DTA_JIT_FUS_";
+const string serviceName = "DTA-JIT-FUS";
+const string meterName = "DTA-JIT-FUS-Meter";
+#endif
+
+builder.Configuration.AddEnvironmentVariables(prefix: prefix);
 
 builder.Services.AddHealthChecks();
 
@@ -26,8 +39,6 @@ builder.Services.AddTransient<IFileService, FileService>();
 var settings =
     builder.Configuration.GetSection(nameof(OpenTelemetrySettings)).Get<OpenTelemetrySettings>()!;
 
-const string serviceName = "DTA-JIT-FUS";
-const string meterName = "DTA-JIT-FUS-Meter";
 var serviceVersion = typeof(Program).Assembly.GetName().Version?.ToString() ?? "unknown";
 
 // Add OpenTelemetry ...
@@ -55,16 +66,16 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI();
+    
+    // Swagger redirect
+    app.MapGet("/", context => 
+    {
+        context.Response.Redirect("/swagger/index.html");
+        return Task.CompletedTask;
+    });
 }
 
 app.MapControllers();
-
-// Swagger redirect
-app.MapGet("/", context => 
-{
-    context.Response.Redirect("/swagger/index.html");
-    return Task.CompletedTask;
-});
 
 app.MapDefaultEndpoints();
 

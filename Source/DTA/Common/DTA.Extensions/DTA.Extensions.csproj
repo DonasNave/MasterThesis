@@ -4,6 +4,18 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <Configurations>Release-JIT;Debug-JIT;Release-AOT;Debug-AOT</Configurations>
+        <Platforms>AnyCPU</Platforms>
+        <RootNamespace>DTA.Extensions</RootNamespace>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release-JIT' ">
+      <Optimize Condition=" '$(Optimize)' == '' ">true</Optimize>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug-JIT' ">
+      <DebugSymbols Condition=" '$(DebugSymbols)' == '' ">true</DebugSymbols>
+      <Optimize Condition=" '$(Optimize)' == '' ">false</Optimize>
     </PropertyGroup>
 
     <ItemGroup>
@@ -17,7 +29,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\DTA.Shared.Models\DTA.Shared.Models.csproj" />
+      <ProjectReference Include="..\DTA.Models\DTA.Models.csproj" />
     </ItemGroup>
 
 </Project>

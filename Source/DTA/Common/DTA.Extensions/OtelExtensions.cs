@@ -11,7 +11,7 @@ using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 
-namespace DTA.JIT.Extensions;
+namespace DTA.Extensions;
 
 public static class OtelExtensions
 {

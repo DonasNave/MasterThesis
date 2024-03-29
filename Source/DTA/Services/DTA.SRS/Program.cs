@@ -1,11 +1,28 @@
 using System.Diagnostics.Metrics;
-using DTA.JIT.Extensions;
-using DTA.Shared.Models;
+using DTA.Extensions;
+using DTA.Models;
 using SRS.Services;
 using SRS.Services.Interfaces;
 
+#if AOT
+var builder = WebApplication.CreateSlimBuilder(args);
+#else
 var builder = WebApplication.CreateBuilder(args);
-// Signal Readings Service
+#endif
+
+// Setup logging to console
+builder.Logging.AddConsole();
+builder.Logging.SetMinimumLevel(LogLevel.Debug);
+
+#if AOT
+const string prefix = "DTA_AOT_SRS_";
+const string serviceName = "DTA-AOT-SRS";
+const string meterName = "DTA-AOT-SRS-Meter";
+#else
+const string prefix = "DTA_JIT_SRS_";
+const string serviceName = "DTA-JIT-SRS";
+const string meterName = "DTA-JIT-SRS-Meter";
+#endif
 
 // Setup logging to console
 var loggerFactory = LoggerFactory.Create(loggingBuilder =>
@@ -27,7 +44,7 @@ builder.Configuration.AddEnvironmentVariables(prefix: "DTA_JIT_SRS_");
 builder.Services.AddHealthChecks();
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -36,8 +53,6 @@ var settings =
 
 logger.LogInformation("OpenTelemetry settings {@Settings}", settings);
 
-const string serviceName = "DTA-JIT-SRS";
-const string meterName = "DTA-JIT-SRS-Meter";
 var serviceVersion = typeof(Program).Assembly.GetName().Version?.ToString() ?? "unknown";
 
 logger.LogInformation("Service name: {ServiceName}, version: {ServiceVersion}", serviceName, serviceVersion);
@@ -62,16 +77,16 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI();
+    
+    // Swagger redirect
+    app.MapGet("/", context => 
+    {
+        context.Response.Redirect("/swagger/index.html");
+        return Task.CompletedTask;
+    });
 }
 
 app.MapControllers();
-
-// Swagger redirect
-app.MapGet("/", context => 
-{
-    context.Response.Redirect("/swagger/index.html");
-    return Task.CompletedTask;
-});
 
 app.MapDefaultEndpoints();
 

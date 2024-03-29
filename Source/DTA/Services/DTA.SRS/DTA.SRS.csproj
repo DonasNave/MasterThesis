@@ -1,0 +1,67 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  
+  <!-- Shared PropertyGroup -->
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>SRS</RootNamespace>
+    <Configurations>Release-JIT;Debug-JIT;Release-AOT;Debug-AOT</Configurations>
+    <Platforms>AnyCPU</Platforms>
+  </PropertyGroup>
+
+  <!-- JIT PropertyGroup -->
+  <PropertyGroup Condition="'$(Configuration)'=='Debug-JIT'">
+    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Release-JIT'">
+    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  
+  <!-- AOT PropertyGroup -->
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release-AOT' ">
+    <DefineConstants>$(DefineConstants);RELEASE;AOT</DefineConstants>
+    <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+    <Optimize>true</Optimize>
+    <PublishAot>true</PublishAot>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug-AOT' ">
+    <DefineConstants>$(DefineConstants);DEBUG;AOT</DefineConstants>
+    <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+    <Optimize>false</Optimize>
+    <PublishAot>true</PublishAot>
+  </PropertyGroup>
+  
+  <!-- Shared PackageRefences -->
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+  </ItemGroup>
+
+  <!-- JIT PackageRefences -->
+  <ItemGroup Condition="'$(Configuration)'=='AOT'">
+  </ItemGroup>
+
+  <!-- AOT PackageRefences -->
+  <ItemGroup Condition="'$(Configuration)'=='JIT'">
+  </ItemGroup>
+
+  <!-- Shared ProjectReferences -->
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\DTA.Extensions\DTA.Extensions.csproj" />
+    <ProjectReference Include="..\..\Common\DTA.Models\DTA.Models.csproj" />
+  </ItemGroup>
+  
+  <!-- JIT ProjectReferences -->
+  <ItemGroup Condition="'$(Configuration)'=='AOT'">
+  </ItemGroup>
+
+  <!-- AOT ProjectReferences -->
+  <ItemGroup Condition="'$(Configuration)'=='AOT'">
+  </ItemGroup>
+</Project>
