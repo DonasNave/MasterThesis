@@ -38,6 +38,7 @@
 \usepackage[labelsep=space,tableposition=bottom,justification=centering]{caption} % Přenastavení popisků u figur a tabulek
 \usepackage{xmpincl}	% Pro aplikaci standardu PDF/A
 \usepackage{hyperxmp}	% Pro aplikaci standardu PDF/A
+\usepackage[final]{pdfpages}
 
 %\pdfminorversion=4
 %\pdfobjcompresslevel=0
@@ -399,14 +400,17 @@
 }
 
 \newcommand{\zadani}{
-	\clearpage
-	\thispagestyle{empty}
-	\voffset=\valueVOffset\evensidemargin=\valueSideMargin\oddsidemargin=\valueSideMargin\headsep=\valueHeadSep\headheight=\valueHeadHeight\setlength{\parskip}{3pt}\textheight=\valueTextHeight\textwidth=\valueTextWidth
-	*** Nascanované zadání, strana 1 ***
+	% \clearpage
+	% \thispagestyle{empty}
+	% \voffset=\valueVOffset\evensidemargin=\valueSideMargin\oddsidemargin=\valueSideMargin\headsep=\valueHeadSep\headheight=\valueHeadHeight\setlength{\parskip}{3pt}\textheight=\valueTextHeight\textwidth=\valueTextWidth
+	% *** Nascanované zadání, strana 1 ***
 	
-	\clearpage
-	\thispagestyle{empty}
-	*** Nascanované zadání, strana 2 ***
+	% \clearpage
+	% \thispagestyle{empty}
+	% *** Nascanované zadání, strana 2 ***
+	\voffset=\valueVOffset\evensidemargin=\valueSideMargin\oddsidemargin=\valueSideMargin\headsep=\valueHeadSep\headheight=\valueHeadHeight\setlength{\parskip}{3pt}\textheight=\valueTextHeight\textwidth=\valueTextWidth
+	\includepdf[pages=-]{zadani.pdf}
+	%\includepdf[pages=1-2, pagecommand={}, trim=1cm 2cm 1cm 2cm, clip]{~/School/Thesis/Thesis/tex/zadani.pdf}
 }
 
 % Nastaveni zobrazovani zahlavi dokumentu
