@@ -1,13 +1,20 @@
 \cast{Praktická část}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                             Tvorba tech stacku                                %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \n{1}{Tvorba tech stacku}
-Na této stránce je k vidění způsob tvorby různých úrovní nadpisů.
+
+Za účelem důkladného testování výkonu a škálovatelnosti mikroslužeb byl vytvořen tech stack, který zahrnuje technologie pro kontejnerizaci, orchestraci, persistenci, komunikaci, monitorování a testování. 
 
 \n{2}{Požadavky na SW}
 
 Aplikace pro svůj účel nezávislého testování výkonu a škálovatelnosti mikroslužeb vyžaduje několik požadavků, které jsou rozděleny na funkční a nefunkční.
 
 \n{3}{Funkční požadavky}
+
+Funkční požadavky popisují, jak má aplikace fungovat a jaké funkce má poskytovat.
 
 \n{4}{Sběr a vizualizace dat}
 
@@ -43,6 +50,12 @@ Pro kontejnerizaci byla zvolena technologie Docker. Docker je open-source platfo
 
 Pro orchestraci byla vybrána technologie Kubernetes. Kubernetes je open-source platforma pro orchestraci kontejnerů, která umožňuje automatizovat nasazování, škálování a správu aplikací. Kubernetes je schopný pracovat s kontejnery, které jsou vytvořeny pomocí Dockeru.
 
+\n{3}{Konfigurace nasazení}
+
+Pro konfiguraci nasazení byla zvolena technologie Helm. Helm je open-source platforma pro správu balíčků, která umožňuje vytvářet, spravovat a nasazovat balíčky. Helm je schopný pracovat s balíčky, které jsou vytvořeny pomocí Kubernetes.
+
+Definice balíčků je řešena pomocí konfiguračních souborů, které jsou použity již při tvorbě obecného obrazu. V rámci Helm je základním prvkem chart, který obsahuje definici balíčku a šablonu, která je použita pro generování konfigurace.
+
 \n{3}{Persistenční vrstva}
 
 Pro persistenci relačních dat byla zvolena technologie PostgreSQL. PostgreSQL je open-source relační databázový systém, který je schopný zvládnout velké množství dat a zároveň poskytovat vysoký výkon.
@@ -57,27 +70,29 @@ Pro monitorování aplikace byl zvolen Grafana observability stack pro jeho pokr
 
 \n{4}{Grafana}
 
-je open-source platforma pro vizualizaci a analýzu dat. Grafana umožňuje vizualizovat data z různých zdrojů, včetně časových řad, protokolů a tras.
+Open-source platforma pro vizualizaci a analýzu dat. Grafana umožňuje vizualizovat data z různých zdrojů, včetně časových řad, protokolů a tras.
 
 \n{4}{Prometheus}
  
-je open-source systém pro sběr a vizualizaci metrik. Prometheus umožňuje sbírat metriky z různých zdrojů, včetně aplikací, systémů a služeb.
+Open-source systém pro sběr a vizualizaci metrik. Prometheus umožňuje sbírat metriky z různých zdrojů, včetně aplikací, systémů a služeb.
 
 \n{4}{Loki}
 
-je open-source systém pro sběr a vizualizaci protokolů. Loki umožňuje sbírat protokoly z různých zdrojů, včetně aplikací, systémů a služeb.
+Open-source systém pro sběr a vizualizaci protokolů. Loki umožňuje sbírat protokoly z různých zdrojů, včetně aplikací, systémů a služeb.
 
 \n{4}{Tempo}
 
-je open-source systém pro sběr a vizualizaci tras. Tempo umožňuje sbírat trasy z různých zdrojů, včetně aplikací, systémů a služeb.
+Open-source systém pro sběr a vizualizaci tras. Tempo umožňuje sbírat trasy z různých zdrojů, včetně aplikací, systémů a služeb.
 
 \n{4}{OpenTelemetry}
 
 je open-source systém pro sběr a vizualizaci metrik, protokolů a tras. OpenTelemetry umožňuje sbírat metriky, protokoly a trasy z různých zdrojů, včetně aplikací, systémů a služeb.
 
+\n{3}{Testovací nástroje}
+
 \n{4}{K6}
 
-K6 je nástroj pro výkonové testování, který umožňuje vývojářům testovat výkon svých aplikací. K6 umožňuje vývojářům vytvářet a spouštět testy, které simuluji reálné uživatelské scénáře. Tímto je zajištěno, že aplikace je schopna zvládnout požadavky uživatelů. K6 je nástroj, který je možné využít pro testování mikroslužeb, protože umožňuje vývojářům vytvářet testy, které simuluji reálné uživatelské scénáře.
+Nástroj pro výkonové testování, který umožňuje vývojářům testovat výkon svých aplikací. K6 umožňuje vývojářům vytvářet a spouštět testy, které simuluji reálné uživatelské scénáře. Tímto je zajištěno, že aplikace je schopna zvládnout požadavky uživatelů. K6 je nástroj, který je možné využít pro testování mikroslužeb, protože umožňuje vývojářům vytvářet testy, které simuluji reálné uživatelské scénáře.
 
 \n{3}{Testovací služby}
 
@@ -105,40 +120,76 @@ Služba v systému hraje roli zapisovacího zařízení, které zapisuje data do
 
 Služba je implementována s REST API rozhraním. (TODO: Obrázek návrhu architektury a rozhraní služby).
 
+\n{3}{BPS - Batch Processing Service}
+
+Služba v systému hraje roli zpracovávajícího zařízení, které zpracovává data z jiných služeb. Tato služba hraje roli služby, která je závislá na ostatních službách a zpracovává data z nich. Reaguje na požadavek o hromadném zpracování při předem definovaném splnění podmínek.
+
+\n{3}{FRS - Fast Response Service}
+
+Služba v systému hraje roli rychlého zpracovávajícího zařízení, které zpracovává data z jiných služeb. Tato služba hraje roli služby, která je závislá na kritických systémech 3. strany a potřebují v co nejkratším čase odpovídat.
+
 \n{2}{Konfigurace aplikace}
 
 \n{3}{Konfigurace služeb}
 
-\n{4}{Grafana}
+\n{4}{Nginx}
 
-\n{4}{Prometheus}
+Pro nginx je dodatečná konfigurace dodána pomocí souboru nginx.conf jenž je namountován do kontejneru. Tento soubor obsahuje konfiguraci pro nginx, která je použita při spuštění kontejneru.
 
-\n{4}{Loki}
+Základní pravidla směrování
 
-\n{4}{Tempo}
+\begin{itemize}
+    \item / - cesta na statickou hlavní stránku-rozcestník aplikace
+    \item /grafana - směrování na Grafanu
+    \item /fus - směrování na FUS
+    \item /srs - směrování na SRS
+    \item /bps - směrování na BPS
+    \item /frs - směrování na FRS
+\end{itemize}
 
-\n{4}{OpenTelemetry}
+\n{4}{LGTM - Monitorovací stack}
+
+LGTM jakožto monitorovací stack zároveň konfiguruje veškeré monitorovací nástroje. Značnou část konfigurace představuje propojení nástrojů a tato konfigurace je řešena pomocí konfiguračních souborů, které jsou použity již při tvorbě obecného obrazu.
+
+Dodatečná konfigurace je řešena podle proměnných prostředí a týká se pouze malé množiny nastavení specifickýh pro správný běh monitorovacích nástrojů v celém stacku.
+
+\begin{itemize}
+    \item \textbf{GF\_SERVER\_ROOT\_URL} - nastavení URL, na které bude Grafana dostupná. Toto nastavení je důležité pro správné směrování požadavků na Grafanu.
+    \item \textbf{GF\_SERVER\_SERVE\_FROM\_SUB\_PATH} - nastavení, které určuje, zda bude Grafana dostupná z podadresáře v URL. Toto nastavení je důležité pro správné směrování požadavků na Grafanu.
+    \item \textbf{GF\_AUTH\_ANONYMOUS\_ENABLED} - nastavení, které určuje, zda bude povoleno anonymní přihlášení do Grafany.
+\end{itemize}
 
 \n{4}{Postgres}
 
-\n{4}{K6}
+X
 
-\n{4}{SRS - Signal Readings Service}
+\n{4}{SGS - Signal Generation Service}
 
 \n{4}{FUS - File Upload Service}
 
-\n{4}{TWS - Test Workers Service}
+\n{4}{BPS - Batch Processing Service}
 
-\n{3}{Konfigurace monitorovacích nástrojů}
+\n{4}{FRS - Fast Response Service}
+
+\n{4}{K6}
 
 \n{3}{Nastavení uživatelského rozhraní}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                             Testování scénářů                                 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \n{1}{Testování scénářů}
-Na této stránce je k vidění způsob tvorby různých úrovní nadpisů.
+
+Testování scénářů je klíčovou součástí testování výkonu a škálovatelnosti mikroslužeb. Scénáře jsou definovány jako soubor kroků, které mají být provedeny, a jsou použity k simulaci zátěže na mikroslužby. Scénáře jsou vytvořeny pomocí testovacích nástrojů, které umožňují vytvářet a spouštět testy, které simuluji reálné uživatelské scénáře.
 
 \n{2}{Požadavky na scénáře}
 
+Scénáře musí být vytvořeny tak, aby simulovali reálné uživatelské scénáře. To znamená, že musí být vytvořeny tak, aby obsahovaly kroky, které mají být provedeny, a musí být vytvořeny tak, aby obsahovaly data, která mají být použita.
+
 \n{2}{Popis scénářů}
+
+Následující sekce obsahuje popis scénářů, které byly vytvořeny pro testování výkonu a škálovatelnosti mikroslužeb kompilovaných JIT a AoT.
 
 \n{3}{Scénář 1 - TBS}
 
@@ -146,9 +197,15 @@ Na této stránce je k vidění způsob tvorby různých úrovní nadpisů.
 
 \n{2}{Zpracování a vizualizace dat}
 
+Po provedení testování scénářů je nutné zpracovat a vizualizovat data, která byla získána. To zahrnuje zpracování dat, která byla získána z testování scénářů, a zpracování dat, která byla získána z monitorovacích nástrojů.
+
 \n{3}{Monitorování v reálném čase}
 
+Monitorování v reálném čase je klíčovou součástí testování výkonu a škálovatelnosti mikroslužeb. Monitorování v reálném čase umožňuje sledovat výkon a škálovatelnost mikroslužeb v reálném čase.
+
 \n{3}{Sběr historických dat}
+
+Sběr historických dat je klíčovou součástí testování výkonu a škálovatelnosti mikroslužeb. Sběr historických dat umožňuje sledovat výkon a škálovatelnost mikroslužeb v čase.
 
 % \n{2}{Obrázek}
 % Obrázek \ref{fig:logo} prezentuje logo Fakulty aplikované informatiky.

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.8)  29 MAR 2024 10:32
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.8)  29 MAR 2024 15:21
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -925,12 +925,12 @@ LaTeX Font Info:    Trying to load font information for OT1+phv on input line 73
  (/usr/local/texlive/2023/texmf-dist/tex/latex/psnfss/ot1phv.fd
 File: ot1phv.fd 2020/03/25 scalable font definitions for OT1/phv.
 )
-<graphics/logo/fai_logo_cz.png, id=357, 325.68428pt x 76.49358pt>
+<graphics/logo/fai_logo_cz.png, id=369, 325.68428pt x 76.49358pt>
 File: graphics/logo/fai_logo_cz.png Graphic file (type png)
 <use graphics/logo/fai_logo_cz.png>
 Package pdftex.def Info: graphics/logo/fai_logo_cz.png  used on input line 73.
 (pdftex.def)             Requested size: 256.0748pt x 60.14912pt.
-<zadani.pdf, id=358, 597.432pt x 844.83629pt>
+<zadani.pdf, id=370, 597.432pt x 844.83629pt>
 File: zadani.pdf Graphic file (type pdf)
 <use zadani.pdf>
 Package pdftex.def Info: zadani.pdf  used on input line 75.
@@ -939,7 +939,7 @@ File: zadani.pdf Graphic file (type pdf)
 <use zadani.pdf>
 Package pdftex.def Info: zadani.pdf  used on input line 75.
 (pdftex.def)             Requested size: 597.43054pt x 844.83423pt.
-<zadani.pdf, id=361, page=1, 597.432pt x 844.83629pt>
+<zadani.pdf, id=373, page=1, 597.432pt x 844.83629pt>
 File: zadani.pdf Graphic file (type pdf)
 <use zadani.pdf, page 1>
 Package pdftex.def Info: zadani.pdf , page1 used on input line 75.
@@ -964,7 +964,7 @@ File: zadani.pdf Graphic file (type pdf)
 Package pdftex.def Info: zadani.pdf , page1 used on input line 75.
 (pdftex.def)             Requested size: 597.93192pt x 845.54323pt.
  [2 <./zadani.pdf, page is rotated 270 degrees>]
-<zadani.pdf, id=375, page=2, 597.432pt x 844.83629pt>
+<zadani.pdf, id=387, page=2, 597.432pt x 844.83629pt>
 File: zadani.pdf Graphic file (type pdf)
 <use zadani.pdf, page 2>
 Package pdftex.def Info: zadani.pdf , page2 used on input line 75.
@@ -1018,35 +1018,35 @@ Overfull \hbox (4.10199pt too wide) in paragraph at lines 301--302
 ] [29
 
 
-] [30] [31] [32]) (./tex/chapters/analytics.tex [33
-
-] [34
-
-
-] [35
-
+] [30] [31] [32] [33] [34]) (./tex/chapters/analytics.tex [35
 
 ] [36
 
-]) (./tex/chapters/conclusion.tex [37
 
-]) [38
+] [37
 
-] (./tex/zkratky.tex [39
+
+] [38
+
+]) (./tex/chapters/conclusion.tex [39
 
 ]) [40
+
+] (./tex/zkratky.tex [41
+
+]) [42
 
 ] (./prace.lof)
 \tf@lof=\write7
 \openout7 = `prace.lof'.
 
- [41
+ [43
 
 ] (./prace.lot)
 \tf@lot=\write8
 \openout8 = `prace.lot'.
 
- [42
+ [44
 
 
 ] (./tex/prilohy.tex (./prace.loa)
@@ -1058,7 +1058,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1--6
 
  []
 
-[43
+[45
 
 ]
 pdfTeX warning (ext4): destination with the same identifier (name{section.1}) has been already used, duplicate ignored
@@ -1078,24 +1078,24 @@ See the caption package documentation for explanation.
 File: se-pdfdoc.def 2019/11/29 v1.12 stringenc: PDFDocEncoding
 ) (/usr/local/texlive/2023/texmf-dist/tex/generic/stringenc/se-utf8.def
 File: se-utf8.def 2019/11/29 v1.12 stringenc: UTF-8
-) [44
+) [46
 
 ] (./prace.aux)
 Package rerunfilecheck Info: File `prace.out' has not changed.
-(rerunfilecheck)             Checksum: F3340EA69ACAAE14C80B6117178E08FE;13524.
+(rerunfilecheck)             Checksum: F5B7E2C9C3520D5FCCD10D84361379A3;14052.
  ) 
 Here is how much of TeX's memory you used:
- 15557 strings out of 476025
- 257788 string characters out of 5790017
+ 15563 strings out of 476025
+ 257900 string characters out of 5790017
  1865388 words of memory out of 5000000
- 35483 multiletter control sequences out of 15000+600000
+ 35486 multiletter control sequences out of 15000+600000
  531050 words of font info for 65 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  80i,17n,79p,1038b,607s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbi1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
-Output written on prace.pdf (44 pages, 1086187 bytes).
+Output written on prace.pdf (46 pages, 1092681 bytes).
 PDF statistics:
- 828 PDF objects out of 1000 (max. 8388607)
- 210 named destinations out of 1000 (max. 500000)
- 747 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 850 PDF objects out of 1000 (max. 8388607)
+ 213 named destinations out of 1000 (max. 500000)
+ 771 words of extra memory for PDF output out of 10000 (max. 10000000)
 
