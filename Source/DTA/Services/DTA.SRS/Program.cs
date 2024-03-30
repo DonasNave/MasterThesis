@@ -39,7 +39,7 @@ logger.LogInformation("Logging from the configuration phase");
 // Add services to the container.
 builder.Services.AddTransient<IReadingService, ReadingService>();
 
-builder.Configuration.AddEnvironmentVariables(prefix: "DTA_JIT_SRS_");
+builder.Configuration.AddEnvironmentVariables(prefix: prefix);
 
 builder.Services.AddHealthChecks();
 

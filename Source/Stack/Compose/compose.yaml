@@ -9,12 +9,12 @@ networks:
   stack-network:
   
 services:
-  fus-service:
+  fus-jit-service:
     image: dta-fus:jit-latest
     container_name: fus-service
     build:
-      context: ../../DTA/Services
-      dockerfile: DTA.JIT.FUS/Dockerfile
+      context: ../../DTA
+      dockerfile: Services/DTA.FUS/Dockerfile-JIT
     environment:
       - "DTA_JIT_FUS_Logging__LogLevel__Default=Debug"
       - "DTA_JIT_FUS_Logging__LogLevel__OpenTelemetry=Debug"
@@ -22,12 +22,12 @@ services:
     networks:
       - stack-network
 
-  srs-service:
+  srs-jit-service:
     image: dta-srs:jit-latest
     container_name: srs-service
     build:
-      context: ../../DTA/Services
-      dockerfile: DTA.JIT.SRS/Dockerfile
+      context: ../../DTA
+      dockerfile: Services/DTA.SRS/Dockerfile-JIT
     environment:
       - "DTA_JIT_SRS_Logging__LogLevel__Default=Debug"
       - "DTA_JIT_SRS_Logging__LogLevel__OpenTelemetry=Debug"

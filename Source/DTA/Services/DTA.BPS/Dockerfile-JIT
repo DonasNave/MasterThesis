@@ -5,19 +5,19 @@ EXPOSE 8080
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
-COPY ["Services/DTA.SRS/DTA.SRS.csproj", "Services/DTA.SRS/"]
+COPY ["Services/DTA.BPS/DTA.BPS.csproj", "Services/DTA.BPS/"]
 COPY ["Common/DTA.Extensions/DTA.Extensions.csproj", "Common/DTA.Extensions/"]
 COPY ["Common/DTA.Models/DTA.Models.csproj", "Common/DTA.Models/"]
-RUN dotnet restore "Services/DTA.SRS/DTA.SRS.csproj"
+RUN dotnet restore "Services/DTA.BPS/DTA.BPS.csproj"
 
 COPY . .
-WORKDIR "/src/Services/DTA.SRS"
-RUN dotnet build "DTA.SRS.csproj" -c Release-JIT -o /app/build
+WORKDIR "/src/Services/DTA.BPS"
+RUN dotnet build "DTA.BPS.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "DTA.SRS.csproj" -c Release-JIT -o /app/publish
+RUN dotnet publish "DTA.BPS.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "DTA.SRS.dll"]
+ENTRYPOINT ["dotnet", "DTA.BPS.dll"]

@@ -20,7 +20,7 @@ RUN dotnet publish \
 
 FROM prepare AS final
 COPY --chown=appuser --from=build /app/AoT.APP.FUS ./AoT.APP.FUS
-ENTRYPOINT ["./DTA.FUS"]
+ENTRYPOINT ["./DTA.FRS"]
 
 #####
 # Alternative method
