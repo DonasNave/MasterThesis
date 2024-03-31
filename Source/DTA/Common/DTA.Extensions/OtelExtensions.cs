@@ -1,4 +1,4 @@
-﻿using DTA.Shared.Models;
+﻿using DTA.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.DependencyInjection;

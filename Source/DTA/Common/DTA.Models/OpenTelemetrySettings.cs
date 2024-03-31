@@ -1,6 +1,6 @@
 ﻿namespace DTA.Models;
 
-public abstract class OpenTelemetrySettings
+public class OpenTelemetrySettings
 {
-    public required Uri ExporterEndpoint { get; init; }
+    public Uri? ExporterEndpoint { get; set; }
 }

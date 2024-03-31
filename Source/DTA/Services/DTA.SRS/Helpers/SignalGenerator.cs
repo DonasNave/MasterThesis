@@ -1,4 +1,4 @@
-using DTA.Shared.Models.Signal;
+using DTA.Models.Signal;
 
 namespace SRS.Helpers;
 
@@ -42,7 +42,8 @@ public static class SignalGenerator
 
     private static UnitEnum GetRandomUnit()
     {
-        var values = Enum.GetValues(typeof(UnitEnum));
+        //AOT: Enum.GetValues<UnitEnum>() is not supported
+        var values = Enum.GetValues<UnitEnum>();
         return (UnitEnum)(values.GetValue(Random.Next(values.Length)) ?? 0);
     }
 

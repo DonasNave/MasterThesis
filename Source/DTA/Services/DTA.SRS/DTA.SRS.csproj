@@ -12,11 +12,13 @@
 
   <!-- JIT PropertyGroup -->
   <PropertyGroup Condition="'$(Configuration)'=='Debug-JIT'">
+    <DefineConstants>$(DefineConstants);Debug;JIT</DefineConstants>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
     <Optimize>false</Optimize>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='Release-JIT'">
+    <DefineConstants>$(DefineConstants);RELEASE;JIT</DefineConstants>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
     <Optimize>true</Optimize>
   </PropertyGroup>
@@ -26,6 +28,7 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Release-AOT' ">
     <DefineConstants>$(DefineConstants);RELEASE;AOT</DefineConstants>
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+    <EnableConfigurationBindingGenerator>true</EnableConfigurationBindingGenerator>
     <Optimize>true</Optimize>
     <PublishAot>true</PublishAot>
   </PropertyGroup>
@@ -33,6 +36,7 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug-AOT' ">
     <DefineConstants>$(DefineConstants);DEBUG;AOT</DefineConstants>
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+    <EnableConfigurationBindingGenerator>true</EnableConfigurationBindingGenerator>
     <Optimize>false</Optimize>
     <PublishAot>true</PublishAot>
   </PropertyGroup>

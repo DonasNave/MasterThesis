@@ -1,4 +1,4 @@
-namespace DTA.Shared.Models.Signal;
+namespace DTA.Models.Signal;
 
 public class Signal
 {
