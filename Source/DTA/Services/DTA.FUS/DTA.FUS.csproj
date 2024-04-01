@@ -12,11 +12,13 @@
   
   <!-- JIT PropertyGroup -->
   <PropertyGroup Condition="'$(Configuration)'=='Debug-JIT'">
+    <DefineConstants>$(DefineConstants);DEBUG;JIT</DefineConstants>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
     <Optimize>false</Optimize>
   </PropertyGroup>
   
   <PropertyGroup Condition="'$(Configuration)'=='Release-JIT'">
+    <DefineConstants>$(DefineConstants);RELEASE;JIT</DefineConstants>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
     <Optimize>true</Optimize>
   </PropertyGroup>

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 #if AOT
 var builder = WebApplication.CreateSlimBuilder(args);
-#else
+#elif JIT
 var builder = WebApplication.CreateBuilder(args);
 #endif
 
@@ -39,7 +39,11 @@ builder.Services.AddTransient<IFileService, FileService>();
 var settings =
     builder.Configuration.GetSection(nameof(OpenTelemetrySettings)).Get<OpenTelemetrySettings>()!;
 
+#if AOT
+const string serviceVersion = "1.0.0";
+#elif JIT
 var serviceVersion = typeof(Program).Assembly.GetName().Version?.ToString() ?? "unknown";
+#endif
 
 // Add OpenTelemetry ...
 builder.SetupOpenTelemetry(options =>
@@ -50,9 +54,11 @@ builder.SetupOpenTelemetry(options =>
     options.MeterNames = [meterName];
 });
 
+#if JIT
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+#endif
 
 var meter = new Meter(meterName, serviceVersion);
 var counterUploads = meter.CreateCounter<long>("download_api_calls_counter");
@@ -60,6 +66,7 @@ var counterDownloads = meter.CreateCounter<long>("upload_api_calls_counter");
 
 var app = builder.Build();
 
+#if JIT
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -76,6 +83,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.MapControllers();
+#endif
 
 app.MapDefaultEndpoints();
 
@@ -90,11 +98,5 @@ app.MapGet("/api/file/download/{id:int}", async (int id, IFileService fileServic
     counterDownloads.Add(1);
     return await fileService.Download(id);
 });
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
 
 app.Run();

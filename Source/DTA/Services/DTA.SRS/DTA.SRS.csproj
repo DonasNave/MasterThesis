@@ -8,6 +8,7 @@
     <RootNamespace>SRS</RootNamespace>
     <Configurations>Release-JIT;Debug-JIT;Release-AOT;Debug-AOT</Configurations>
     <Platforms>AnyCPU</Platforms>
+    <RuntimeIdentifiers>linux-arm64;win-x64;osx-x64</RuntimeIdentifiers>
   </PropertyGroup>
 
   <!-- JIT PropertyGroup -->
@@ -24,7 +25,6 @@
   </PropertyGroup>
   
   <!-- AOT PropertyGroup -->
-
   <PropertyGroup Condition=" '$(Configuration)' == 'Release-AOT' ">
     <DefineConstants>$(DefineConstants);RELEASE;AOT</DefineConstants>
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>

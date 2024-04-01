@@ -15,6 +15,8 @@ services:
     build:
       context: ../../DTA
       dockerfile: Services/DTA.FUS/Dockerfile-JIT
+    ports:
+      - "12002:8080"
     environment:
       - "DTA_JIT_FUS_Logging__LogLevel__Default=Debug"
       - "DTA_JIT_FUS_Logging__LogLevel__OpenTelemetry=Debug"
@@ -22,28 +24,44 @@ services:
     networks:
       - stack-network
 
-  srs-jit-service:
-    image: dta-srs:jit-latest
-    container_name: srs-service
+  # srs-jit-service:
+  #   image: dta-srs:jit-latest
+  #   container_name: srs-jit-service
+  #   build:
+  #     context: ../../DTA
+  #     dockerfile: Services/DTA.SRS/Dockerfile-JIT
+  #   environment:
+  #     - "DTA_JIT_SRS_Logging__LogLevel__Default=Debug"
+  #     - "DTA_JIT_SRS_Logging__LogLevel__OpenTelemetry=Debug"
+  #     - "DTA_JIT_SRS_OpenTelemetrySettings__ExporterEndpoint=http://otel-lgtm:4317"
+  #   networks:
+  #     - stack-network
+
+  srs-aot-service:
+    image: dta-srs:aot-latest
+    container_name: srs-aot-service
     build:
       context: ../../DTA
-      dockerfile: Services/DTA.SRS/Dockerfile-JIT
+      dockerfile: Services/DTA.SRS/Dockerfile-AOT
+    ports:
+      - "12001:8080"
     environment:
-      - "DTA_JIT_SRS_Logging__LogLevel__Default=Debug"
-      - "DTA_JIT_SRS_Logging__LogLevel__OpenTelemetry=Debug"
-      - "DTA_JIT_SRS_OpenTelemetrySettings__ExporterEndpoint=http://otel-lgtm:4317"
+      - "DTA_AOT_SRS_Logging__LogLevel__Default=Debug"
+      - "DTA_AOT_SRS_Logging__LogLevel__OpenTelemetry=Debug"
+      - "DTA_AOT_SRS_OpenTelemetrySettings__ExporterEndpoint=http://otel-lgtm:4317"
     networks:
       - stack-network
 
   otel-lgtm:
-    build:
-      context: ../../Tools/LGTM
-      dockerfile: ./Dockerfile
+    # build:
+    #   context: ../../Tools/LGTM
+    #   dockerfile: ./Dockerfile
+    image: donasnave/dta-lgtm:latest
     volumes:
-      - ./configuration/grafana-provisioning/grafana.ini:/etc/grafana/grafana.ini
       - ./configuration/grafana-provisioning/dashboards:/etc/grafana/provisioning/dashboards
     environment:
       - GF_SERVER_ROOT_URL=http://localhost/grafana/
+      - GF_AUTH_ANONYMOUS_ENABLED=true
     restart: unless-stopped
     networks:
       - stack-network

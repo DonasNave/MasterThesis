@@ -7,6 +7,7 @@
     <IsAotCompatible>true</IsAotCompatible>
     <Configurations>Release-JIT;Debug-JIT;Release-AOT;Debug-AOT</Configurations>
     <Platforms>AnyCPU</Platforms>
+    <RuntimeIdentifiers>linux-arm64;win-x64;osx-x64</RuntimeIdentifiers>
     <RootNamespace>DTA.Models</RootNamespace>
   </PropertyGroup>
 

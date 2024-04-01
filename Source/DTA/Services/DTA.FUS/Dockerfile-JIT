@@ -12,10 +12,10 @@ RUN dotnet restore "Services/DTA.FUS/DTA.FUS.csproj"
 
 COPY . .
 WORKDIR "/src/Services/DTA.FUS"
-RUN dotnet build "DTA.FUS.csproj" -c Release -o /app/build
+RUN dotnet build "DTA.FUS.csproj" -c Release-JIT -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "DTA.FUS.csproj" -c Release -o /app/publish
+RUN dotnet publish "DTA.FUS.csproj" -c Release-JIT -o /app/publish
 
 FROM base AS final
 WORKDIR /app
