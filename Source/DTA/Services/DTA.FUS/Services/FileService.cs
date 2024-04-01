@@ -22,15 +22,40 @@ public class FileService(FileContext context) : IFileService
             FileName = file.FileName,
             Content = stream.ToArray()
         };
+
+        int fileId;
         
 #if AOT
-        
+        //WORKAROUND: Npgsql doesn't support data insert via compiled models, thus we use raw SQL
+        await using (var command = context.Database.GetDbConnection().CreateCommand())
+        {
+            command.CommandText = $"""INSERT INTO "Files" ("FileName", "Content") VALUES (@FileName, @Content) RETURNING "Id";""";
+            await context.Database.OpenConnectionAsync();
+            
+            var fileNameParam = command.CreateParameter();
+            fileNameParam.ParameterName = "@FileName";
+            fileNameParam.Value = fileModel.FileName;
+            command.Parameters.Add(fileNameParam);
+
+            var contentParam = command.CreateParameter();
+            contentParam.ParameterName = "@Content";
+            contentParam.Value = fileModel.Content;
+            command.Parameters.Add(contentParam);
+            
+            var result = await command.ExecuteScalarAsync();
+            
+            if (result == null || result == DBNull.Value)
+                return Results.BadRequest("Failed to upload file");
+            
+            fileId = (int)result;
+        }
 #elif JIT
         context.Files?.Add(fileModel);
-#endif
         await context.SaveChangesAsync();
+        fileId = fileModel.Id;
+#endif
 
-        return Results.Ok();
+        return Results.Ok(fileId);
     }
 
     public async Task<IResult> Download(int id)
