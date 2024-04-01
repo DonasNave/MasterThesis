@@ -1,4 +1,4 @@
-namespace FUS.Models;
+namespace DTA.Models.Files;
 
 public class FileModel
 {

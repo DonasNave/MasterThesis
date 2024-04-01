@@ -1,11 +1,35 @@
+using DTA.FUS.EFCompiledModels;
+using DTA.Models.Files;
 using Microsoft.EntityFrameworkCore;
-using FUS.Models;
 
 namespace FUS.Data;
 
-public class FileContext : DbContext
+public partial class FileContext : DbContext
 {
-    public FileContext(DbContextOptions<FileContext> options) : base(options) { }
-
-    public DbSet<FileModel> Files { get; set; }
+    public DbSet<FileModel>? Files { get; set; }
 }
+
+#if AOT
+
+public partial class FileContext
+{
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        var model = FileContextModel.Instance;
+        var connectionString = DbConfiguration.DefaultConnectionString;
+        
+        optionsBuilder
+            .UseModel(model)
+            .UseNpgsql(connectionString);
+    }
+}
+
+#elif JIT
+
+public partial class FileContext : DbContext
+{
+    public FileContext(DbContextOptions<FileContext> options) : base(options)
+    { }
+}
+
+#endif

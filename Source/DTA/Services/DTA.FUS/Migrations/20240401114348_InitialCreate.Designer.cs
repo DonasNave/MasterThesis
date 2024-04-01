@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FUS.Migrations
 {
     [DbContext(typeof(FileContext))]
-    [Migration("20231231191259_InitialCreate")]
+    [Migration("20240401114348_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -19,12 +19,12 @@ namespace FUS.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.0")
+                .HasAnnotation("ProductVersion", "8.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("FUS.Models.FileModel", b =>
+            modelBuilder.Entity("DTA.Models.Files.FileModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

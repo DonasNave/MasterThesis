@@ -4,7 +4,10 @@ using FUS.Data;
 using FUS.Services;
 using FUS.Services.Interfaces;
 using DTA.Models;
+
+#if JIT
 using Microsoft.EntityFrameworkCore;
+#endif
 
 #if AOT
 var builder = WebApplication.CreateSlimBuilder(args);
@@ -31,8 +34,15 @@ builder.Configuration.AddEnvironmentVariables(prefix: prefix);
 
 builder.Services.AddHealthChecks();
 
+var dbConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+#if JIT
 builder.Services.AddDbContext<FileContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseNpgsql(dbConnectionString));
+#elif AOT
+DbConfiguration.DefaultConnectionString = dbConnectionString;
+builder.Services.AddScoped<FileContext>();
+#endif
 
 builder.Services.AddTransient<IFileService, FileService>();
 
@@ -83,6 +93,22 @@ if (app.Environment.IsDevelopment())
 }
 
 app.MapControllers();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    try
+    {
+        var context = services.GetRequiredService<FileContext>();
+        context.Database.Migrate();
+    }
+    catch (Exception ex)
+    {
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "An error occurred while migrating the database");
+    }
+}
 #endif
 
 app.MapDefaultEndpoints();
@@ -91,7 +117,7 @@ app.MapPost("/api/file/upload", async (IFormFile file, IFileService fileService)
 {
     counterUploads.Add(1);
     return await fileService.Upload(file);
-});
+}).DisableAntiforgery();
 
 app.MapGet("/api/file/download/{id:int}", async (int id, IFileService fileService) =>
 {

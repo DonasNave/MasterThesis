@@ -66,6 +66,20 @@ services:
     networks:
       - stack-network
 
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    networks:
+      - stack-network
+
   proxy:
     image: nginx:alpine
     restart: always

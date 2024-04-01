@@ -77,4 +77,8 @@
   <!-- AOT ProjectReferences -->
   <ItemGroup Condition="'$(Configuration)'=='AOT'">
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="EFCompiledModels\" />
+    <Folder Include="Migrations\" />
+  </ItemGroup>
 </Project>
