@@ -1,6 +1,6 @@
 namespace DTA.Models.Signal;
 
-public class Signal
+public class DtaSignal
 {
     public float Value { get; set; }
     public DateTime Time { get; set; }

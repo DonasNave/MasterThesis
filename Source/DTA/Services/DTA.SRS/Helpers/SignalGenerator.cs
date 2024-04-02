@@ -6,9 +6,9 @@ public static class SignalGenerator
 {
     private static readonly Random Random = new();
 
-    public static async Task<List<Signal>> GenerateRandomSignalsAsync(int numberOfSignals)
+    public static async Task<List<DtaSignal>> GenerateRandomSignalsAsync(int numberOfSignals)
     {
-        var signals = new List<Signal>();
+        var signals = new List<DtaSignal>();
 
         // Simulate baseline delay
         await Task.Delay(500);
@@ -18,7 +18,7 @@ public static class SignalGenerator
             // Simulate a delay per signal
             await Task.Delay(Random.Next(1, 20));
 
-            var signal = new Signal
+            var signal = new DtaSignal
             {
                 Value = (float)(Random.NextDouble() * 100),
                 Time = DateTime.Now,
