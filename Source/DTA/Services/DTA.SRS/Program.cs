@@ -19,14 +19,14 @@ builder.Logging.AddConsole();
 builder.Logging.SetMinimumLevel(LogLevel.Debug);
 
 #if AOT
-const string prefix = "DTA_AOT_SRS_";
-const string serviceName = "DTA-AOT-SRS";
-const string meterName = "DTA-AOT-SRS-Meter";
+const string compilationMode = "AOT";
 #elif JIT
-const string prefix = "DTA_JIT_SRS_";
-const string serviceName = "DTA-JIT-SRS";
-const string meterName = "DTA-JIT-SRS-Meter";
+const string compilationMode = "JIT";
 #endif
+
+const string prefix = $"DTA_{compilationMode}_SRS_";
+const string serviceName = $"DTA-{compilationMode}-SRS";
+const string meterName = $"DTA-{compilationMode}-SRS-Meter";
 
 // Setup logging to console
 var loggerFactory = LoggerFactory.Create(loggingBuilder =>
@@ -57,12 +57,9 @@ var settings =
 
 logger.LogInformation("OpenTelemetry settings {@Settings}", settings);
 
-#if AOT
-const string serviceVersion = "1.0.0";
-#elif JIT
 var serviceVersion = typeof(Program).Assembly.GetName().Version?.ToString() ?? "unknown";
+
 logger.LogInformation("Service name: {ServiceName}, version: {ServiceVersion}", serviceName, serviceVersion);
-#endif
 
 #if AOT
 builder.Services.ConfigureHttpJsonOptions(options =>
@@ -92,9 +89,9 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI();
-    
+
     // Swagger redirect
-    app.MapGet("/", context => 
+    app.MapGet("/", context =>
     {
         context.Response.Redirect("/swagger/index.html");
         return Task.CompletedTask;
@@ -106,7 +103,7 @@ app.MapControllers();
 
 app.MapDefaultEndpoints();
 
-app.MapGet("/api/signals/{count:int}", async (int count, IReadingService readingService)  =>
+app.MapGet("/api/signals/{count:int}", async (int count, IReadingService readingService) =>
 {
     var signals = await readingService.GetRandomSignals(count);
     counterSignals.Add(1);

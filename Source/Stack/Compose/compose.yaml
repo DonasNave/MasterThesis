@@ -9,20 +9,20 @@ networks:
   stack-network:
   
 services:
-  fus-jit-service:
-    image: dta-fus:jit-latest
-    container_name: fus-service
-    build:
-      context: ../../DTA
-      dockerfile: Services/DTA.FUS/Dockerfile-JIT
-    ports:
-      - "12002:8080"
-    environment:
-      - "DTA_JIT_FUS_Logging__LogLevel__Default=Debug"
-      - "DTA_JIT_FUS_Logging__LogLevel__OpenTelemetry=Debug"
-      - "DTA_JIT_FUS_OpenTelemetrySettings__ExporterEndpoint=http://otel-lgtm:4317"
-    networks:
-      - stack-network
+  # fus-jit-service:
+  #   image: dta-fus:jit-latest
+  #   container_name: fus-service
+  #   build:
+  #     context: ../../DTA
+  #     dockerfile: Services/DTA.FUS/Dockerfile-JIT
+  #   ports:
+  #     - "12002:8080"
+  #   environment:
+  #     - "DTA_JIT_FUS_Logging__LogLevel__Default=Debug"
+  #     - "DTA_JIT_FUS_Logging__LogLevel__OpenTelemetry=Debug"
+  #     - "DTA_JIT_FUS_OpenTelemetrySettings__ExporterEndpoint=http://otel-lgtm:4317"
+  #   networks:
+  #     - stack-network
 
   # srs-jit-service:
   #   image: dta-srs:jit-latest
@@ -36,6 +36,22 @@ services:
   #     - "DTA_JIT_SRS_OpenTelemetrySettings__ExporterEndpoint=http://otel-lgtm:4317"
   #   networks:
   #     - stack-network
+
+  fus-aot-service:
+    image: dta-fus:aot-latest
+    container_name: fus-aot-service
+    build:
+      context: ../../DTA
+      dockerfile: Services/DTA.FUS/Dockerfile-AOT
+    ports:
+      - "12002:8080"
+    environment:
+      - "DTA_AOT_FUS_Logging__LogLevel__Default=Debug"
+      - "DTA_AOT_FUS_Logging__LogLevel__OpenTelemetry=Debug"
+      - "DTA_AOT_FUS_OpenTelemetrySettings__ExporterEndpoint=http://otel-lgtm:4317"
+      - "DTA_AOT_FUS_ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=FUS;Username=postgres;Password=postgres;"
+    networks:
+      - stack-network
 
   srs-aot-service:
     image: dta-srs:aot-latest

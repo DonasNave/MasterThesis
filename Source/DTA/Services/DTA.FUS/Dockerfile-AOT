@@ -4,9 +4,6 @@ EXPOSE 8080
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG TARGETARCH
-ARG CONNECTION_STRING
-ENV ConnectionStrings__DefaultConnection=$CONNECTION_STRING
-
 RUN <<EOF
 apt-get update
 apt-get install -y clang zlib1g-dev
@@ -21,8 +18,6 @@ RUN dotnet restore "Services/DTA.FUS/DTA.FUS.csproj" -r linux-$TARGETARCH
 # copy and publish app and libraries
 COPY . .
 WORKDIR "/src/Services/DTA.FUS"
-
-RUN dotnet ef database update --configuration Release-AOT
 
 FROM build AS publish
 RUN dotnet publish "DTA.FUS.csproj" -c Release-AOT -o /app/publish

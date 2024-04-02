@@ -33,14 +33,14 @@ builder.Logging.SetMinimumLevel(LogLevel.Debug);
 
 // Add services to the container.
 #if AOT
-const string prefix = "DTA_AOT_FUS_";
-const string serviceName = "DTA-AOT-FUS";
-const string meterName = "DTA-AOT-FUS-Meter";
-#else
-const string prefix = "DTA_JIT_FUS_";
-const string serviceName = "DTA-JIT-FUS";
-const string meterName = "DTA-JIT-FUS-Meter";
+const string compilationMode = "AOT";
+#elif JIT
+const string compilationMode = "JIT";
 #endif
+
+const string prefix = $"DTA_{compilationMode}_FUS_";
+const string serviceName = $"DTA-{compilationMode}-FUS";
+const string meterName = $"DTA-{compilationMode}-FUS-Meter";
 
 builder.Configuration.AddEnvironmentVariables(prefix: prefix);
 
@@ -62,11 +62,7 @@ builder.Services.AddTransient<IFileService, FileService>();
 var settings =
     builder.Configuration.GetSection(nameof(OpenTelemetrySettings)).Get<OpenTelemetrySettings>()!;
 
-#if AOT
-const string serviceVersion = "1.0.0";
-#elif JIT
 var serviceVersion = typeof(Program).Assembly.GetName().Version?.ToString() ?? "unknown";
-#endif
 
 // Add OpenTelemetry ...
 builder.SetupOpenTelemetry(options =>

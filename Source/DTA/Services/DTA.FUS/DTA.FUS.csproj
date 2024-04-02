@@ -8,6 +8,9 @@
     <RootNamespace>DTA.FUS</RootNamespace>
     <Configurations>Release-JIT;Debug-JIT;Release-AOT;Debug-AOT</Configurations>
     <Platforms>AnyCPU</Platforms>
+    <AssemblyName>DTA.FUS</AssemblyName>
+    <AssemblyVersion>$(Version)</AssemblyVersion>
+    <RuntimeIdentifiers>linux-arm64;win-x64;osx-x64</RuntimeIdentifiers>
   </PropertyGroup>
   
   <!-- JIT PropertyGroup -->
