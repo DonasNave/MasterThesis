@@ -1,4 +1,4 @@
-namespace FUS.Services.Interfaces;
+namespace DTA.FUS.Services.Interfaces;
 
 public interface IFileService
 {

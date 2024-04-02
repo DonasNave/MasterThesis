@@ -5,7 +5,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>FUS</RootNamespace>
+    <RootNamespace>DTA.FUS</RootNamespace>
     <Configurations>Release-JIT;Debug-JIT;Release-AOT;Debug-AOT</Configurations>
     <Platforms>AnyCPU</Platforms>
   </PropertyGroup>

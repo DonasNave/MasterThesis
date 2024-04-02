@@ -5,7 +5,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>SRS</RootNamespace>
+    <RootNamespace>DTA.SRS</RootNamespace>
     <Configurations>Release-JIT;Debug-JIT;Release-AOT;Debug-AOT</Configurations>
     <Platforms>AnyCPU</Platforms>
     <RuntimeIdentifiers>linux-arm64;win-x64;osx-x64</RuntimeIdentifiers>

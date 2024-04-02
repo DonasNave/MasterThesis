@@ -1,7 +1,7 @@
-using SRS.Helpers;
-using SRS.Services.Interfaces;
+using DTA.SRS.Helpers;
+using DTA.SRS.Services.Interfaces;
 
-namespace SRS.Services;
+namespace DTA.SRS.Services;
 
 public class ReadingService : IReadingService
 {

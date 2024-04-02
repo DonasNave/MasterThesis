@@ -1,10 +1,10 @@
 using System.Diagnostics.Metrics;
 using DTA.Extensions;
-using FUS.Services;
-using FUS.Services.Interfaces;
+using DTA.FUS.Data;
+using DTA.FUS.Services;
+using DTA.FUS.Services.Interfaces;
 using DTA.Models;
 using FluentMigrator.Runner;
-using FUS.Data;
 
 #if AOT
 using Dapper;

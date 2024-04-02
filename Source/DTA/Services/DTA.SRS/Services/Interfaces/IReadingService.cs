@@ -1,4 +1,4 @@
-namespace SRS.Services.Interfaces;
+namespace DTA.SRS.Services.Interfaces;
 
 public interface IReadingService
 {

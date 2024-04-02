@@ -1,6 +1,6 @@
 using FluentMigrator;
 
-namespace FUS.Migrations;
+namespace DTA.FUS.Migrations;
 
 [Migration(20240401161604)]
 public class AddFileTable : Migration

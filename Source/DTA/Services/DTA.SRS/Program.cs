@@ -1,11 +1,10 @@
 using System.Diagnostics.Metrics;
 using DTA.Extensions;
 using DTA.Models;
-using SRS.Services;
-using SRS.Services.Interfaces;
+using DTA.SRS.Services;
+using DTA.SRS.Services.Interfaces;
 
 #if AOT
-using SRS;
 using DTA.Models.JsonSerializers;
 #endif
 

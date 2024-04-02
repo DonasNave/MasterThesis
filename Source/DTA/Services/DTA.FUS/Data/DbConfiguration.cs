@@ -1,4 +1,4 @@
-namespace FUS.Data;
+namespace DTA.FUS.Data;
 
 public static class DbConfiguration
 {

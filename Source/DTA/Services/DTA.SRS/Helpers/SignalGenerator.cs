@@ -1,6 +1,6 @@
 using DTA.Models.Signal;
 
-namespace SRS.Helpers;
+namespace DTA.SRS.Helpers;
 
 public static class SignalGenerator
 {

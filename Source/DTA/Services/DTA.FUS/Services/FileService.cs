@@ -1,11 +1,11 @@
 using Dapper;
+using DTA.FUS.Data;
+using DTA.FUS.Services.Interfaces;
 using DTA.Models.Files;
 using DTA.Models.Response;
-using FUS.Data;
-using FUS.Services.Interfaces;
 using Npgsql;
 
-namespace FUS.Services;
+namespace DTA.FUS.Services;
 
 #if AOT
 [DapperAot]
