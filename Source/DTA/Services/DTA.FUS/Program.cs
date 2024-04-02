@@ -1,18 +1,30 @@
 using System.Diagnostics.Metrics;
 using DTA.Extensions;
-using FUS.Data;
 using FUS.Services;
 using FUS.Services.Interfaces;
 using DTA.Models;
+using FluentMigrator.Runner;
+using FUS.Data;
 
-#if JIT
-using Microsoft.EntityFrameworkCore;
+#if AOT
+using Dapper;
+using DTA.Models.JsonSerializers;
+
+// Generally, the AOT module of Dapper is disabled, in order for it to work as expected, it's enabled in crucial segments via the DapperAot attribute
+[module: DapperAot(false)]
 #endif
 
 #if AOT
 var builder = WebApplication.CreateSlimBuilder(args);
 #elif JIT
 var builder = WebApplication.CreateBuilder(args);
+#endif
+
+#if AOT
+builder.Services.ConfigureHttpJsonOptions(options =>
+{
+    options.SerializerOptions.TypeInfoResolverChain.Insert(0, CommonResponseContext.Default);
+});
 #endif
 
 // Setup logging to console
@@ -35,14 +47,15 @@ builder.Configuration.AddEnvironmentVariables(prefix: prefix);
 builder.Services.AddHealthChecks();
 
 var dbConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-
-#if JIT
-builder.Services.AddDbContext<FileContext>(options =>
-    options.UseNpgsql(dbConnectionString));
-#elif AOT
 DbConfiguration.DefaultConnectionString = dbConnectionString;
-builder.Services.AddScoped<FileContext>();
-#endif
+
+builder.Services
+    .EnsureDatabaseExists(dbConnectionString!)
+    .AddFluentMigratorCore()
+    .ConfigureRunner(rb => rb
+        .AddPostgres()
+        .WithGlobalConnectionString(dbConnectionString)
+        .ScanIn(typeof(Program).Assembly).For.Migrations());
 
 builder.Services.AddTransient<IFileService, FileService>();
 
@@ -93,23 +106,13 @@ if (app.Environment.IsDevelopment())
 }
 
 app.MapControllers();
+#endif
 
 using (var scope = app.Services.CreateScope())
 {
-    var services = scope.ServiceProvider;
-
-    try
-    {
-        var context = services.GetRequiredService<FileContext>();
-        context.Database.Migrate();
-    }
-    catch (Exception ex)
-    {
-        var logger = services.GetRequiredService<ILogger<Program>>();
-        logger.LogError(ex, "An error occurred while migrating the database");
-    }
+    var runner = scope.ServiceProvider.GetRequiredService<IMigrationRunner>();
+    runner.MigrateUp();
 }
-#endif
 
 app.MapDefaultEndpoints();
 

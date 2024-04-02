@@ -6,6 +6,7 @@ using SRS.Services.Interfaces;
 
 #if AOT
 using SRS;
+using DTA.Models.JsonSerializers;
 #endif
 
 #if AOT
@@ -67,7 +68,7 @@ logger.LogInformation("Service name: {ServiceName}, version: {ServiceVersion}", 
 #if AOT
 builder.Services.ConfigureHttpJsonOptions(options =>
 {
-    options.SerializerOptions.TypeInfoResolverChain.Insert(0, SrsJsonSerializerContext.Default);
+    options.SerializerOptions.TypeInfoResolverChain.Insert(0, DtaSignalContext.Default);
 });
 #endif
 

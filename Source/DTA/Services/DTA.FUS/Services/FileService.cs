@@ -1,14 +1,16 @@
+using Dapper;
 using DTA.Models.Files;
+using DTA.Models.Response;
 using FUS.Data;
 using FUS.Services.Interfaces;
-
-#if AOT
-using Microsoft.EntityFrameworkCore;
-#endif
+using Npgsql;
 
 namespace FUS.Services;
 
-public class FileService(FileContext context) : IFileService
+#if AOT
+[DapperAot]
+#endif
+public class FileService : IFileService
 {
     public async Task<IResult> Upload(IFormFile? file)
     {
@@ -17,35 +19,32 @@ public class FileService(FileContext context) : IFileService
 
         await using var stream = new MemoryStream();
         await file.CopyToAsync(stream);
-        var fileModel = new FileModel
+    
+        var fileModel = new DtaFile
         {
             FileName = file.FileName,
             Content = stream.ToArray()
         };
-        
-#if AOT
-        
-#elif JIT
-        context.Files?.Add(fileModel);
-#endif
-        await context.SaveChangesAsync();
 
-        return Results.Ok();
+        const string sql = """INSERT INTO "Files" ("FileName", "Content") VALUES (@FileName, @Content) RETURNING "Id";""";
+
+        await using var connection = new NpgsqlConnection(DbConfiguration.DefaultConnectionString);
+    
+        var id = await connection.ExecuteScalarAsync<int>(sql, fileModel);
+        return Results.Ok(new CommonResponse { Id = id });
     }
 
     public async Task<IResult> Download(int id)
     {
-        if (context.Files == null) return Results.NotFound();
-        
-        //Aot requires AsNoTracking, as tracking changes uses runtime code generation/model building
-#if AOT
-        var fileModel = await context.Files.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
-#elif JIT
-        var fileModel = await context.Files.FindAsync(id);
-#endif
-        
+        const string sql = """SELECT "Id", "FileName", "Content" FROM "Files" WHERE "Id" = @Id;""";
+
+        await using var connection = new NpgsqlConnection(DbConfiguration.DefaultConnectionString);
+    
+        var fileModel = await connection.QueryFirstOrDefaultAsync<DtaFile>(sql, new { Id = id });
         if (fileModel == null)
+        {
             return Results.NotFound();
+        }
 
         var stream = new MemoryStream(fileModel.Content);
         return Results.Stream(stream, "application/octet-stream", fileModel.FileName);

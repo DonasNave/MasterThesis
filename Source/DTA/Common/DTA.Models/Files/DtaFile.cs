@@ -1,6 +1,6 @@
 namespace DTA.Models.Files;
 
-public class FileModel
+public class DtaFile
 {
     public int Id { get; set; }
     public string FileName { get; set; } = string.Empty;

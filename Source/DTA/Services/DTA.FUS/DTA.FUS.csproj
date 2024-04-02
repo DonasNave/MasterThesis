@@ -27,6 +27,7 @@
   
   <PropertyGroup Condition=" '$(Configuration)' == 'Release-AOT' ">
     <DefineConstants>$(DefineConstants);RELEASE;AOT</DefineConstants>
+    <InterceptorsPreviewNamespaces>$(InterceptorsPreviewNamespaces);Dapper.AOT</InterceptorsPreviewNamespaces>
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
     <Optimize>true</Optimize>
     <PublishAot>true</PublishAot>
@@ -34,6 +35,7 @@
   
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug-AOT' ">
     <DefineConstants>$(DefineConstants);DEBUG;AOT</DefineConstants>
+    <InterceptorsPreviewNamespaces>$(InterceptorsPreviewNamespaces);Dapper.AOT</InterceptorsPreviewNamespaces>
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
     <Optimize>false</Optimize>
     <PublishAot>true</PublishAot>
@@ -41,27 +43,32 @@
   
   <!-- Shared PackageRefences -->
   <ItemGroup>
+    <PackageReference Include="FluentMigrator" Version="5.2.0" />
+    <PackageReference Include="FluentMigrator.Runner" Version="5.2.0" />
+    <PackageReference Include="FluentMigrator.Runner.Postgres" Version="5.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.3">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.3">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.2" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     <PackageReference Include="Npgsql" Version="8.0.2" />
-  </ItemGroup>
-  
-  <!-- JIT PackageRefences -->
-  <ItemGroup Condition="'$(Configuration)'=='AOT'">
+    <PackageReference Include="Dapper" Version="2.0.90" />
   </ItemGroup>
   
   <!-- AOT PackageRefences -->
-  <ItemGroup Condition="'$(Configuration)'=='JIT'">
+  <ItemGroup Condition="'$(Configuration)'=='Debug-AOT'">
+    <PackageReference Include="Dapper.AOT" Version="1.0.31" />
+  </ItemGroup>
+  
+  <ItemGroup Condition="'$(Configuration)'=='Release-AOT'">
+    <PackageReference Include="Dapper.AOT" Version="1.0.31" />
+  </ItemGroup>
+  
+  <!-- JIT PackageRefences -->
+  <ItemGroup Condition="'$(Configuration)'=='Debug-JIT'">
+    <PackageReference Include="Dapper.Advisor" Version="1.0.31" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(Configuration)'=='Release-JIT'">
+    <PackageReference Include="Dapper.Advisor" Version="1.0.31" />
   </ItemGroup>
   
   <!-- Shared ProjectReferences -->
@@ -76,9 +83,5 @@
   
   <!-- AOT ProjectReferences -->
   <ItemGroup Condition="'$(Configuration)'=='AOT'">
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="EFCompiledModels\" />
-    <Folder Include="Migrations\" />
   </ItemGroup>
 </Project>
