@@ -9,6 +9,7 @@ using FluentMigrator.Runner;
 #if AOT
 using Dapper;
 using DTA.Models.JsonSerializers;
+using DTA.FUS.Migrations;
 
 // Generally, the AOT module of Dapper is disabled, in order for it to work as expected, it's enabled in crucial segments via the DapperAot attribute
 [module: DapperAot(false)]
@@ -92,9 +93,9 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI();
-    
+
     // Swagger redirect
-    app.MapGet("/", context => 
+    app.MapGet("/", context =>
     {
         context.Response.Redirect("/swagger/index.html");
         return Task.CompletedTask;
@@ -107,7 +108,13 @@ app.MapControllers();
 using (var scope = app.Services.CreateScope())
 {
     var runner = scope.ServiceProvider.GetRequiredService<IMigrationRunner>();
+
+#if AOT
+    var specificMigration = new AddFileTable();
+    runner.Up(specificMigration);
+#elif JIT
     runner.MigrateUp();
+#endif
 }
 
 app.MapDefaultEndpoints();
