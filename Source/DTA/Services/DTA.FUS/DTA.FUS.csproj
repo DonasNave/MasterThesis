@@ -46,9 +46,6 @@
   
   <!-- Shared PackageRefences -->
   <ItemGroup>
-    <PackageReference Include="FluentMigrator" Version="5.2.0" />
-    <PackageReference Include="FluentMigrator.Runner" Version="5.2.0" />
-    <PackageReference Include="FluentMigrator.Runner.Postgres" Version="5.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.3" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
@@ -77,6 +74,7 @@
   <!-- Shared ProjectReferences -->
   <ItemGroup>
     <ProjectReference Include="..\..\Common\DTA.Extensions\DTA.Extensions.csproj" />
+    <ProjectReference Include="..\..\Common\DTA.Migrator\DTA.Migrator.csproj" />
     <ProjectReference Include="..\..\Common\DTA.Models\DTA.Models.csproj" />
   </ItemGroup>
 </Project>

@@ -3,8 +3,8 @@ using DTA.Extensions;
 using DTA.FUS.Data;
 using DTA.FUS.Services;
 using DTA.FUS.Services.Interfaces;
+using DTA.Migrator;
 using DTA.Models;
-using FluentMigrator.Runner;
 
 #if AOT
 using Dapper;
@@ -48,15 +48,23 @@ builder.Configuration.AddEnvironmentVariables(prefix: prefix);
 builder.Services.AddHealthChecks();
 
 var dbConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+if (string.IsNullOrWhiteSpace(dbConnectionString))
+{
+    throw new InvalidOperationException("Database connection string is missing");
+}
+
 DbConfiguration.DefaultConnectionString = dbConnectionString;
 
+// Ensure database exists and apply migrations
 builder.Services
-    .EnsureDatabaseExists(dbConnectionString!)
-    .AddFluentMigratorCore()
-    .ConfigureRunner(rb => rb
-        .AddPostgres()
-        .WithGlobalConnectionString(dbConnectionString)
-        .ScanIn(typeof(Program).Assembly).For.Migrations());
+    .EnsureDatabaseExists(dbConnectionString)
+    .InitiateMigrator(dbConnectionString)
+    .ApplyMigrations(options =>
+    {
+        options.ConnectionString = dbConnectionString;
+        options.Migrations.Add(new AddFileTable(1));
+    });
 
 builder.Services.AddTransient<IFileService, FileService>();
 
@@ -104,18 +112,6 @@ if (app.Environment.IsDevelopment())
 
 app.MapControllers();
 #endif
-
-using (var scope = app.Services.CreateScope())
-{
-    var runner = scope.ServiceProvider.GetRequiredService<IMigrationRunner>();
-
-#if AOT
-    var specificMigration = new AddFileTable();
-    runner.Up(specificMigration);
-#elif JIT
-    runner.MigrateUp();
-#endif
-}
 
 app.MapDefaultEndpoints();
 

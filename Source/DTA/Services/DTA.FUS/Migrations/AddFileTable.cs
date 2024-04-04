@@ -1,22 +1,18 @@
-using FluentMigrator;
+using DTA.Migrator;
 
 namespace DTA.FUS.Migrations;
 
-[Migration(20240401161604)]
-public class AddFileTable : Migration
+public class AddFileTable(long version) : DtaMigration(version)
 {
-    public override void Up()
-    {
-        // Create the "Files" table
-        Create.Table("Files")
-            .WithColumn("Id").AsInt32().PrimaryKey().Identity()
-            .WithColumn("FileName").AsString()
-            .WithColumn("Content").AsBinary();
-    }
+    public override string Up() =>
+        """
+        CREATE TABLE "Files" (
+            "Id" SERIAL PRIMARY KEY,
+            "FileName" TEXT NOT NULL,
+            "Content" BYTEA NOT NULL
+        );
+        """;
 
-    public override void Down()
-    {
-        // Optionally, define how to revert the migration
-        Delete.Table("Files");
-    }
+    public override string Down() =>
+        """DROP TABLE IF EXISTS "Files";""";
 }
