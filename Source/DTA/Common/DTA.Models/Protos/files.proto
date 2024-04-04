@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option csharp_namespace = "DTA.Models.Protos.Files";
+
+package files;
+
+service FileServer {
+  rpc GetFile (FileRequest) returns (FileResponse);
+}
+
+message FileRequest {
+  int32 id = 1;
+}
+
+message FileResponse {
+  int32 id = 1;
+  string file_name = 2;
+  bytes file_data = 3;
+}

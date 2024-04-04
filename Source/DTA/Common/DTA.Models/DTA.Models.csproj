@@ -38,5 +38,10 @@
     <PublishAot>true</PublishAot>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.26.1" />
+    <PackageReference Include="Grpc.AspNetCore" Version="2.62.0" />
+  </ItemGroup>
+
 
 </Project>

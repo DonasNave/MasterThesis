@@ -49,4 +49,13 @@ public class FileService : IFileService
         var stream = new MemoryStream(fileModel.Content);
         return Results.Stream(stream, "application/octet-stream", fileModel.FileName);
     }
+
+    public async Task<DtaFile?> GetFile(int id)
+    {
+        const string sql = """SELECT "Id", "FileName", "Content" FROM "Files" WHERE "Id" = @Id;""";
+
+        await using var connection = new NpgsqlConnection(DbConfiguration.DefaultConnectionString);
+    
+        return await connection.QueryFirstOrDefaultAsync<DtaFile>(sql, new { Id = id });
+    }
 }

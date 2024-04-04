@@ -1,7 +1,9 @@
 using System.Diagnostics.Metrics;
 using DTA.Extensions;
 using DTA.FUS.Data;
+using DTA.FUS.Migrations;
 using DTA.FUS.Services;
+using DTA.FUS.Services.gRPC;
 using DTA.FUS.Services.Interfaces;
 using DTA.Migrator;
 using DTA.Models;
@@ -9,7 +11,6 @@ using DTA.Models;
 #if AOT
 using Dapper;
 using DTA.Models.JsonSerializers;
-using DTA.FUS.Migrations;
 
 // Generally, the AOT module of Dapper is disabled, in order for it to work as expected, it's enabled in crucial segments via the DapperAot attribute
 [module: DapperAot(false)]
@@ -20,6 +21,8 @@ var builder = WebApplication.CreateSlimBuilder(args);
 #elif JIT
 var builder = WebApplication.CreateBuilder(args);
 #endif
+
+builder.Services.AddGrpc();
 
 #if AOT
 builder.Services.ConfigureHttpJsonOptions(options =>
@@ -93,6 +96,8 @@ var counterUploads = meter.CreateCounter<long>("download_api_calls_counter");
 var counterDownloads = meter.CreateCounter<long>("upload_api_calls_counter");
 
 var app = builder.Build();
+
+app.MapGrpcService<GrpcFileService>();
 
 #if JIT
 // Configure the HTTP request pipeline.
