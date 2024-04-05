@@ -24,8 +24,10 @@ const string prefix = $"DTA_{compilationMode}_EPS_";
 const string serviceName = $"DTA-{compilationMode}-EPS";
 const string meterName = $"DTA-{compilationMode}-EPS-Meter";
 
+#if JIT
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+#endif
 
 // Add Environment variables
 builder.Configuration.AddEnvironmentVariables(prefix: prefix);
@@ -49,12 +51,14 @@ var eventSimulatedCounter = meter.CreateCounter<long>("event_simulated_counter")
 
 var app = builder.Build();
 
+#if JIT
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+#endif
 
 app.MapGet("/api/simulateEvent", () =>
     {
