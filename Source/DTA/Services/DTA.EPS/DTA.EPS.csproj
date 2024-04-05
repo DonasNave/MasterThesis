@@ -4,13 +4,12 @@
         <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-        <RootNamespace>DTA.BPS</RootNamespace>
+        <RootNamespace>DTA.FRS</RootNamespace>
         <Configurations>Release-JIT;Debug-AOT;Debug-JIT;Release-AOT</Configurations>
         <Platforms>AnyCPU</Platforms>
     </PropertyGroup>
 
     <!-- AOT PropertyGroup -->
-
     <PropertyGroup Condition=" '$(Configuration)' == 'Release-AOT' ">
         <DefineConstants>$(DefineConstants);RELEASE;AOT</DefineConstants>
         <InterceptorsPreviewNamespaces>$(InterceptorsPreviewNamespaces);Dapper.AOT</InterceptorsPreviewNamespaces>
@@ -28,22 +27,18 @@
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release-JIT' ">
-      <Optimize Condition=" '$(Optimize)' == '' ">true</Optimize>
+        <DefineConstants>$(DefineConstants);RELEASE;JIT</DefineConstants>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug-JIT' ">
-      <DebugSymbols Condition=" '$(DebugSymbols)' == '' ">true</DebugSymbols>
-      <Optimize Condition=" '$(Optimize)' == '' ">false</Optimize>
+        <DefineConstants>$(DefineConstants);DEBUG;JIT</DefineConstants>
     </PropertyGroup>
-    
+
     <!-- Shared PackageRefences -->
     <ItemGroup>
-        <PackageReference Include="Google.Protobuf" Version="3.26.1" />
-        <PackageReference Include="Grpc.Net.Client" Version="2.62.0" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.3"/>
+        <PackageReference Include="RabbitMQ.Client" Version="6.8.1" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
-        <PackageReference Include="Grpc.Tools" PrivateAssets="All" Version="2.62.0" />
-        <Protobuf Include="..\..\Common\DTA.Models\Protos\files.proto" GrpcServices="Client" Link="Protos\files.proto" />
     </ItemGroup>
 
     <!-- AOT PackageRefences -->
@@ -59,11 +54,10 @@
 
     <ItemGroup Condition="'$(Configuration)'=='Release-JIT'">
     </ItemGroup>
-    
+
     <!-- Shared Project References -->
     <ItemGroup>
-      <ProjectReference Include="..\..\Common\DTA.Extensions\DTA.Extensions.csproj" />
-      <ProjectReference Include="..\..\Common\DTA.Models\DTA.Models.csproj" />
+        <ProjectReference Include="..\..\Common\DTA.Extensions\DTA.Extensions.csproj" />
+        <ProjectReference Include="..\..\Common\DTA.Models\DTA.Models.csproj" />
     </ItemGroup>
-
 </Project>
