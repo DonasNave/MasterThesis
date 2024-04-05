@@ -1,5 +1,4 @@
 using System.Diagnostics.Metrics;
-using System.Text;
 using DTA.Extensions;
 using DTA.Models;
 using RabbitMQ.Client;
@@ -60,7 +59,7 @@ if (app.Environment.IsDevelopment())
 }
 #endif
 
-app.MapGet("/api/simulateEvent", () =>
+app.MapGet("/api/simulateEvent/{id:int}", (int id) =>
     {
         var factory = new ConnectionFactory { HostName = "localhost" };
         
@@ -73,11 +72,10 @@ app.MapGet("/api/simulateEvent", () =>
             autoDelete: false,
             arguments: null);
 
-        const string message = "Fire!";
-        var body = Encoding.UTF8.GetBytes(message);
+        var body = BitConverter.GetBytes(id);
 
         channel.BasicPublish(exchange: string.Empty,
-            routingKey: "simulatedEvent",
+            routingKey: "simulated",
             basicProperties: null,
             body: body);
         

@@ -1,7 +1,11 @@
 using System.Diagnostics.Metrics;
+using System.Text;
 using DTA.BPS.Configuration;
+using DTA.BPS.Services.Interfaces;
 using DTA.Extensions;
 using DTA.Models;
+using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 
 #if AOT
 var builder = WebApplication.CreateSlimBuilder(args);
@@ -67,12 +71,30 @@ var meter = new Meter(meterName, serviceVersion);
 var batchCounter = meter.CreateCounter<long>("batch_process_counter");
 app.UseHttpsRedirection();
 
-app.MapGet("/api/batch/process", () =>
-    {
-        batchCounter.Add(1);
-        return Results.Ok("Batch process completed");
-    })
-    .WithName("BatchProcessing")
-    .WithOpenApi();
+
+var factory = new ConnectionFactory { HostName = "localhost" };
+using var connection = factory.CreateConnection();
+using var channel = connection.CreateModel();
+
+channel.QueueDeclare(queue: "simulated",
+    durable: false,
+    exclusive: false,
+    autoDelete: false,
+    arguments: null);
+
+var consumer = new EventingBasicConsumer(channel);
+consumer.Received += (_, ea) =>
+{
+    var body = ea.Body.ToArray();
+    var fileId = int.Parse(Encoding.UTF8.GetString(body));
+    
+    var processingService = Activator.CreateInstance<IProcessingService>();
+    processingService.GetDataAndProcess(fileId);
+    batchCounter.Add(1);
+};
+
+channel.BasicConsume(queue: "simulated",
+    autoAck: true,
+    consumer: consumer);
 
 app.Run();

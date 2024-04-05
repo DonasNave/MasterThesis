@@ -1,6 +1,6 @@
-namespace DTA.BPS.Services;
+namespace DTA.BPS.Services.Interfaces;
 
 public interface IProcessingService
 {
-    void GetDataAndProcess();
+    void GetDataAndProcess(int fileId);
 }
