@@ -28,6 +28,7 @@ builder.Services.AddGrpc();
 builder.Services.ConfigureHttpJsonOptions(options =>
 {
     options.SerializerOptions.TypeInfoResolverChain.Insert(0, CommonResponseContext.Default);
+    options.SerializerOptions.TypeInfoResolverChain.Insert(1, DtaFileContext.Default);
 });
 #endif
 

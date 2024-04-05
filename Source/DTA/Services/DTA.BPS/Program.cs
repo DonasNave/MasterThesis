@@ -1,4 +1,5 @@
 using System.Diagnostics.Metrics;
+using DTA.BPS.Configuration;
 using DTA.Extensions;
 using DTA.Models;
 
@@ -29,6 +30,15 @@ builder.Services.AddSwaggerGen();
 
 // Add Environment variables
 builder.Configuration.AddEnvironmentVariables(prefix: prefix);
+
+var fusUrl = builder.Configuration["ServiceConnections:FUS:Url"];
+
+if (string.IsNullOrWhiteSpace(fusUrl))
+{
+    throw new InvalidOperationException("File service URL is missing");
+}
+
+ServiceConfiguration.FileServiceAddress = fusUrl;
 
 var app = builder.Build();
 
