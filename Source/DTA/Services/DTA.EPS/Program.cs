@@ -2,6 +2,7 @@ using DTA.EPS.Api.Rest;
 using DTA.EPS.Extensions;
 using DTA.Extensions.Common;
 using DTA.Extensions.Telemetry;
+using DTA.Models.Options;
 
 #if DEBUG_JIT
 using DTA.Extensions.Swagger;
@@ -23,6 +24,8 @@ builder.Configuration.AddEnvironmentVariables(prefix: serviceName);
 // Get application settings
 var settings = builder.Configuration.GetSection(nameof(OpenTelemetrySettings))
                                     .Get<OpenTelemetrySettings>()!;
+
+builder.Services.Configure<RabbitMqOptions>(builder.Configuration.GetSection("RabbitMQ"));
 
 // Setup logging to console
 builder.Logging.AddConsole();

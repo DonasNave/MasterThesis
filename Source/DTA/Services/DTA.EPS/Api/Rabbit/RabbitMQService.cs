@@ -1,4 +1,6 @@
 using DTA.EPS.Api.Rabbit.Interfaces;
+using DTA.Models.Options;
+using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 
 namespace DTA.EPS.Api.Rabbit;
@@ -8,9 +10,9 @@ public class RabbitMqService : IDisposable, IRabbitMqService
     private readonly IConnection _connection;
     private readonly IModel _channel;
 
-    public RabbitMqService()
+    public RabbitMqService(IOptions<RabbitMqOptions> options)
     {
-        var factory = new ConnectionFactory { HostName = "localhost" };
+        var factory = new ConnectionFactory { HostName = options.Value.HostName };
         _connection = factory.CreateConnection();
         _channel = _connection.CreateModel();
 

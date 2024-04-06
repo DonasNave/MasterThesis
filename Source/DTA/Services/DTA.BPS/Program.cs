@@ -1,7 +1,7 @@
-using DTA.BPS.Configuration;
 using DTA.BPS.Extensions;
 using DTA.Extensions.Common;
 using DTA.Extensions.Telemetry;
+using DTA.Models.Options;
 
 #if DEBUG_JIT
 using DTA.Extensions.Swagger;
@@ -25,8 +25,8 @@ builder.Configuration.AddEnvironmentVariables(prefix: serviceName);
 var telemetrySettings = builder.Configuration.GetSection(nameof(OpenTelemetrySettings))
                                     .Get<OpenTelemetrySettings>()!;
 
-ServiceConfiguration.FileServiceAddress = builder.Configuration["ServiceConnections:FUS:Url"] 
-                                          ?? throw new InvalidOperationException("File service URL is missing");
+builder.Services.Configure<RabbitMqOptions>(builder.Configuration.GetSection("RabbitMQ"));
+builder.Services.Configure<ServiceConnectionOptions>(builder.Configuration.GetSection("ServiceConnections"));
 
 // Setup logging to console
 builder.Logging.AddConsole();

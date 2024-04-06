@@ -1,6 +1,8 @@
 using System.Text;
 using DTA.BPS.Monitoring;
 using DTA.BPS.Services.Interfaces;
+using DTA.Models.Options;
+using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 
@@ -8,17 +10,19 @@ namespace DTA.BPS.Api.Rabbit;
 
 public class RabbitMqConsumerService : IDisposable
 {
-    private readonly IProcessingService _processingService; // Assuming you have this from the previous example
+    private readonly RabbitMqOptions _options;
+    private readonly IProcessingService _processingService;
 
-    public RabbitMqConsumerService(IProcessingService processingService)
+    public RabbitMqConsumerService(IOptions<RabbitMqOptions> options, IProcessingService processingService)
     {
+        _options = options.Value;
         _processingService = processingService;
         InitializeConsumer();
     }
 
     private void InitializeConsumer()
     {
-        var factory = new ConnectionFactory { HostName = "localhost" };
+        var factory = new ConnectionFactory { HostName = _options.HostName };
         var connection = factory.CreateConnection();
         var channel = connection.CreateModel();
 
