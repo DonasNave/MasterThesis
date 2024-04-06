@@ -1,30 +1,32 @@
-using System.Diagnostics.Metrics;
+using DTA.EPS.Api.Rest;
+using DTA.EPS.Extensions;
 using DTA.Extensions.Common;
 using DTA.Extensions.Telemetry;
-using DTA.Models;
-using RabbitMQ.Client;
 
 #if DEBUG_JIT
 using DTA.Extensions.Swagger;
 #endif
 
+// Create builder
 #if AOT
 var builder = WebApplication.CreateSlimBuilder(args);
 #elif JIT
 var builder = WebApplication.CreateBuilder(args);
 #endif
 
+// Set service names
 builder.WithServiceNames(out var serviceName, out var meterName);
+var serviceVersion = typeof(Program).Assembly.GetName().Version?.ToString() ?? "unknown";
+
 builder.Configuration.AddEnvironmentVariables(prefix: serviceName);
+
+// Get application settings
+var settings = builder.Configuration.GetSection(nameof(OpenTelemetrySettings))
+                                    .Get<OpenTelemetrySettings>()!;
 
 // Setup logging to console
 builder.Logging.AddConsole();
 builder.Logging.SetMinimumLevel(LogLevel.Debug);
-
-var settings =
-    builder.Configuration.GetSection(nameof(OpenTelemetrySettings)).Get<OpenTelemetrySettings>()!;
-
-var serviceVersion = typeof(Program).Assembly.GetName().Version?.ToString() ?? "unknown";
 
 // Add OpenTelemetry ...
 builder.SetupOpenTelemetry(options =>
@@ -35,42 +37,26 @@ builder.SetupOpenTelemetry(options =>
     options.MeterNames = [meterName];
 });
 
-var meter = new Meter(meterName, serviceVersion);
-var eventSimulatedCounter = meter.CreateCounter<long>("event_simulated_counter");
+// Add services to the container.
+builder.Services.AddHealthChecks();
+builder.Services.RegisterServices();
 
 #if DEBUG_JIT
 builder.Services.AddSwaggerEndpoints();
 #endif
 
+// Build the app
 var app = builder.Build();
 
 #if DEBUG_JIT
 app.SetupSwagger();
 #endif
 
-app.MapGet("/api/simulateEvent/{id:int}", (int id) =>
-    {
-        var factory = new ConnectionFactory { HostName = "localhost" };
-        
-        using var connection = factory.CreateConnection();
-        using var channel = connection.CreateModel();
+// Initialize metrics
+app.InitializeMetrics(meterName, serviceVersion);
 
-        channel.QueueDeclare(queue: "simulated",
-            durable: false,
-            exclusive: false,
-            autoDelete: false,
-            arguments: null);
-
-        var body = BitConverter.GetBytes(id);
-
-        channel.BasicPublish(exchange: string.Empty,
-            routingKey: "simulated",
-            basicProperties: null,
-            body: body);
-        
-        eventSimulatedCounter.Add(1);
-    })
-    .WithName("SimulateEvent")
-    .WithOpenApi();
+// Map endpoints
+app.MapDefaultEndpoints();
+app.MapEventModule();
 
 app.Run();

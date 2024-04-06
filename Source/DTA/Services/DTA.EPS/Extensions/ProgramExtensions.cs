@@ -1,20 +1,20 @@
 using System.Diagnostics.Metrics;
-using DTA.SRS.Monitoring;
-using DTA.SRS.Services;
-using DTA.SRS.Services.Interfaces;
+using DTA.EPS.Api.Rabbit;
+using DTA.EPS.Api.Rabbit.Interfaces;
+using DTA.EPS.Monitoring;
 
-namespace DTA.SRS.Extensions;
+namespace DTA.EPS.Extensions;
 
 public static class ProgramExtensions
 {
     public static void InitializeMetrics(this WebApplication _, string meterName, string serviceVersion)
     {
         var meter = new Meter(meterName, serviceVersion);
-        AppMonitor.SignalCounter = meter.CreateCounter<long>("signal_api_calls_counter");
+        AppMonitor.EventSimulatedCounter = meter.CreateCounter<long>("event_simulated_counter");
     }
-    
+
     public static void RegisterServices(this IServiceCollection serviceCollection)
     {
-        serviceCollection.AddSingleton<IReadingService, ReadingService>();
+        serviceCollection.AddSingleton<IRabbitMqService, RabbitMqService>();
     }
 }

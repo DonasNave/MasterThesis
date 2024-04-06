@@ -1,4 +1,4 @@
-namespace DTA.Models;
+namespace DTA.Extensions.Telemetry;
 
 public class TelemetryConfiguration
 {

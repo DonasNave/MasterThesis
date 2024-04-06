@@ -1,8 +1,9 @@
+using DTA.FUS.Monitoring;
 using DTA.FUS.Services.Interfaces;
 using DTA.Models.Protos.Files;
 using Grpc.Core;
 
-namespace DTA.FUS.Services.gRPC;
+namespace DTA.FUS.Api.Grpc;
 
 public class GrpcFileService(IFileService fileService) : FileServer.FileServerBase
 {
@@ -14,6 +15,8 @@ public class GrpcFileService(IFileService fileService) : FileServer.FileServerBa
         {
             throw new RpcException(new Status(StatusCode.NotFound, "File not found"));
         }
+        
+        AppMonitor.GetFileProceduresCounter.Add(1);
         
         return new FileResponse
         {

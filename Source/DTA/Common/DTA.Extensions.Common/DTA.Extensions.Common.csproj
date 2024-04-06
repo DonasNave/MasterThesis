@@ -30,10 +30,12 @@
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug-JIT' ">
         <DefineConstants>$(DefineConstants);DEBUG;JIT</DefineConstants>
     </PropertyGroup>
-
     
     <!-- Shared PackageRefences -->
     <ItemGroup>
         <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\DTA.Abstractions\DTA.Abstractions.csproj" />
     </ItemGroup>
 </Project>

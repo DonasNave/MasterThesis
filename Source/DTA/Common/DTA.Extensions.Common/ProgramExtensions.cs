@@ -4,7 +4,7 @@ namespace DTA.Extensions.Common;
 
 public static class ProgramExtensions
 {
-    public static void WithServiceNames(this WebApplicationBuilder applicationBuilder, out string serviceName, out string meterName)
+    public static void WithServiceNames(this WebApplicationBuilder builder, out string serviceName, out string meterName)
     {
 #if AOT
         const string compilationMode = "AOT"; 
@@ -12,7 +12,7 @@ public static class ProgramExtensions
         const string compilationMode = "JIT";
 #endif        
         const string prefix = $"DTA_{compilationMode}_";
-        serviceName = $"{prefix}{applicationBuilder.Environment.ApplicationName}";
+        serviceName = $"{prefix}{builder.Environment.ApplicationName}";
         meterName = $"{serviceName}-Meter";
     }
 }

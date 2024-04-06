@@ -1,40 +1,49 @@
-using System.Diagnostics.Metrics;
-using System.Text;
 using DTA.BPS.Configuration;
-using DTA.BPS.Services.Interfaces;
+using DTA.BPS.Extensions;
 using DTA.Extensions.Common;
 using DTA.Extensions.Telemetry;
-using DTA.Models;
-using RabbitMQ.Client;
-using RabbitMQ.Client.Events;
 
 #if DEBUG_JIT
 using DTA.Extensions.Swagger;
 #endif
 
+// Create builder
 #if AOT
 var builder = WebApplication.CreateSlimBuilder(args);
 #else
 var builder = WebApplication.CreateBuilder(args);
 #endif
 
+// Set service names
 builder.WithServiceNames(out var serviceName, out var meterName);
+var serviceVersion = typeof(Program).Assembly.GetName().Version?.ToString() ?? "unknown";
 
 // Add Environment variables
 builder.Configuration.AddEnvironmentVariables(prefix: serviceName);
+
+// Get application settings
+var telemetrySettings = builder.Configuration.GetSection(nameof(OpenTelemetrySettings))
+                                    .Get<OpenTelemetrySettings>()!;
+
+ServiceConfiguration.FileServiceAddress = builder.Configuration["ServiceConnections:FUS:Url"] 
+                                          ?? throw new InvalidOperationException("File service URL is missing");
 
 // Setup logging to console
 builder.Logging.AddConsole();
 builder.Logging.SetMinimumLevel(LogLevel.Debug);
 
-var fusUrl = builder.Configuration["ServiceConnections:FUS:Url"];
-
-if (string.IsNullOrWhiteSpace(fusUrl))
+// Add OpenTelemetry ...
+builder.SetupOpenTelemetry(options =>
 {
-    throw new InvalidOperationException("File service URL is missing");
-}
+    options.OpenTelemetrySettings = telemetrySettings;
+    options.ServiceName = serviceName;
+    options.ServiceVersion = serviceVersion;
+    options.MeterNames = [meterName];
+});
 
-ServiceConfiguration.FileServiceAddress = fusUrl;
+// Add services to the container.
+builder.Services.AddHealthChecks();
+builder.Services.RegisterServices();
 
 #if DEBUG_JIT
 builder.Services.AddSwaggerEndpoints();
@@ -42,51 +51,14 @@ builder.Services.AddSwaggerEndpoints();
 
 var app = builder.Build();
 
-var settings =
-    builder.Configuration.GetSection(nameof(OpenTelemetrySettings)).Get<OpenTelemetrySettings>()!;
-
-var serviceVersion = typeof(Program).Assembly.GetName().Version?.ToString() ?? "unknown";
-
-// Add OpenTelemetry ...
-builder.SetupOpenTelemetry(options =>
-{
-    options.OpenTelemetrySettings = settings;
-    options.ServiceName = serviceName;
-    options.ServiceVersion = serviceVersion;
-    options.MeterNames = [meterName];
-});
-
-var meter = new Meter(meterName, serviceVersion);
-var batchCounter = meter.CreateCounter<long>("batch_process_counter");
-app.UseHttpsRedirection();
-
 #if DEBUG_JIT
 app.SetupSwagger();
 #endif
 
-var factory = new ConnectionFactory { HostName = "localhost" };
-using var connection = factory.CreateConnection();
-using var channel = connection.CreateModel();
+// Initialize metrics
+app.InitializeMetrics(meterName, serviceVersion);
 
-channel.QueueDeclare(queue: "simulated",
-    durable: false,
-    exclusive: false,
-    autoDelete: false,
-    arguments: null);
-
-var consumer = new EventingBasicConsumer(channel);
-consumer.Received += (_, ea) =>
-{
-    var body = ea.Body.ToArray();
-    var fileId = int.Parse(Encoding.UTF8.GetString(body));
-    
-    var processingService = Activator.CreateInstance<IProcessingService>();
-    processingService.GetDataAndProcess(fileId);
-    batchCounter.Add(1);
-};
-
-channel.BasicConsume(queue: "simulated",
-    autoAck: true,
-    consumer: consumer);
+// Map endpoints
+app.MapDefaultEndpoints();
 
 app.Run();

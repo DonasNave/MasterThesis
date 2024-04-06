@@ -1,81 +1,73 @@
 using DTA.Extensions.Common;
 using DTA.Extensions.Telemetry;
-using DTA.Models;
 using DTA.SRS.Extensions;
-using DTA.SRS.Services;
-using DTA.SRS.Services.Interfaces;
 
-#if DEBUG_JIT
+#if AOT
+using DTA.Models.Extensions;
+using DTA.Models.JsonSerializers;
+using DTA.SRS.Api.Rest;
+
+#elif DEBUG_JIT
 using DTA.Extensions.Swagger;
 #endif
 
+// Create builder
 #if AOT
 var builder = WebApplication.CreateSlimBuilder(args);
 #elif JIT
 var builder = WebApplication.CreateBuilder(args);
 #endif
 
+// Set service names
 builder.WithServiceNames(out var serviceName, out var meterName);
+var serviceVersion = typeof(Program).Assembly.GetName().Version?.ToString() ?? "unknown";
+
 builder.Configuration.AddEnvironmentVariables(prefix: serviceName);
+
+// Service settings
+var telemetrySettings =
+    builder.Configuration.GetSection(nameof(OpenTelemetrySettings)).Get<OpenTelemetrySettings>()!;
 
 // Setup logging to console
 builder.Logging.AddConsole();
 builder.Logging.SetMinimumLevel(LogLevel.Debug);
 
-// Setup logging to console
-var loggerFactory = LoggerFactory.Create(loggingBuilder =>
-{
-    loggingBuilder
-        .AddConsole()
-        .SetMinimumLevel(LogLevel.Debug); // Adjust the log level as needed
-});
-
-ILogger logger = loggerFactory.CreateLogger<Program>();
-logger.LogInformation("Logging from the configuration phase");
-
-// Add services to the container.
-builder.Services.AddTransient<IReadingService, ReadingService>();
-
-builder.Services.AddHealthChecks();
-
-#if JIT
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-#endif
-
-var settings =
-    builder.Configuration.GetSection(nameof(OpenTelemetrySettings)).Get<OpenTelemetrySettings>()!;
-
-logger.LogInformation("OpenTelemetry settings {@Settings}", settings);
-
-var serviceVersion = typeof(Program).Assembly.GetName().Version?.ToString() ?? "unknown";
-
-logger.LogInformation("Service name: {ServiceName}, version: {ServiceVersion}", serviceName, serviceVersion);
-
-#if AOT
-builder.Services.RegisterContextSerializers();
-#endif
-
 // Add OpenTelemetry ...
 builder.SetupOpenTelemetry(options =>
 {
-    options.OpenTelemetrySettings = settings;
+    options.OpenTelemetrySettings = telemetrySettings;
     options.ServiceName = serviceName;
     options.ServiceVersion = serviceVersion;
     options.MeterNames = [meterName];
 });
 
+// Add services to the container.
+builder.Services.AddHealthChecks();
+builder.Services.RegisterServices();
+
+#if DEBUG_JIT
+//builder.Services.AddControllers();
+builder.Services.AddSwaggerEndpoints();
+#endif
+
+// Register context serializers in AOT mode
+#if AOT
+builder.Services.RegisterContextSerializers([ DtaSignalContext.Default ]);
+#endif
+
+// Build the app
 var app = builder.Build();
 
+// Initialize metrics
 app.InitializeMetrics(meterName, serviceVersion);
+
+// Map endpoints
+app.MapDefaultEndpoints();
+app.MapSignalModule();
 
 #if DEBUG_JIT
 app.SetupSwagger();
 //app.MapControllers();
 #endif
-
-app.MapDefaultEndpoints();
-app.MapMinimalApi();
 
 app.Run();

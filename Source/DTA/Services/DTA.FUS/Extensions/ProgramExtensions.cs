@@ -1,8 +1,8 @@
 using System.Diagnostics.Metrics;
+using DTA.FUS.Api.Grpc;
 using DTA.FUS.Monitoring;
-using DTA.FUS.Services.gRPC;
+using DTA.FUS.Services;
 using DTA.FUS.Services.Interfaces;
-using DTA.Models.JsonSerializers;
 
 namespace DTA.FUS.Extensions;
 
@@ -16,34 +16,13 @@ public static class ProgramExtensions
         AppMonitor.GetFileProceduresCounter = meter.CreateCounter<long>("get_file_procedure_calls_counter");
     }
     
-    public static void MapMinimalApi(this WebApplication app)
+    public static void RegisterServices(this IServiceCollection serviceCollection)
     {
-        app.MapPost("/api/file/upload", async (IFormFile file, IFileService fileService) =>
-        {
-            AppMonitor.UploadsCounter.Add(1);
-            return await fileService.Upload(file);
-        }).DisableAntiforgery();
-
-        app.MapGet("/api/file/download/{id:int}", async (int id, IFileService fileService) =>
-        {
-            AppMonitor.DownloadCounter.Add(1);
-            return await fileService.Download(id);
-        });
+        serviceCollection.AddSingleton<IFileService, FileService>();
     }
     
     public static void MapGrpcServices(this WebApplication app)
     {
         app.MapGrpcService<GrpcFileService>();
-    }
-    
-    public static IServiceCollection RegisterContextSerializers(this IServiceCollection services)
-    {
-        services.ConfigureHttpJsonOptions(options =>
-        {
-            options.SerializerOptions.TypeInfoResolverChain.Insert(0, CommonResponseContext.Default);
-            options.SerializerOptions.TypeInfoResolverChain.Insert(1, DtaFileContext.Default);
-        });
-        
-        return services;
     }
 }
