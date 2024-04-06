@@ -1,11 +1,12 @@
-using System.Diagnostics.Metrics;
-using DTA.Extensions;
+using DTA.Extensions.Common;
+using DTA.Extensions.Telemetry;
 using DTA.Models;
+using DTA.SRS.Extensions;
 using DTA.SRS.Services;
 using DTA.SRS.Services.Interfaces;
 
-#if AOT
-using DTA.Models.JsonSerializers;
+#if DEBUG_JIT
+using DTA.Extensions.Swagger;
 #endif
 
 #if AOT
@@ -14,19 +15,12 @@ var builder = WebApplication.CreateSlimBuilder(args);
 var builder = WebApplication.CreateBuilder(args);
 #endif
 
+builder.WithServiceNames(out var serviceName, out var meterName);
+builder.Configuration.AddEnvironmentVariables(prefix: serviceName);
+
 // Setup logging to console
 builder.Logging.AddConsole();
 builder.Logging.SetMinimumLevel(LogLevel.Debug);
-
-#if AOT
-const string compilationMode = "AOT";
-#elif JIT
-const string compilationMode = "JIT";
-#endif
-
-const string prefix = $"DTA_{compilationMode}_SRS_";
-const string serviceName = $"DTA-{compilationMode}-SRS";
-const string meterName = $"DTA-{compilationMode}-SRS-Meter";
 
 // Setup logging to console
 var loggerFactory = LoggerFactory.Create(loggingBuilder =>
@@ -41,8 +35,6 @@ logger.LogInformation("Logging from the configuration phase");
 
 // Add services to the container.
 builder.Services.AddTransient<IReadingService, ReadingService>();
-
-builder.Configuration.AddEnvironmentVariables(prefix: prefix);
 
 builder.Services.AddHealthChecks();
 
@@ -62,10 +54,7 @@ var serviceVersion = typeof(Program).Assembly.GetName().Version?.ToString() ?? "
 logger.LogInformation("Service name: {ServiceName}, version: {ServiceVersion}", serviceName, serviceVersion);
 
 #if AOT
-builder.Services.ConfigureHttpJsonOptions(options =>
-{
-    options.SerializerOptions.TypeInfoResolverChain.Insert(0, DtaSignalContext.Default);
-});
+builder.Services.RegisterContextSerializers();
 #endif
 
 // Add OpenTelemetry ...
@@ -77,38 +66,16 @@ builder.SetupOpenTelemetry(options =>
     options.MeterNames = [meterName];
 });
 
-var meter = new Meter(meterName, serviceVersion);
-var counterSignals = meter.CreateCounter<long>("signal_api_calls_counter");
-
 var app = builder.Build();
 
-#if JIT
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseDeveloperExceptionPage();
-    app.UseSwagger();
-    app.UseSwaggerUI();
+app.InitializeMetrics(meterName, serviceVersion);
 
-    // Swagger redirect
-    app.MapGet("/", context =>
-    {
-        context.Response.Redirect("/swagger/index.html");
-        return Task.CompletedTask;
-    });
-}
-
-app.MapControllers();
+#if DEBUG_JIT
+app.SetupSwagger();
+//app.MapControllers();
 #endif
 
 app.MapDefaultEndpoints();
-
-app.MapGet("/api/signals/{count:int}", async (int count, IReadingService readingService) =>
-{
-    var signals = await readingService.GetRandomSignals(count);
-    counterSignals.Add(1);
-    logger.LogInformation("Signal API called {Count} signals", count);
-    return signals;
-});
+app.MapMinimalApi();
 
 app.Run();

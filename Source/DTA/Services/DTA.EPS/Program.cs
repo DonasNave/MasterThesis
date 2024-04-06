@@ -1,7 +1,12 @@
 using System.Diagnostics.Metrics;
-using DTA.Extensions;
+using DTA.Extensions.Common;
+using DTA.Extensions.Telemetry;
 using DTA.Models;
 using RabbitMQ.Client;
+
+#if DEBUG_JIT
+using DTA.Extensions.Swagger;
+#endif
 
 #if AOT
 var builder = WebApplication.CreateSlimBuilder(args);
@@ -9,27 +14,12 @@ var builder = WebApplication.CreateSlimBuilder(args);
 var builder = WebApplication.CreateBuilder(args);
 #endif
 
+builder.WithServiceNames(out var serviceName, out var meterName);
+builder.Configuration.AddEnvironmentVariables(prefix: serviceName);
+
 // Setup logging to console
 builder.Logging.AddConsole();
 builder.Logging.SetMinimumLevel(LogLevel.Debug);
-
-#if AOT
-const string compilationMode = "AOT";
-#elif JIT
-const string compilationMode = "JIT";
-#endif
-
-const string prefix = $"DTA_{compilationMode}_EPS_";
-const string serviceName = $"DTA-{compilationMode}-EPS";
-const string meterName = $"DTA-{compilationMode}-EPS-Meter";
-
-#if JIT
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-#endif
-
-// Add Environment variables
-builder.Configuration.AddEnvironmentVariables(prefix: prefix);
 
 var settings =
     builder.Configuration.GetSection(nameof(OpenTelemetrySettings)).Get<OpenTelemetrySettings>()!;
@@ -48,15 +38,14 @@ builder.SetupOpenTelemetry(options =>
 var meter = new Meter(meterName, serviceVersion);
 var eventSimulatedCounter = meter.CreateCounter<long>("event_simulated_counter");
 
+#if DEBUG_JIT
+builder.Services.AddSwaggerEndpoints();
+#endif
+
 var app = builder.Build();
 
-#if JIT
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+#if DEBUG_JIT
+app.SetupSwagger();
 #endif
 
 app.MapGet("/api/simulateEvent/{id:int}", (int id) =>

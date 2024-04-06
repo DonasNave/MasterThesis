@@ -2,10 +2,15 @@ using System.Diagnostics.Metrics;
 using System.Text;
 using DTA.BPS.Configuration;
 using DTA.BPS.Services.Interfaces;
-using DTA.Extensions;
+using DTA.Extensions.Common;
+using DTA.Extensions.Telemetry;
 using DTA.Models;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+
+#if DEBUG_JIT
+using DTA.Extensions.Swagger;
+#endif
 
 #if AOT
 var builder = WebApplication.CreateSlimBuilder(args);
@@ -13,27 +18,14 @@ var builder = WebApplication.CreateSlimBuilder(args);
 var builder = WebApplication.CreateBuilder(args);
 #endif
 
+builder.WithServiceNames(out var serviceName, out var meterName);
+
+// Add Environment variables
+builder.Configuration.AddEnvironmentVariables(prefix: serviceName);
+
 // Setup logging to console
 builder.Logging.AddConsole();
 builder.Logging.SetMinimumLevel(LogLevel.Debug);
-
-#if AOT
-const string prefix = "DTA_AOT_BPS_";
-const string serviceName = "DTA-AOT-BPS";
-const string meterName = "DTA-AOT-BPS-Meter";
-#else
-const string prefix = "DTA_JIT_BPS_";
-const string serviceName = "DTA-JIT-BPS";
-const string meterName = "DTA-JIT-BPS-Meter";
-#endif
-
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-// Add Environment variables
-builder.Configuration.AddEnvironmentVariables(prefix: prefix);
 
 var fusUrl = builder.Configuration["ServiceConnections:FUS:Url"];
 
@@ -44,14 +36,11 @@ if (string.IsNullOrWhiteSpace(fusUrl))
 
 ServiceConfiguration.FileServiceAddress = fusUrl;
 
-var app = builder.Build();
+#if DEBUG_JIT
+builder.Services.AddSwaggerEndpoints();
+#endif
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+var app = builder.Build();
 
 var settings =
     builder.Configuration.GetSection(nameof(OpenTelemetrySettings)).Get<OpenTelemetrySettings>()!;
@@ -71,6 +60,9 @@ var meter = new Meter(meterName, serviceVersion);
 var batchCounter = meter.CreateCounter<long>("batch_process_counter");
 app.UseHttpsRedirection();
 
+#if DEBUG_JIT
+app.SetupSwagger();
+#endif
 
 var factory = new ConnectionFactory { HostName = "localhost" };
 using var connection = factory.CreateConnection();

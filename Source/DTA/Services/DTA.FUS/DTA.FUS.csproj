@@ -8,7 +8,7 @@
     <RootNamespace>DTA.FUS</RootNamespace>
     <Configurations>Release-JIT;Debug-JIT;Release-AOT;Debug-AOT</Configurations>
     <Platforms>AnyCPU</Platforms>
-    <AssemblyName>DTA.FUS</AssemblyName>
+    <AssemblyName>FUS</AssemblyName>
     <AssemblyVersion>$(Version)</AssemblyVersion>
     <RuntimeIdentifiers>linux-arm64;win-x64;osx-x64</RuntimeIdentifiers>
   </PropertyGroup>
@@ -47,9 +47,7 @@
   <!-- Shared PackageRefences -->
   <ItemGroup>
     <PackageReference Include="Grpc.AspNetCore" Version="2.62.0" />
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.3" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     <PackageReference Include="Npgsql" Version="8.0.2" />
     <PackageReference Include="Dapper" Version="2.1.35" />
     <Protobuf Include="..\..\Common\DTA.Models\Protos\files.proto" GrpcServices="Server" Link="Protos\files.proto" />
@@ -75,8 +73,15 @@
   
   <!-- Shared ProjectReferences -->
   <ItemGroup>
-    <ProjectReference Include="..\..\Common\DTA.Extensions\DTA.Extensions.csproj" />
+    <ProjectReference Include="..\..\Common\DTA.Extensions.Common\DTA.Extensions.Common.csproj" />
+    <ProjectReference Include="..\..\Common\DTA.Extensions.Postgre\DTA.Extensions.Postgre.csproj" />
+    <ProjectReference Include="..\..\Common\DTA.Extensions.Telemetry\DTA.Extensions.Telemetry.csproj" />
     <ProjectReference Include="..\..\Common\DTA.Migrator\DTA.Migrator.csproj" />
     <ProjectReference Include="..\..\Common\DTA.Models\DTA.Models.csproj" />
+  </ItemGroup>
+
+  <!-- Debug-JIT ProjectReferences -->
+  <ItemGroup Condition="'$(Configuration)'=='Debug-JIT'">
+    <ProjectReference Include="..\..\Common\DTA.Extensions.Swagger\DTA.Extensions.Swagger.csproj" />
   </ItemGroup>
 </Project>

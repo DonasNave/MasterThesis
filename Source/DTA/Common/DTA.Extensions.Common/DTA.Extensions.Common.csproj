@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <Configurations>Release-JIT;Debug-AOT;Debug-JIT;Release-AOT</Configurations>
+        <Platforms>AnyCPU</Platforms>
+    </PropertyGroup>
+
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release-AOT' ">
+        <DefineConstants>$(DefineConstants);RELEASE;AOT</DefineConstants>
+        <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+        <Optimize>true</Optimize>
+        <PublishAot>true</PublishAot>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug-AOT' ">
+        <DefineConstants>$(DefineConstants);DEBUG;AOT</DefineConstants>
+        <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+        <Optimize>false</Optimize>
+        <PublishAot>true</PublishAot>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release-JIT' ">
+        <DefineConstants>$(DefineConstants);RELEASE;JIT</DefineConstants>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug-JIT' ">
+        <DefineConstants>$(DefineConstants);DEBUG;JIT</DefineConstants>
+    </PropertyGroup>
+
+    
+    <!-- Shared PackageRefences -->
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    </ItemGroup>
+</Project>

@@ -4,9 +4,11 @@
         <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-        <RootNamespace>DTA.FRS</RootNamespace>
+        <RootNamespace>DTA.EPS</RootNamespace>
         <Configurations>Release-JIT;Debug-AOT;Debug-JIT;Release-AOT</Configurations>
         <Platforms>AnyCPU</Platforms>
+        <AssemblyName>EPS</AssemblyName>
+        <AssemblyVersion>$(Version)</AssemblyVersion>
     </PropertyGroup>
 
     <!-- AOT PropertyGroup -->
@@ -41,23 +43,15 @@
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     </ItemGroup>
 
-    <!-- AOT PackageRefences -->
-    <ItemGroup Condition="'$(Configuration)'=='Debug-AOT'">
-    </ItemGroup>
-
-    <ItemGroup Condition="'$(Configuration)'=='Release-AOT'">
-    </ItemGroup>
-
-    <!-- JIT PackageRefences -->
-    <ItemGroup Condition="'$(Configuration)'=='Debug-JIT'">
-    </ItemGroup>
-
-    <ItemGroup Condition="'$(Configuration)'=='Release-JIT'">
-    </ItemGroup>
-
     <!-- Shared Project References -->
     <ItemGroup>
-        <ProjectReference Include="..\..\Common\DTA.Extensions\DTA.Extensions.csproj" />
+        <ProjectReference Include="..\..\Common\DTA.Extensions.Common\DTA.Extensions.Common.csproj" />
+        <ProjectReference Include="..\..\Common\DTA.Extensions.Telemetry\DTA.Extensions.Telemetry.csproj" />
         <ProjectReference Include="..\..\Common\DTA.Models\DTA.Models.csproj" />
+    </ItemGroup>
+    
+    <!-- Debug-JIT Project References -->
+    <ItemGroup Condition="'$(Configuration)'=='Debug-JIT'">
+        <ProjectReference Include="..\..\Common\DTA.Extensions.Swagger\DTA.Extensions.Swagger.csproj" />
     </ItemGroup>
 </Project>

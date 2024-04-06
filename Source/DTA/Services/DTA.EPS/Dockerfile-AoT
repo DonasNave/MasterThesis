@@ -11,9 +11,8 @@ EOF
 WORKDIR /src
 
 COPY ["Services/DTA.EPS/DTA.EPS.csproj", "Services/DTA.EPS/"]
-COPY ["Common/DTA.Extensions/DTA.Extensions.csproj", "Common/DTA.Extensions/"]
-COPY ["Common/DTA.Models/DTA.Models.csproj", "Common/DTA.Models/"]
-RUN dotnet restore "Services/DTA.SRS/DTA.SRS.csproj" -r linux-$TARGETARCH
+COPY ["Common/", "Common/"]
+RUN dotnet restore "Services/DTA.EPS/DTA.EPS.csproj" -r linux-$TARGETARCH
 
 # copy and publish app and libraries
 COPY . .

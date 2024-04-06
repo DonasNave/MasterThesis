@@ -8,7 +8,7 @@
     <RootNamespace>DTA.SRS</RootNamespace>
     <Configurations>Release-JIT;Debug-JIT;Release-AOT;Debug-AOT</Configurations>
     <Platforms>AnyCPU</Platforms>
-    <AssemblyName>DTA.SRS</AssemblyName>
+    <AssemblyName>SRS</AssemblyName>
     <AssemblyVersion>$(Version)</AssemblyVersion>
     <RuntimeIdentifiers>linux-arm64;win-x64;osx-x64</RuntimeIdentifiers>
   </PropertyGroup>
@@ -59,12 +59,14 @@
 
   <!-- Shared ProjectReferences -->
   <ItemGroup>
-    <ProjectReference Include="..\..\Common\DTA.Extensions\DTA.Extensions.csproj" />
+    <ProjectReference Include="..\..\Common\DTA.Extensions.Common\DTA.Extensions.Common.csproj" />
+    <ProjectReference Include="..\..\Common\DTA.Extensions.Telemetry\DTA.Extensions.Telemetry.csproj" />
     <ProjectReference Include="..\..\Common\DTA.Models\DTA.Models.csproj" />
   </ItemGroup>
   
   <!-- JIT ProjectReferences -->
-  <ItemGroup Condition="'$(Configuration)'=='AOT'">
+  <ItemGroup Condition="'$(Configuration)'=='Debug-JIT'">
+    <ProjectReference Include="..\..\Common\DTA.Extensions.Swagger\DTA.Extensions.Swagger.csproj" />
   </ItemGroup>
 
   <!-- AOT ProjectReferences -->

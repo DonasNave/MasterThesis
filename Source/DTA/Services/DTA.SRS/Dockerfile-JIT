@@ -6,8 +6,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
 COPY ["Services/DTA.SRS/DTA.SRS.csproj", "Services/DTA.SRS/"]
-COPY ["Common/DTA.Extensions/DTA.Extensions.csproj", "Common/DTA.Extensions/"]
-COPY ["Common/DTA.Models/DTA.Models.csproj", "Common/DTA.Models/"]
+COPY ["Common/", "Common/"]
 RUN dotnet restore "Services/DTA.SRS/DTA.SRS.csproj"
 
 COPY . .
