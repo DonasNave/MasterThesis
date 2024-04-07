@@ -10,7 +10,7 @@ public static class ProgramExtensions
     public static void InitializeMetrics(this WebApplication _, string meterName, string serviceVersion)
     {
         var meter = new Meter(meterName, serviceVersion);
-        AppMonitor.SignalCounter = meter.CreateCounter<long>("signal_api_calls_counter");
+        AppMonitor.SignalCounter = meter.CreateCounter<long>("signals_rest_calls_counter");
     }
     
     public static void RegisterServices(this IServiceCollection serviceCollection)

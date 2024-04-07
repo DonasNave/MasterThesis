@@ -20,35 +20,37 @@ public static class OtelExtensions
         // Options
         TelemetryConfiguration config = new();
         optionsAction(config);
-        
+
+        // Create service Resource Builder
+        var resourceBuilder = ResourceBuilder
+            .CreateDefault()
+            .AddService(
+                serviceName: config.ServiceName,
+                serviceVersion: config.ServiceVersion);
+
         // Logging
         builder.Logging.AddOpenTelemetry(options =>
         {
-            options.SetResourceBuilder(
-                ResourceBuilder
-                    .CreateDefault()
-                    .AddService(
-                        serviceName: config.ServiceName,
-                        serviceVersion: config.ServiceVersion,
-                        serviceInstanceId: Environment.MachineName));
+            options.SetResourceBuilder(resourceBuilder);
 
             options.IncludeScopes = true;
             options.IncludeFormattedMessage = true;
             options.ParseStateValues = true;
         });
-        
+
         // Metrics
         string[] defaultMeters =
             ["System.Runtime", "System.Net.Http", "Microsoft.AspNetCore.Hosting", "Microsoft.AspNetCore.Server.Kestrel", "Npgsql"];
 
         if (config.MeterNames is { Length: > 0 } meterNames)
             defaultMeters = meterNames.Union(defaultMeters).ToArray();
-        
+
         builder.Services.AddOpenTelemetry()
             // Metrics
             .WithMetrics(options =>
             {
                 options
+                    .SetResourceBuilder(resourceBuilder)
                     .AddRuntimeInstrumentation()
                     .AddAspNetCoreInstrumentation()
                     .AddHttpClientInstrumentation()
@@ -59,15 +61,17 @@ public static class OtelExtensions
             {
                 if (builder.Environment.IsDevelopment())
                     options.SetSampler<AlwaysOnSampler>();
-                
+
                 options
+                    .SetResourceBuilder(resourceBuilder)
                     .AddAspNetCoreInstrumentation()
                     .AddHttpClientInstrumentation()
                     .AddNpgsql();
             });
 
         // Exporters
-        builder.Services.Configure<OpenTelemetryLoggerOptions>(logging => logging.AddOtlpExporter(options => {
+        builder.Services.Configure<OpenTelemetryLoggerOptions>(logging => logging.AddOtlpExporter(options =>
+        {
             options.Endpoint = config.OpenTelemetrySettings.ExporterEndpoint;
             options.Protocol = OtlpExportProtocol.Grpc;
         }));
@@ -75,7 +79,7 @@ public static class OtelExtensions
         {
             options.Endpoint = config.OpenTelemetrySettings.ExporterEndpoint;
             options.Protocol = OtlpExportProtocol.Grpc;
-        
+
         }));
         builder.Services.ConfigureOpenTelemetryMeterProvider(metrics => metrics.AddOtlpExporter(options =>
         {
@@ -83,16 +87,16 @@ public static class OtelExtensions
             options.Protocol = OtlpExportProtocol.Grpc;
         }));
     }
-    
+
     public static void MapDefaultEndpoints(this WebApplication app)
     {
         app.MapHealthChecks("/health");
-        
+
         app.MapHealthChecks("/alive", new HealthCheckOptions
         {
             Predicate = registration => registration.Tags.Contains("live"),
         });
-        
+
         app.MapHealthChecks("/ready", new HealthCheckOptions
         {
             Predicate = registration => registration.Tags.Contains("ready"),

@@ -11,8 +11,8 @@ public static class ProgramExtensions
     public static void InitializeMetrics(this WebApplication _, string meterName, string serviceVersion)
     {
         var meter = new Meter(meterName, serviceVersion);
-        AppMonitor.DownloadCounter = meter.CreateCounter<long>("download_api_calls_counter");
-        AppMonitor.UploadsCounter = meter.CreateCounter<long>("upload_api_calls_counter");
+        AppMonitor.DownloadCounter = meter.CreateCounter<long>("file_download_rest_calls_counter");
+        AppMonitor.UploadsCounter = meter.CreateCounter<long>("file_upload_rest_calls_counter");
         AppMonitor.GetFileProceduresCounter = meter.CreateCounter<long>("get_file_procedure_calls_counter");
     }
     

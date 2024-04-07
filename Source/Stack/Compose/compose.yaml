@@ -1,7 +1,8 @@
 version: '3.7'
 
 volumes:
-  grafana_storage:
+  grafana_data:
+  otel_data:
   prometheus_data:
   postgres:
 
@@ -157,7 +158,7 @@ services:
     container_name: rabbitmq
     ports:
         - 15672:15672
-    #     - 5672:5672
+        - 5672:5672
     healthcheck:
       test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
       interval: 30s
@@ -173,7 +174,12 @@ services:
     #   dockerfile: ./Dockerfile
     image: donasnave/dta-lgtm:latest
     container_name: otel-lgtm
+    ports:
+        - 4317:4317
     volumes:
+      - otel_data:/otel-lgtm/data
+      - grafana_data:/otel-lgtm/grafana-v10.4.1
+      - prometheus_data:/otel-lgtm/prometheus-2.51.0
       - ./configuration/grafana-provisioning/dashboards:/etc/grafana/provisioning/dashboards
     environment:
       - GF_SERVER_ROOT_URL=http://localhost/grafana/

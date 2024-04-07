@@ -1,4 +1,3 @@
-using System.Text;
 using DTA.BPS.Monitoring;
 using DTA.BPS.Services.Interfaces;
 using DTA.Models.Options;
@@ -43,7 +42,7 @@ public class RabbitMqConsumerService : IDisposable
     private void OnMessageReceived(object? model, BasicDeliverEventArgs ea)
     {
         var body = ea.Body.ToArray();
-        var fileId = int.Parse(Encoding.UTF8.GetString(body));
+        var fileId = BitConverter.ToInt32(body);
         
         _processingService.GetDataAndProcess(fileId);
         AppMonitor.BatchProcessCounter.Add(1);

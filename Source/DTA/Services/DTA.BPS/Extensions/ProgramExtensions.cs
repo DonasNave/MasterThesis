@@ -11,7 +11,7 @@ public static class ProgramExtensions
     public static void InitializeMetrics(this WebApplication _, string meterName, string serviceVersion)
     {
         var meter = new Meter(meterName, serviceVersion);
-        AppMonitor.BatchProcessCounter = meter.CreateCounter<long>("batch_process_counter");
+        AppMonitor.BatchProcessCounter = meter.CreateCounter<long>("batch_event_consumed_counter");
     }
 
     public static void RegisterServices(this IServiceCollection serviceCollection)

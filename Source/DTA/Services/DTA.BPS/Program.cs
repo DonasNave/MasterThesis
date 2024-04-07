@@ -1,3 +1,4 @@
+using DTA.BPS.Api.Rabbit;
 using DTA.BPS.Extensions;
 using DTA.Extensions.Common;
 using DTA.Extensions.Telemetry;
@@ -54,6 +55,8 @@ var app = builder.Build();
 #if DEBUG_JIT
 app.SetupSwagger();
 #endif
+
+_ = app.Services.GetRequiredService<RabbitMqConsumerService>();
 
 // Initialize metrics
 app.InitializeMetrics(meterName, serviceVersion);
