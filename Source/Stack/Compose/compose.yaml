@@ -10,6 +10,11 @@ networks:
   stack-network:
   
 services:
+
+################
+# JIT Services #
+################
+
   srs-jit-service:
     image: dta-srs:jit-latest
     container_name: srs-jit-service
@@ -50,7 +55,7 @@ services:
       - "DTA_JIT_FUS_Logging__LogLevel__Default=Debug"
       - "DTA_JIT_FUS_Logging__LogLevel__OpenTelemetry=Debug"
       - "DTA_JIT_FUS_OpenTelemetrySettings__ExporterEndpoint=http://otel-lgtm:4317"
-      - "DTA_JIT_FUS_ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=FUS;Username=postgres;Password=postgres;"
+      - "DTA_JIT_FUS_ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=FUS-JIT;Username=postgres;Password=postgres;"
     ports:
       - "12002:8080"
       - "12102:8081"
@@ -79,6 +84,7 @@ services:
       - "DTA_JIT_EPS_Logging__LogLevel__OpenTelemetry=Debug"
       - "DTA_JIT_EPS_OpenTelemetrySettings__ExporterEndpoint=http://otel-lgtm:4317"
       - "DTA_JIT_EPS_RabbitMQ__HostName=rabbitmq"
+      - "DTA_AOT_EPS_RabbitMQ__QueueGroup=jit"
     ports:
       - "12003:8080"
     depends_on:
@@ -106,6 +112,7 @@ services:
       - "DTA_JIT_BPS_Logging__LogLevel__OpenTelemetry=Debug"
       - "DTA_JIT_BPS_OpenTelemetrySettings__ExporterEndpoint=http://otel-lgtm:4317"
       - "DTA_JIT_BPS_RabbitMQ__HostName=rabbitmq"
+      - "DTA_AOT_BPS_RabbitMQ__QueueGroup=jit"
       - "DTA_JIT_BPS_ServiceConnections__FusHttp2=http://fus-jit-service:8081"
     ports:
       - "12004:8080"
@@ -119,39 +126,119 @@ services:
     networks:
       - stack-network
 
-  # fus-aot-service:
-  #   image: dta-fus:aot-latest
-  #   container_name: fus-aot-service
-  #   build:
-  #     context: ../../DTA
-  #     dockerfile: Services/DTA.FUS/Dockerfile-AOT
-  #   ports:
-  #     - "12002:8080"
-  #   environment:
-  #     - "DTA_AOT_FUS_Logging__LogLevel__Default=Debug"
-  #     - "DTA_AOT_FUS_Logging__LogLevel__OpenTelemetry=Debug"
-  #     - "DTA_AOT_FUS_OpenTelemetrySettings__ExporterEndpoint=http://otel-lgtm:4317"
-  #     - "DTA_AOT_FUS_ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=FUS;Username=postgres;Password=postgres;"
-  #   depends_on:
-  #     postgres:
-  #       condition: service_healthy
-  #   networks:
-  #     - stack-network
+################
+# AOT Services #
+################
 
-  # srs-aot-service:
-  #   image: dta-srs:aot-latest
-  #   container_name: srs-aot-service
-  #   build:
-  #     context: ../../DTA
-  #     dockerfile: Services/DTA.SRS/Dockerfile-AOT
-  #   ports:
-  #     - "12001:8080"
-  #   environment:
-  #     - "DTA_AOT_SRS_Logging__LogLevel__Default=Debug"
-  #     - "DTA_AOT_SRS_Logging__LogLevel__OpenTelemetry=Debug"
-  #     - "DTA_AOT_SRS_OpenTelemetrySettings__ExporterEndpoint=http://otel-lgtm:4317"
-  #   networks:
-  #     - stack-network
+  srs-aot-service:
+    image: dta-srs:aot-latest
+    container_name: srs-aot-service
+    build:
+      context: ../../DTA
+      dockerfile: Services/DTA.SRS/Dockerfile-AOT
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "--quiet", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    ports:
+      - "13001:8080"
+    environment:
+      - "DTA_AOT_SRS_Logging__LogLevel__Default=Debug"
+      - "DTA_AOT_SRS_Logging__LogLevel__OpenTelemetry=Debug"
+      - "DTA_AOT_SRS_OpenTelemetrySettings__ExporterEndpoint=http://otel-lgtm:4317"
+    networks:
+      - stack-network
+
+  fus-aot-service:
+    image: dta-fus:aot-latest
+    container_name: fus-aot-service
+    build:
+      context: ../../DTA
+      dockerfile: Services/DTA.FUS/Dockerfile-AOT
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "--quiet", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    ports:
+      - "13002:8080"
+      - "13102:8081"
+    environment:
+      - "DTA_AOT_FUS_Logging__LogLevel__Default=Debug"
+      - "DTA_AOT_FUS_Logging__LogLevel__OpenTelemetry=Debug"
+      - "DTA_AOT_FUS_OpenTelemetrySettings__ExporterEndpoint=http://otel-lgtm:4317"
+      - "DTA_AOT_FUS_ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=FUS-AOT;Username=postgres;Password=postgres;"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - stack-network
+
+  eps-aot-service:
+    image: dta-eps:aot-latest
+    container_name: eps-aot-service
+    build:
+      context: ../../DTA
+      dockerfile: Services/DTA.EPS/Dockerfile-AOT
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "--quiet", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    environment:
+      - "DTA_AOT_EPS_Logging__LogLevel__Default=Debug"
+      - "DTA_AOT_EPS_Logging__LogLevel__OpenTelemetry=Debug"
+      - "DTA_AOT_EPS_OpenTelemetrySettings__ExporterEndpoint=http://otel-lgtm:4317"
+      - "DTA_AOT_EPS_RabbitMQ__HostName=rabbitmq"
+      - "DTA_AOT_EPS_RabbitMQ__QueueGroup=aot"
+    ports:
+      - "13003:8080"
+    depends_on:
+      otel-lgtm:
+        condition: service_started
+      rabbitmq:
+        condition: service_healthy
+    networks:
+      - stack-network
+
+  bps-aot-service:
+    image: dta-bps:aot-latest
+    container_name: bps-aot-service
+    build:
+      context: ../../DTA
+      dockerfile: Services/DTA.BPS/Dockerfile-AOT
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "--quiet", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    environment:
+      - "DTA_AOT_BPS_Logging__LogLevel__Default=Debug"
+      - "DTA_AOT_BPS_Logging__LogLevel__OpenTelemetry=Debug"
+      - "DTA_AOT_BPS_OpenTelemetrySettings__ExporterEndpoint=http://otel-lgtm:4317"
+      - "DTA_AOT_BPS_RabbitMQ__HostName=rabbitmq"
+      - "DTA_AOT_BPS_RabbitMQ__QueueGroup=aot"
+      - "DTA_AOT_BPS_ServiceConnections__FusHttp2=http://fus-aot-service:8081"
+    ports:
+      - "13004:8080"
+    depends_on:
+      otel-lgtm:
+        condition: service_started
+      rabbitmq:
+        condition: service_healthy
+      fus-jit-service:
+        condition: service_healthy
+    networks:
+      - stack-network
+
+##################
+# Infrastructure #
+##################
 
   rabbitmq:
     image: rabbitmq:3-management-alpine

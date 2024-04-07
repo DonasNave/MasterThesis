@@ -11,11 +11,13 @@ public class RabbitMqConsumerService : IDisposable
 {
     private readonly RabbitMqOptions _options;
     private readonly IProcessingService _processingService;
+    private readonly string _queueName;
 
     public RabbitMqConsumerService(IOptions<RabbitMqOptions> options, IProcessingService processingService)
     {
         _options = options.Value;
         _processingService = processingService;
+        _queueName = $"{options.Value.QueueGroup}_simulated";
         InitializeConsumer();
     }
 
@@ -25,7 +27,7 @@ public class RabbitMqConsumerService : IDisposable
         var connection = factory.CreateConnection();
         var channel = connection.CreateModel();
 
-        channel.QueueDeclare(queue: "simulated",
+        channel.QueueDeclare(queue: _queueName,
             durable: true,
             exclusive: false,
             autoDelete: true,
@@ -34,7 +36,7 @@ public class RabbitMqConsumerService : IDisposable
         var consumer = new EventingBasicConsumer(channel);
         consumer.Received += OnMessageReceived;
 
-        channel.BasicConsume(queue: "simulated",
+        channel.BasicConsume(queue: _queueName,
             autoAck: true,
             consumer: consumer);
     }
@@ -43,7 +45,7 @@ public class RabbitMqConsumerService : IDisposable
     {
         var body = ea.Body.ToArray();
         var fileId = BitConverter.ToInt32(body);
-        
+
         _processingService.GetDataAndProcess(fileId);
         AppMonitor.BatchProcessCounter.Add(1);
     }

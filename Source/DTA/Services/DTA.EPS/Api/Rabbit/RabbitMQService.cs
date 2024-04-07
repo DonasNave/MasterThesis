@@ -9,14 +9,17 @@ public class RabbitMqService : IDisposable, IRabbitMqService
 {
     private readonly IConnection _connection;
     private readonly IModel _channel;
+    private readonly string _queueName;
 
     public RabbitMqService(IOptions<RabbitMqOptions> options)
     {
         var factory = new ConnectionFactory { HostName = options.Value.HostName };
         _connection = factory.CreateConnection();
         _channel = _connection.CreateModel();
+        
+        _queueName = $"{options.Value.QueueGroup}_simulated";
 
-        _channel.QueueDeclare(queue: "simulated",
+        _channel.QueueDeclare(queue: _queueName,
             durable: true,
             exclusive: false,
             autoDelete: true,
@@ -28,7 +31,7 @@ public class RabbitMqService : IDisposable, IRabbitMqService
         var body = BitConverter.GetBytes(id);
 
         _channel.BasicPublish(exchange: string.Empty,
-            routingKey: "simulated",
+            routingKey: _queueName,
             basicProperties: null,
             body: body);
     }
