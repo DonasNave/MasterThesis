@@ -30,7 +30,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.WithServiceNames(out var serviceName, out var meterName);
 var serviceVersion = typeof(Program).Assembly.GetName().Version?.ToString() ?? "unknown";
 
-builder.Configuration.AddEnvironmentVariables(prefix: serviceName);
+// Add Environment variables
+builder.Configuration.AddEnvironmentVariables(prefix: $"{serviceName}_");
 
 // Get application settings
 var telemetrySettings = builder.Configuration.GetSection(nameof(OpenTelemetrySettings))

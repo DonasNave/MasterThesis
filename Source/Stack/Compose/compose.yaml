@@ -15,6 +15,12 @@ services:
     build:
       context: ../../DTA
       dockerfile: Services/DTA.SRS/Dockerfile-JIT
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "--quiet", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
     environment:
       - "DTA_JIT_SRS_Logging__LogLevel__Default=Debug"
       - "DTA_JIT_SRS_Logging__LogLevel__OpenTelemetry=Debug"
@@ -22,40 +28,63 @@ services:
     ports:
       - "12001:8080"
     depends_on:
-      postgres:
-        condition: service_healthy
+      otel-lgtm:
+        condition: service_started
     networks:
       - stack-network
 
   fus-jit-service:
     image: dta-fus:jit-latest
-    container_name: fus-service
+    container_name: fus-jit-service
     build:
       context: ../../DTA
       dockerfile: Services/DTA.FUS/Dockerfile-JIT
-    ports:
-      - "12002:8080"
-      - "12102:8081"
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "--quiet", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
     environment:
       - "DTA_JIT_FUS_Logging__LogLevel__Default=Debug"
       - "DTA_JIT_FUS_Logging__LogLevel__OpenTelemetry=Debug"
       - "DTA_JIT_FUS_OpenTelemetrySettings__ExporterEndpoint=http://otel-lgtm:4317"
+      - "DTA_JIT_FUS_ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=FUS;Username=postgres;Password=postgres;"
+    ports:
+      - "12002:8080"
+      - "12102:8081"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      otel-lgtm:
+        condition: service_started
     networks:
       - stack-network
 
   eps-jit-service:
     image: dta-eps:jit-latest
-    container_name: eps-service
+    container_name: eps-jit-service
     build:
       context: ../../DTA
       dockerfile: Services/DTA.EPS/Dockerfile-JIT
-    ports:
-      - "12003:8080"
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "--quiet", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
     environment:
       - "DTA_JIT_EPS_Logging__LogLevel__Default=Debug"
       - "DTA_JIT_EPS_Logging__LogLevel__OpenTelemetry=Debug"
       - "DTA_JIT_EPS_OpenTelemetrySettings__ExporterEndpoint=http://otel-lgtm:4317"
       - "DTA_JIT_EPS_RabbitMQ__HostName=rabbitmq"
+    ports:
+      - "12003:8080"
+    depends_on:
+      otel-lgtm:
+        condition: service_started
+      rabbitmq:
+        condition: service_healthy
     networks:
       - stack-network
 
@@ -65,6 +94,12 @@ services:
     build:
       context: ../../DTA
       dockerfile: Services/DTA.BPS/Dockerfile-JIT
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "--quiet", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
     environment:
       - "DTA_JIT_BPS_Logging__LogLevel__Default=Debug"
       - "DTA_JIT_BPS_Logging__LogLevel__OpenTelemetry=Debug"
@@ -74,7 +109,11 @@ services:
     ports:
       - "12004:8080"
     depends_on:
-      postgres:
+      otel-lgtm:
+        condition: service_started
+      rabbitmq:
+        condition: service_healthy
+      fus-jit-service:
         condition: service_healthy
     networks:
       - stack-network
@@ -117,8 +156,14 @@ services:
     image: rabbitmq:3-management-alpine
     container_name: rabbitmq
     ports:
-        - 5672:5672
         - 15672:15672
+    #     - 5672:5672
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
     networks:
       - stack-network
 
@@ -127,6 +172,7 @@ services:
     #   context: ../../Tools/LGTM
     #   dockerfile: ./Dockerfile
     image: donasnave/dta-lgtm:latest
+    container_name: otel-lgtm
     volumes:
       - ./configuration/grafana-provisioning/dashboards:/etc/grafana/provisioning/dashboards
     environment:

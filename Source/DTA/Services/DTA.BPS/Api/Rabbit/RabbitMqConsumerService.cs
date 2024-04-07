@@ -27,9 +27,9 @@ public class RabbitMqConsumerService : IDisposable
         var channel = connection.CreateModel();
 
         channel.QueueDeclare(queue: "simulated",
-            durable: false,
+            durable: true,
             exclusive: false,
-            autoDelete: false,
+            autoDelete: true,
             arguments: null);
 
         var consumer = new EventingBasicConsumer(channel);

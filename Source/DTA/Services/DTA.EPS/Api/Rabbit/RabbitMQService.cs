@@ -17,9 +17,9 @@ public class RabbitMqService : IDisposable, IRabbitMqService
         _channel = _connection.CreateModel();
 
         _channel.QueueDeclare(queue: "simulated",
-            durable: false,
+            durable: true,
             exclusive: false,
-            autoDelete: false,
+            autoDelete: true,
             arguments: null);
     }
 

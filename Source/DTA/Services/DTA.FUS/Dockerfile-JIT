@@ -20,4 +20,4 @@ RUN dotnet publish "DTA.FUS.csproj" -c Release-JIT -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "DTA.FUS.dll"]
+ENTRYPOINT ["dotnet", "FUS.dll"]

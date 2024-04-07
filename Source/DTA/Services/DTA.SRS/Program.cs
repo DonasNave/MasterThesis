@@ -1,11 +1,11 @@
 using DTA.Extensions.Common;
 using DTA.Extensions.Telemetry;
+using DTA.SRS.Api.Rest;
 using DTA.SRS.Extensions;
 
 #if AOT
 using DTA.Models.Extensions;
 using DTA.Models.JsonSerializers;
-using DTA.SRS.Api.Rest;
 
 #elif DEBUG_JIT
 using DTA.Extensions.Swagger;
@@ -22,7 +22,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.WithServiceNames(out var serviceName, out var meterName);
 var serviceVersion = typeof(Program).Assembly.GetName().Version?.ToString() ?? "unknown";
 
-builder.Configuration.AddEnvironmentVariables(prefix: serviceName);
+// Add Environment variables
+builder.Configuration.AddEnvironmentVariables(prefix: $"{serviceName}_");
 
 // Service settings
 var telemetrySettings =

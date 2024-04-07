@@ -19,4 +19,4 @@ RUN dotnet publish "DTA.SRS.csproj" -c Release-JIT -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "DTA.SRS.dll"]
+ENTRYPOINT ["dotnet", "SRS.dll"]
