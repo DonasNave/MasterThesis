@@ -18,6 +18,10 @@ var builder = WebApplication.CreateSlimBuilder(args);
 var builder = WebApplication.CreateBuilder(args);
 #endif
 
+// Setup logging to console
+builder.Logging.AddConsole();
+builder.Logging.SetMinimumLevel(LogLevel.Debug);
+
 // Set service names
 builder.WithServiceNames(out var serviceName, out var meterName);
 var serviceVersion = typeof(Program).Assembly.GetName().Version?.ToString() ?? "unknown";
@@ -25,9 +29,17 @@ var serviceVersion = typeof(Program).Assembly.GetName().Version?.ToString() ?? "
 // Add Environment variables
 builder.Configuration.AddEnvironmentVariables(prefix: $"{serviceName}_");
 
-// Service settings
+// Telemetry settings
+#if AOT
+var telemetrySettings = new OpenTelemetrySettings()
+{
+    ExporterEndpoint = new Uri(builder.Configuration["OpenTelemetrySettings:ExporterEndpoint"] ?? string.Empty),
+    ExporterProtocol = builder.Configuration["OpenTelemetrySettings:ExporterProtocol"] ?? "grpc"
+};
+#elif JIT
 var telemetrySettings =
     builder.Configuration.GetSection(nameof(OpenTelemetrySettings)).Get<OpenTelemetrySettings>()!;
+#endif
 
 // Setup logging to console
 builder.Logging.AddConsole();
@@ -58,6 +70,15 @@ builder.Services.RegisterContextSerializers([ DtaSignalContext.Default ]);
 
 // Build the app
 var app = builder.Build();
+
+// Log the service settings
+var logger = app.Services.GetRequiredService<ILogger<Program>>();
+
+logger.LogInformation("Starting application");
+logger.LogInformation("Service Name: {ServiceName}", serviceName);
+logger.LogInformation("Service Version: {ServiceVersion}", serviceVersion);
+logger.LogInformation("Telemetry Endpoint: {TelemetrySettingsExporterEndpoint}", telemetrySettings.ExporterEndpoint);
+logger.LogInformation("Telemetry Endpoint Protocol: {TelemetrySettingsExporterProtocol}", telemetrySettings.ExporterProtocol);
 
 // Initialize metrics
 app.InitializeMetrics(meterName, serviceVersion);

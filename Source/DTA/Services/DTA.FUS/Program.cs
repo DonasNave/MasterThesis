@@ -25,24 +25,31 @@ var builder = WebApplication.CreateSlimBuilder(args);
 var builder = WebApplication.CreateBuilder(args);
 #endif
 
-// Set service names
+// Setup logging to console
+builder.Logging.AddConsole();
+builder.Logging.SetMinimumLevel(LogLevel.Debug);
 
+// Set service names
 builder.WithServiceNames(out var serviceName, out var meterName);
 var serviceVersion = typeof(Program).Assembly.GetName().Version?.ToString() ?? "unknown";
 
 // Add Environment variables
 builder.Configuration.AddEnvironmentVariables(prefix: $"{serviceName}_");
 
-// Get application settings
-var telemetrySettings = builder.Configuration.GetSection(nameof(OpenTelemetrySettings))
-                                             .Get<OpenTelemetrySettings>()!;
+// Telemetry settings
+#if AOT
+var telemetrySettings = new OpenTelemetrySettings()
+{
+    ExporterEndpoint = new Uri(builder.Configuration["OpenTelemetrySettings:ExporterEndpoint"] ?? string.Empty),
+    ExporterProtocol = builder.Configuration["OpenTelemetrySettings:ExporterProtocol"] ?? "grpc"
+};
+#elif JIT
+var telemetrySettings =
+    builder.Configuration.GetSection(nameof(OpenTelemetrySettings)).Get<OpenTelemetrySettings>()!;
+#endif
 
 var dbConnectionString = builder.Configuration.GetConnectionString("DefaultConnection")
                          ?? throw new InvalidOperationException("Database connection string is missing");
-
-// Setup logging to console
-builder.Logging.AddConsole();
-builder.Logging.SetMinimumLevel(LogLevel.Debug);
 
 // Add OpenTelemetry ...
 builder.SetupOpenTelemetry(options =>
@@ -82,6 +89,16 @@ builder.Services.AddSwaggerEndpoints();
 
 // Build the app
 var app = builder.Build();
+
+// Log the service settings
+var logger = app.Services.GetRequiredService<ILogger<Program>>();
+
+logger.LogInformation("Starting application");
+logger.LogInformation("Service Name: {ServiceName}", serviceName);
+logger.LogInformation("Service Version: {ServiceVersion}", serviceVersion);
+logger.LogInformation("Telemetry Endpoint: {TelemetrySettingsExporterEndpoint}", telemetrySettings.ExporterEndpoint);
+logger.LogInformation("Telemetry Endpoint Protocol: {TelemetrySettingsExporterProtocol}", telemetrySettings.ExporterProtocol);
+
 
 // Initialize metrics
 app.InitializeMetrics(meterName, serviceVersion);

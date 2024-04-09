@@ -136,12 +136,6 @@ services:
     build:
       context: ../../DTA
       dockerfile: Services/DTA.SRS/Dockerfile-AOT
-    healthcheck:
-      test: ["CMD", "wget", "--spider", "--quiet", "http://localhost:8080/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 10s
     ports:
       - "13001:8080"
     environment:
@@ -157,23 +151,16 @@ services:
     build:
       context: ../../DTA
       dockerfile: Services/DTA.FUS/Dockerfile-AOT
-    healthcheck:
-      test: ["CMD", "wget", "--spider", "--quiet", "http://localhost:8080/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 10s
     ports:
       - "13002:8080"
       - "13102:8081"
-    environment:
-      - "DTA_AOT_FUS_Logging__LogLevel__Default=Debug"
-      - "DTA_AOT_FUS_Logging__LogLevel__OpenTelemetry=Debug"
-      - "DTA_AOT_FUS_OpenTelemetrySettings__ExporterEndpoint=http://otel-lgtm:4317"
-      - "DTA_AOT_FUS_ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=FUS-AOT;Username=postgres;Password=postgres;"
     depends_on:
       postgres:
         condition: service_healthy
+    environment:
+      - "DTA_AOT_SRS_Logging__LogLevel__Default=Debug"
+      - "DTA_AOT_SRS_Logging__LogLevel__OpenTelemetry=Debug"
+      - "DTA_AOT_SRS_ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=FUS-AOT;Username=postgres;Password=postgres;"
     networks:
       - stack-network
 
@@ -183,12 +170,6 @@ services:
     build:
       context: ../../DTA
       dockerfile: Services/DTA.EPS/Dockerfile-AOT
-    healthcheck:
-      test: ["CMD", "wget", "--spider", "--quiet", "http://localhost:8080/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 10s
     environment:
       - "DTA_AOT_EPS_Logging__LogLevel__Default=Debug"
       - "DTA_AOT_EPS_Logging__LogLevel__OpenTelemetry=Debug"
@@ -231,7 +212,7 @@ services:
         condition: service_started
       rabbitmq:
         condition: service_healthy
-      fus-jit-service:
+      fus-aot-service:
         condition: service_healthy
     networks:
       - stack-network

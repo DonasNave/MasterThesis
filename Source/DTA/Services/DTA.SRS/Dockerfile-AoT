@@ -19,7 +19,14 @@ COPY . .
 WORKDIR "/src/Services/DTA.SRS"
 
 FROM build AS publish
-RUN dotnet publish "DTA.SRS.csproj" -c Release-AOT -o /app/publish
+RUN dotnet publish "DTA.SRS.csproj" -c Release-AOT -o /app/publish -r linux-$TARGETARCH \
+    -p:DebugType=None \
+    -p:PublishReadyToRun=true \
+    -p:ExcludeFilesFromPublish=**/appsettings.Development.json
+
+# Clean up
+RUN find /app/publish -name '*.pdb' -exec rm -f {} + \
+    && rm -f /app/publish/appsettings.Development.json
 
 FROM base AS final
 WORKDIR /app

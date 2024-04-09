@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Npgsql;
 using OpenTelemetry.Exporter;
 using OpenTelemetry.Logs;
 using OpenTelemetry.Metrics;
@@ -20,6 +19,13 @@ public static class OtelExtensions
         // Options
         TelemetryConfiguration config = new();
         optionsAction(config);
+
+        var exportProtocol = config.OpenTelemetrySettings.ExporterProtocol switch
+        {
+            "http" => OtlpExportProtocol.HttpProtobuf,
+            "grpc" => OtlpExportProtocol.Grpc,
+            _ => throw new ArgumentException("Invalid exporter protocol")
+        };
 
         // Create service Resource Builder
         var resourceBuilder = ResourceBuilder
@@ -65,26 +71,25 @@ public static class OtelExtensions
                 options
                     .SetResourceBuilder(resourceBuilder)
                     .AddAspNetCoreInstrumentation()
-                    .AddHttpClientInstrumentation()
-                    .AddNpgsql();
+                    .AddHttpClientInstrumentation();
             });
 
         // Exporters
         builder.Services.Configure<OpenTelemetryLoggerOptions>(logging => logging.AddOtlpExporter(options =>
         {
             options.Endpoint = config.OpenTelemetrySettings.ExporterEndpoint;
-            options.Protocol = OtlpExportProtocol.Grpc;
+            options.Protocol = exportProtocol;
         }));
         builder.Services.ConfigureOpenTelemetryTracerProvider(tracing => tracing.AddOtlpExporter(options =>
         {
             options.Endpoint = config.OpenTelemetrySettings.ExporterEndpoint;
-            options.Protocol = OtlpExportProtocol.Grpc;
+            options.Protocol = exportProtocol;
 
         }));
         builder.Services.ConfigureOpenTelemetryMeterProvider(metrics => metrics.AddOtlpExporter(options =>
         {
             options.Endpoint = config.OpenTelemetrySettings.ExporterEndpoint;
-            options.Protocol = OtlpExportProtocol.Grpc;
+            options.Protocol = exportProtocol;
         }));
     }
 
