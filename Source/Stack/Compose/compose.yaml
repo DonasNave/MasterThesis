@@ -1,13 +1,15 @@
-version: '3.7'
+version: '3.9'
 
 volumes:
   grafana_data:
   otel_data:
   prometheus_data:
   postgres:
+  influxdb:
 
 networks:
   stack-network:
+    driver: bridge
   
 services:
 
@@ -237,10 +239,10 @@ services:
       - stack-network
 
   otel-lgtm:
-    # build:
-    #   context: ../../Tools/LGTM
-    #   dockerfile: ./Dockerfile
-    image: donasnave/dta-lgtm:latest
+    build:
+      context: ../../Tools/LGTM
+      dockerfile: ./Dockerfile
+    #image: donasnave/dta-lgtm:latest
     container_name: otel-lgtm
     ports:
         - 4317:4317
@@ -248,11 +250,13 @@ services:
       - otel_data:/otel-lgtm/data
       - grafana_data:/otel-lgtm/grafana-v10.4.1
       - prometheus_data:/otel-lgtm/prometheus-2.51.0
-      - ./configuration/grafana-provisioning/dashboards:/etc/grafana/provisioning/dashboards
     environment:
       - GF_SERVER_ROOT_URL=http://localhost/grafana/
       - GF_AUTH_ANONYMOUS_ENABLED=true
     restart: unless-stopped
+    depends_on:
+      influxdb:
+        condition: service_started
     networks:
       - stack-network
 
@@ -275,6 +279,21 @@ services:
     networks:
       - stack-network
 
+  influxdb:
+    image: influxdb:1.8.10
+    container_name: influxdb
+    ports:
+      - "8086:8086"
+    environment:
+      INFLUXDB_DB: k6
+      INFLUXDB_HTTP_AUTH_ENABLED: 'true'
+      INFLUXDB_ADMIN_USER: dta
+      INFLUXDB_ADMIN_PASSWORD: dtapass
+    volumes:
+      - influxdb:/var/lib/influxdb
+    networks:
+      - stack-network
+
   proxy:
     image: nginx:alpine
     restart: always
@@ -285,4 +304,4 @@ services:
       - ./configuration/proxy/nginx.conf:/etc/nginx/nginx.conf
       - ./configuration/proxy/www:/usr/share/nginx/html/custom 
     networks:
-      stack-network:
+      - stack-network

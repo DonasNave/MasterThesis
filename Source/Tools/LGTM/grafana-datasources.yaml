@@ -56,3 +56,14 @@ datasources:
           matcherRegex: '"traceid":"(\w+)"'
           url: '$${__value.raw}'
           datasourceUid: 'tempo'
+
+  - name: InfluxDB
+    type: influxdb
+    access: proxy
+    user: dta
+    url: http://influxdb:8086
+    jsonData:
+      dbName: k6
+      httpMode: GET
+    secureJsonData:
+      password: dtapass
