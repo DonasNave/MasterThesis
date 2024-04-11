@@ -175,6 +175,141 @@ X
 
 \n{3}{Nastavení uživatelského rozhraní}
 
+
+\n{2}{Tvorba programu v dotnet}
+
+Následující část popisuje obecnou koncepci a strukturu projektu aplikace v dotnet. Součástí je postup pro tvorbu a vydání projektu. Blížší pozornost bude věnována tvorbě nativního AoT projektu.
+
+\n{3}{Struktura aplikačních zdrojů}
+
+Základním strukturovaným prvkem v .NET aplikaci je projektový soubor. Jedná se o XML soubor disponující příponou \emph{.csproj}. V rámci něj dochází ke konfiguraci a deklaraci, jak bude .NET CLI s projektem pracovat. Zároveň jsou zde definováný závislosti na další projekty a knihovny. Mezi základní charakteristiky běžně určené v projektovém souboru patří verze .NET, verze projektu/assembly, seznam závislostí, konfigurace pro buildování, testování a publikaci.
+
+Pro tvorbu složitějších aplikací je možné využít více projektových souborů, které jsou následně propojeny. Tento způsob je využíván především v případě větších aplikací, které jsou rozděleny do více částí. Propojení a vazby mezi více projekty v aplikaci je definované pomocí tzv. solution souboru. Jedná se o kontejnerový soubor s příponou \emph{.sln}, jenž popisuje závislosti mezi projektovými soubory, konfigurace sestavení a nasazení a správu pomocných souborů.
+
+\n{3}{Obecný postup}
+
+\begin{enumerate}
+    \item \textbf{Nastavení vývojového prostředí}: Sestává z instalace sady nástrojů .NET SDK.
+    
+    \item \textbf{Vytvoření projektu}: Pomocí příkazu \texttt{dotnet new} nebo skrze GUI IDE je vytvořen nový projekt a solution soubor. Součástí je výběr typu projektu, jazyka, frameworku a dalších konfiguračních parametrů.
+    
+    \item \textbf{Programování}: Sestává z tvorby kódu aplikace, testování a ladění.
+
+    \item \textbf{Správa závislostí}: Pomocí nástrojů .NET CLI je možno referencovat balíčky a knihovny v rámci projektu.
+    
+    \item \textbf{Kompilace}: Kompilace aplikace probíhá pomocí příkazu \texttt{dotnet build}, který převede vysokoúrovňový kód do IL. V případě AoT dochází k dodatečné kompilace do nativního kódu dle cílové architektury.
+    
+    \item \textbf{Publikování}: Použitím příkazu příkazu \texttt{dotnet publish} dochází k vydání aplikace, tedy specifickému sestavení v konfigurovaném nastavení.
+\end{enumerate}
+
+\n{3}{Tvorba nativního programu}
+
+Pro tvorbu nativního programu v .NET je nutné využít speciálního atributu \emph{PublishAoT} v projektovém souboru. Tento atribut je zodpovědný za konfiguraci projektu pro nativní AoT kompilaci. Při jeho použití je nutné specifikovat cílovou architekturu, pro kterou je nativní kód vytvářen. Po kompilaci kódu do IL dochází k dodatečné kompilaci do nativního kódu, která dodává další konzolový výstup s informacemi o průběhu kompilace.
+
+Vzhledem k tomu, že nativní AoT kompilace je v .NETu stále vývojově nezralá, samotný proces kompilace, tak jako analýza kompilovaného kódu není dostatečně informativní. Za účelem přenesení vysokoúrovňových konceptů a formálních zápisů v C\# je při kompilace prováděno široké spektrum transformací a gerování kódu.
+
+\n{4}{EmitCompilerGeneratedFiles}
+
+Jedná se
+
+\n{4}{Deklarace unmanaged rozhraní}
+
+
+
+\n{4}{Trimming}
+
+\n{3}{Přehled podpory}
+
+\n{4}{Funkcionalita}
+
+Následující přehled představuje rozsah funkcionality implementované v rámci .NET frameworku 8.0, konkrétně APS.NET k datu zvěřejnění práce.
+
+\begin{itemize}
+    \item \textbf{REST minimal API}
+    \item \textbf{gRPC API}
+    \item \textbf{JWT Authentication}
+    \item \textbf{CORS}
+    \item \textbf{HealthChecks}
+    \item \textbf{HttpLogging}
+    \item \textbf{Localization}
+    \item \textbf{OutputCaching}
+    \item \textbf{RateLimiting}
+    \item \textbf{RequestDecompression}
+    \item \textbf{ResponseCaching}
+    \item \textbf{ResponseCompression}
+    \item \textbf{Rewrite}
+    \item \textbf{StaticFiles}
+    \item \textbf{WebSockets}
+\end{itemize}
+
+\n{4}{Cíle kompilace}
+
+.NET poskytuje podporu pro kompilaci zdrojového kódu v režimu AoT pouze pro určité operační systémy:
+
+\begin{itemize}
+    \item \textbf{Windows} - plná podpora
+    \item \textbf{Linux} - plná podpora
+    \item \textbf{macOS} - plná podpora
+    \item \textbf{Android} - částečná podpora
+    \item \textbf{iOS} - částečná podpora
+    \item \textbf{WebAssembly} - částečná podpora
+\end{itemize}
+
+\n{2}{Srovnání vývoje}
+
+\n{3}{JIT}
+
+\n{4}{Výhody}
+
+Mezi hlavní výhody se řadí zprostředkování následujícího:
+
+\begin{itemize}
+    \item  \textbf{Reflexe} - CLR umožňuje využívat reflexi, která umožňuje získat informace o kódu za běhu aplikace. Tímto je umožněno vytvářet aplikace, které jsou schopny měnit své chování za běhu.
+    \item \textbf{Dynamické načítání} - CLR umožňuje dynamicky načítat knihovny za běhu aplikace. Tímto je umožněno vytvářet aplikace, které jsou schopny měnit své chování za běhu.
+    \item \textbf{Větší bezpečnost} - CLR zajišťuje, že aplikace nemůže přistupovat k paměti, která jí nebyla přidělena. Tímto je zajištěna bezpečnost aplikace a zabráněno chybám, které by mohly vést k pádu aplikace.
+    \item \textbf{Správa paměti} - CLR zajišťuje správu paměti pomocí GC. Tímto je zajištěno, že paměť je uvolněna vždy, když ji aplikace již nepotřebuje. Tímto je zabráněno tzv. memory leakům, které by mohly vést k pádu aplikace.
+    \item \textbf{Větší přenositelnost} - CLR zajišťuje, že aplikace je spustitelná na všech operačních systémech, na kterých je dostupné běhové prostředí CLR.
+\end{itemize}
+
+\n{4}{Nevýhody}
+
+Zatímco za nevýhody CLR se dá považovat:
+
+\begin{itemize}
+    \item  \textbf{Výkonnost} - I když určité optimalizace jsou prováděny pro konkrétní systém a architekturu, výkon CLR je nižší než výkon nativního kódu. Dalším výkonnostním měřítkem je rychlost startu aplikace, která je pro CLR vyšší než v případě nativního kódu.
+    \item \textbf{Operační paměť} - CLR využívá více operační paměti, jak pro aplikaci, tak i pro běhové prostředí.
+    \item \textbf{Velikost aplikace} - Přítomnost CLR nehraje zásádní roli v případě monolitických aplikací, ale v případě mikroslužeb je nutné CLR přidat ke každé službě. Tímto se zvyšuje velikost jedné aplikační instance.
+\end{itemize}
+
+\n{3}{AoT}
+
+\n{4}{Výhody}
+
+Mezi hlavní výhody se řadí zprostředkování následujícího:
+
+\begin{itemize}
+    \item  \textbf{Výkonnost} - CLR umožňuje využívat reflexi, která umožňuje získat informace o kódu za běhu aplikace. Tímto je umožněno vytvářet aplikace, které jsou schopny měnit své chování za běhu.
+    \item \textbf{Paměťová zátěž} - CLR umožňuje dynamicky načítat knihovny za běhu aplikace. Tímto je umožněno vytvářet aplikace, které jsou schopny měnit své chování za běhu.
+\end{itemize}
+
+\n{4}{Nevýhody}
+
+Zatímco za nevýhody CLR se dá považovat:
+
+\begin{itemize}
+    \item  \textbf{Absence nástrojů z CLR} - Mnoho nástrojů, které jsou dostupné v CLR, nejsou dostupné v AoT kompilaci. Mezi tyto nástroje patří například reflexe, dynamické načítání knihoven a další.
+    \item \textbf{Absence dynamického načítání} - například Assembly.LoadFile.
+    \item \textbf{Bez generování kódu za běhu} - například System.Reflection.Emit.
+    \item \textbf{Žádné C++/CLI} - např. System.Runtime.InteropServices.WindowsRuntime
+    \item \textbf{Windows: absence COM} - např. System.Runtime.InteropServices.ComTypes
+    \item \textbf{Vyžaduje trimming (ořezávání)} - má určitá omezení, je však klíčový pro rozumnou velikost výsledného programu
+    \item \textbf{Kompilace do jediného souboru} 
+    \item \textbf{Připojení běhových knihoven} - požadované běhové knihovny jsou součástí výsledného aplikačního souboru. To zvyšuje velikost samoteného programu ve srovnání s aplikacemi závislými na frameworku.
+    \item \textbf{System.Linq.Expressions} - výsledný kód používá svou interpretovanou podobu, která je pomalejší než run-time generovaný kompilovaný kód.
+    \item \textbf{Kompatibilita knihoven s AoT} - né všechny knihovny runtime jsou plně anotovány tak, aby byly kompatibilní s Native AoT. To znamená, že některá varování v knihovnách runtime nejsou pro koncové vývojáře použitelná.
+\end{itemize}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                             Testování scénářů                                 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

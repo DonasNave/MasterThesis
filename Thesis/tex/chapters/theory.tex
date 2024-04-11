@@ -6,7 +6,7 @@
 
 \n{1}{Platforma .NET}
 
-Platforma .NET od společnosti Microsoft představuje sadu nástrojů k vývoji aplikací v jazyce C\# a jeho derivátech. Tato platforma je multiplatformní a umožňuje vývoj aplikací pro operační systémy jako Windows, Linux, macOS ale i pro mobilní platformy. Vývojáři mohou využívat nástroje pro vývoj webových aplikací, desktopových aplikací, mobilních aplikací a dalších. Platforma .NET je postavena na dvou hlavních nástrojích. Prvním z nich je \textit{Common Language Runtime} (dále jen CLR), runtime prostředí zodpovídající za běh aplikací. Druhým nástrojem je \textit{dotnet CLI}, konzolový nástroj-rozhraní, zodpovědné za interakci s dílčími nástroji v platformě. \cite{Richter2012}
+Platforma .NET od společnosti Microsoft představuje sadu nástrojů k vývoji aplikací v podporovaných jazycích. Tato platforma je multiplatformní a umožňuje vývoj aplikací pro operační systémy jako Windows, Linux, macOS ale i pro mobilní platformy. Vývojáři mohou využívat nástroje pro vývoj webových aplikací, desktopových aplikací, mobilních aplikací a dalších. Platforma .NET je postavena na dvou hlavních nástrojích. Prvním z nich je \textit{Common Language Runtime} (dále jen CLR), runtime prostředí zodpovídající za běh aplikací. Druhým nástrojem je \textit{dotnet CLI}, konzolový nástroj-rozhraní, zodpovědné za interakci s dílčími nástroji v platformě. \cite{Richter2012}
 
 \n{2}{Historie}
 
@@ -16,9 +16,10 @@ V průběhu 90. let 20. století představila společnost Sun-Microsystems virtu
 
 Microsoft v reakci na JVM vydal v roce 2000 první .NET Framework, který umožňoval spouštět kód v jazyce C\# na operačním systému Windows. Cílem prvních verzí .NET Framework nebylo primárně umožnit vývoj pro různé zařízení a operační systémy, ale zprostředkovat lepší nástroje pro vývoj aplikací. KV roce 2014 byla vydána první multiplatformní verze .NETu. Byl vydán .NET Core, který umožňoval spouštět kód v jazyce C\# na operačních systémech Windows, Linux a macOS. \cite{Richter2012}
 
-\n{2}{Nástroje .NET}
+\n{2}{Architektura}
 
-Platforma .NET zprostředkovává širokou sadu nástrojů za účelem tvorby, sestavení a spuštění aplikace. Mezi nejdůležitější lze zařadit následující:
+Platforma .NET je postavena na několika klíčových komponentách, které zajišťují běh aplikací a poskytují nástroje pro vývoj aplikací. Mezi nejdůležitější komponenty patří:
+
 
 \begin{itemize}
     \item \textbf{CLR} - běhové prostředí pro programy kompilované do IL
@@ -29,13 +30,144 @@ Platforma .NET zprostředkovává širokou sadu nástrojů za účelem tvorby, s
     \item \textbf{NuGet} - balíčkovací manager 
 \end{itemize}
 
+Tvorbu aplikace zprostředkovává sada nástrojů a knihoven .NET SDK. Tyto nástroje umožňují vývojářům vytvářet, sestavovat a spouštět aplikace v podporovaných programovacích jazycích. Nástroje .NET SDK poskytují sadu nástrojů pro vývoj aplikací, včetně nástrojů pro sestavení, testování a publikaci. Nástroje .NET SDK jsou dostupné pro operační systémy Windows, Linux a macOS a umožňují vývoj aplikací pro různé platformy. Vývojáři mohou vytvářet aplikace pro různé platformy pomocí jednoho kódu a sdílet kód mezi různými platformami. \cite{Richter2012}
+
+\n{2}{Frameworky a technologie}
+
+Platforma .NET poskytuje mnoho frameworků a technologií pro vývoj aplikací.
+
+\n{3}{Foundtation frameworky}
+
+\n{4}{.NET}
+
+.NET je hlavní framework platformy .NET. Poskytuje sadu nástrojů a knihoven pro vývoj aplikací v jazyce C\# a .NET. .NET obsahuje sadu tříd a metod, které mohou být použity při vývoji aplikací. .NET poskytuje sadu nástrojů pro vývoj aplikací, včetně nástrojů pro sestavení, testování a publikaci. .NET umožňuje vývoj aplikací pro platformy Windows, Linux a macOS pomocí jednoho kódu. Vývojáři mohou vytvářet aplikace pro různé platformy pomocí jednoho kódu a sdílet kód mezi různými platformami.
+
+\n{4}{Mono}
+
+Mono je open-source implementace platformy .NET. Poskytuje sadu nástrojů a knihoven pro vývoj aplikací v jazyce C\# a .NET. Mono umožňuje vývoj aplikací pro platformy Windows, Linux a macOS pomocí jednoho kódu. Vývojáři mohou vytvářet aplikace pro různé platformy pomocí jednoho kódu a sdílet kód mezi různými platformami. Mono je dostupný jako open-source projekt a je vyvíjen komunitou vývojářů. Mono poskytuje sadu nástrojů pro vývoj aplikací, včetně nástrojů pro sestavení, testování a publikaci. Mono umožňuje vývoj aplikací pro platformy Windows, Linux a macOS pomocí jednoho kódu. Vývojáři mohou vytvářet aplikace pro různé platformy pomocí jednoho kódu a sdílet kód mezi různými platformami.
+
+\n{3}{Specializované frameworky}
+
+\n{4}{ASP.NET}
+
+robustní framework pro vytváření webových aplikací a služeb. Je součástí ekosystému .NET navržený tak, aby umožňoval vývoj vysoce výkonných, dynamických webových stránek, RESTful API a webových aplikací v reálném čase. ASP.NET podporuje jak webové formuláře pro rychlý vývojový model prostřednictvím rozhraní přetahování a serverových ovládacích prvků, tak architekturu MVC (Model-View-Controller), která podporuje čisté oddělení problémů, testovatelnost a výkonné směrování URL pro SEO. -přátelské webové aplikace. S uvedením ASP.NET Core bylo přepracováno pro cloudovou škálovatelnost, vývoj napříč platformami a vysoký výkon, takže je ideální pro vývoj moderních webových aplikací, které lze spustit na Linuxu, Windows a macOS. ASP.NET Core také představuje Blazor, který umožňuje vývojářům používat C\# při vývoji webu, což dále zvyšuje všestrannost ekosystému. Vývojářům, kteří chtějí využít .NET pro vývoj webu, poskytuje ASP.NET komplexní a flexibilní sadu nástrojů pro vytváření všeho od malých webů po složité webové platformy.
+
+\n{4}{MAUI}
+
+je moderní specializovaný framework pro vývoj aplikací napříč platformami v rámci ekosystému .NET. Umožňuje vývojářům vytvářet aplikace pro Android, iOS, macOS a Windows z jediné kódové základny, která zahrnuje to nejlepší z Xamarin.Forms a zároveň rozšiřuje jeho možnosti na desktopové aplikace. .NET MAUI zjednodušuje vývojový proces tím, že poskytuje jednotnou sadu rozhraní API pro vývoj uživatelského rozhraní na všech platformách s možností přístupu k funkcím specifickým pro platformu v případě potřeby. Podporuje moderní vývojové vzory a nástroje, včetně MVVM, datové vazby a asynchronního programování, což usnadňuje vytváření sofistikovaných a citlivých aplikací. Vývojářům, kteří chtějí využít sílu .NET napříč mobilními a desktopovými platformami, nabízí .NET MAUI komplexní a moderní sadu nástrojů navrženou tak, aby vyhovovala dnešním vývojovým výzvám a zároveň zajistila přenositelnost a udržovatelnost kódu.
+
+Předchůdcem MAUI je framework Xamarin, který sloužil pro vytváření mobilních aplikací na platformě .NET.
+
+\n{4}{Blazor}
+
+je specializovaný rámec v rámci ekosystému .NET, který přináší revoluci ve vývoji webu tím, že umožňuje vývojářům vytvářet interaktivní webová uživatelská rozhraní pomocí C\# namísto JavaScriptu. Blazor může běžet na serveru (Blazor Server), kde zpracovává interakce s uživatelským rozhraním přes připojení SignalR, nebo v prohlížeči pomocí WebAssembly (Blazor WebAssembly) ke spouštění kódu C\# přímo ve webovém prohlížeči vedle tradičních webových technologií, jako jsou HTML a CSS. Tento inovativní přístup umožňuje vývojářům využít jejich dovednosti .NET pro komplexní vývoj webových aplikací a vytvářet bohaté webové aplikace na straně klienta s .NET spuštěným v prohlížeči. Architektura Blazor založená na komponentách usnadňuje opětovné použití komponent uživatelského rozhraní a podporuje modulární vývojový přístup. Vývojářům .NET, kteří chtějí vytvářet moderní webové aplikace a přitom zůstat v ekosystému .NET, nabízí Blazor přesvědčivou cestu vpřed, která kombinuje produktivitu a sílu C\# s flexibilitou a dosahem webových technologií.
+
+\n{3}{Knihovny}
+
+Knihovny představují soubor funkcí a nástrojů, které mohou být použity při vývoji aplikací. 
+
+\n{4}{Microsoft knihovny}
+
+Běžnou praxí tvůrce platformy, programovacího jazyka nebo frameworku je poskytnutí sad knihoven, které usnadňují vývoj aplikací. Zároveň tyto knihovny zpravidla implementují nejběžnější funkcionality, které mohou programátoři vyžadovat. Typicky se jedná o přístup k souborovému systému, síti, databázím, grafickému rozhraní a další.
+
+\begin{itemize}
+    \item \textbf{System.IO} - knihovna pro práci se souborovým systémem
+    \item \textbf{System.Net} - knihovna pro práci se sítí
+    \item \textbf{System.Data} - knihovna pro práci s databázemi
+    \item \textbf{System.Windows.Forms} - knihovna pro tvorbu grafického rozhraní
+    \item \textbf{System.Drawing} - knihovna pro práci s grafikou
+\end{itemize}
+
+\n{4}{Knihovny třetích stran}
+
+Kromě knihoven poskytovaných společností Microsoft existuje mnoho knihoven třetích stran. Za vývojem těchto knihoven mohou stát vývojařské komunity nebo být vydány velkými společnostmi. Běžně tyto knihovny navazují na sadu funkcí poskytovaných Microsoftem a rozšiřují je o další funkcionality.
+
+\n{2}{Nástroje .NET}
+
+Platforma .NET zprostředkovává širokou sadu nástrojů za účelem tvorby, sestavení a spuštění aplikace. Mezi nejdůležitější lze zařadit následující:
+
+\n{3}{IDE}
+
+Neméně důležitým prvkem vývoje aplikací je vývojové prostředí (IDE). I když není povinné, pro spoustu vývojářů je jeho použití neodmyslitené. IDE je nástroj, který zprostředkovává vývoj aplikací, správu projektů, debuggování a další. IDE poskytuje uživatelské rozhraní, které umožňuje vývojářům vytvářet, upravovat a testovat kód. IDE poskytuje také nástroje pro správu projektů, jako jsou sestavení, testování a publikace. Umožňuje provádět různorodé operace na aplikací, jako je refaktorování kódu, hledání chyb a ladění.
+
+Jedním z nejpoužívanějších IDE je Visual Studio, vydávané společností Microsoft. Visual Studio poskytuje prvotřídní podporu pro vývoj na platformě .NET. Mezi další populární IDE patří Visual Studio Code, JetBrains Rider a další.
+
+
+\n{3}{Balíčky}
+
+Pro jednoduchou distribuci knihoven, jak systémových tak třetích stran, je využíván balíčkovací manager NuGet. Projekt, jenž má být distribuován je buďto opatřen atributem \emph{<PackageOnBuild>} a sestaven nebo je využito příkazu \emph{dotnet pack}. 
+
+Takto vytvořené balíčky lze distribuovat např. přes NuGet.org, což je veřejný repozitář knihoven, který je dostupný pro všechny vývojáře. Možná je také implementace vlastních řešení. Distribuované knihovny jsou jednoduše přidatelné do projektu a umožňují snadnou správu závislostí.
+
+\n{3}{Dokumentace}
+
+Dokumentace je důležitou součástí vývoje aplikací. Poskytuje informace o tom, jak používat nástroje a technologie, které jsou součástí platformy .NET. Dokumentace obsahuje informace o API, knihovnách, nástrojích a dalších součástech platformy .NET. Dokumentace je dostupná online na oficiálních webových stránkách platformy .NET a obsahuje podrobné informace o mnoha aspektech vývoje aplikací v .NET. Dotnet dokumentace je k nalezení na webu \url{https://docs.microsoft.com/en-us/dotnet/}.
+
+\n{2}{Jazyky a struktura aplikace}
+
+Základem aplikace je zdrojový kód, který je v případě platformy dotnet reprezentován nejčastěji jedním ze podporovaných jazyků, Mezi nejčastěji využívané patří VisualBasic (VB), C\# a F\#.
+
+\n{3}{Jazyky}
+
+\n{4}{C\#}
+
+představuje staticky typovaný jazyk, který je založen na jazyce C++. Vznikl v roce 2000 a je nejpoužívanějších z jazyků pro vývoj aplikací na platformě .NET. C\# je objektově orientovaný jazyk, který umožňuje vytvářet aplikace pomocí tříd, objektů a metod.
+
+\n{4}{F\#}
+
+je funkcionální jazyk, který je založen na jazyce OCaml. Základem F\# je funkcionální programování, které umožňuje vytvářet aplikace pomocí funkcí. F\# je multiplatformní jazyk, který je možné použít na operačních systémech Windows, Linux a macOS. Vývojáři mohou využívat několik nástrojů pro vývoj aplikací v jazyce F\#. Mezi nejpoužívanější nástroje patří Visual Studio, Visual Studio Code a JetBrains Rider.
+
+\n{4}{Visual Basic}
+
+je založen na jazyce BASIC. Historie jazyka sahá až do roku 1964, kdy byl vytvořen první jazyk BASIC. 
+
+\n{3}{Aplikační struktura}
+
+Základním stavebním prvkem aplikace v .NET je projektový soubor. Jedná se o XML soubor disponující příponou \emph{.csproj}. V rámci něj dochází ke konfiguraci a deklaraci, jak bude .NET CLI s projektem pracovat. Zároveň jsou zde definováný závislosti na další projekty a knihovny. Mezi základní charakteristiky běžně určené v projektovém souboru patří verze .NET, verze projektu/assembly, seznam závislostí, konfigurace pro buildování, testování a publikaci.
+
+Pro tvorbu složitějších aplikací je možné využít více projektových souborů, které jsou následně propojeny. Tento způsob je využíván především v případě větších aplikací, které jsou rozděleny do více částí. Propojení a vazby mezi více projekty v aplikaci je definované pomocí tzv. solution souboru. Jedná se o kontejnerový soubor s příponou \emph{.sln}, jenž popisuje závislosti mezi projektovými soubory, konfigurace sestavení a nasazení a správu pomocných souborů.
+
+Mezi další běžně používané známé konfigurační soubory patří následující:
+
+\begin{itemize}
+    \item \textbf{appsettings.json} - konfigurační soubor, který obsahuje nastavení aplikace
+    \item \textbf{launchsettings.json} - konfigurační soubor, který obsahuje nastavení pro spuštění aplikace
+    \item \textbf{Directory.Build.props} - konfigurační soubor, který obsahuje globální nastavení atributů pro všechny projekty v solution
+    \item \textbf{Directory.Build.targets} - konfigurační soubor, který obsahuje globální nastavení cílů kompilace pro všechny projekty v solution
+    \item \textbf{NuGet.config} - konfigurační soubor, který obsahuje nastavení pro balíčkovací manager NuGet
+    
+
+\end{itemize}
+
+Dalším příkladem projektového souboru je \emph{.fsproj} pro F\# projekty, \emph{.vbproj} pro Visual Basic projekty a \emph{.nuspec} pro balíčkovací soubory NuGet. Speciálně pro IDE Visual Studio je využíván soubor \emph{.dcsproj}, který obsahuje nastavení pro spustění a debuggování aplikace spuštěné v Docker kontejneru. 
+
 \n{2}{Kompilace zdrojového kódu}
 
 Kompilace je proces transformace zdrojového kódu do jiné podoby. Kód je zpravidla kompilován do podoby bližší cílové architektuře, ať je touto architekturou OS, případně konkrétní HW, nebo runtime prostředí (virtuální stroj). V rámci platformy .NET jsou k dispozici 2 hlavní fundamentálně odlišné režimy kompilace zdrojového kódu: kompilace pro běhové prostředí (CLR) do tzv. \emph{assembly} a kompilace do nativního kódu přímo pro cílovou architekturu (Native AoT).
 
+\n{3}{Cíle kompilace}
+
+Cílem kompilace je převést zdrojový kód do podoby, kterou je možné spustit na cílovém zařízení. Platforma .NET podporuje zacílit na několik cílových zařízení, jako jsou desktopové počítače, mobilní zařízení nebo cloudové služby na základě použitých nástrojů a frameworků. Mezi podporované cíle patří:
+
+\n{4}{PC}
+
+Pro desktopové počítače je využíván framework .NET Core. .NET Core umožňuje vývoj desktopových aplikací pro platformy Windows, Linux a macOS pomocí jazyka C\# a .NET. Vývojáři mohou využívat nástroje a knihovny platformy .NET pro vývoj desktopových aplikací. .NET Core poskytuje sadu nástrojů pro vývoj desktopových aplikací, včetně nástrojů pro vytváření uživatelského rozhraní, správu dat a komunikaci s cloudovými službami. .NET Core umožňuje vývoj desktopových aplikací pro platformy Windows, Linux a macOS pomocí jednoho kódu. Vývojáři mohou vytvářet aplikace pro různé platformy pomocí jednoho kódu a sdílet kód mezi různými platformami.
+
+
+
+\n{4}{Xamarin}
+
+Pro vývoj mobilních aplikací je využíván framework Xamarin. Xamarin umožňuje vývoj mobilních aplikací pro platformy Android a iOS pomocí jazyka C\# a .NET. Vývojáři mohou využívat nástroje a knihovny platformy .NET pro vývoj mobilních aplikací. Xamarin poskytuje sadu nástrojů pro vývoj mobilních aplikací, včetně nástrojů pro vytváření uživatelského rozhraní, správu dat a komunikaci s cloudovými službami. Xamarin umožňuje vývoj mobilních aplikací pro platformy Android a iOS pomocí jednoho kódu. Vývojáři mohou vytvářet aplikace pro obě platformy pomocí jednoho kódu a sdílet kód mezi oběma platformami. Xamarin poskytuje sadu nástrojů pro vývoj mobilních aplikací, včetně nástrojů pro vytváření uživatelského rozhraní, správu dat a komunikaci s cloudovými službami. Xamarin umožňuje vývoj mobilních aplikací pro platformy Android a iOS pomocí jednoho kódu. Vývojáři mohou vytvářet aplikace pro obě platformy pomocí jednoho kódu a sdílet kód mezi oběma platformami. Xamarin poskytuje sadu nástrojů pro vývoj mobilních aplikací, včetně nástrojů pro vytváření uživatelského rozhraní, správu dat a komunikaci s cloudovými službami. Xamarin umožňuje vývoj mobilních aplikací pro platformy Android a iOS pomocí jednoho kódu.
+
+Pro .NET MAUI aplikace je cílem kompilace vytvoření spustitelného souboru, který lze spustit na cílovém zařízení. To se liší od jiných typů aplikací, které mohou být spuštěny na různých zařízeních, jako jsou webové aplikace, desktopové aplikace a další. 
+
 \n{3}{Kompilace pro CLR}
 
-Standartním výstupem sestavení aplikace v .NETu je transformace zdrojového kódu z vybraného podporovaného jazyka do assembly v jazyce IL. Tento výstupní IL se v .NET konkrétně navývaná Common Intermediate language (CIL) nebo také Microsoft Intermediate Language (MSIL). V případě jazyka C\# na platformě Windows slouží ke kompilaci spustitelný soubor \emph{csc.exe}. 
+Standartním výstupem sestavení aplikace v .NETu je transformace zdrojového kódu z vybraného podporovaného jazyka do assembly v jazyce IL. Tento výstupní IL se v .NET konkrétně navývaná Common Intermediate language (CIL) nebo také Microsoft Intermediate Language (MSIL). IL je jazyk nezávislý na platformě, který je následně kompilován do nativního kódu za běhu aplikace.
+
+CLR je zodpovědný za interpretaci IL kódu a jeho kompilaci do nativního kódu. Kompilace do nativního kódu je prováděna v rámci běhu aplikace, což zajišťuje, že kód je optimalizován pro konkrétní architekturu systému.
+
+V případě jazyka C\# na platformě Windows slouží ke kompilaci spustitelný soubor \emph{csc.exe}. 
 
 \n{4}{Výstup} 
 
@@ -62,10 +194,6 @@ Výstupem nativní AoT kompilace .NET aplikace je spustitelný soubor ve formát
     \item Generování pre-build kódu 
     \item Překlad kódu
 \end{enumerate}
-
-\n{3}{Cíle kompilace}
-
-TODO
 
 \n{2}{Běh kódu}
 
@@ -101,138 +229,7 @@ Zdrojový kód je při sestavení zkompilován do podoby nativního kódu pomoc�
 
 \n{3}{Nativní kód}
 
-Běh nativního kódu je závislý na konkrétní architektuře systému, pro které jsou nativní programové soubory vytvořeny. Nepodléhá další úpravě ze strany .NET nástrojů.
-
-\n{2}{Tvorba programu v dotnet}
-
-Následující část popisuje obecnou koncepci a strukturu projektu aplikace v dotnet. Součástí je postup pro tvorbu a vydání projektu. Blížší pozornost bude věnována tvorbě nativního AoT projektu.
-
-\n{3}{Struktura aplikačních zdrojů}
-
-Základním strukturovaným prvkem v .NET aplikaci je projektový soubor. Jedná se o XML soubor disponující příponou \emph{.csproj}. V rámci něj dochází ke konfiguraci a deklaraci, jak bude .NET CLI s projektem pracovat. Zároveň jsou zde definováný závislosti na další projekty a knihovny. Mezi základní charakteristiky běžně určené v projektovém souboru patří verze .NET, verze projektu/assembly, seznam závislostí, konfigurace pro buildování, testování a publikaci.
-
-Pro tvorbu složitějších aplikací je možné využít více projektových souborů, které jsou následně propojeny. Tento způsob je využíván především v případě větších aplikací, které jsou rozděleny do více částí. Propojení a vazby mezi více projekty v aplikaci je definované pomocí tzv. solution souboru. Jedná se o kontejnerový soubor s příponou \emph{.sln}, jenž popisuje závislosti mezi projektovými soubory, konfigurace sestavení a nasazení a správu pomocných souborů.
-
-\n{3}{Obecný postup}
-
-\begin{enumerate}
-    \item \textbf{Nastavení vývojového prostředí}: Sestává z instalace sady nástrojů .NET SDK.
-    
-    \item \textbf{Vytvoření projektu}: Pomocí příkazu \texttt{dotnet new} nebo skrze GUI IDE je vytvořen nový projekt a solution soubor. Součástí je výběr typu projektu, jazyka, frameworku a dalších konfiguračních parametrů.
-    
-    \item \textbf{Programování}: Sestává z tvorby kódu aplikace, testování a ladění.
-
-    \item \textbf{Správa závislostí}: Pomocí nástrojů .NET CLI je možno referencovat balíčky a knihovny v rámci projektu.
-    
-    \item \textbf{Kompilace}: Kompilace aplikace probíhá pomocí příkazu \texttt{dotnet build}, který převede vysokoúrovňový kód do IL. V případě AoT dochází k dodatečné kompilace do nativního kódu dle cílové architektury.
-    
-    \item \textbf{Publikování}: Použitím příkazu příkazu \texttt{dotnet publish} dochází k vydání aplikace, tedy specifickému sestavení v konfigurovaném nastavení.
-\end{enumerate}
-
-\n{3}{Tvorba nativního programu}
-
-Pro tvorbu nativního programu v .NET je nutné využít speciálního atributu \emph{PublishAoT} v projektovém souboru. Tento atribut je zodpovědný za konfiguraci projektu pro nativní AoT kompilaci. Při jeho použití je nutné specifikovat cílovou architekturu, pro kterou je nativní kód vytvářen. Po kompilaci kódu do IL dochází k dodatečné kompilaci do nativního kódu, která dodává další konzolový výstup s informacemi o průběhu kompilace.
-
-Vzhledem k tomu, že nativní AoT kompilace je v .NETu stále vývojově nezralá, samotný proces kompilace, tak jako analýza kompilovaného kódu není dostatečně informativní. Za účelem přenesení vysokoúrovňových konceptů a formálních zápisů v C\# je při kompilace prováděno široké spektrum transformací a gerování kódu.
-
-\n{4}{Deklarace unmanaged rozhraní}
-
-\n{4}{Trimming}
-
-\n{3}{Přehled podpory}
-
-\n{4}{Funkcionalita}
-
-Následující přehled představuje rozsah funkcionality implementované v rámci .NET frameworku 8.0, konkrétně APS.NET k datu zvěřejnění práce.
-
-\begin{itemize}
-    \item \textbf{REST minimal API}
-    \item \textbf{gRPC API}
-    \item \textbf{JWT Authentication}
-    \item \textbf{CORS}
-    \item \textbf{HealthChecks}
-    \item \textbf{HttpLogging}
-    \item \textbf{Localization}
-    \item \textbf{OutputCaching}
-    \item \textbf{RateLimiting}
-    \item \textbf{RequestDecompression}
-    \item \textbf{ResponseCaching}
-    \item \textbf{ResponseCompression}
-    \item \textbf{Rewrite}
-    \item \textbf{StaticFiles}
-    \item \textbf{WebSockets}
-\end{itemize}
-
-\n{4}{Cíle kompilace}
-
-.NET poskytuje podporu pro kompilaci zdrojového kódu v režimu AoT pouze pro určité operační systémy:
-
-\begin{itemize}
-    \item \textbf{Windows} - plná podpora
-    \item \textbf{Linux} - plná podpora
-    \item \textbf{macOS} - plná podpora
-    \item \textbf{Android} - částečná podpora
-    \item \textbf{iOS} - částečná podpora
-    \item \textbf{WebAssembly} - částečná podpora
-\end{itemize}
-
-\n{2}{Srovnání}
-
-\n{3}{JIT}
-
-\n{4}{Výhody}
-
-Mezi hlavní výhody se řadí zprostředkování následujícího:
-
-\begin{itemize}
-    \item  \textbf{Reflexe} - CLR umožňuje využívat reflexi, která umožňuje získat informace o kódu za běhu aplikace. Tímto je umožněno vytvářet aplikace, které jsou schopny měnit své chování za běhu.
-    \item \textbf{Dynamické načítání} - CLR umožňuje dynamicky načítat knihovny za běhu aplikace. Tímto je umožněno vytvářet aplikace, které jsou schopny měnit své chování za běhu.
-    \item \textbf{Větší bezpečnost} - CLR zajišťuje, že aplikace nemůže přistupovat k paměti, která jí nebyla přidělena. Tímto je zajištěna bezpečnost aplikace a zabráněno chybám, které by mohly vést k pádu aplikace.
-    \item \textbf{Správa paměti} - CLR zajišťuje správu paměti pomocí GC. Tímto je zajištěno, že paměť je uvolněna vždy, když ji aplikace již nepotřebuje. Tímto je zabráněno tzv. memory leakům, které by mohly vést k pádu aplikace.
-    \item \textbf{Větší přenositelnost} - CLR zajišťuje, že aplikace je spustitelná na všech operačních systémech, na kterých je dostupné běhové prostředí CLR.
-\end{itemize}
-
-\n{4}{Nevýhody}
-
-Zatímco za nevýhody CLR se dá považovat:
-
-\begin{itemize}
-    \item  \textbf{Výkonnost} - I když určité optimalizace jsou prováděny pro konkrétní systém a architekturu, výkon CLR je nižší než výkon nativního kódu. Dalším výkonnostním měřítkem je rychlost startu aplikace, která je pro CLR vyšší než v případě nativního kódu.
-    \item \textbf{Operační paměť} - CLR využívá více operační paměti, jak pro aplikaci, tak i pro běhové prostředí.
-    \item \textbf{Velikost aplikace} - Přítomnost CLR nehraje zásádní roli v případě monolitických aplikací, ale v případě mikroslužeb je nutné CLR přidat ke každé službě. Tímto se zvyšuje velikost jedné aplikační instance.
-\end{itemize}
-
-\n{3}{AoT}
-
-\n{4}{Výhody}
-
-Mezi hlavní výhody se řadí zprostředkování následujícího:
-
-\begin{itemize}
-    \item  \textbf{Výkonnost} - CLR umožňuje využívat reflexi, která umožňuje získat informace o kódu za běhu aplikace. Tímto je umožněno vytvářet aplikace, které jsou schopny měnit své chování za běhu.
-    \item \textbf{Paměťová zátěž} - CLR umožňuje dynamicky načítat knihovny za běhu aplikace. Tímto je umožněno vytvářet aplikace, které jsou schopny měnit své chování za běhu.
-\end{itemize}
-
-\n{4}{Nevýhody}
-
-Zatímco za nevýhody CLR se dá považovat:
-
-\begin{itemize}
-    \item  \textbf{Absence nástrojů z CLR} - Mnoho nástrojů, které jsou dostupné v CLR, nejsou dostupné v AoT kompilaci. Mezi tyto nástroje patří například reflexe, dynamické načítání knihoven a další.
-    \item \textbf{Absence dynamického načítání} - například Assembly.LoadFile.
-    \item \textbf{Bez generování kódu za běhu} - například System.Reflection.Emit.
-    \item \textbf{Žádné C++/CLI} - např. System.Runtime.InteropServices.WindowsRuntime
-    \item \textbf{Windows: absence COM} - např. System.Runtime.InteropServices.ComTypes
-    \item \textbf{Vyžaduje trimming (ořezávání)} - má určitá omezení, je však klíčový pro rozumnou velikost výsledného programu
-    \item \textbf{Kompilace do jediného souboru} 
-    \item \textbf{Připojení běhových knihoven} - požadované běhové knihovny jsou součástí výsledného aplikačního souboru. To zvyšuje velikost samoteného programu ve srovnání s aplikacemi závislými na frameworku.
-    \item \textbf{System.Linq.Expressions} - výsledný kód používá svou interpretovanou podobu, která je pomalejší než run-time generovaný kompilovaný kód.
-    \item \textbf{Kompatibilita knihoven s AoT} - né všechny knihovny runtime jsou plně anotovány tak, aby byly kompatibilní s Native AoT. To znamená, že některá varování v knihovnách runtime nejsou pro koncové vývojáře použitelná.
-\end{itemize}
-
-\n{2}{Závěr}
-
-xx
+Běh nativního kódu je závislý na konkrétní architektuře systému, pro které jsou nativní programové soubory vytvořeny. Nepodléhá další úpravě ze strany .NET nástrojů. Spuštění probíhá nativním příkazem operačního systému, který zprostředkuje spuštění programu.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                 MICROSERVICE                                  %
@@ -248,9 +245,12 @@ Původ microservice architektury nelze přesně definovat, důležitý moment v�
 
 Opravdový přelom přišel postupně, nástupem a popularizací virtualizace a kontejnerizace v průběhu let 2013 až 2015. Tímto bylo umožněno vytvářet a spouštět mikroslužby v izolovaných prostředích. Tímto bylo umožněno vytvářet mikroslužby, které jsou nezávislé na operačním systému a hardwaru, na kterém jsou spouštěny. Nejdůležitější v tomto ohledu je nepochybně projekt Docker, který byl vydán v roce 2013. Díky Dockeru bylo možno jednoduše definovat, vytvářet a spouštět kontejnerizované aplikace.
 
-\n{2}{Popis}
+\n{2}{Základní principy}
 
-Architektura mikroslužeb rozděluje složité softwarové aplikace na menší, spravovatelné části, které lze vyvíjet, nasazovat a škálovat nezávisle.
+\n{3}{Mikroslužby}
+
+Serverless je model vývoje aplikací, který umožňuje vývojářům psát a nasazovat kód bez starostí o infrastrukturu. Tento model je založen na konceptu funkcí jako služby (FaaS), které jsou jednotlivé kusy kódu, které jsou spouštěny na základě událostí. Serverless a mikroslužby se často používají společně, protože oba modely podporují škálovatelnost, agilitu a odolnost. Serverless může být výhodný pro mikroslužby, které jsou založeny na událostech, jako jsou zpracování obrázků, zpracování zpráv nebo plánování úloh.
+
 
 \n{3}{Virtualizace a kontejnerizace}
 
@@ -262,27 +262,23 @@ Kontejnerizace je obzvláště důležitá pro mikroslužby, protože zapouzdřu
 
 S rozšiřováním mikroslužeb a kontejnerů se jejich správa stává složitou. Nástroje pro orchestraci pomáhají automatizovat nasazení, škálování a správu kontejnerů. Mezi oblíbené orchestrační nástroje patří Kubernetes, Docker Swarm a Mesos. Zejména Kubernetes se stal de facto standardem, který poskytuje robustní rámec pro nasazení, škálování a provoz kontejnerových aplikací v clusteru strojů. Řeší vyhledávání služeb, vyvažování zátěže, sledování přidělování prostředků a škálování na základě výkonu pracovní zátěže.
 
-\n{3}{Základní principy}
+\n{2}{Vlastnosti}
 
-\n{4}{Komunikace}
+\n{3}{Komunikace}
 
 Mikroslužby spolu komunikují prostřednictvím rozhraní API, obvykle prostřednictvím protokolů HTTP/HTTPS, i když pro aplikace citlivější na výkon lze použít i jiné protokoly, například gRPC. Komunikační vzory zahrnují synchronní požadavky (např. RESTful API) a asynchronní zasílání zpráv (např. pomocí brokerů zpráv jako RabbitMQ nebo Kafka). Tím je zajištěno volné propojení mezi službami, což umožňuje jejich nezávislý vývoj a nasazení.
 
-\n{4}{Škálování}
+\n{3}{Škálování}
 
 Architektura mikroslužeb zvyšuje škálovatelnost. Služby lze škálovat nezávisle, což umožňuje efektivnější využití zdrojů a zlepšuje schopnost systému zvládat velké objemy požadavků. Běžně se používá horizontální škálování (přidávání dalších instancí služby), které usnadňují nástroje pro kontejnerizaci a orchestraci.
 
-\n{4}{Odolnost}
+\n{3}{Odolnost}
 
 Robustnosti mikroslužeb je dosaženo pomocí strategií, jako jsou přerušovače, záložní řešení a opakované pokusy, které pomáhají zabránit tomu, aby se selhání jedné služby kaskádově přeneslo na ostatní. Izolace služeb také znamená, že problémy lze omezit a vyřešit s minimálním dopadem na celý systém. Kromě toho jsou kontroly stavu a monitorování nezbytné pro včasné odhalení a řešení problémů.
 
-\n{4}{Vývoj}
+\n{3}{Vývoj}
 
 Mikroslužby umožňují agilní vývojové postupy. Týmy mohou vyvíjet, testovat a nasazovat služby nezávisle, což umožňuje rychlejší iteraci a zpětnou vazbu. Nedílnou součástí jsou pipelines pro kontinuální integraci a doručování (CI/CD), které umožňují automatizované testování a nasazení. Tento přístup podporuje kulturu DevOps a podporuje užší spolupráci mezi vývojovými a provozními týmy.
-
-\n{3}{Serverless a mikroslužby}
-
-Serverless je model vývoje aplikací, který umožňuje vývojářům psát a nasazovat kód bez starostí o infrastrukturu. Tento model je založen na konceptu funkcí jako služby (FaaS), které jsou jednotlivé kusy kódu, které jsou spouštěny na základě událostí. Serverless a mikroslužby se často používají společně, protože oba modely podporují škálovatelnost, agilitu a odolnost. Serverless může být výhodný pro mikroslužby, které jsou založeny na událostech, jako jsou zpracování obrázků, zpracování zpráv nebo plánování úloh.
 
 \n{2}{Testování}
 
