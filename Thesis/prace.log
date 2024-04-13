@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.8)  13 APR 2024 19:20
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.8)  13 APR 2024 20:24
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1145,30 +1145,220 @@ Package: inlinedef 2008/07/10 v1.0 Inlined expansions within definitions
 \forest@copy@out=\write5
 \forest@externalize@max@outer@n=\count343
 \forest@externalize@inner@n=\count344
+) (/Users/noe/Library/texmf/tex/latex/local/rest-api.sty
+Package: rest-api 2020/12/04 v1.4 rest-api package
+
+
+LaTeX Warning: You have requested package `rest-api',
+               but the package provides `restapi'.
+
+Package: restapi 2020/02/18 REST API package
+(/usr/local/texlive/2023/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
+) (/usr/local/texlive/2023/texmf-dist/tex/latex/tools/tabularx.sty
+Package: tabularx 2020/01/15 v2.11c `tabularx' package (DPC)
+ (/usr/local/texlive/2023/texmf-dist/tex/latex/tools/array.sty
+Package: array 2022/09/04 v2.5g Tabular extension package (FMi)
+\col@sep=\dimen283
+\ar@mcellbox=\box90
+\extrarowheight=\dimen284
+\NC@list=\toks55
+\extratabsurround=\skip101
+\backup@length=\skip102
+\ar@cellbox=\box91
+)
+\TX@col@width=\dimen285
+\TX@old@table=\dimen286
+\TX@old@col=\dimen287
+\TX@target=\dimen288
+\TX@delta=\dimen289
+\TX@cols=\count345
+\TX@ftn=\toks56
+) (/usr/local/texlive/2023/texmf-dist/tex/latex/colortbl/colortbl.sty
+Package: colortbl 2022/06/20 v1.0f Color table columns (DPC)
+\everycr=\toks57
+\minrowclearance=\skip103
+\rownum=\count346
+) (/usr/local/texlive/2023/texmf-dist/tex/latex/transparent/transparent.sty
+Package: transparent 2022-10-27 v1.5 Transparency with color stacks
+ (/usr/local/texlive/2023/texmf-dist/tex/latex/transparent/transparent-nometadata.sty
+Package: transparent-nometadata 2022-10-27 v1.5 Transparency via pdfTeX's color stack (HO)
+)) (/usr/local/texlive/2023/texmf-dist/tex/latex/xifthen/xifthen.sty
+Package: xifthen 2015/11/05 v1.4.0 Extended ifthen features
+) (/usr/local/texlive/2023/texmf-dist/tex/generic/xstring/xstring.sty (/usr/local/texlive/2023/texmf-dist/tex/generic/xstring/xstring.tex
+\integerpart=\count347
+\decimalpart=\count348
+)
+Package: xstring 2023/01/14 v1.85 String manipulations (CT)
+) (/usr/local/texlive/2023/texmf-dist/tex/latex/mdframed/mdframed.sty
+Package: mdframed 2013/07/01 1.9b: mdframed
+ (/usr/local/texlive/2023/texmf-dist/tex/latex/zref/zref-abspage.sty
+Package: zref-abspage 2022-04-07 v2.34 Module abspage for zref (HO)
+ (/usr/local/texlive/2023/texmf-dist/tex/latex/zref/zref-base.sty
+Package: zref-base 2022-04-07 v2.34 Module base for zref (HO)
+Package zref Info: New property list: main on input line 767.
+Package zref Info: New property: default on input line 768.
+Package zref Info: New property: page on input line 769.
+)
+\c@abspage=\count349
+Package zref Info: New property: abspage on input line 65.
+) (/usr/local/texlive/2023/texmf-dist/tex/latex/needspace/needspace.sty
+Package: needspace 2010/09/12 v1.3d reserve vertical space
+)
+\mdf@templength=\skip104
+\c@mdf@globalstyle@cnt=\count350
+\mdf@skipabove@length=\skip105
+\mdf@skipbelow@length=\skip106
+\mdf@leftmargin@length=\skip107
+\mdf@rightmargin@length=\skip108
+\mdf@innerleftmargin@length=\skip109
+\mdf@innerrightmargin@length=\skip110
+\mdf@innertopmargin@length=\skip111
+\mdf@innerbottommargin@length=\skip112
+\mdf@splittopskip@length=\skip113
+\mdf@splitbottomskip@length=\skip114
+\mdf@outermargin@length=\skip115
+\mdf@innermargin@length=\skip116
+\mdf@linewidth@length=\skip117
+\mdf@innerlinewidth@length=\skip118
+\mdf@middlelinewidth@length=\skip119
+\mdf@outerlinewidth@length=\skip120
+\mdf@roundcorner@length=\skip121
+\mdf@footenotedistance@length=\skip122
+\mdf@userdefinedwidth@length=\skip123
+\mdf@needspace@length=\skip124
+\mdf@frametitleaboveskip@length=\skip125
+\mdf@frametitlebelowskip@length=\skip126
+\mdf@frametitlerulewidth@length=\skip127
+\mdf@frametitleleftmargin@length=\skip128
+\mdf@frametitlerightmargin@length=\skip129
+\mdf@shadowsize@length=\skip130
+\mdf@extratopheight@length=\skip131
+\mdf@subtitleabovelinewidth@length=\skip132
+\mdf@subtitlebelowlinewidth@length=\skip133
+\mdf@subtitleaboveskip@length=\skip134
+\mdf@subtitlebelowskip@length=\skip135
+\mdf@subtitleinneraboveskip@length=\skip136
+\mdf@subtitleinnerbelowskip@length=\skip137
+\mdf@subsubtitleabovelinewidth@length=\skip138
+\mdf@subsubtitlebelowlinewidth@length=\skip139
+\mdf@subsubtitleaboveskip@length=\skip140
+\mdf@subsubtitlebelowskip@length=\skip141
+\mdf@subsubtitleinneraboveskip@length=\skip142
+\mdf@subsubtitleinnerbelowskip@length=\skip143
+ (/usr/local/texlive/2023/texmf-dist/tex/latex/mdframed/md-frame-1.mdf
+File: md-frame-1.mdf 2013/07/01\ 1.9b: md-frame-1
+)
+\mdf@frametitlebox=\box92
+\mdf@footnotebox=\box93
+\mdf@splitbox@one=\box94
+\mdf@splitbox@two=\box95
+\mdf@splitbox@save=\box96
+\mdfsplitboxwidth=\skip144
+\mdfsplitboxtotalwidth=\skip145
+\mdfsplitboxheight=\skip146
+\mdfsplitboxdepth=\skip147
+\mdfsplitboxtotalheight=\skip148
+\mdfframetitleboxwidth=\skip149
+\mdfframetitleboxtotalwidth=\skip150
+\mdfframetitleboxheight=\skip151
+\mdfframetitleboxdepth=\skip152
+\mdfframetitleboxtotalheight=\skip153
+\mdffootnoteboxwidth=\skip154
+\mdffootnoteboxtotalwidth=\skip155
+\mdffootnoteboxheight=\skip156
+\mdffootnoteboxdepth=\skip157
+\mdffootnoteboxtotalheight=\skip158
+\mdftotallinewidth=\skip159
+\mdfboundingboxwidth=\skip160
+\mdfboundingboxtotalwidth=\skip161
+\mdfboundingboxheight=\skip162
+\mdfboundingboxdepth=\skip163
+\mdfboundingboxtotalheight=\skip164
+\mdf@freevspace@length=\skip165
+\mdf@horizontalwidthofbox@length=\skip166
+\mdf@verticalmarginwhole@length=\skip167
+\mdf@horizontalspaceofbox=\skip168
+\mdfsubtitleheight=\skip169
+\mdfsubsubtitleheight=\skip170
+\c@mdfcountframes=\count351
+
+****** mdframed patching \endmdf@trivlist
+
+****** -- success******
+
+\mdf@envdepth=\count352
+\c@mdf@env@i=\count353
+\c@mdf@env@ii=\count354
+\c@mdf@zref@counter=\count355
+Package zref Info: New property: mdf@pagevalue on input line 895.
+) (/usr/local/texlive/2023/texmf-dist/tex/latex/tools/verbatim.sty
+Package: verbatim 2022-07-02 v1.5u LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks58
+\verbatim@line=\toks59
+\verbatim@in@stream=\read4
+) (/usr/local/texlive/2023/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count356
+\lst@gtempboxa=\box97
+\lst@token=\toks60
+\lst@length=\count357
+\lst@currlwidth=\dimen290
+\lst@column=\count358
+\lst@pos=\count359
+\lst@lostspace=\dimen291
+\lst@width=\dimen292
+\lst@newlines=\count360
+\lst@lineno=\count361
+\lst@maxwidth=\dimen293
+ (/usr/local/texlive/2023/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
+\c@lstnumber=\count362
+\lst@skipnumbers=\count363
+\lst@framebox=\box98
+) (/usr/local/texlive/2023/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2023/02/27 1.9 listings configuration
+))
+Package: listings 2023/02/27 1.9 (Carsten Heinz)
 )
 pdfTeX warning (Object streams): \pdfobjcompresslevel > 0 requires PDF-1.5 or greater. Object streams disabled now.
-<<graphics/sRGBIEC1966-2.1.icm>>) (/usr/local/texlive/2023/texmf-dist/tex/generic/babel/babel.sty
+<<graphics/sRGBIEC1966-2.1.icm>>
+
+./tex/UTB.tex:686: LaTeX Error: Command \comment already defined.
+               Or name \end... illegal, see p.192 of the manual.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.686 ...{\comment}[1]{\color{red}#1\color{black}}
+                                                  
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+) (/usr/local/texlive/2023/texmf-dist/tex/generic/babel/babel.sty
 Package: babel 2023/02/13 3.86 The Babel package
-\babel@savecnt=\count345
-\U@D=\dimen283
+\babel@savecnt=\count364
+\U@D=\dimen294
 \l@unhyphenated=\language87
  (/usr/local/texlive/2023/texmf-dist/tex/generic/babel/txtbabel.def)
-\bbl@readstream=\read4
-\bbl@dirlevel=\count346
+\bbl@readstream=\read5
+\bbl@dirlevel=\count365
  (/usr/local/texlive/2023/texmf-dist/tex/generic/babel-czech/czech.ldf
 Language: czech 2008/07/06 v3.1a Czech support from the babel system
 Package babel Info: Making " an active character on input line 172.
-\cs@wordlen=\count347
+\cs@wordlen=\count366
 Package babel Info: Making - an active character on input line 226.
 )) (/usr/local/texlive/2023/texmf-dist/tex/generic/babel/locale/cs/babel-czech.tex
 Package babel Info: Importing font and identification data for czech
 (babel)             from babel-cs.ini. Reported on input line 11.
 )
 \xmpinclWrite=\write6
-\xmpinclRead=\read5
+\xmpinclRead=\read6
 \openout6 = `tex/pdfa-1b.xmpi'.
 
-<<tex/pdfa-1b.xmpi>> (./prace.aux)
+<<tex/pdfa-1b.xmpi>>
+No file prace.aux.
 \openout1 = `prace.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 71.
@@ -1189,19 +1379,19 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 71.
 LaTeX Font Info:    ... okay on input line 71.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 71.
 LaTeX Font Info:    ... okay on input line 71.
- (/usr/local/texlive/2023/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+(/usr/local/texlive/2023/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count348
-\scratchdimen=\dimen284
-\scratchbox=\box90
-\nofMPsegments=\count349
-\nofMParguments=\count350
-\everyMPshowfont=\toks55
-\MPscratchCnt=\count351
-\MPscratchDim=\dimen285
-\MPnumerator=\count352
-\makeMPintoPDFobject=\count353
-\everyMPtoPDFconversion=\toks56
+\scratchcounter=\count367
+\scratchdimen=\dimen295
+\scratchbox=\box99
+\nofMPsegments=\count368
+\nofMParguments=\count369
+\everyMPshowfont=\toks61
+\MPscratchCnt=\count370
+\MPscratchDim=\dimen296
+\MPnumerator=\count371
+\makeMPintoPDFobject=\count372
+\everyMPtoPDFconversion=\toks62
 ) (/usr/local/texlive/2023/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
  (/usr/local/texlive/2023/texmf-dist/tex/latex/grfext/grfext.sty
@@ -1215,11 +1405,11 @@ Package grfext Info: Graphics extension search list:
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
 Package hyperref Info: Link coloring OFF on input line 71.
- (./prace.out) (./prace.out)
 \@outlinefile=\write7
 \openout7 = `prace.out'.
 
 Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/pdflscape/pdflscape.sty
 Package: pdflscape 2022-10-27 v0.13 Display of landscape pages in PDF
@@ -1230,16 +1420,17 @@ Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
 )
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 ))
+\c@lstlisting=\count373
 LaTeX Font Info:    Trying to load font information for OT1+phv on input line 73.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/psnfss/ot1phv.fd
 File: ot1phv.fd 2020/03/25 scalable font definitions for OT1/phv.
 )
-<graphics/logo/fai_logo_cz.png, id=484, 325.68428pt x 76.49358pt>
+<graphics/logo/fai_logo_cz.png, id=8, 325.68428pt x 76.49358pt>
 File: graphics/logo/fai_logo_cz.png Graphic file (type png)
 <use graphics/logo/fai_logo_cz.png>
 Package pdftex.def Info: graphics/logo/fai_logo_cz.png  used on input line 73.
 (pdftex.def)             Requested size: 256.0748pt x 60.14912pt.
-<zadani.pdf, id=485, 597.432pt x 844.83629pt>
+<zadani.pdf, id=9, 597.432pt x 844.83629pt>
 File: zadani.pdf Graphic file (type pdf)
 <use zadani.pdf>
 Package pdftex.def Info: zadani.pdf  used on input line 75.
@@ -1248,7 +1439,7 @@ File: zadani.pdf Graphic file (type pdf)
 <use zadani.pdf>
 Package pdftex.def Info: zadani.pdf  used on input line 75.
 (pdftex.def)             Requested size: 597.43054pt x 844.83423pt.
-<zadani.pdf, id=488, page=1, 597.432pt x 844.83629pt>
+<zadani.pdf, id=12, page=1, 597.432pt x 844.83629pt>
 File: zadani.pdf Graphic file (type pdf)
 <use zadani.pdf, page 1>
 Package pdftex.def Info: zadani.pdf , page1 used on input line 75.
@@ -1273,7 +1464,7 @@ File: zadani.pdf Graphic file (type pdf)
 Package pdftex.def Info: zadani.pdf , page1 used on input line 75.
 (pdftex.def)             Requested size: 597.93192pt x 845.54323pt.
  [2 <./zadani.pdf, page is rotated 270 degrees>]
-<zadani.pdf, id=502, page=2, 597.432pt x 844.83629pt>
+<zadani.pdf, id=26, page=2, 597.432pt x 844.83629pt>
 File: zadani.pdf Graphic file (type pdf)
 <use zadani.pdf, page 2>
 Package pdftex.def Info: zadani.pdf , page2 used on input line 75.
@@ -1293,79 +1484,121 @@ Package pdftex.def Info: zadani.pdf , page2 used on input line 75.
 
 ] [6
 
-] (./prace.toc [7
-
-] [8] [9])
+]
+No file prace.toc.
 \tf@toc=\write8
 \openout8 = `prace.toc'.
 
- [10] (./tex/chapters/intro.tex) (./tex/chapters/theory.tex [11
+[7
+
+] (./tex/chapters/intro.tex) (./tex/chapters/theory.tex [8
 
 
-] [12
+] [9
 
 
-] [13
+]
+
+LaTeX Warning: Citation `Richter2012' on page 10 undefined on input line 9.
 
 
-] [14] [15] [16]
+LaTeX Warning: Citation `Richter2012' on page 10 undefined on input line 17.
+
+[10
+
+
+]
+
+LaTeX Warning: Citation `Richter2012' on page 11 undefined on input line 33.
+
+[11] [12] [13]
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 104.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2022/07/10 v2.5l Standard LaTeX font definitions
-) [17] [18] [19] [20] [21] [22] [23] [24] [25] [26
+) [14] [15] [16] [17] [18] [19] [20] [21] [22]
 
-] [27]
+LaTeX Warning: Citation `Richardson2018' on page 23 undefined on input line 317.
+
+[23
+
+] [24]
 Overfull \hbox (4.10199pt too wide) in paragraph at lines 379--380
  []\T1/cmr/bx/it/10.95 ’kálovatelnost[] \T1/cmr/m/n/12 Sluºby lze ²ká-lo-vat ne-zá-visle, coº umoº-¬uje p°es-n¥j²í p°i-d¥-lo-vání zdroj·
  []
 
-[28] [29] [30] [31
+[25] [26] [27] [28
 
-] [32]) (./tex/chapters/practical.tex [33] [34
-
-
-] [35
+] [29]) (./tex/chapters/practical.tex [30] [31
 
 
-] [36] [37] [38]
+] [32
+
+
+] [33] [34] [35]
 Overfull \hbox (4.78093pt too wide) in paragraph at lines 127--128
  []\T1/cmr/bx/it/10.95 OpenTelemetry[] \T1/cmr/m/n/12 Open source collec-tor te-le-me-t-ric-kých dat. Po-sky-tuje jed-notný, vendor-
  []
 
-[39] [40] [41] [42] [43]
+[36] [37] [38] [39] [40]
 Overfull \hbox (0.4579pt too wide) in paragraph at lines 326--327
  []\T1/cmr/bx/it/10.95 Telemetrie[] \T1/cmr/m/n/12 Knihovna \T1/cmr/m/it/12 DTA.Extensions.Telemetry \T1/cmr/m/n/12 zpro-st°ed-ko-vává ex-tensi-ons me-tody
  []
 
-[44] [45] [46] [47] [48
+[41]
 
-] [49]) (./tex/chapters/analytics.tex [50] [51
+./tex/chapters/practical.tex:346: LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.346 \newline
+              
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
 
 
-] [52
+Underfull \hbox (badness 10000) in paragraph at lines 348--349
+
+ []
 
 
-] [53] [54] [55
+Underfull \hbox (badness 10000) in paragraph at lines 352--353
 
-]) (./tex/chapters/conclusion.tex [56
+ []
 
-]) [57
+[42] [43] [44] [45
 
-] (./tex/zkratky.tex [58
+] [46]) (./tex/chapters/analytics.tex [47] [48
 
-]) [59
 
-] (./prace.lof)
+] [49
+
+
+] [50] [51] [52
+
+]) (./tex/chapters/conclusion.tex [53
+
+]) [54
+
+] (./tex/zkratky.tex [55
+
+]) [56
+
+]
+No file prace.lof.
 \tf@lof=\write9
 \openout9 = `prace.lof'.
 
- [60
+[57
 
-] (./prace.lot)
+]
+No file prace.lot.
 \tf@lot=\write10
 \openout10 = `prace.lot'.
 
- [61
+[58
 
 
 ] (./tex/prilohy.tex (./prace.loa)
@@ -1377,7 +1610,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1--6
 
  []
 
-[62
+[59
 
 ]
 pdfTeX warning (ext4): destination with the same identifier (name{section.1}) has been already used, duplicate ignored
@@ -1386,35 +1619,50 @@ pdfTeX warning (ext4): destination with the same identifier (name{section.1}) ha
 l.7 \priloha{NÃ¡zev pÅ™Ã­lohy}
                               )
 
-Package caption Warning: Unused \captionsetup[figure] on input line 81.
+Package caption Warning: Unused \captionsetup[figure] on input line 82.
 See the caption package documentation for explanation.
 
 
-Package caption Warning: Unused \captionsetup[table] on input line 83.
+Package caption Warning: Unused \captionsetup[table] on input line 84.
 See the caption package documentation for explanation.
 
-(/usr/local/texlive/2023/texmf-dist/tex/generic/stringenc/se-pdfdoc.def
+[60
+
+] (/usr/local/texlive/2023/texmf-dist/tex/generic/stringenc/se-pdfdoc.def
 File: se-pdfdoc.def 2019/11/29 v1.12 stringenc: PDFDocEncoding
 ) (/usr/local/texlive/2023/texmf-dist/tex/generic/stringenc/se-utf8.def
 File: se-utf8.def 2019/11/29 v1.12 stringenc: UTF-8
-) [63
+) [61] (./prace.aux)
 
-] (./prace.aux)
-Package rerunfilecheck Info: File `prace.out' has not changed.
-(rerunfilecheck)             Checksum: 95DDE927C61452AE2DAF1CA35BF4C06E;19055.
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+LaTeX Warning: Temporary extra page added at the end. Rerun to get it removed.
+
+
+Package rerunfilecheck Warning: File `prace.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `prace.out':
+(rerunfilecheck)             Before: <no file>
+(rerunfilecheck)             After:  95DDE927C61452AE2DAF1CA35BF4C06E;19055.
  ) 
 Here is how much of TeX's memory you used:
- 38408 strings out of 476025
- 822017 string characters out of 5790017
- 1877388 words of memory out of 5000000
- 57962 multiletter control sequences out of 15000+600000
- 531050 words of font info for 65 fonts, out of 8000000 for 9000
+ 41564 strings out of 476025
+ 875090 string characters out of 5790017
+ 1901388 words of memory out of 5000000
+ 61056 multiletter control sequences out of 15000+600000
+ 532143 words of font info for 67 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  140i,17n,135p,1633b,2853s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbi1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
-Output written on prace.pdf (63 pages, 1183482 bytes).
+</usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbi1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfxc1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
+Output written on prace.pdf (61 pages, 1130557 bytes).
 PDF statistics:
- 1115 PDF objects out of 1200 (max. 8388607)
- 289 named destinations out of 1000 (max. 500000)
- 1007 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 641 PDF objects out of 1000 (max. 8388607)
+ 296 named destinations out of 1000 (max. 500000)
+ 55 words of extra memory for PDF output out of 10000 (max. 10000000)
 

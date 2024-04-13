@@ -291,7 +291,7 @@ Npgsql je open-source ADO.NET provider pro PostgreSQL, který umožňuje komunik
 
 \n{4}{Dapper}
 
-Dapper je open-source ORM knihovna pro .NET, která umožňuje mapovat databázové struktury na C\# objekty a vytvářet a provádět dotazy na databázi. Dapper.AOT je rozšíření knihovny Dapper, které umožňuje vytvářet a provádět dotazy na databázi v rámci AOT kompilace. Toho je zajištěno tím, že Dapper.AOT generuje kód pro dotazy na databázi v době kompilace. Využívá k tomu interceptorů a generátorů. Samotný balíček Dapper.AOT obsahuje další knihovnu - Dapper.Advisor, která pomáhá s analýzou zdrojového kódu a generováním kódu pro dotazy na databázi.
+Dapper je open-source ORM knihovna pro .NET, která umožňuje mapovat databázové struktury na C\# objekty a vytvářet a provádět dotazy na databázi. \emph{Dapper.AOT} je dílčí knihovna, která umožňuje vytvářet a provádět dotazy na databázi v rámci AOT kompilace. Toho je zajištěno tím, že Dapper.AOT generuje kód pro dotazy na databázi v době kompilace. Využívá k tomu interceptorů a generátorů. Samotný balíček Dapper.AOT obsahuje další knihovnu - \emph{Dapper.Advisor}, která pomáhá s analýzou zdrojového kódu a generováním kódu pro dotazy na databázi.
 
 \n{4}{OpenTelemetry}
 
@@ -341,7 +341,36 @@ Součástí řešení je společná konfigurace, která je využita ve všech sl
 
 Služba v systému hraje roli čtecího zařízení, které čte data ze zdroje a poskytuje je ostatním službám. Tato služba simulu základní kámen celého systému, značně ovlivňuje výkon a škálovatelnost celého systému. Očekává se velké množství požadavků na tuto službu.
 
-Za účelem zjednodušení implementace není využito čtení dat ze skutečného zdroje, ale jsou generována náhodná data. Načež data jsou následně poskytována se simulovaným zdržením, časově založenému na měření skutečného zdržení systému při čtení dat ze vzdáleného zdroje u obdobného systému. Tato služba je implementována jako REST API (TODO: pokud konečná implementace bude gRPC, změň tuto sekci), které poskytuje data ve formátu JSON. (TODO: Obrázek návrhu architektury a rozhraní služby).
+Za účelem zjednodušení implementace není využito čtení dat ze skutečného zdroje, ale jsou generována náhodná data. Načež data jsou následně poskytována se simulovaným zdržením, časově založenému na měření skutečného zdržení systému při čtení dat ze vzdáleného zdroje u obdobného systému. Tato služba je implementována rozhraní jako  které poskytuje data ve formátu JSON. (TODO: Obrázek návrhu architektury a rozhraní služby).
+
+\newline
+
+\begin{apiRoute}{get}{/api/storage/\{id\}}{get specific storage with id}
+	
+	\begin{routeParameter}
+		\routeParamItem{id}{id of storage}
+	\end{routeParameter}
+	\begin{routeResponse}{application/json}
+		\begin{routeResponseItem}{200}{ok}
+			\begin{routeResponseItemBody}
+{     
+	"id": 867654678,
+	"name" : "Apfelmus",
+	"count" : 25
+}
+			\end{routeResponseItemBody}
+		\end{routeResponseItem}
+		\begin{routeResponseItem}{404}{error: storage not found}
+			\begin{routeResponseItemBody}
+{
+	"message": "storage with id '11' not found!"
+}
+			\end{routeResponseItemBody}
+		\end{routeResponseItem}
+	\end{routeResponse}
+	
+\end{apiRoute}
+
 
 \n{3}{FUS - File Upload Service}
 
