@@ -146,10 +146,196 @@ Následující pasáž se zabírá návrhem a implementací testovacích služeb
 
 \n{3}{Architektura}
 
-Následující představuje 
+Pro implementaci požadované funkcionality bylo zvoleno následující rozdělení zodpovědnosti služeb:
+
+\begin{itemize}
+    \item \textbf{SRS - Signal reading service} - služba, která simuluje čtecí zařízení, které čte data ze zdroje a poskytuje je ostatním službám. Poskytuje REST API rozhraní.
+    \item \textbf{FUS - File Upload Service} - služba, která simuluje zapisovací zařízení, zapisuje nebo čte data do persistentního úložiště. Poskytuje REST API a gRPC rozhraní.
+    \item \textbf{BPS - Batch Processing Service} - služba, která zpracovává data z jiných služeb. Reaguje na požadavek o hromadném zpracování při předem definovaném splnění podmínek. Poskytuje REST API a gRPC rozhraní. Je přihlášena do RabbitMQ jako subscriber.
+    \item \textbf{EPS - Event Publishing Service} - slouží k vyvolání události, která je následně zpracována jinými službami. Poskytuje REST API rozhraní. Je přihlášena do RabbitMQ jako publisher.
+\end{itemize}
+
+obrázek architektury
 
 \n{4}{Řešení kompilačních cílů}
-Pro implementaci nativního AoT kompilovaného kódu bude využit atribut PublishAoT v projektovém souboru. Za účelem zajištění co největší podobnosti služeb zacílených na AoT a JIT kompilaci, bude využito zadefinování konstantních hodnot v rámci projektu. Konstanty \emph{JIT} a \emph{AOT} budou využity pro rozlišení chování služeb v rámci obou kompilačních verzí. S použitím direktiv kompilátoru a zmíněných konstant bude v nutných případech docíleno rozdílného volání API při snaze zachovat totožnou funkcionalitu.
+Pro kompilaci do nativního AOT kódu byl využit atribut PublishAoT v projektovém souboru. Za účelem zajištění co největší podobnosti služeb zacílených na AOT a JIT kompilaci, bude využito zadefinování konstantních hodnot v rámci projektu. Konstanty \emph{JIT} a \emph{AOT} budou využity pro rozlišení chování služeb v rámci obou kompilačních verzí. S použitím direktiv kompilátoru a zmíněných konstant bude v nutných případech docíleno rozdílného volání API při snaze zachovat totožnou funkcionalitu.
+
+foto využití konstant v kódu
+
+\n{3}{Organizace zdrojových souborů služeb}
+
+Organizace zdrojových souborů služeb, knihoven a pomocných souborů je řešena v rámci hlavního adresáře obsahujícího .NET solution soubor, pomocné soubory a solution složky s konkrétními projekty služeb a knihoven. Následující
+stromový graf představuje adresářovou strukturu projektu.
+    
+\begin{forest}
+    for tree={
+      font=\ttfamily,
+      grow'=0,
+      child anchor=west,
+      parent anchor=south,
+      anchor=west,
+      calign=first,
+      edge path={
+        \noexpand\path [draw, \forestoption{edge}]
+        (!u.south west) +(7.5pt,0) |- node[fill,inner sep=1.25pt] {} (.child anchor)\forestoption{edge label};
+      },
+      before typesetting nodes={
+        if n=1
+          {insert before={[,phantom]}}
+          {}
+      },
+      fit=band,
+      before computing xy={l=15pt},
+    }
+  [DTA
+    [Common
+      [DTA.Abstractions]
+      [DTA.Extensions.Common]
+      [DTA.Extensions.Postgre]
+      [DTA.Extensions.Swagger]
+      [DTA.Extensions.Telemetry]
+      [DTA.Migrator]
+      [DTA.Models]
+    ]
+    [Services
+      [DTA.BPS]
+      [DTA.EPS]
+      [DTA.FUS]
+      [DTA.SRS]
+    ]
+    [SolutionItems
+      [Directory.Build.props]
+      [NuGet.config]
+    ]
+    [.gitignore]
+    [DTA.sln]
+  ]
+  \end{forest}
+
+
+\n{3}{Společná struktura služeb}
+
+Každá z vyvinutých služeb využívá konkrétní .NET SDK \emph{Microsoft.NET.Sdk.Web}, které umožňuje využít WebApplication pro registraci a konfiguraci funkcionality služby a zároveň poskytuje konfigurovatelný Kestrel server. Pro zajištění jednotného přístupu k logování, metrikám a konfiguraci byly vytvořeny společné knihovny, které jsou využity ve všech službách.
+
+\begin{forest}
+    for tree={
+      font=\ttfamily,
+      grow'=0,
+      child anchor=west,
+      parent anchor=south,
+      anchor=west,
+      calign=first,
+      edge path={
+        \noexpand\path [draw, \forestoption{edge}]
+        (!u.south west) +(7.5pt,0) |- node[fill,inner sep=1.25pt] {} (.child anchor)\forestoption{edge label};
+      },
+      before typesetting nodes={
+        if n=1
+          {insert before={[,phantom]}}
+          {}
+      },
+      fit=band,
+      before computing xy={l=15pt},
+    }
+  [DTA.SampleService
+    [Api
+      [Rest]
+      [Grpc]
+      [Rabbit]
+    ] 
+    [Extensions
+      [ProgramExtensions.cs]
+    ]
+    [Monitoring
+      [AppMonitor.cs]
+    ]
+    [Properties
+      [launchSettings.json]
+    ]
+    [Services
+      [Interfaces
+        [ISampleService.cs]
+      ]
+      [SampleService.cs]
+    ]
+    [apssettings.json]
+    [Dockerfile-AOT]
+    [Dockerfile-JIT]
+    [DTA.SampleService.csproj]
+    [Program.cs]
+  ]
+  \end{forest}
+
+
+  \begin{itemize}
+    \item \textbf{Api} - obsahuje implementaci rozhraní služby
+    \item \textbf{Extensions} - implementuje extension metody specifické pro doménu služby
+    \item \textbf{Monitoring} - obsahuje statickou třídu, která drží reference na počítadla metrik
+    \item \textbf{Service} - ve složce jsou implementovány služby, které provádějí doménovou logiku služby
+    \item \textbf{Properties} - drží konfiguraci pro spuštění služby
+    \item \textbf{Program.cs} - vstupní bod služby
+    \item \textbf{appsettings.json} - konfigurace služby
+    \item \textbf{Dockerfile-AOT} - soubor pro tvorbu Docker obrazu pro AOT kompilaci
+    \item \textbf{Dockerfile-JIT} - soubor pro tvorbu Docker obrazu pro JIT kompilaci
+\end{itemize}
+
+Specifické služby obsahují dodatečné adresáře a soubory nutné pro implementaci jejich doménové funkce.
+
+\n{3}{Knihovny 3. stran}
+
+Pro implementaci funkcionality aplikace byly využity následující knihovny třetích stran.
+
+\n{4}{Npgsql}
+
+Npgsql je open-source ADO.NET provider pro PostgreSQL, který umožňuje komunikaci s PostgreSQL databází. Npgsql poskytuje základní balíček funkcí pro vytvoření připojení na základě standardizovaného řetězce pro připojení. Tento balíček sice není plně kompatibilní s AOT kompilací, funkce které jsou využity v rámci aplikace jsou avšak kompatibilní.
+
+\n{4}{Dapper}
+
+Dapper je open-source ORM knihovna pro .NET, která umožňuje mapovat databázové struktury na C\# objekty a vytvářet a provádět dotazy na databázi. Dapper.AOT je rozšíření knihovny Dapper, které umožňuje vytvářet a provádět dotazy na databázi v rámci AOT kompilace. Toho je zajištěno tím, že Dapper.AOT generuje kód pro dotazy na databázi v době kompilace. Využívá k tomu interceptorů a generátorů. Samotný balíček Dapper.AOT obsahuje další knihovnu - Dapper.Advisor, která pomáhá s analýzou zdrojového kódu a generováním kódu pro dotazy na databázi.
+
+\n{4}{OpenTelemetry}
+
+OpenTelemetry zprostředkovává množinu knihoven pro sběr, zpracování a export telemetrických dat. V rámci knihovny je umožňeno registrace vlastních metrik, logů a traces, ale také nastavení exportu vybraných systémových dat sbíraných v rámci knihoven .NET.
+
+\n{4}{Grpc}
+
+Knihovny pro implementaci komunikace pomocí protokolu HTTP/2 a gRPC. Konkrétně jsou využity \emph{Grpc.AspNetCore} v případě serveru, \emph{Grpc.Net.Client} pro klienta a \emph{Google.Protobuf} s \emph{Grpc.Tools} pro generování modelů v přístupu model first.
+
+\n{4}{RabbitMQ}
+
+Komunikace a implementace publish subscribe vzoru je umožněna knihovnou \emph{RabbitMQ.Client}. S její pomocí jsou vytvářeny fronty, dochází k přihlášení k odběru zpráv a jejich publikování.
+
+\n{4}{Swagger}
+
+Grafické rozhraní pro vizualizaci a testování REST API služeb. Swagger je využit pouze v kombinaci konfigurací \emph{JIT Debug}. K tomuto účelou jsou využity knihovny \emph{Swashbuckle.AspNetCore} a \emph{Microsoft.AspNetCore.OpenApi}.
+
+\n{3}{Společné knihovny}
+
+V rámci zjednodušení tvorby služeb, jednotné implementaci a konfiguraci, ale také z důvodu zajištění některé základní ale klíčové funkcionality, byly vytvořeny společné knihovny. Tyto knihovny obsahují společné třídy, rozhraní a konfigurace, které jsou použity ve všech službách.
+
+\n{4}{Persistence}
+
+Pro implementaci persistence byla vytvořena pomocná knihovna \\ \emph{DTA.Extensions.Postgres}, která poskytuje pomocnou funkcionalitu pro zajištění existence databáze pro službu, dle konfigurace v řetězci pro připojení.
+
+\n{4}{Migrace}
+
+Zajištění migrace databáze bylo implementováno po vlastní ose minimalistickým migrátorem v knihovně \emph{DTA.Migrator}. Tato knihovna poskytuje základní funkcionalitu pro vytvoření databáze, vytvoření tabulek a indexů, ale také zajištění migrace dat a verzování změn.
+
+\n{4}{Telemetrie}
+
+Knihovna \emph{DTA.Extensions.Telemetry} zprostředkovává extensions metody pro jednotnou a jednoduchou registraci sběru a export telemetrických dat napříč službami.
+
+\n{4}{Modely}
+
+Knihovna \emph{DTA.Models} obsahuje společné modely, které jsou využity ve službách. Je tím docílena viditelnost na datové struktury rozhraní aplikace napříč všemi službami, jež knihovnu referencují.
+
+\n{4}{Obecná funkcionalita}
+
+Za účelem sjednocení funkcionality využité napříč všemi službami jsou implementovány extension metody v knihovně \emph{DTA.Extensions.Common}. Zde je poskytnuta funkcionalita pro sestavení názvů pro službu.
+
+\n{3}{Společná konfigurace}
+
+Součástí řešení je společná konfigurace, která je využita ve všech službách. Ta je řešena jedna na úrovni solution souboru, tak i Directory.Build.props souboru. Týká se jednotné distribuce projektových atributů pro verzi, kompatibilitu s AOT, vynucení konkrétních pravidel pro kód a analyzéry.
 
 \n{3}{SRS - Signal reading service}
 
@@ -170,12 +356,6 @@ Služba v systému hraje roli zpracovávajícího zařízení, které zpracováv
 \n{3}{FRS - Fast Response Service}
 
 Služba v systému hraje roli rychlého zpracovávajícího zařízení, které zpracovává data z jiných služeb. Tato služba hraje roli služby, která je závislá na kritických systémech 3. strany a potřebují v co nejkratším čase odpovídat.
-
-\n{3}{Společné knihovny}
-
-V rámci zjednodušení tvorby služeb, jednotné implementaci a konfiguraci, ale také z důvodu zajištění některé základní ale klíčové funkcionality, byly vytvořeny společné knihovny. Tyto knihovny obsahují společné třídy, rozhraní a konfigurace, které jsou použity ve všech službách.
-
-V rámci knihoven byly implementovány různé extensions metody, sjednocen přístup k telmetrii, persistenci, ale také vytvořen vlastní minimalistický migrátor.
 
 \n{3}{Přehled řešení}
 
