@@ -8,6 +8,67 @@ Popis výsledné struktury aplikace, včetně popisu jednotlivých služeb a jej
 
 TODO: NDepend graf
 
+\n{2}{Vývojový proces}
+
+\n{3}{JIT}
+
+\n{4}{Výhody}
+
+Mezi hlavní výhody se řadí zprostředkování následujícího:
+
+\begin{itemize}
+    \item  \textbf{Reflexe} - CLR umožňuje využívat reflexi, která umožňuje získat informace o kódu za běhu aplikace. Tímto je umožněno vytvářet aplikace, které jsou schopny měnit své chování za běhu.
+    \item \textbf{Dynamické načítání} - CLR umožňuje dynamicky načítat knihovny za běhu aplikace. Tímto je umožněno vytvářet aplikace, které jsou schopny měnit své chování za běhu.
+    \item \textbf{Větší bezpečnost} - CLR zajišťuje, že aplikace nemůže přistupovat k paměti, která jí nebyla přidělena. Tímto je zajištěna bezpečnost aplikace a zabráněno chybám, které by mohly vést k pádu aplikace.
+    \item \textbf{Správa paměti} - CLR zajišťuje správu paměti pomocí GC. Tímto je zajištěno, že paměť je uvolněna vždy, když ji aplikace již nepotřebuje. Tímto je zabráněno tzv. memory leakům, které by mohly vést k pádu aplikace.
+    \item \textbf{Větší přenositelnost} - CLR zajišťuje, že aplikace je spustitelná na všech operačních systémech, na kterých je dostupné běhové prostředí CLR.
+\end{itemize}
+
+\n{4}{Nevýhody}
+
+Zatímco za nevýhody CLR se dá považovat:
+
+\begin{itemize}
+    \item  \textbf{Výkonnost} - I když určité optimalizace jsou prováděny pro konkrétní systém a architekturu, výkon CLR je nižší než výkon nativního kódu. Dalším výkonnostním měřítkem je rychlost startu aplikace, která je pro CLR vyšší než v případě nativního kódu.
+    \item \textbf{Operační paměť} - CLR využívá více operační paměti, jak pro aplikaci, tak i pro běhové prostředí.
+    \item \textbf{Velikost aplikace} - Přítomnost CLR nehraje zásádní roli v případě monolitických aplikací, ale v případě mikroslužeb je nutné CLR přidat ke každé službě. Tímto se zvyšuje velikost jedné aplikační instance.
+\end{itemize}
+
+\n{3}{AoT}
+
+\n{4}{Výhody}
+
+Mezi hlavní výhody se řadí zprostředkování následujícího:
+
+\begin{itemize}
+    \item  \textbf{Výkonnost} - CLR umožňuje využívat reflexi, která umožňuje získat informace o kódu za běhu aplikace. Tímto je umožněno vytvářet aplikace, které jsou schopny měnit své chování za běhu.
+    \item \textbf{Paměťová zátěž} - CLR umožňuje dynamicky načítat knihovny za běhu aplikace. Tímto je umožněno vytvářet aplikace, které jsou schopny měnit své chování za běhu.
+\end{itemize}
+
+\n{4}{Nevýhody}
+
+Zatímco za nevýhody CLR se dá považovat:
+
+\begin{itemize}
+    \item  \textbf{Absence nástrojů z CLR} - Mnoho nástrojů, které jsou dostupné v CLR, nejsou dostupné v AoT kompilaci. Mezi tyto nástroje patří například reflexe, dynamické načítání knihoven a další.
+    \item \textbf{Absence dynamického načítání} - například Assembly.LoadFile.
+    \item \textbf{Bez generování kódu za běhu} - například System.Reflection.Emit.
+    \item \textbf{Žádné C++/CLI} - např. System.Runtime.InteropServices.WindowsRuntime
+    \item \textbf{Windows: absence COM} - např. System.Runtime.InteropServices.ComTypes
+    \item \textbf{Vyžaduje trimming (ořezávání)} - má určitá omezení, je však klíčový pro rozumnou velikost výsledného programu
+    \item \textbf{Kompilace do jediného souboru} 
+    \item \textbf{Připojení běhových knihoven} - požadované běhové knihovny jsou součástí výsledného aplikačního souboru. To zvyšuje velikost samoteného programu ve srovnání s aplikacemi závislými na frameworku.
+    \item \textbf{System.Linq.Expressions} - výsledný kód používá svou interpretovanou podobu, která je pomalejší než run-time generovaný kompilovaný kód.
+    \item \textbf{Kompatibilita knihoven s AoT} - né všechny knihovny runtime jsou plně anotovány tak, aby byly kompatibilní s Native AoT. To znamená, že některá varování v knihovnách runtime nejsou pro koncové vývojáře použitelná.
+\end{itemize}
+
+
+\n{3}{Vývojové prostředí}
+
+\n{3}{Knihovny třetích stran}
+
+\n{3}{Závislosti}
+
 \n{1}{Analýza testování}
 
 \n{2}{Charakteristika testovacího prostředí}

@@ -49,6 +49,23 @@ Hardware, na kterém bude aplikace provozována, musí výkonnostně dostačovat
 
 Součástí tvorby tech stacku je výběr technologií, které budou použity pro implementaci aplikace. Výběr technologií je závislý na požadavcích na aplikaci a HW, na kterém bude aplikace provozována.
 
+\n{3}{Organizace a správa zdrojů}
+
+\n{4}{Git}
+Pro správu souborů práce byl zvolen SCM Git. Git je open-source verzovací, který umožňuje vytvářet, spravovat a sdílet soubory. Git je schopný pracovat s větvemi, které umožňují vytvářet paralelní vývojové větve.
+
+\n{4}{Struktura}
+Za účelem jednoduché organizace souborů bylo zvoleno řešení monorepozitáře. Monorepozitář je repozitář, který obsahuje veškeré soubory projektu, ale také relevantní dokumentaci, obrázky, podpůrné nástroj a zdrojové soubory diplomové práce. Následující struktura adresářů byla zvolena pro organizaci souborů.
+
+\begin{itemize}
+    \item \textbf{Documentation} - adresář obsahující dokumentaci aplikace.
+    \item \textbf{Source} - adresář obsahující zdrojové soubory aplikace.
+    \item \textbf{Thesis} - adresář obsahující zdrojové soubory textu diplomové práce a práci samotnou ve formátu pdf.
+\end{itemize}
+
+\n{4}{GitHub}
+Pro zaručení dostupnosti a sdílení veškerých prostředků souvisejících s prací byl vybrán GitHub, jakožto server pro hostování repozitáře. GitHub je open-source platforma pro verzování souborů a projektů. Navíc poskytuje rozšířující možnosti jako je CI/CD, správa dokumentace a další. Repozitář projektu je veden jako veřejný s licencí MIT.
+
 \n{3}{Kontejnerizace a orchestrace}
 
 Základním prvkem nasazení aplikace je kontejnerizace a orchestrace. Kontejnerizace zajišťuje, že aplikace bude spouštěna v izolovaném prostředí, které je nezávislé na hostitelském systému. Orchestrace zajišťuje, že aplikace bude spouštěna na dostupných zdrojích a bude schopna zvládnout zátěž, která je na ni kladena.
@@ -117,37 +134,40 @@ Nástroj pro výkonové testování, který umožňuje vývojářům testovat v�
 
 \n{3}{Testovací služby}
 
-Pro implementaci testovacích služeb z podstaty práce zvolena technologie .NET, konkrétně jazyk C\#. Služby budou implementovány jako mikroslužby a budou podporovat kontejnerizované nasazení v microservice architektuře. Služby budou vytvořeny tak, že každou dílčí službu reprezentuje projektový soubor s doménových kódem. 
+Pro implementaci testovacích služeb z podstaty práce zvolena technologie .NET, konkrétně jazyk C\#. Služby budou implementovány jako mikroslužby a budou podporovat kontejnerizované nasazení v microservice architektuře. Služby budou vytvořeny tak, že každou dílčí službu reprezentuje projektový soubor s doménových kódem. Celé řešení spolu s dílčími knihovnami bude součástí jednoho solution souboru.
 
-ve dvou verzích, které se liší v použitém způsobu kompilace, a to JIT a AoT.
+Pro řešení byla vybrána nejnovější verze .NET SDK 8.0, která poskytuje nejrozsáhlejší impelmentaci a podporu pro nativní AoT kompilaci. Jakožto nástroj pro vývoj a správu projektů byl zvolen JetBrains Rider. Rider je IDE, které poskytuje širokou škálu funkcí pro vývoj aplikací v .NET.
+
+Konkrétní knihovny použité v rámci implementace budou záviset na konkrétních požadavcích na služby a popsány v následující sekci.
 
 \n{2}{Návrh a implementace testovacích služeb}
 
-\n{3}{Předpoklady služeb}
+Následující pasáž se zabírá návrhem a implementací testovacích služeb, které budou využity pro analýzu vývoje a výkonu jednotlivých kompilací AOT a JIT v rámci .NET.
 
-Služby musí být implementovány tak, aby v obou kompilačních verzích poskytovaly totožnou funkcionalitu. Jejich chování musí být konfigurovatelné na úrovni environmentálních proměnných kontejneru, v němž jsou spouštěny. Zároveň musí sbírat data o svém chování a poskytovat je monitorovacím nástrojům.
+\n{3}{Architektura}
 
-AoT kompilované služby budou otestovány s ohledem na možné kompilační optimalizace, které ovlivňují výsledný program. Toto chování je ovlivňeno atributem OptimizationPreference, který je součástí konfigurace služby.
+Následující představuje 
 
-\n{3}{Implementace služeb}
+\n{4}{Řešení kompilačních cílů}
+Pro implementaci nativního AoT kompilovaného kódu bude využit atribut PublishAoT v projektovém souboru. Za účelem zajištění co největší podobnosti služeb zacílených na AoT a JIT kompilaci, bude využito zadefinování konstantních hodnot v rámci projektu. Konstanty \emph{JIT} a \emph{AOT} budou využity pro rozlišení chování služeb v rámci obou kompilačních verzí. S použitím direktiv kompilátoru a zmíněných konstant bude v nutných případech docíleno rozdílného volání API při snaze zachovat totožnou funkcionalitu.
 
-\n{4}{SRS - Signal Readings Service}
+\n{3}{SRS - Signal reading service}
 
 Služba v systému hraje roli čtecího zařízení, které čte data ze zdroje a poskytuje je ostatním službám. Tato služba simulu základní kámen celého systému, značně ovlivňuje výkon a škálovatelnost celého systému. Očekává se velké množství požadavků na tuto službu.
 
 Za účelem zjednodušení implementace není využito čtení dat ze skutečného zdroje, ale jsou generována náhodná data. Načež data jsou následně poskytována se simulovaným zdržením, časově založenému na měření skutečného zdržení systému při čtení dat ze vzdáleného zdroje u obdobného systému. Tato služba je implementována jako REST API (TODO: pokud konečná implementace bude gRPC, změň tuto sekci), které poskytuje data ve formátu JSON. (TODO: Obrázek návrhu architektury a rozhraní služby).
 
-\n{4}{FUS - File Upload Service}
+\n{3}{FUS - File Upload Service}
 
 Služba v systému hraje roli zapisovacího zařízení, které zapisuje data do zdroje. Tato služba hraje roli méně vytíženého služby, která nemá značný vliv na fungování systému jako celku. Požadavky, jenž musí vyřídit nejsou kritické a nutné řešit s minimální odezvou.
 
 Služba je implementována s REST API rozhraním. (TODO: Obrázek návrhu architektury a rozhraní služby).
 
-\n{4}{BPS - Batch Processing Service}
+\n{3}{BPS - Batch Processing Service}
 
 Služba v systému hraje roli zpracovávajícího zařízení, které zpracovává data z jiných služeb. Tato služba hraje roli služby, která je závislá na ostatních službách a zpracovává data z nich. Reaguje na požadavek o hromadném zpracování při předem definovaném splnění podmínek.
 
-\n{4}{FRS - Fast Response Service}
+\n{3}{FRS - Fast Response Service}
 
 Služba v systému hraje roli rychlého zpracovávajícího zařízení, které zpracovává data z jiných služeb. Tato služba hraje roli služby, která je závislá na kritických systémech 3. strany a potřebují v co nejkratším čase odpovídat.
 
@@ -156,6 +176,10 @@ Služba v systému hraje roli rychlého zpracovávajícího zařízení, které 
 V rámci zjednodušení tvorby služeb, jednotné implementaci a konfiguraci, ale také z důvodu zajištění některé základní ale klíčové funkcionality, byly vytvořeny společné knihovny. Tyto knihovny obsahují společné třídy, rozhraní a konfigurace, které jsou použity ve všech službách.
 
 V rámci knihoven byly implementovány různé extensions metody, sjednocen přístup k telmetrii, persistenci, ale také vytvořen vlastní minimalistický migrátor.
+
+\n{3}{Přehled řešení}
+
+Obrázek adresářové struktury + diagram služeb + popis
 
 \n{2}{Konfigurace aplikace}
 
@@ -200,139 +224,6 @@ Dodatečná konfigurace je řešena podle proměnných prostředí a týká se p
 
 \n{3}{Nastavení uživatelského rozhraní}
 
-
-\n{2}{Tvorba programu v dotnet}
-
-Následující část popisuje obecnou koncepci a strukturu projektu aplikace v dotnet. Součástí je postup pro tvorbu a vydání projektu. Blížší pozornost bude věnována tvorbě nativního AoT projektu.
-
-\n{3}{Struktura aplikačních zdrojů}
-
-Základním strukturovaným prvkem v .NET aplikaci je projektový soubor. Jedná se o XML soubor disponující příponou \emph{.csproj}. V rámci něj dochází ke konfiguraci a deklaraci, jak bude .NET CLI s projektem pracovat. Zároveň jsou zde definováný závislosti na další projekty a knihovny. Mezi základní charakteristiky běžně určené v projektovém souboru patří verze .NET, verze projektu/assembly, seznam závislostí, konfigurace pro buildování, testování a publikaci.
-
-Pro tvorbu složitějších aplikací je možné využít více projektových souborů, které jsou následně propojeny. Tento způsob je využíván především v případě větších aplikací, které jsou rozděleny do více částí. Propojení a vazby mezi více projekty v aplikaci je definované pomocí tzv. solution souboru. Jedná se o kontejnerový soubor s příponou \emph{.sln}, jenž popisuje závislosti mezi projektovými soubory, konfigurace sestavení a nasazení a správu pomocných souborů.
-
-\n{3}{Obecný postup}
-
-\begin{enumerate}
-    \item \textbf{Nastavení vývojového prostředí}: Sestává z instalace sady nástrojů .NET SDK.
-    
-    \item \textbf{Vytvoření projektu}: Pomocí příkazu \texttt{dotnet new} nebo skrze GUI IDE je vytvořen nový projekt a solution soubor. Součástí je výběr typu projektu, jazyka, frameworku a dalších konfiguračních parametrů.
-    
-    \item \textbf{Programování}: Sestává z tvorby kódu aplikace, testování a ladění.
-
-    \item \textbf{Správa závislostí}: Pomocí nástrojů .NET CLI je možno referencovat balíčky a knihovny v rámci projektu.
-    
-    \item \textbf{Kompilace}: Kompilace aplikace probíhá pomocí příkazu \texttt{dotnet build}, který převede vysokoúrovňový kód do IL. V případě AoT dochází k dodatečné kompilace do nativního kódu dle cílové architektury.
-    
-    \item \textbf{Publikování}: Použitím příkazu příkazu \texttt{dotnet publish} dochází k vydání aplikace, tedy specifickému sestavení v konfigurovaném nastavení.
-\end{enumerate}
-
-\n{3}{Tvorba nativního programu}
-
-Pro tvorbu nativního programu v .NET je nutné využít speciálního atributu \emph{PublishAoT} v projektovém souboru. Tento atribut je zodpovědný za konfiguraci projektu pro nativní AoT kompilaci. Při jeho použití je nutné specifikovat cílovou architekturu, pro kterou je nativní kód vytvářen. Po kompilaci kódu do IL dochází k dodatečné kompilaci do nativního kódu, která dodává další konzolový výstup s informacemi o průběhu kompilace.
-
-Vzhledem k tomu, že nativní AoT kompilace je v .NETu stále vývojově nezralá, samotný proces kompilace, tak jako analýza kompilovaného kódu není dostatečně informativní. Za účelem přenesení vysokoúrovňových konceptů a formálních zápisů v C\# je při kompilace prováděno široké spektrum transformací a gerování kódu.
-
-\n{4}{EmitCompilerGeneratedFiles}
-
-Jedná se
-
-\n{4}{Deklarace unmanaged rozhraní}
-
-
-
-\n{4}{Trimming}
-
-\n{3}{Přehled podpory}
-
-\n{4}{Funkcionalita}
-
-Následující přehled představuje rozsah funkcionality implementované v rámci .NET frameworku 8.0, konkrétně APS.NET k datu zvěřejnění práce.
-
-\begin{itemize}
-    \item \textbf{REST minimal API}
-    \item \textbf{gRPC API}
-    \item \textbf{JWT Authentication}
-    \item \textbf{CORS}
-    \item \textbf{HealthChecks}
-    \item \textbf{HttpLogging}
-    \item \textbf{Localization}
-    \item \textbf{OutputCaching}
-    \item \textbf{RateLimiting}
-    \item \textbf{RequestDecompression}
-    \item \textbf{ResponseCaching}
-    \item \textbf{ResponseCompression}
-    \item \textbf{Rewrite}
-    \item \textbf{StaticFiles}
-    \item \textbf{WebSockets}
-\end{itemize}
-
-\n{4}{Cíle kompilace}
-
-.NET poskytuje podporu pro kompilaci zdrojového kódu v režimu AoT pouze pro určité operační systémy:
-
-\begin{itemize}
-    \item \textbf{Windows} - plná podpora
-    \item \textbf{Linux} - plná podpora
-    \item \textbf{macOS} - plná podpora
-    \item \textbf{Android} - částečná podpora
-    \item \textbf{iOS} - částečná podpora
-    \item \textbf{WebAssembly} - částečná podpora
-\end{itemize}
-
-\n{2}{Srovnání vývoje}
-
-\n{3}{JIT}
-
-\n{4}{Výhody}
-
-Mezi hlavní výhody se řadí zprostředkování následujícího:
-
-\begin{itemize}
-    \item  \textbf{Reflexe} - CLR umožňuje využívat reflexi, která umožňuje získat informace o kódu za běhu aplikace. Tímto je umožněno vytvářet aplikace, které jsou schopny měnit své chování za běhu.
-    \item \textbf{Dynamické načítání} - CLR umožňuje dynamicky načítat knihovny za běhu aplikace. Tímto je umožněno vytvářet aplikace, které jsou schopny měnit své chování za běhu.
-    \item \textbf{Větší bezpečnost} - CLR zajišťuje, že aplikace nemůže přistupovat k paměti, která jí nebyla přidělena. Tímto je zajištěna bezpečnost aplikace a zabráněno chybám, které by mohly vést k pádu aplikace.
-    \item \textbf{Správa paměti} - CLR zajišťuje správu paměti pomocí GC. Tímto je zajištěno, že paměť je uvolněna vždy, když ji aplikace již nepotřebuje. Tímto je zabráněno tzv. memory leakům, které by mohly vést k pádu aplikace.
-    \item \textbf{Větší přenositelnost} - CLR zajišťuje, že aplikace je spustitelná na všech operačních systémech, na kterých je dostupné běhové prostředí CLR.
-\end{itemize}
-
-\n{4}{Nevýhody}
-
-Zatímco za nevýhody CLR se dá považovat:
-
-\begin{itemize}
-    \item  \textbf{Výkonnost} - I když určité optimalizace jsou prováděny pro konkrétní systém a architekturu, výkon CLR je nižší než výkon nativního kódu. Dalším výkonnostním měřítkem je rychlost startu aplikace, která je pro CLR vyšší než v případě nativního kódu.
-    \item \textbf{Operační paměť} - CLR využívá více operační paměti, jak pro aplikaci, tak i pro běhové prostředí.
-    \item \textbf{Velikost aplikace} - Přítomnost CLR nehraje zásádní roli v případě monolitických aplikací, ale v případě mikroslužeb je nutné CLR přidat ke každé službě. Tímto se zvyšuje velikost jedné aplikační instance.
-\end{itemize}
-
-\n{3}{AoT}
-
-\n{4}{Výhody}
-
-Mezi hlavní výhody se řadí zprostředkování následujícího:
-
-\begin{itemize}
-    \item  \textbf{Výkonnost} - CLR umožňuje využívat reflexi, která umožňuje získat informace o kódu za běhu aplikace. Tímto je umožněno vytvářet aplikace, které jsou schopny měnit své chování za běhu.
-    \item \textbf{Paměťová zátěž} - CLR umožňuje dynamicky načítat knihovny za běhu aplikace. Tímto je umožněno vytvářet aplikace, které jsou schopny měnit své chování za běhu.
-\end{itemize}
-
-\n{4}{Nevýhody}
-
-Zatímco za nevýhody CLR se dá považovat:
-
-\begin{itemize}
-    \item  \textbf{Absence nástrojů z CLR} - Mnoho nástrojů, které jsou dostupné v CLR, nejsou dostupné v AoT kompilaci. Mezi tyto nástroje patří například reflexe, dynamické načítání knihoven a další.
-    \item \textbf{Absence dynamického načítání} - například Assembly.LoadFile.
-    \item \textbf{Bez generování kódu za běhu} - například System.Reflection.Emit.
-    \item \textbf{Žádné C++/CLI} - např. System.Runtime.InteropServices.WindowsRuntime
-    \item \textbf{Windows: absence COM} - např. System.Runtime.InteropServices.ComTypes
-    \item \textbf{Vyžaduje trimming (ořezávání)} - má určitá omezení, je však klíčový pro rozumnou velikost výsledného programu
-    \item \textbf{Kompilace do jediného souboru} 
-    \item \textbf{Připojení běhových knihoven} - požadované běhové knihovny jsou součástí výsledného aplikačního souboru. To zvyšuje velikost samoteného programu ve srovnání s aplikacemi závislými na frameworku.
-    \item \textbf{System.Linq.Expressions} - výsledný kód používá svou interpretovanou podobu, která je pomalejší než run-time generovaný kompilovaný kód.
-    \item \textbf{Kompatibilita knihoven s AoT} - né všechny knihovny runtime jsou plně anotovány tak, aby byly kompatibilní s Native AoT. To znamená, že některá varování v knihovnách runtime nejsou pro koncové vývojáře použitelná.
-\end{itemize}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
