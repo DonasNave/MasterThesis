@@ -4,13 +4,21 @@
 
 \n{2}{Architektura}
 
-Popis výsledné struktury aplikace, včetně popisu jednotlivých služeb a jejich vzájemné interakce.
+Výsledná architektura aplikace je založena na mikroslužbách. Splňuje předem definované funkční a nefunkční požadavky. V případě testovaných služeb, zapojuje základní množinu systémových knihoven a knihoven 3. stran.
 
-TODO: NDepend graf
+Po straně telemetrie, implementuje sběr a zpracování dat z různých zdrojů. Výsledná data jsou následně zpracována a uložena do databáze, dle druhu dat. Veškeré dostupné zdroje jsou uživatelsky přívětive vizualizovány v rámci webového rozhraní.
+
+Stack je testovatelný a nasaditelný na všech hlavních platformách.
 
 \n{2}{Vývojový proces}
 
+Následující sekce popisuje vývojový proces, tak jak se týkal testovaných služeb. Vývojový proces byl založen na experimentaci a snaze využít co nejvíc dostupných knihoven a nástrojů, za cenu nutnosti řešení problémů, případně změny implementace.
+
 \n{3}{JIT}
+
+Vývojový proces pro kompilaci služeb JIT se zacílením na dotnet runtime probíhal standarntím způsobem. Veškeré dostupné knihovny a nástroje byly plně kompatibilní s JIT kompilací. Nedošlo k žádným nepředpokládaným problémům.
+
+Znatelný rozdíl oproti běžnému vývoji byl výběr technologií, který přihlížel k potencionální kompatibilitě s AOT a tedy řešení, které inherntně vyžadovala funkce rezervované pro využití dotnet runtime, byly ihned zavrženy.
 
 \n{4}{Výhody}
 
@@ -34,7 +42,9 @@ Zatímco za nevýhody CLR se dá považovat:
     \item \textbf{Velikost aplikace} - Přítomnost CLR nehraje zásádní roli v případě monolitických aplikací, ale v případě mikroslužeb je nutné CLR přidat ke každé službě. Tímto se zvyšuje velikost jedné aplikační instance.
 \end{itemize}
 
-\n{3}{AoT}
+\n{3}{AOT}
+
+Kompilace do nativního kódu probíhala s průběžnými problémy. Podpora ze strany knihoven 3. stran ve spoustě případů neodopvídala deklarovaným možnostem. Vývojový proces byl značně zpomalován nutností řešení problémů, které byly způsobeny nedostatečnou podporou. Experimentace s řešeními často vyústila v nutnost změny implementace, případě v implementaci zcela vlastní.
 
 \n{4}{Výhody}
 
@@ -67,14 +77,48 @@ Zatímco za nevýhody CLR se dá považovat:
 
 \n{3}{Knihovny třetích stran}
 
+\n{4}{Entity Framework}
+
+Entity framework se pyšní vysokou kompatibilitou s AoT kompilací. V rámci vývoje nebyly zaznamenány problémy, avšak následné testování se ukázalo problematické. EF jakožto plnohodnotný ORM framework stopuje stav objektu a jeho změny. Toto chování bohužel vyžaduje dynamické generování kódu, což je v rozporu s možnostmi AOT kompilovaného kódu. Vypnutí této funkcionality je pouze částečné, neb EF stále vyžaduje reflexi při vkládání nových entit do databáze.
+
+\n{4}{Fluent Migrator}
+
+Fluent Migrator je knihovna, která umožňuje verzování databáze pomocí kódu. V rámci testování bylo zjištěno, že knihovna využívá reflexi pro načítání migrací. Toto chování je v rozporu s AOT kompilací a výsledkem je chyba při spuštění migrace. Problém byl vyřešen vytvořením vlastního minimalistického migrátoru, který nepoužívá reflexi.
+
+\n{4}{Grpc}
+
+Vytváření rozhrání a modelů pro gRPC komunikaci vyžadovalo využití přístupu model first. Tento přístup využívá generátorů pro tvorbu kódu, definijucího kódového rozhraní pro .NET. Tímto je dosaženo vygenerování veškerého potřebného kódu v době kompilace a je zajištěna kompatibila s AOT. Pro definici modelu code first ovšem kombatibila s AOT není zajištěna.
+
+\n{4}{Párování konfigurace}
+
+V rámci systémové .NET knihovny je umožněno volání API, jenž načte data ze sjednocení stavu proměnných prostředi a konfiguračního souboru. Součástí API je volání metody mapující tuto konfiguraci na předem definovaný objekt. Toto chování dle dostupných informací není v rozporu s AOT kompilací a volání relevantního kódu neprodukuje AOT warning. Z testování však vyplynulo, že mapování konfigurace ne objekt bylo problematické a neprobíhalo správně. Z toho důvodu je v případě AOT kompilace za pomocí deriktivy použité přímé načtení jednotlivých hodnot z konfigurace, dle stromomvého klíče.
+
 \n{3}{Závislosti}
 
 \n{1}{Analýza testování}
 
 \n{2}{Charakteristika testovacího prostředí}
 
+Testovací prostředí, na němž došlo k testování, bylo založeno na operačním systému OSX Ventura. Pro testování byl využit docker engine. Testování bylo provedeno na stroji s čipem Mac M1.
+
 \n{2}{Výsledky testování}
+
+\n{3}{Scénář 1}
+
+\n{3}{Scénář 2}
+
+\n{3}{Scénář 3}
+
+\n{3}{Scénář 4}
+
+\n{3}{Scénář 5}
 
 \n{1}{Doporučení pro použití AoT kompilace v dotnet}
 
-TODO: AoT kompilovaný kód přínáší xxx za cenu yyy. Na základě výsledků zzz usuzuji...
+AOT kód přináší jasné výhody výkonnostní výhody za cenu kompatibility. Řešení tvorby toho kódu, je však s ohledem na běžný postup velmi nešťastné. Využití interceptorů a generátorů bere inciativu z rukou vývojáře a vytváří naprosto nový program. Toto chování není natolik odlišné od průběhu kompilace do nativního systémového kódu v jiných jazycích, v případě .NET avšak bylo dodáno znatelně "post mortem".
+
+Valná většina konkurenčních výhod, jenž z .NET plyne souvisí s možnostmi jeho runtime prostředí. Nativní AOT kompilace má smysl jen ve velice specifický situacích, jenž lze blíže identifikovat jako poskytování cludové infrastruktury a s tím spojenou potřebu běhu velkého množství instancí. Dalším příkladem je využití Serverless nebo také jako lambda funkce, kdy je poskytována funkcionalita a běh spuštění aplikace pro její vykonání je dílčí režie.
+
+Případy konkurenční výhody pro AOT kompilaci staví na jednom předpokladu a to je zájem či potřeba mít zdrojové kódy v .NET, respektive jazyce C\#. Při unimodálním přístupu, kdy je vývojář, respektive zapojený tým schopen přijmout jiný jazyk, jsou výhody AOT kompilace značně zmenšeny, zatímco nedostatky jsou zvýrazněny.
+
+Nativní AOT kompilace má nesporné výhody za splnění uričtých podmínek na požadavky vůči nasazení, codebase a vývojového týmu. Zaplňuje určitou díru na trhu, která je však vzhledem k výše uvedeným podmínkám velice specifická. Pro běžné vývojáře usilující o výkonostní výhody, je však AOT kompilace v současné podobě nevhodná.

@@ -343,34 +343,7 @@ Služba v systému hraje roli čtecího zařízení, které čte data ze zdroje 
 
 Za účelem zjednodušení implementace není využito čtení dat ze skutečného zdroje, ale jsou generována náhodná data. Načež data jsou následně poskytována se simulovaným zdržením, časově založenému na měření skutečného zdržení systému při čtení dat ze vzdáleného zdroje u obdobného systému. Tato služba je implementována rozhraní jako  které poskytuje data ve formátu JSON. (TODO: Obrázek návrhu architektury a rozhraní služby).
 
-\newline
-
-\begin{apiRoute}{get}{/api/storage/\{id\}}{get specific storage with id}
-	
-	\begin{routeParameter}
-		\routeParamItem{id}{id of storage}
-	\end{routeParameter}
-	\begin{routeResponse}{application/json}
-		\begin{routeResponseItem}{200}{ok}
-			\begin{routeResponseItemBody}
-{     
-	"id": 867654678,
-	"name" : "Apfelmus",
-	"count" : 25
-}
-			\end{routeResponseItemBody}
-		\end{routeResponseItem}
-		\begin{routeResponseItem}{404}{error: storage not found}
-			\begin{routeResponseItemBody}
-{
-	"message": "storage with id '11' not found!"
-}
-			\end{routeResponseItemBody}
-		\end{routeResponseItem}
-	\end{routeResponse}
-	
-\end{apiRoute}
-
+API
 
 \n{3}{FUS - File Upload Service}
 
@@ -403,11 +376,9 @@ Základní pravidla směrování
 \begin{itemize}
     \item / - cesta na statickou hlavní stránku-rozcestník aplikace
     \item /grafana - směrování na Grafanu
-    \item /fus - směrování na FUS
-    \item /srs - směrování na SRS
-    \item /bps - směrování na BPS
-    \item /frs - směrování na FRS
 \end{itemize}
+
+Statická stránka html.index je obdobným způsobem napojena do virualizovaného repozitáře kontejneru.
 
 \n{4}{LGTM - Monitorovací stack}
 
@@ -421,18 +392,36 @@ Dodatečná konfigurace je řešena podle proměnných prostředí a týká se p
     \item \textbf{GF\_AUTH\_ANONYMOUS\_ENABLED} - nastavení, které určuje, zda bude povoleno anonymní přihlášení do Grafany.
 \end{itemize}
 
-\n{4}{SGS - Signal Generation Service}
+
+\n{4}{SRS - Signal Reading Service}
+
+Nasazení obsahuje konfiguraci definifující úroveň logování a cíl exportu telemetrických dat.
 
 \n{4}{FUS - File Upload Service}
 
+Nasazení obsahuje konfiguraci definifující úroveň logování a cíl exportu telemetrických dat.
+
 \n{4}{BPS - Batch Processing Service}
 
-\n{4}{FRS - Fast Response Service}
+Nasazení obsahuje konfiguraci definifující úroveň logování a cíl exportu telemetrických dat.
 
-\n{4}{K6}
+\n{4}{EPS - Fast Response Service}
+
+Nasazení obsahuje konfiguraci definifující úroveň logování a cíl exportu telemetrických dat.
+
+\n{3}{Konfigurace persistence}
+
+\n{4}{PostgreSQL}
+
+PostgreSQL je konfigurována pomocí proměnných prostředí, kdy rozdíl od základní konfiguraci činí pouze definice přihlašovacích údajů pro připojení k databázi.
+
+\n{4}{InfluxDB}
+
+InfluxDB má upraven název výchozí databáze a nastavení autentifikace a přihlašovacích údajů. Tyto změny jsou provedeny za pomocí proměnných prostředí.
 
 \n{3}{Nastavení uživatelského rozhraní}
 
+Definice uživatelského rozhraní, respektive dostupných dashboardů, je dána při sestavení obrazu LGTM. V rámci něj jsou předdefinovány hodnoty pro připojení zdrojů dat, tj. Prometheus, Loki, Tempo a InfluxDb. Patřičné dashboardy zobrazující relevantní data pro různé scénáře systému byly předem připraveny a jsou k dispozici po otevření Grafany anonymním uživatelem.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -441,11 +430,17 @@ Dodatečná konfigurace je řešena podle proměnných prostředí a týká se p
 
 \n{1}{Testování scénářů}
 
-Testování scénářů je klíčovou součástí testování výkonu a škálovatelnosti mikroslužeb. Scénáře jsou definovány jako soubor kroků, které mají být provedeny, a jsou použity k simulaci zátěže na mikroslužby. Scénáře jsou vytvořeny pomocí testovacích nástrojů, které umožňují vytvářet a spouštět testy, které simuluji reálné uživatelské scénáře.
+Testování scénářů je klíčovou součástí testování výkonu mikroslužeb. Scénáře jsou definovány jako soubor kroků, které mají být provedeny, a jsou použity k simulaci zátěže na mikroslužby. Scénáře jsou vytvořeny pomocí testovacích nástrojů, které umožňují vytvářet a spouštět testy, které simuluji reálné uživatelské scénáře.
 
 \n{2}{Požadavky na scénáře}
 
 Scénáře musí být vytvořeny tak, aby simulovali reálné uživatelské scénáře. To znamená, že musí být vytvořeny tak, aby obsahovaly kroky, které mají být provedeny, a musí být vytvořeny tak, aby obsahovaly data, která mají být použita.
+
+\n{2}{Definice scénářů}
+
+Scénáře jsou vytvořeny jako množina javascriptových souborů splňujících požadavku API nástroje K6. Každý scénář je definován přes jeden a více scriptových souborů. Tyto soubory obsahují kroky, které mají být provedeny, a data, která mají být použita. Pro sjednocení obecných nastavení jsou vytvořený konfigurační soubory, které jsou využity ve více scénářích.
+
+Každý scénař má definován vlastní dashboard v Grafaně, který je využit pro sledování výsledků testů v reálném čase. Zároveň je součástní každého scénáře readme soubor, jenž podrobněji popisuje jednotlivé kroky a data, která jsou využita.
 
 \n{2}{Popis scénářů}
 
@@ -457,28 +452,109 @@ Scénář 1 je zaměřen na schopnost mikroslužeb odpovídat na požadavky. K t
 
 Jelikož healthcheck endpoint je triviální ve své implementaci, nehraje roli další režie spojená se zpracováním logiky požadavku. Tímto je zajištěno, že se otestuje maximální vliv jednotlivých nasazení na výkon a škálovatelnost mikroslužeb.
 
-\n{3}{Scénář 2 - přístup k persistenci}
+Scénář se dělí na více kroků, aby při každém byl zjištěn dostatek zdrojů pro v systému pro testovanou službu. Krok je proveden vždy po určitém časovém intervalu, který je definován v konfiguračním souboru testu.
 
-Cílem tohoto scénáře je otestovat schopnost poradit si s vysokým množství asynchroních operací přístupu k datům. Scénař testuje schopnost mikroslužeb zpracovávat požadavky na zápis a čtení dat z databáze.
+\n{4}{Relevantní služby}
 
+\begin{itemize}
+    \item \textbf{SRS, FUS, BPS, EPS} - běžné služby s definovaným healthcheck endpointem
+\end{itemize}
+
+\n{4}{Průběh scénáře}
+
+\begin{itemize}
+    \item \textbf{Krok 1} - Spuštění služeb v rámci stacku
+    \item \textbf{Krok 2} - Na služby jsou zasílány požadavky na healthcheck endpoint. Charakter požadavků je stupňující se k konfigurovanému maximu, načež zase klesá.
+    \item \textbf{Krok 3} - Služby ukončují svoji činnost a zasílají data o provedeném testu
+\end{itemize}
+
+\n{3}{Scénář 2 - přístup k perzistenci}
+
+Cílem tohoto scénáře je otestovat schopnost poradit si s vysokým množství asynchroních operací přístupu k datům. Scénář se pokouší identifikovat dodatečné režie spojené s přístupem k perzistenci a zjišťuje, zda jsou služby schopny zpracovat vysoký počet požadavků na perzistenci. Zejména je cílem pozorovat potencionál rozdíl v přístupu AOT a JIT zkompilované služby k systémovému API.
+
+\n{4}{Relevantní služby}
+
+\begin{itemize}
+    \item \textbf{FUS} - služba pro přístup k perzistenci na databázi Postgres
+\end{itemize}
+
+\n{4}{Průběh scénáře}
+
+\begin{itemize}
+    \item \textbf{Krok 1} - Služba je spuštěna v rámci stacku
+    \item \textbf{Krok 2} - Na službu jsou zasílány požadavky na zápis i čtení dat z perzistentního úložiště. Charakter požadavků je stupňující se k konfigurovanému maximu, načež zase klesá.
+    \item \textbf{Krok 3} - Služba ukončuje svoji činnost a zasílá data o prevedeném testu
+\end{itemize}
 
 \n{3}{Scénář 3 - zátěž zpracování dat}
 
 Cílem tohoto scénáře je otestovat schopnost mikroslužeb v jednotlivých architekturách zpracovat náročnější operace. Scénář se zaměřuje na samotnou podstatu přístupu k vnitřnímu systémového API, efektivitě jeho využití a další režii, která by mohla být odlišná mezi JIT a AoT kompilací.
 
-\n{3}{Scénář 4 - komunikace mezi službami}
+Předmětem scénář jsou dva výpočetně náročné algoritmy - faktoriál a Fibonacciho posloupnost. Tyto algoritmy jsou implementovány v rámci služby a jsou volány zvenčí. Scénář je vytvořen tak, aby simuloval zátěž na výpočetní jednotku a prozkoumal tak potencionální výkonnostní rozdíly v rámci přístupu k systémovému API a organizaci instrukcí.
 
-Tento scénář je zaměřen na schopnost a výkkonosti mikroslužeb při komunikaci mezi sebou. Toho je docíleno využitím různých komunikačních protokolů, kdy je otestována komunikace:
+\n{4}{Relevantní služby}
 
 \begin{itemize}
-    \item \textbf{REST} - přes http1
-    \item \textbf{gRPC} - přes http2
-    \item \textbf{PubSub} - přes message broker
+    \item \textbf{BPS} - služba, která poskytuje data pro výpočet faktoriálu a Fibonacciho posloupnosti
 \end{itemize}
 
-\n{3}{Scénář 5 - rychlost spuštění služby}
+\n{4}{Průběh scénáře}
+
+\begin{itemize}
+    \item \textbf{Krok 1} - Služba je spuštěna v rámci stacku
+    \item \textbf{Krok 2} - Na službu jsou zasílány požadavky na výpočet faktoriálu a Fibonacciho posloupnosti. Charakter požadavků je stupňující se k konfigurovanému maximu, načež zase klesá.
+    \item \textbf{Krok 3} - Služba ukončuje svoji činnost a zasílá data o prevedeném testu
+    
+\end{itemize}
+
+\n{3}{Scénář 4 - komunikace mezi službami}
+
+Tento scénář je zaměřen na schopnost a výkkonosti mikroslužeb při komunikaci mezi sebou. Toho je docíleno využitím dostupných komunikačních protokolů.
+
+\n{4}{Relevantní služby}
+
+\begin{itemize}
+    \item \textbf{FUS} - služba hraje roli serveru, na něž se dotáže klient gRPC voláním. Následně přistupuje k perzistenci pro získání dat k splnění volání.
+    \item \textbf{BPS} - poslouchá nad předem definovanou frontou a vyčkává na zprávu pro zpracování. V momentu přijetí zprávy, zpracovává vyvolanou událost a získává data ze vzdáleného volání z FUS.
+    \item \textbf{EPS} - na základě přijatého volání přes REST API, zasílá služba EPS zprávu do předem definované fronty, na niž naslouchá BPS.
+\end{itemize}
+
+\n{4}{Průběh scénáře}
+
+\begin{itemize}
+    \item \textbf{Krok 1} - Služby jsou spuštěny v rámci stacku
+    \item \textbf{Krok 2} - Do služby EPS je zaslán požadavek na zpracování dat. 
+    \item \textbf{Krok 3} - Služba EPS zprávu zasílá do fronty, na kterou naslouchá služba BPS. 
+    \item \textbf{Krok 4} - Služba BPS zprávu zpracovává a získává data ze vzdáleného volání na službu FUS. 
+    \item \textbf{Krok 5} - Služba FUS získává data z perzistence a zasílá je zpět službě BPS. 
+    \item \textbf{Krok 6} - Služba BPS zpracovává data.
+    \item \textbf{Krok 7} - Služby ukončují svoji činnost a zasílají data o prevedeném testu
+\end{itemize}
+
+\n{3}{Scénář 5 - rychlost odpovědi služby}
 
 Cílem tohoto scénáře je otestovat rychlost spuštění služby. Scénář testuje, jak rychle je služba schopna odpovědět na požadavek po spuštění. V rámci testu jsou testovány různé endpointy, které jsou volány po spuštění služby.
+
+\n{4}{Relevantní služby}
+
+\begin{itemize}
+    \item \textbf{SRS} - služba je testována pro svoji nutnost serializace vygenerované datové odpovědi. Vyžaduje určitou množinu operací, jenž se podepíše dále nad rychlostí odpovědi služby a více přiblíží reálnému scénáři.
+    \item \textbf{FUS} - za účelem otestování rychlosti odpovědi služby s ohledem na vazbu do dalšího systému je využita i služba FUS. S jejím přístupem k persistentnímu úložišti přiblíží scénář, kdy je nutné pro zpracování odpovědi nejen nastartovat službu, ale i získat data ze vzdáleného zdroje.
+\end{itemize}
+
+\n{4}{Průběh scénáře}
+
+\begin{itemize}
+    \item \textbf{Krok 1} - Služba je spuštěn v rámci stacku
+    \item \textbf{Krok 2} - V návaznosti na spuštění služby je zaslán požadavek na získání dat.
+    \item \textbf{Krok 3} - Služba SRS/FUS zpracovává požadavek a zprostředkovává data.
+    \item \textbf{Krok 4} - Data jsou zaslána zpět klientovi.
+    \item \textbf{Krok 5} - Služba ukončuje svoji činnost.
+\end{itemize}
+
+\n{2}{Spouštění scénářů}
+
+Jednotlivé scénáře jsou spouštěny dle definice v příslušném readme souboru. Jedná se o sekvenci instrkcí/příkazů pro přípravu požadovaného stavu systému a spuštění K6 testu v rámci kontejneru.
 
 \n{2}{Zpracování a vizualizace dat}
 
@@ -486,9 +562,9 @@ Po provedení testování scénářů je nutné zpracovat a vizualizovat data, k
 
 \n{3}{Monitorování v reálném čase}
 
-Monitorování v reálném čase je klíčovou součástí testování výkonu a škálovatelnosti mikroslužeb. Monitorování v reálném čase umožňuje sledovat výkon a škálovatelnost mikroslužeb při běhu testů.
+Monitorování v reálném čase je klíčovou součástí testování výkonu a škálovatelnosti mikroslužeb. Umožňuje sledovat výkon a škálovatelnost mikroslužeb při běhu testů.
 
-Toho je docíleno využitím dashboardů v grafaně, důkladnou konfigurací a zobrazením metrik, kterých sběr je implementován v rámci mikroslužeb.
+Toho je docíleno využitím dashboardů v Grafaně, důkladnou konfigurací a zobrazením metrik, kterých sběr je implementován v rámci mikroslužeb.
 
 Dalším aspektem monitorování v reálném čase je zobrazení výsledků testů v reálném čase. Toho je rovněž docíleno pomocí specifických dashboardů v Grafaně, které integrují data z K6 testovacího nástroje a zaslané do InfluxDb. Díky propojení Grafany s InfluxDb je možné sledovat výsledky testů v reálném čase.
 
