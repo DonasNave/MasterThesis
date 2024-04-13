@@ -111,15 +111,15 @@ Základem aplikace je zdrojový kód, který je v případě platformy dotnet re
 
 \n{4}{C\#}
 
-představuje staticky typovaný jazyk, který je založen na jazyce C++. Vznikl v roce 2000 a je nejpoužívanějších z jazyků pro vývoj aplikací na platformě .NET. C\# je objektově orientovaný jazyk, který umožňuje vytvářet aplikace pomocí tříd, objektů a metod.
+představuje všestranný, objektově orientovaný jazyk navržený tak, aby umožnil vývojářům vytvářet širokou škálu bezpečných a robustních aplikací, které běží na .NET Framework. Kombinuje sílu a flexibilitu C++ s jednoduchostí jazyka Visual Basic.
 
 \n{4}{F\#}
 
-je funkcionální jazyk, který je založen na jazyce OCaml. Základem F\# je funkcionální programování, které umožňuje vytvářet aplikace pomocí funkcí. F\# je multiplatformní jazyk, který je možné použít na operačních systémech Windows, Linux a macOS. Vývojáři mohou využívat několik nástrojů pro vývoj aplikací v jazyce F\#. Mezi nejpoužívanější nástroje patří Visual Studio, Visual Studio Code a JetBrains Rider.
+je funkční jazyk, který také podporuje imperativní a objektově orientované programování. Primárně je vhodný pro vědecké aplikace a aplikace náročné na data. Zakládá na silném typování, umožňuje stručný, robustní a výkonný kód.
 
 \n{4}{Visual Basic}
 
-je založen na jazyce BASIC. Historie jazyka sahá až do roku 1964, kdy byl vytvořen první jazyk BASIC. 
+programovací jazyk vyvinutý společností Microsoft. VB, představený v roce 1991, byl navržen jako uživatelsky přívětivé programovací prostředí založené na jazyce BASIC; jeho drag-and-drop rozhraní umožňovalo snadné vytváření grafických uživatelských rozhraní (GUI). Tento přístup zpřístupnil programování širšímu okruhu uživatelů a kladl důraz na rychlý vývoj aplikací (RAD).
 
 \n{3}{Aplikační struktura}
 
@@ -151,15 +151,11 @@ Cílem kompilace je převést zdrojový kód do podoby, kterou je možné spusti
 
 \n{4}{PC}
 
-Pro desktopové počítače je využíván framework .NET Core. .NET Core umožňuje vývoj desktopových aplikací pro platformy Windows, Linux a macOS pomocí jazyka C\# a .NET. Vývojáři mohou využívat nástroje a knihovny platformy .NET pro vývoj desktopových aplikací. .NET Core poskytuje sadu nástrojů pro vývoj desktopových aplikací, včetně nástrojů pro vytváření uživatelského rozhraní, správu dat a komunikaci s cloudovými službami. .NET Core umožňuje vývoj desktopových aplikací pro platformy Windows, Linux a macOS pomocí jednoho kódu. Vývojáři mohou vytvářet aplikace pro různé platformy pomocí jednoho kódu a sdílet kód mezi různými platformami.
+Zacílení na platformy PC nabízí probíhá několika způsoby. Aplikace obvykle běží na CLR, kde je kód kompilován do jazyka IL a poté spouštěn prostřednictvím .NET runtime, přičemž je za běhu převeden na nativní kód. Pro situace, kdy .NET runtime není nebo nemůže být přítomen poskytuje .NET možnost kompilace Ahead-Of-Time (AOT) prostřednictvím nástrojů jako .NET Native.
 
+\n{4}{Mobilní zařízení}
 
-
-\n{4}{Xamarin}
-
-Pro vývoj mobilních aplikací je využíván framework Xamarin. Xamarin umožňuje vývoj mobilních aplikací pro platformy Android a iOS pomocí jazyka C\# a .NET. Vývojáři mohou využívat nástroje a knihovny platformy .NET pro vývoj mobilních aplikací. Xamarin poskytuje sadu nástrojů pro vývoj mobilních aplikací, včetně nástrojů pro vytváření uživatelského rozhraní, správu dat a komunikaci s cloudovými službami. Xamarin umožňuje vývoj mobilních aplikací pro platformy Android a iOS pomocí jednoho kódu. Vývojáři mohou vytvářet aplikace pro obě platformy pomocí jednoho kódu a sdílet kód mezi oběma platformami. Xamarin poskytuje sadu nástrojů pro vývoj mobilních aplikací, včetně nástrojů pro vytváření uživatelského rozhraní, správu dat a komunikaci s cloudovými službami. Xamarin umožňuje vývoj mobilních aplikací pro platformy Android a iOS pomocí jednoho kódu. Vývojáři mohou vytvářet aplikace pro obě platformy pomocí jednoho kódu a sdílet kód mezi oběma platformami. Xamarin poskytuje sadu nástrojů pro vývoj mobilních aplikací, včetně nástrojů pro vytváření uživatelského rozhraní, správu dat a komunikaci s cloudovými službami. Xamarin umožňuje vývoj mobilních aplikací pro platformy Android a iOS pomocí jednoho kódu.
-
-Pro .NET MAUI aplikace je cílem kompilace vytvoření spustitelného souboru, který lze spustit na cílovém zařízení. To se liší od jiných typů aplikací, které mohou být spuštěny na různých zařízeních, jako jsou webové aplikace, desktopové aplikace a další. 
+Pro mobilní vývoj poskytuje .NET MAUI (nebo také Xamarin), sadu nástrojů, které umožňují vývojářům psát nativní aplikace pro Android, iOS a Windows s jedinou sdílenou kódovou základnou .NET. Xamarin se integruje do sady Visual Studio a umožňuje vývojářům používat knihovny C\# a .NET k vytváření a spouštění mobilních aplikací. Tyto aplikace jsou kompilovány specificky pro každou platformu a mohou využívat nativní funkce zařízení.
 
 \n{3}{Kompilace pro CLR}
 
@@ -267,6 +263,12 @@ S rozšiřováním mikroslužeb a kontejnerů se jejich správa stává složito
 \n{3}{Komunikace}
 
 Mikroslužby spolu komunikují prostřednictvím rozhraní API, obvykle prostřednictvím protokolů HTTP/HTTPS, i když pro aplikace citlivější na výkon lze použít i jiné protokoly, například gRPC. Komunikační vzory zahrnují synchronní požadavky (např. RESTful API) a asynchronní zasílání zpráv (např. pomocí brokerů zpráv jako RabbitMQ nebo Kafka). Tím je zajištěno volné propojení mezi službami, což umožňuje jejich nezávislý vývoj a nasazení.
+
+\n{4}{REST API}
+
+\n{4}{gRPC}
+
+\n{4}{Message brokers}
 
 \n{3}{Škálování}
 

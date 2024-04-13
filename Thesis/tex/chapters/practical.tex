@@ -14,7 +14,14 @@ Aplikace pro svůj účel nezávislého testování výkonu a škálovatelnosti 
 
 \n{3}{Funkční požadavky}
 
-Funkční požadavky popisují, jak má aplikace fungovat a jaké funkce má poskytovat.
+\n{4}{Mikroslužby}
+
+Každá aplikace musí poskytovat rozhraní REST API s healtcheck enpointem pro informování celého systému o svém stavu. Dalším požadavkem je obecná komunikace mezi službami pomocí vybraných protokolů. Aplikace musí být schopna sbírat a vizualizovat data o výkonu a škálovatelnosti mikroslužeb. To zahrnuje sběr a vizualizaci metrik, logů a traces.
+
+
+\n{4}{Stack}
+
+Aplikační stack jakožto celek musí zahrnovat komunikaci pomocí protokolů HTTP/2 a gRPC. Je nutné aby implementoval publish - subscribe pattern pro komunikaci mezi vybranými službami. Stack musí zprostředkovat přístup a ukládání dat do relační a timeseries databáze. Musí poskytovat nutné rozhraní pro sběr, uchování a vizualizaci metrik a testovacích dat. Stack musí být schopen konfigurovat testovací scénáře, které se mají provést a také je spouštět v manuálním a automatizovaném režimu.
 
 \n{4}{Sběr a vizualizace dat}
 
@@ -58,11 +65,25 @@ Definice balíčků je řešena pomocí konfiguračních souborů, které jsou p
 
 \n{3}{Persistenční vrstva}
 
-Pro persistenci relačních dat byla zvolena technologie PostgreSQL. PostgreSQL je open-source relační databázový systém, který je schopný zvládnout velké množství dat a zároveň poskytovat vysoký výkon.
+Persistenční vrsta zprostředovává dlouhodobé uchování dat. Z důvodů požadavků na persistenci byly vybrány následující.
 
-\n{3}{Komunikační protokoly}
+\n{4}{Postgres}
 
-Pro komunikaci mezi službami byl zvolen protokol HTTP. Verze HTTP/2 byla zvolena pro její schopnost zvládnout vysoký počet požadavků a zároveň poskytovat vysoký výkon.
+Open-source relační databáze, která umožňuje ukládat a spravovat data. Postgres je schopná pracovat s relačními daty, které jsou uloženy v tabulkách. Poskytuje základní klientský balíček pro .NET, který umožňuje komunikaci s databází. Tento balíček je kompatibilní s Native AoT kompilací.
+
+\n{4}{InfluxDB}
+
+Open-source timeseries databáze, která umožňuje ukládat a spravovat časové řady. Využití InfluxDb je pragramtické z důvodu nativní podbory Influxdb napojení z nástroje K6 pro export testovacích dat.
+
+\n{3}{Komunikační metody}
+
+Za účelem analýzy možností komunikace klienta se službami, ale i interní komunikace, bylo vybráno k implementaci hned několik protokolů. 
+
+\n{4}{REST API} V rámci Kestrel serveru každé služby je využit protokol HTTP/1 a komunikace pomocí REST API. Toto rozhraní slouží pro komunikaci klienta se službou a poskytuje data ve formátu JSON.
+
+\n{4}{gRPC} Vybrané služby implementují komunikaci pomocí protokolu HTTP/2 a gRPC. Za tímto účelem mají zmíněné služby otevřené rozhraní na dodatečném portu. gRPC protokol je využit přístupem model first, tedy rozhraní je definováno pomocí protobuf souboru a následně je vygenerován kód pro komunikaci.
+
+\n{4}{RabbitMQ} Pro implementaci komunikace prodle vzoru Publish - Subscribe byl vybrán message broker RabbitMQ. Umožňuje službám odebírat data z jiných služeb a zároveň poskytovat data jiným službám. Tím je zajištěna asynchronní messaging mezi službami.
 
 \n{3}{Monitorovací nástroje}
 
@@ -70,23 +91,23 @@ Pro monitorování aplikace byl zvolen Grafana observability stack pro jeho pokr
 
 \n{4}{Grafana}
 
-Open-source platforma pro vizualizaci a analýzu dat. Grafana umožňuje vizualizovat data z různých zdrojů, včetně časových řad, protokolů a tras.
+Grafana je open source webová aplikace pro analýzu a interaktivní vizualizaci dat. Poskytuje možnost sestavit dashboard z komponent jako jsou grafy, tabulky a další. Jedná se o velmi populární technologii v doménách serverové infrastruktury a monitorování. Grafana umožňuje sjednotit monitorovací služby a zobrazit data v reálném čase. Podporuje širokou škálu datových zdrojů, jako jsou Prometheus, InfluxDB, Tempo, Loki nebo Elasticsearch, což umožňuje jednoduchou konfiguraci a připojení cílových dat. Kombinací dat z různých zdrojů umožňuje vytvářet komplexní pohled na celý systém. To je obzlvášť cenné pro analýzu systému pomocí kombinací metrických dat.
 
 \n{4}{Prometheus}
  
-Open-source systém pro sběr a vizualizaci metrik. Prometheus umožňuje sbírat metriky z různých zdrojů, včetně aplikací, systémů a služeb.
+Open-source monitorovací systém. Shromažďuje a ukládá metriky jako time-series data a umožňuje se na ně dotazovat pomocí vlastního výkonného jazyka PromQL. Prometheus je zvláště vhodný pro monitorování microservice architektur díky své schopnosti automaticky objevovat cíle. Jeho architektura podporuje více modelů získávání dat, stahování metrik z cílových služeb nebo collectorů, odesílání metrik přes gateway a zprostředkování notifikací.
 
 \n{4}{Loki}
 
-Open-source systém pro sběr a vizualizaci protokolů. Loki umožňuje sbírat protokoly z různých zdrojů, včetně aplikací, systémů a služeb.
+Škálovatelný agregátor logů. Na rozdíl od obdobných systémů pro agregaci logů, jenž indexují všechna data, Loki indexuje pouze metadata, přičemž ukládá celá data logu efektivním způsobem. Loki je navržen tak, aby jednoduše spolupracoval s Grafanou a umožňuje rychle vyhledávat a vizualizovat logy.
 
 \n{4}{Tempo}
 
-Open-source systém pro sběr a vizualizaci tras. Tempo umožňuje sbírat trasy z různých zdrojů, včetně aplikací, systémů a služeb.
+Je snadno ovladatelný open-source backend pro distribuované sledování požadavků. Tempo podporuje ukládání a načítání traces, které jsou přijímány ze zdrojů jako Jaeger, Zipkin a OpenTelemetry. Na rozdíl od mnoha jiných systémů pro traces nevyžaduje Tempo žadné předem definované schéma. Je navržen tak, aby se bezproblémově integroval s Prometheus a Loki.
 
 \n{4}{OpenTelemetry}
 
-je open-source systém pro sběr a vizualizaci metrik, protokolů a tras. OpenTelemetry umožňuje sbírat metriky, protokoly a trasy z různých zdrojů, včetně aplikací, systémů a služeb.
+Open source collector telemetrických dat. Poskytuje jednotný, vendor-agnostic způsob sběru, zpracování a exportu telemetrických dat  Je konfigurovatelný a podporuje více pipeline, které mohou upravovat telemetrická data při jejich průchodu. Výrazně zjednodušuje instrumentaci služeb, protože umožňuje agregovat a exportovat metriky, taces a logy do různých analytických a monitorovacích nástrojů. Poskytuje podporu pro export dat do Prometheus, Tempo i Loki.
 
 \n{3}{Testovací nástroje}
 
@@ -96,13 +117,15 @@ Nástroj pro výkonové testování, který umožňuje vývojářům testovat v�
 
 \n{3}{Testovací služby}
 
-Pro implementaci testovacích služeb byl zvolena technologie dotnet, konkrétně jazyk C\#. Dotnet je open-source platforma pro vývoj a provozování aplikací, která umožňuje vytvářet výkonné a škálovatelné aplikace. Služby budou implementovány jako mikroslužby, které budou spouštěny v kontejnerech. Služby jsou vytvořeny ve dvou verzích, které se liší v použitém způsobu kompilace, a to JIT a AoT.
+Pro implementaci testovacích služeb z podstaty práce zvolena technologie .NET, konkrétně jazyk C\#. Služby budou implementovány jako mikroslužby a budou podporovat kontejnerizované nasazení v microservice architektuře. Služby budou vytvořeny tak, že každou dílčí službu reprezentuje projektový soubor s doménových kódem. 
+
+ve dvou verzích, které se liší v použitém způsobu kompilace, a to JIT a AoT.
 
 \n{2}{Návrh a implementace testovacích služeb}
 
 \n{3}{Předpoklady služeb}
 
-Služby musí být implementovány tak, aby v obou kompilačních verzích poskytovaly totožnou funkcionalitu. Jejich chování musí být konfigurovatelné na úrovni kontejneru, který je spouští. Zároveň musí sbírat data o svém chování a poskytovat je monitorovacím nástrojům.
+Služby musí být implementovány tak, aby v obou kompilačních verzích poskytovaly totožnou funkcionalitu. Jejich chování musí být konfigurovatelné na úrovni environmentálních proměnných kontejneru, v němž jsou spouštěny. Zároveň musí sbírat data o svém chování a poskytovat je monitorovacím nástrojům.
 
 AoT kompilované služby budou otestovány s ohledem na možné kompilační optimalizace, které ovlivňují výsledný program. Toto chování je ovlivňeno atributem OptimizationPreference, který je součástí konfigurace služby.
 
@@ -120,13 +143,19 @@ Služba v systému hraje roli zapisovacího zařízení, které zapisuje data do
 
 Služba je implementována s REST API rozhraním. (TODO: Obrázek návrhu architektury a rozhraní služby).
 
-\n{3}{BPS - Batch Processing Service}
+\n{4}{BPS - Batch Processing Service}
 
 Služba v systému hraje roli zpracovávajícího zařízení, které zpracovává data z jiných služeb. Tato služba hraje roli služby, která je závislá na ostatních službách a zpracovává data z nich. Reaguje na požadavek o hromadném zpracování při předem definovaném splnění podmínek.
 
-\n{3}{FRS - Fast Response Service}
+\n{4}{FRS - Fast Response Service}
 
 Služba v systému hraje roli rychlého zpracovávajícího zařízení, které zpracovává data z jiných služeb. Tato služba hraje roli služby, která je závislá na kritických systémech 3. strany a potřebují v co nejkratším čase odpovídat.
+
+\n{3}{Společné knihovny}
+
+V rámci zjednodušení tvorby služeb, jednotné implementaci a konfiguraci, ale také z důvodu zajištění některé základní ale klíčové funkcionality, byly vytvořeny společné knihovny. Tyto knihovny obsahují společné třídy, rozhraní a konfigurace, které jsou použity ve všech službách.
+
+V rámci knihoven byly implementovány různé extensions metody, sjednocen přístup k telmetrii, persistenci, ale také vytvořen vlastní minimalistický migrátor.
 
 \n{2}{Konfigurace aplikace}
 
@@ -158,10 +187,6 @@ Dodatečná konfigurace je řešena podle proměnných prostředí a týká se p
     \item \textbf{GF\_SERVER\_SERVE\_FROM\_SUB\_PATH} - nastavení, které určuje, zda bude Grafana dostupná z podadresáře v URL. Toto nastavení je důležité pro správné směrování požadavků na Grafanu.
     \item \textbf{GF\_AUTH\_ANONYMOUS\_ENABLED} - nastavení, které určuje, zda bude povoleno anonymní přihlášení do Grafany.
 \end{itemize}
-
-\n{4}{Postgres}
-
-X
 
 \n{4}{SGS - Signal Generation Service}
 
@@ -324,11 +349,36 @@ Scénáře musí být vytvořeny tak, aby simulovali reálné uživatelské scé
 
 \n{2}{Popis scénářů}
 
-Následující sekce obsahuje popis scénářů, které byly vytvořeny pro testování výkonu a škálovatelnosti mikroslužeb kompilovaných JIT a AoT.
+Následující sekce obsahuje popis scénářů, které byly vytvořeny pro testování výkonu a škálovatelnosti mikroslužeb kompilovaných JIT a AoT. Ke každému scénáři patři odpovídající sada souborů scriptů a konfigurací. Rovněž každý scénář disponuje vlastním interaktivním dashboardem v Grafaně, který umožňuje sledovat výsledky testů v reálném čase.
 
-\n{3}{Scénář 1 - TBS}
+\n{3}{Scénář 1 - schopnost odpovídat služeb}
 
-\n{3}{Scénář 2 - TBS}
+Scénář 1 je zaměřen na schopnost mikroslužeb odpovídat na požadavky. K tomuto účelu je využit základní endpoint \emph{/health}, který informuje o stavu služby. Scénář je vytvořen tak, aby simuloval zátěž na mikroslužby a zjišťoval, zda jsou schopny odpovídat na požadavky.
+
+Jelikož healthcheck endpoint je triviální ve své implementaci, nehraje roli další režie spojená se zpracováním logiky požadavku. Tímto je zajištěno, že se otestuje maximální vliv jednotlivých nasazení na výkon a škálovatelnost mikroslužeb.
+
+\n{3}{Scénář 2 - přístup k persistenci}
+
+Cílem tohoto scénáře je otestovat schopnost poradit si s vysokým množství asynchroních operací přístupu k datům. Scénař testuje schopnost mikroslužeb zpracovávat požadavky na zápis a čtení dat z databáze.
+
+
+\n{3}{Scénář 3 - zátěž zpracování dat}
+
+Cílem tohoto scénáře je otestovat schopnost mikroslužeb v jednotlivých architekturách zpracovat náročnější operace. Scénář se zaměřuje na samotnou podstatu přístupu k vnitřnímu systémového API, efektivitě jeho využití a další režii, která by mohla být odlišná mezi JIT a AoT kompilací.
+
+\n{3}{Scénář 4 - komunikace mezi službami}
+
+Tento scénář je zaměřen na schopnost a výkkonosti mikroslužeb při komunikaci mezi sebou. Toho je docíleno využitím různých komunikačních protokolů, kdy je otestována komunikace:
+
+\begin{itemize}
+    \item \textbf{REST} - přes http1
+    \item \textbf{gRPC} - přes http2
+    \item \textbf{PubSub} - přes message broker
+\end{itemize}
+
+\n{3}{Scénář 5 - rychlost spuštění služby}
+
+Cílem tohoto scénáře je otestovat rychlost spuštění služby. Scénář testuje, jak rychle je služba schopna odpovědět na požadavek po spuštění. V rámci testu jsou testovány různé endpointy, které jsou volány po spuštění služby.
 
 \n{2}{Zpracování a vizualizace dat}
 
@@ -336,11 +386,15 @@ Po provedení testování scénářů je nutné zpracovat a vizualizovat data, k
 
 \n{3}{Monitorování v reálném čase}
 
-Monitorování v reálném čase je klíčovou součástí testování výkonu a škálovatelnosti mikroslužeb. Monitorování v reálném čase umožňuje sledovat výkon a škálovatelnost mikroslužeb v reálném čase.
+Monitorování v reálném čase je klíčovou součástí testování výkonu a škálovatelnosti mikroslužeb. Monitorování v reálném čase umožňuje sledovat výkon a škálovatelnost mikroslužeb při běhu testů.
+
+Toho je docíleno využitím dashboardů v grafaně, důkladnou konfigurací a zobrazením metrik, kterých sběr je implementován v rámci mikroslužeb.
+
+Dalším aspektem monitorování v reálném čase je zobrazení výsledků testů v reálném čase. Toho je rovněž docíleno pomocí specifických dashboardů v Grafaně, které integrují data z K6 testovacího nástroje a zaslané do InfluxDb. Díky propojení Grafany s InfluxDb je možné sledovat výsledky testů v reálném čase.
 
 \n{3}{Sběr historických dat}
 
-Sběr historických dat je klíčovou součástí testování výkonu a škálovatelnosti mikroslužeb. Sběr historických dat umožňuje sledovat výkon a škálovatelnost mikroslužeb v čase.
+Historická data jsou automaticky ukládána do jednotlivých databází při sběru. Po propagaci telemetrických dat do jednotného collectoru OpenTelemetry jsou data dále poskytována službám Loki, Tempo a Prometheus. Ty jedna jednotlivá telemetrická data zpracují, zároveň ale slouží jako jejich persistence. Data z výsledků testů jsou ukládána do InfluxDb.
 
 % \n{2}{Obrázek}
 % Obrázek \ref{fig:logo} prezentuje logo Fakulty aplikované informatiky.

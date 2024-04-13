@@ -28,45 +28,48 @@
 \contentsline {subsection}{\numberline {1.6}Kompilace zdrojového kódu}{19}{subsection.1.6}%
 \contentsline {subsubsection}{\numberline {1.6.1}Cíle kompilace}{19}{subsubsection.1.6.1}%
 \contentsline {paragraph}{\itshape \bfseries {PC}}{19}{section*.15}%
-\contentsline {paragraph}{\itshape \bfseries {Xamarin}}{19}{section*.16}%
+\contentsline {paragraph}{\itshape \bfseries {Mobilní zařízení}}{19}{section*.16}%
 \contentsline {subsubsection}{\numberline {1.6.2}Kompilace pro CLR}{20}{subsubsection.1.6.2}%
 \contentsline {paragraph}{\itshape \bfseries {Výstup}}{20}{section*.17}%
-\contentsline {subsubsection}{\numberline {1.6.3}Kompilace do nativního kódu}{21}{subsubsection.1.6.3}%
+\contentsline {subsubsection}{\numberline {1.6.3}Kompilace do nativního kódu}{20}{subsubsection.1.6.3}%
 \contentsline {paragraph}{\itshape \bfseries {Výstup}}{21}{section*.18}%
 \contentsline {subsubsection}{\numberline {1.6.4}Popis procesu}{21}{subsubsection.1.6.4}%
 \contentsline {subsection}{\numberline {1.7}Běh kódu}{21}{subsection.1.7}%
-\contentsline {subsubsection}{\numberline {1.7.1}CLR}{22}{subsubsection.1.7.1}%
-\contentsline {paragraph}{\itshape \bfseries {Funkce}}{22}{section*.19}%
+\contentsline {subsubsection}{\numberline {1.7.1}CLR}{21}{subsubsection.1.7.1}%
+\contentsline {paragraph}{\itshape \bfseries {Funkce}}{21}{section*.19}%
 \contentsline {paragraph}{\itshape \bfseries {JIT kompilace}}{22}{section*.20}%
-\contentsline {paragraph}{\itshape \bfseries {R2R kompilace}}{23}{section*.21}%
-\contentsline {subsubsection}{\numberline {1.7.2}Nativní kód}{23}{subsubsection.1.7.2}%
-\contentsline {section}{\numberline {2}Microservice architektura}{24}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Historie}{24}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}Základní principy}{24}{subsection.2.2}%
-\contentsline {subsubsection}{\numberline {2.2.1}Mikroslužby}{24}{subsubsection.2.2.1}%
-\contentsline {subsubsection}{\numberline {2.2.2}Virtualizace a kontejnerizace}{24}{subsubsection.2.2.2}%
-\contentsline {subsubsection}{\numberline {2.2.3}Orchestrace}{25}{subsubsection.2.2.3}%
-\contentsline {subsection}{\numberline {2.3}Vlastnosti}{25}{subsection.2.3}%
-\contentsline {subsubsection}{\numberline {2.3.1}Komunikace}{25}{subsubsection.2.3.1}%
-\contentsline {subsubsection}{\numberline {2.3.2}Škálování}{25}{subsubsection.2.3.2}%
+\contentsline {paragraph}{\itshape \bfseries {R2R kompilace}}{22}{section*.21}%
+\contentsline {subsubsection}{\numberline {1.7.2}Nativní kód}{22}{subsubsection.1.7.2}%
+\contentsline {section}{\numberline {2}Microservice architektura}{23}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Historie}{23}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Základní principy}{23}{subsection.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.1}Mikroslužby}{23}{subsubsection.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.2}Virtualizace a kontejnerizace}{23}{subsubsection.2.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.3}Orchestrace}{24}{subsubsection.2.2.3}%
+\contentsline {subsection}{\numberline {2.3}Vlastnosti}{24}{subsection.2.3}%
+\contentsline {subsubsection}{\numberline {2.3.1}Komunikace}{24}{subsubsection.2.3.1}%
+\contentsline {paragraph}{\itshape \bfseries {REST API}}{24}{section*.22}%
+\contentsline {paragraph}{\itshape \bfseries {gRPC}}{24}{section*.23}%
+\contentsline {paragraph}{\itshape \bfseries {Message brokers}}{24}{section*.24}%
+\contentsline {subsubsection}{\numberline {2.3.2}Škálování}{24}{subsubsection.2.3.2}%
 \contentsline {subsubsection}{\numberline {2.3.3}Odolnost}{25}{subsubsection.2.3.3}%
-\contentsline {subsubsection}{\numberline {2.3.4}Vývoj}{26}{subsubsection.2.3.4}%
-\contentsline {subsection}{\numberline {2.4}Testování}{26}{subsection.2.4}%
-\contentsline {subsection}{\numberline {2.5}Výhody a nevýhody}{26}{subsection.2.5}%
-\contentsline {subsubsection}{\numberline {2.5.1}Výhody}{26}{subsubsection.2.5.1}%
-\contentsline {paragraph}{\itshape \bfseries {Zvýšená agilita}}{26}{section*.22}%
-\contentsline {paragraph}{\itshape \bfseries {Škálovatelnost}}{26}{section*.23}%
-\contentsline {paragraph}{\itshape \bfseries {Odolnost}}{26}{section*.24}%
-\contentsline {paragraph}{\itshape \bfseries {Technologická rozmanitost}}{26}{section*.25}%
-\contentsline {paragraph}{\itshape \bfseries {Flexibilita nasazení}}{27}{section*.26}%
-\contentsline {paragraph}{\itshape \bfseries {Modularita}}{27}{section*.27}%
-\contentsline {subsubsection}{\numberline {2.5.2}Nevýhody}{27}{subsubsection.2.5.2}%
-\contentsline {paragraph}{\itshape \bfseries {Komplexnost}}{27}{section*.28}%
-\contentsline {paragraph}{\itshape \bfseries {Správa dat}}{27}{section*.29}%
-\contentsline {paragraph}{\itshape \bfseries {Zpoždění sítě}}{27}{section*.30}%
-\contentsline {paragraph}{\itshape \bfseries {Provozní režie}}{27}{section*.31}%
-\contentsline {paragraph}{\itshape \bfseries {Složitost vývoje a testování}}{27}{section*.32}%
-\contentsline {paragraph}{\itshape \bfseries {Integrace služeb}}{27}{section*.33}%
+\contentsline {subsubsection}{\numberline {2.3.4}Vývoj}{25}{subsubsection.2.3.4}%
+\contentsline {subsection}{\numberline {2.4}Testování}{25}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Výhody a nevýhody}{25}{subsection.2.5}%
+\contentsline {subsubsection}{\numberline {2.5.1}Výhody}{25}{subsubsection.2.5.1}%
+\contentsline {paragraph}{\itshape \bfseries {Zvýšená agilita}}{25}{section*.25}%
+\contentsline {paragraph}{\itshape \bfseries {Škálovatelnost}}{25}{section*.26}%
+\contentsline {paragraph}{\itshape \bfseries {Odolnost}}{25}{section*.27}%
+\contentsline {paragraph}{\itshape \bfseries {Technologická rozmanitost}}{26}{section*.28}%
+\contentsline {paragraph}{\itshape \bfseries {Flexibilita nasazení}}{26}{section*.29}%
+\contentsline {paragraph}{\itshape \bfseries {Modularita}}{26}{section*.30}%
+\contentsline {subsubsection}{\numberline {2.5.2}Nevýhody}{26}{subsubsection.2.5.2}%
+\contentsline {paragraph}{\itshape \bfseries {Komplexnost}}{26}{section*.31}%
+\contentsline {paragraph}{\itshape \bfseries {Správa dat}}{26}{section*.32}%
+\contentsline {paragraph}{\itshape \bfseries {Zpoždění sítě}}{26}{section*.33}%
+\contentsline {paragraph}{\itshape \bfseries {Provozní režie}}{26}{section*.34}%
+\contentsline {paragraph}{\itshape \bfseries {Složitost vývoje a testování}}{26}{section*.35}%
+\contentsline {paragraph}{\itshape \bfseries {Integrace služeb}}{26}{section*.36}%
 \contentsline {subsection}{\numberline {2.6}Závěr}{27}{subsection.2.6}%
 \contentsline {section}{\numberline {3}Monitorování aplikace}{28}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Druhy dat}{28}{subsection.3.1}%
@@ -86,79 +89,89 @@
 \contentsline {section}{\numberline {4}Tvorba tech stacku}{32}{section.4}%
 \contentsline {subsection}{\numberline {4.1}Požadavky na SW}{32}{subsection.4.1}%
 \contentsline {subsubsection}{\numberline {4.1.1}Funkční požadavky}{32}{subsubsection.4.1.1}%
-\contentsline {paragraph}{\itshape \bfseries {Sběr a vizualizace dat}}{32}{section*.34}%
-\contentsline {paragraph}{\itshape \bfseries {Testování scénářů}}{32}{section*.35}%
-\contentsline {paragraph}{\itshape \bfseries {Konfigurace aplikace}}{32}{section*.36}%
+\contentsline {paragraph}{\itshape \bfseries {Mikroslužby}}{32}{section*.37}%
+\contentsline {paragraph}{\itshape \bfseries {Stack}}{32}{section*.38}%
+\contentsline {paragraph}{\itshape \bfseries {Sběr a vizualizace dat}}{32}{section*.39}%
+\contentsline {paragraph}{\itshape \bfseries {Testování scénářů}}{32}{section*.40}%
+\contentsline {paragraph}{\itshape \bfseries {Konfigurace aplikace}}{32}{section*.41}%
 \contentsline {subsubsection}{\numberline {4.1.2}Nefunkční požadavky}{32}{subsubsection.4.1.2}%
-\contentsline {paragraph}{\itshape \bfseries {Výkon}}{32}{section*.37}%
-\contentsline {subsection}{\numberline {4.2}Požadavky na HW}{32}{subsection.4.2}%
-\contentsline {subsection}{\numberline {4.3}Výběr technlogií}{32}{subsection.4.3}%
+\contentsline {paragraph}{\itshape \bfseries {Výkon}}{32}{section*.42}%
+\contentsline {subsection}{\numberline {4.2}Požadavky na HW}{33}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Výběr technlogií}{33}{subsection.4.3}%
 \contentsline {subsubsection}{\numberline {4.3.1}Kontejnerizace a orchestrace}{33}{subsubsection.4.3.1}%
 \contentsline {subsubsection}{\numberline {4.3.2}Konfigurace nasazení}{33}{subsubsection.4.3.2}%
 \contentsline {subsubsection}{\numberline {4.3.3}Persistenční vrstva}{33}{subsubsection.4.3.3}%
-\contentsline {subsubsection}{\numberline {4.3.4}Komunikační protokoly}{33}{subsubsection.4.3.4}%
-\contentsline {subsubsection}{\numberline {4.3.5}Monitorovací nástroje}{33}{subsubsection.4.3.5}%
-\contentsline {paragraph}{\itshape \bfseries {Grafana}}{34}{section*.38}%
-\contentsline {paragraph}{\itshape \bfseries {Prometheus}}{34}{section*.39}%
-\contentsline {paragraph}{\itshape \bfseries {Loki}}{34}{section*.40}%
-\contentsline {paragraph}{\itshape \bfseries {Tempo}}{34}{section*.41}%
-\contentsline {paragraph}{\itshape \bfseries {OpenTelemetry}}{34}{section*.42}%
-\contentsline {subsubsection}{\numberline {4.3.6}Testovací nástroje}{34}{subsubsection.4.3.6}%
-\contentsline {paragraph}{\itshape \bfseries {K6}}{34}{section*.43}%
-\contentsline {subsubsection}{\numberline {4.3.7}Testovací služby}{34}{subsubsection.4.3.7}%
-\contentsline {subsection}{\numberline {4.4}Návrh a implementace testovacích služeb}{34}{subsection.4.4}%
-\contentsline {subsubsection}{\numberline {4.4.1}Předpoklady služeb}{34}{subsubsection.4.4.1}%
-\contentsline {subsubsection}{\numberline {4.4.2}Implementace služeb}{35}{subsubsection.4.4.2}%
-\contentsline {paragraph}{\itshape \bfseries {SRS - Signal Readings Service}}{35}{section*.44}%
-\contentsline {paragraph}{\itshape \bfseries {FUS - File Upload Service}}{35}{section*.45}%
-\contentsline {subsubsection}{\numberline {4.4.3}BPS - Batch Processing Service}{35}{subsubsection.4.4.3}%
-\contentsline {subsubsection}{\numberline {4.4.4}FRS - Fast Response Service}{35}{subsubsection.4.4.4}%
-\contentsline {subsection}{\numberline {4.5}Konfigurace aplikace}{36}{subsection.4.5}%
-\contentsline {subsubsection}{\numberline {4.5.1}Konfigurace služeb}{36}{subsubsection.4.5.1}%
-\contentsline {paragraph}{\itshape \bfseries {Nginx}}{36}{section*.46}%
-\contentsline {paragraph}{\itshape \bfseries {LGTM - Monitorovací stack}}{36}{section*.47}%
-\contentsline {paragraph}{\itshape \bfseries {Postgres}}{36}{section*.48}%
-\contentsline {paragraph}{\itshape \bfseries {SGS - Signal Generation Service}}{36}{section*.49}%
-\contentsline {paragraph}{\itshape \bfseries {FUS - File Upload Service}}{36}{section*.50}%
-\contentsline {paragraph}{\itshape \bfseries {BPS - Batch Processing Service}}{37}{section*.51}%
-\contentsline {paragraph}{\itshape \bfseries {FRS - Fast Response Service}}{37}{section*.52}%
-\contentsline {paragraph}{\itshape \bfseries {K6}}{37}{section*.53}%
-\contentsline {subsubsection}{\numberline {4.5.2}Nastavení uživatelského rozhraní}{37}{subsubsection.4.5.2}%
-\contentsline {subsection}{\numberline {4.6}Tvorba programu v dotnet}{37}{subsection.4.6}%
-\contentsline {subsubsection}{\numberline {4.6.1}Struktura aplikačních zdrojů}{37}{subsubsection.4.6.1}%
-\contentsline {subsubsection}{\numberline {4.6.2}Obecný postup}{37}{subsubsection.4.6.2}%
-\contentsline {subsubsection}{\numberline {4.6.3}Tvorba nativního programu}{38}{subsubsection.4.6.3}%
-\contentsline {paragraph}{\itshape \bfseries {EmitCompilerGeneratedFiles}}{38}{section*.54}%
-\contentsline {paragraph}{\itshape \bfseries {Deklarace unmanaged rozhraní}}{38}{section*.55}%
-\contentsline {paragraph}{\itshape \bfseries {Trimming}}{38}{section*.56}%
-\contentsline {subsubsection}{\numberline {4.6.4}Přehled podpory}{38}{subsubsection.4.6.4}%
-\contentsline {paragraph}{\itshape \bfseries {Funkcionalita}}{38}{section*.57}%
-\contentsline {paragraph}{\itshape \bfseries {Cíle kompilace}}{39}{section*.58}%
-\contentsline {subsection}{\numberline {4.7}Srovnání vývoje}{39}{subsection.4.7}%
-\contentsline {subsubsection}{\numberline {4.7.1}JIT}{39}{subsubsection.4.7.1}%
-\contentsline {paragraph}{\itshape \bfseries {Výhody}}{39}{section*.59}%
-\contentsline {paragraph}{\itshape \bfseries {Nevýhody}}{40}{section*.60}%
-\contentsline {subsubsection}{\numberline {4.7.2}AoT}{40}{subsubsection.4.7.2}%
-\contentsline {paragraph}{\itshape \bfseries {Výhody}}{40}{section*.61}%
-\contentsline {paragraph}{\itshape \bfseries {Nevýhody}}{40}{section*.62}%
-\contentsline {section}{\numberline {5}Testování scénářů}{42}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Požadavky na scénáře}{42}{subsection.5.1}%
-\contentsline {subsection}{\numberline {5.2}Popis scénářů}{42}{subsection.5.2}%
-\contentsline {subsubsection}{\numberline {5.2.1}Scénář 1 - TBS}{42}{subsubsection.5.2.1}%
-\contentsline {subsubsection}{\numberline {5.2.2}Scénář 2 - TBS}{42}{subsubsection.5.2.2}%
-\contentsline {subsection}{\numberline {5.3}Zpracování a vizualizace dat}{42}{subsection.5.3}%
-\contentsline {subsubsection}{\numberline {5.3.1}Monitorování v reálném čase}{42}{subsubsection.5.3.1}%
-\contentsline {subsubsection}{\numberline {5.3.2}Sběr historických dat}{42}{subsubsection.5.3.2}%
-\contentsline {section}{\texorpdfstring {\makebox [0.85cm]{III\hfill } Analytická část}{III\ Analytická část}}{43}{part.3}%
-\contentsline {section}{\numberline {6}Analýza aplikace}{44}{section.6}%
-\contentsline {subsection}{\numberline {6.1}Architektura}{44}{subsection.6.1}%
-\contentsline {section}{\numberline {7}Analýza testování}{45}{section.7}%
-\contentsline {subsection}{\numberline {7.1}Charakteristika testovacího prostředí}{45}{subsection.7.1}%
-\contentsline {subsection}{\numberline {7.2}Výsledky testování}{45}{subsection.7.2}%
-\contentsline {section}{\numberline {8}Doporučení pro použití AoT kompilace v dotnet}{46}{section.8}%
-\contentsline {section}{Závěr}{47}{section*.63}%
-\contentsline {section}{Seznam použité literatury}{48}{section*.65}%
-\contentsline {section}{Seznam použitých symbolů a zkratek}{49}{section*.67}%
-\contentsline {section}{Seznam obrázků}{50}{section*.69}%
-\contentsline {section}{Seznam tabulek}{51}{section*.70}%
-\contentsline {section}{Seznam příloh}{52}{section*.71}%
+\contentsline {paragraph}{\itshape \bfseries {Postgres}}{34}{section*.43}%
+\contentsline {paragraph}{\itshape \bfseries {InfluxDB}}{34}{section*.44}%
+\contentsline {subsubsection}{\numberline {4.3.4}Komunikační metody}{34}{subsubsection.4.3.4}%
+\contentsline {paragraph}{\itshape \bfseries {REST API}}{34}{section*.45}%
+\contentsline {paragraph}{\itshape \bfseries {gRPC}}{34}{section*.46}%
+\contentsline {paragraph}{\itshape \bfseries {RabbitMQ}}{34}{section*.47}%
+\contentsline {subsubsection}{\numberline {4.3.5}Monitorovací nástroje}{34}{subsubsection.4.3.5}%
+\contentsline {paragraph}{\itshape \bfseries {Grafana}}{34}{section*.48}%
+\contentsline {paragraph}{\itshape \bfseries {Prometheus}}{35}{section*.49}%
+\contentsline {paragraph}{\itshape \bfseries {Loki}}{35}{section*.50}%
+\contentsline {paragraph}{\itshape \bfseries {Tempo}}{35}{section*.51}%
+\contentsline {paragraph}{\itshape \bfseries {OpenTelemetry}}{35}{section*.52}%
+\contentsline {subsubsection}{\numberline {4.3.6}Testovací nástroje}{35}{subsubsection.4.3.6}%
+\contentsline {paragraph}{\itshape \bfseries {K6}}{35}{section*.53}%
+\contentsline {subsubsection}{\numberline {4.3.7}Testovací služby}{36}{subsubsection.4.3.7}%
+\contentsline {subsection}{\numberline {4.4}Návrh a implementace testovacích služeb}{36}{subsection.4.4}%
+\contentsline {subsubsection}{\numberline {4.4.1}Předpoklady služeb}{36}{subsubsection.4.4.1}%
+\contentsline {subsubsection}{\numberline {4.4.2}Implementace služeb}{36}{subsubsection.4.4.2}%
+\contentsline {paragraph}{\itshape \bfseries {SRS - Signal Readings Service}}{36}{section*.54}%
+\contentsline {paragraph}{\itshape \bfseries {FUS - File Upload Service}}{36}{section*.55}%
+\contentsline {paragraph}{\itshape \bfseries {BPS - Batch Processing Service}}{37}{section*.56}%
+\contentsline {paragraph}{\itshape \bfseries {FRS - Fast Response Service}}{37}{section*.57}%
+\contentsline {subsubsection}{\numberline {4.4.3}Společné knihovny}{37}{subsubsection.4.4.3}%
+\contentsline {subsection}{\numberline {4.5}Konfigurace aplikace}{37}{subsection.4.5}%
+\contentsline {subsubsection}{\numberline {4.5.1}Konfigurace služeb}{37}{subsubsection.4.5.1}%
+\contentsline {paragraph}{\itshape \bfseries {Nginx}}{37}{section*.58}%
+\contentsline {paragraph}{\itshape \bfseries {LGTM - Monitorovací stack}}{37}{section*.59}%
+\contentsline {paragraph}{\itshape \bfseries {SGS - Signal Generation Service}}{38}{section*.60}%
+\contentsline {paragraph}{\itshape \bfseries {FUS - File Upload Service}}{38}{section*.61}%
+\contentsline {paragraph}{\itshape \bfseries {BPS - Batch Processing Service}}{38}{section*.62}%
+\contentsline {paragraph}{\itshape \bfseries {FRS - Fast Response Service}}{38}{section*.63}%
+\contentsline {paragraph}{\itshape \bfseries {K6}}{38}{section*.64}%
+\contentsline {subsubsection}{\numberline {4.5.2}Nastavení uživatelského rozhraní}{38}{subsubsection.4.5.2}%
+\contentsline {subsection}{\numberline {4.6}Tvorba programu v dotnet}{38}{subsection.4.6}%
+\contentsline {subsubsection}{\numberline {4.6.1}Struktura aplikačních zdrojů}{38}{subsubsection.4.6.1}%
+\contentsline {subsubsection}{\numberline {4.6.2}Obecný postup}{39}{subsubsection.4.6.2}%
+\contentsline {subsubsection}{\numberline {4.6.3}Tvorba nativního programu}{39}{subsubsection.4.6.3}%
+\contentsline {paragraph}{\itshape \bfseries {EmitCompilerGeneratedFiles}}{39}{section*.65}%
+\contentsline {paragraph}{\itshape \bfseries {Deklarace unmanaged rozhraní}}{39}{section*.66}%
+\contentsline {paragraph}{\itshape \bfseries {Trimming}}{40}{section*.67}%
+\contentsline {subsubsection}{\numberline {4.6.4}Přehled podpory}{40}{subsubsection.4.6.4}%
+\contentsline {paragraph}{\itshape \bfseries {Funkcionalita}}{40}{section*.68}%
+\contentsline {paragraph}{\itshape \bfseries {Cíle kompilace}}{40}{section*.69}%
+\contentsline {subsection}{\numberline {4.7}Srovnání vývoje}{41}{subsection.4.7}%
+\contentsline {subsubsection}{\numberline {4.7.1}JIT}{41}{subsubsection.4.7.1}%
+\contentsline {paragraph}{\itshape \bfseries {Výhody}}{41}{section*.70}%
+\contentsline {paragraph}{\itshape \bfseries {Nevýhody}}{41}{section*.71}%
+\contentsline {subsubsection}{\numberline {4.7.2}AoT}{42}{subsubsection.4.7.2}%
+\contentsline {paragraph}{\itshape \bfseries {Výhody}}{42}{section*.72}%
+\contentsline {paragraph}{\itshape \bfseries {Nevýhody}}{42}{section*.73}%
+\contentsline {section}{\numberline {5}Testování scénářů}{43}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Požadavky na scénáře}{43}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Popis scénářů}{43}{subsection.5.2}%
+\contentsline {subsubsection}{\numberline {5.2.1}Scénář 1 - schopnost odpovídat služeb}{43}{subsubsection.5.2.1}%
+\contentsline {subsubsection}{\numberline {5.2.2}Scénář 2 - přístup k persistenci}{43}{subsubsection.5.2.2}%
+\contentsline {subsubsection}{\numberline {5.2.3}Scénář 3 - zátěž zpracování dat}{43}{subsubsection.5.2.3}%
+\contentsline {subsubsection}{\numberline {5.2.4}Scénář 4 - komunikace mezi službami}{44}{subsubsection.5.2.4}%
+\contentsline {subsubsection}{\numberline {5.2.5}Scénář 5 - rychlost spuštění služby}{44}{subsubsection.5.2.5}%
+\contentsline {subsection}{\numberline {5.3}Zpracování a vizualizace dat}{44}{subsection.5.3}%
+\contentsline {subsubsection}{\numberline {5.3.1}Monitorování v reálném čase}{44}{subsubsection.5.3.1}%
+\contentsline {subsubsection}{\numberline {5.3.2}Sběr historických dat}{44}{subsubsection.5.3.2}%
+\contentsline {section}{\texorpdfstring {\makebox [0.85cm]{III\hfill } Analytická část}{III\ Analytická část}}{46}{part.3}%
+\contentsline {section}{\numberline {6}Analýza aplikace}{47}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Architektura}{47}{subsection.6.1}%
+\contentsline {section}{\numberline {7}Analýza testování}{48}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Charakteristika testovacího prostředí}{48}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Výsledky testování}{48}{subsection.7.2}%
+\contentsline {section}{\numberline {8}Doporučení pro použití AoT kompilace v dotnet}{49}{section.8}%
+\contentsline {section}{Závěr}{50}{section*.74}%
+\contentsline {section}{Seznam použité literatury}{51}{section*.76}%
+\contentsline {section}{Seznam použitých symbolů a zkratek}{52}{section*.78}%
+\contentsline {section}{Seznam obrázků}{53}{section*.80}%
+\contentsline {section}{Seznam tabulek}{54}{section*.81}%
+\contentsline {section}{Seznam příloh}{55}{section*.82}%
