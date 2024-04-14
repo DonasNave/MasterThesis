@@ -204,7 +204,7 @@
 \contentsline {subsubsection}{\numberline {6.3.4}Knihovny třetích stran}{57}{subsubsection.6.3.4}%
 \contentsline {paragraph}{\itshape \bfseries {Entity Framework}}{57}{section*.98}%
 \contentsline {paragraph}{\itshape \bfseries {Fluent Migrator}}{57}{section*.99}%
-\contentsline {paragraph}{\itshape \bfseries {Grpc}}{57}{section*.100}%
+\contentsline {paragraph}{\itshape \bfseries {Grpc}}{58}{section*.100}%
 \contentsline {paragraph}{\itshape \bfseries {Párování konfigurace}}{58}{section*.101}%
 \contentsline {section}{\numberline {7}Analýza testování}{59}{section.7}%
 \contentsline {subsection}{\numberline {7.1}Charakteristika testovacího prostředí}{59}{subsection.7.1}%

@@ -13,16 +13,18 @@ Stack je testovatelný a nasaditelný na všech hlavních platformách.
 
 \n{2}{Výstup služeb}
 
-Samotný proces nativní AOT a JIT kompilace je výrazně odlišný a výkonnostně náročný. Následující tabulka zobrazuje přehled časové náročnosti kompilace služeb pro oba kompilační cíle.
+Samotný proces nativní AOT a JIT kompilace je různě výkonnostně náročný. Při tvorbě samotného obrazu služby, ale i kompilace je hlavní náročná operace \emph{restore}, která stahuje potřebné závislosti a balíčky pro projekt. Následující tabulka zobrazuje přehled časové náročnosti kompilace služeb pro oba kompilační cíle. Kompilace probíhá v rámci systému MacOS Sonoma 14.4.1, na čipu M1 v dispozici s 8GB RAM. Použitý příkaz je \emph{dotnet build /p:Rebuild=True -c Release-<target>}, kdy \emph{<target>} představuje vybranou kompilační metodu AOT nebo JIT.
+
+Proces kompilace je vysoce závislý na specifickém HW a SW, následující tabulka poukazuje na výsledky testování na konkrétním HW a SW a má pouze informativní charakter.
 
 % Tabulku lze vkládat pomocí následujícího zjednodušeného stylu, nebo klasickým LaTex způsobem
 \tab{Čas kompilace služeb}{tab:priklad}{0.65}{|l|c|c|r|}{
   \hline
-    & JIT (s) & AOT (s) & AOT \% zmenšení \\ \hline
-  \emph{SRS} & 2 & 5 & 300 \\ \hline
-  \emph{FUS} & 3 & 5 & 300 \\ \hline
-  \emph{BPS} & 2 & 4 & 300 \\ \hline
-  \emph{EPS} & 3 & 10 & 300 \\ \hline
+    & JIT (s) & AOT (s) & AOT \% nárůst \\ \hline
+  \emph{SRS} & 01.01 & 01.92 & 90.0 \\ \hline
+  \emph{FUS} & 01.98 & 02.24 & 13.1 \\ \hline
+  \emph{BPS} & 01.44 & 01.59 & 10.4 \\ \hline
+  \emph{EPS} & 01.41 & 01.55 & 9.9 \\ \hline
 }
 
 Výstupem služby jsou obrazy založené na linuxovém systému, Alpine s dotnet runtime v případě JIT výstupu služby, zredukované Ubuntu v případě nativního AOT výstupu. Z pohledu použitelnosti výsledných služeb má smysl měřit samotný výstupní obraz služby se všemi závislostmi. Následující tabulka zobrazuje velikost obrazu služeb pro oba kompilační cíle.
@@ -33,8 +35,8 @@ Výstupem služby jsou obrazy založené na linuxovém systému, Alpine s dotnet
     & JIT (MB) & AOT (MB) & AOT \% zmenšení \\ \hline
   \emph{SRS} & 125.63 & 31.41 & 75.0 \\ \hline
   \emph{FUS} & 143.19 & 38.32 & 73.2 \\ \hline
-  \emph{BPS} & 125.10 & 37.12 & 300 \\ \hline
-  \emph{EPS} & 126.52 & 37.66 & 300 \\ \hline
+  \emph{BPS} & 126.50 & 31.40 & 75.2 \\ \hline
+  \emph{EPS} & 126.45 & 31.74 & 74.9 \\ \hline
 }
 
 \n{2}{Vývojový proces}
