@@ -10,6 +10,33 @@ Po straně telemetrie, implementuje sběr a zpracování dat z různých zdrojů
 
 Stack je testovatelný a nasaditelný na všech hlavních platformách.
 
+
+\n{2}{Výstup služeb}
+
+Samotný proces nativní AOT a JIT kompilace je výrazně odlišný a výkonnostně náročný. Následující tabulka zobrazuje přehled časové náročnosti kompilace služeb pro oba kompilační cíle.
+
+% Tabulku lze vkládat pomocí následujícího zjednodušeného stylu, nebo klasickým LaTex způsobem
+\tab{Čas kompilace služeb}{tab:priklad}{0.65}{|l|c|c|r|}{
+  \hline
+    & JIT (s) & AOT (s) & AOT \% zmenšení \\ \hline
+  \emph{SRS} & 2 & 5 & 300 \\ \hline
+  \emph{FUS} & 3 & 5 & 300 \\ \hline
+  \emph{BPS} & 2 & 4 & 300 \\ \hline
+  \emph{EPS} & 3 & 10 & 300 \\ \hline
+}
+
+Výstupem služby jsou obrazy založené na linuxovém systému, Alpine s dotnet runtime v případě JIT výstupu služby, zredukované Ubuntu v případě nativního AOT výstupu. Z pohledu použitelnosti výsledných služeb má smysl měřit samotný výstupní obraz služby se všemi závislostmi. Následující tabulka zobrazuje velikost obrazu služeb pro oba kompilační cíle.
+
+% Tabulku lze vkládat pomocí následujícího zjednodušeného stylu, nebo klasickým LaTex způsobem
+\tab{Velikost obrazu služeb}{tab:priklad}{0.65}{|l|c|c|r|}{
+  \hline
+    & JIT (MB) & AOT (MB) & AOT \% zmenšení \\ \hline
+  \emph{SRS} & 125.63 & 31.41 & 75.0 \\ \hline
+  \emph{FUS} & 143.19 & 38.32 & 73.2 \\ \hline
+  \emph{BPS} & 125.10 & 37.12 & 300 \\ \hline
+  \emph{EPS} & 126.52 & 37.66 & 300 \\ \hline
+}
+
 \n{2}{Vývojový proces}
 
 Následující sekce popisuje vývojový proces, tak jak se týkal testovaných služeb. Vývojový proces byl založen na experimentaci a snaze využít co nejvíc dostupných knihoven a nástrojů, za cenu nutnosti řešení problémů, případně změny implementace.
@@ -75,6 +102,10 @@ Zatímco za nevýhody CLR se dá považovat:
 
 \n{3}{Vývojové prostředí}
 
+K vývoji byl použit IDE Rider od společnosti JetBrains. Vyzkoušena byla rovněž i práce ve Visual Studio 2022 Community Edition a Visual Studio Code s doporučenými rozšířeními od Microsoft. Všechna vývojová prostředí jsou kompatibilní, co se týče procesu kompilace respektive sestavení, jelikož to se odehrává pomocí CLI dotnet.
+
+Samotný vývoj s ohledem na práci s direktivami pro různé kompilace byl značně zjednodušen vizualicemi, jenž poskytovala vývojová prostředí Rider a Visual Studio. Obdobně byla v těchto IDE zjednodušena i analýza a hledání chyb díky integraci referencí na kód generovaný na pozadí pro kompatibilitu s AOT. V tomto ohledu Visual Studio Code zaostávalo. S ohledem na aktivní vývoj a podporu, jenž je ze strany Microsoft poskytována podpoře vývoje .NET ve Visual Studio Code (po diskontuaci produktu Visual Studio pro Mac), lze očekávat, že se tato situace v budoucnu změní.
+
 \n{3}{Knihovny třetích stran}
 
 \n{4}{Entity Framework}
@@ -93,8 +124,6 @@ Vytváření rozhrání a modelů pro gRPC komunikaci vyžadovalo využití př�
 
 V rámci systémové .NET knihovny je umožněno volání API, jenž načte data ze sjednocení stavu proměnných prostředi a konfiguračního souboru. Součástí API je volání metody mapující tuto konfiguraci na předem definovaný objekt. Toto chování dle dostupných informací není v rozporu s AOT kompilací a volání relevantního kódu neprodukuje AOT warning. Z testování však vyplynulo, že mapování konfigurace ne objekt bylo problematické a neprobíhalo správně. Z toho důvodu je v případě AOT kompilace za pomocí deriktivy použité přímé načtení jednotlivých hodnot z konfigurace, dle stromomvého klíče.
 
-\n{3}{Závislosti}
-
 \n{1}{Analýza testování}
 
 \n{2}{Charakteristika testovacího prostředí}
@@ -105,13 +134,73 @@ Testovací prostředí, na němž došlo k testování, bylo založeno na opera�
 
 \n{3}{Scénář 1}
 
+První scénář se zabíral jednoduchou funkcionalitou a meřením výkonu kestrel serveru a odpovědí na požadavky v REST API.
+
+\n{4}{Výsledky}
+
+Následující výsledky představují průměrnou dobu odezvy serveru na požadavek v milisekundách. 
+
+Na snímcích jsou zachyceny vybrané dashboardy z nástroje Grafana určené pro monitorování scénaře 1. 
+
+\n{4}{Závěr}
+
+Testování přineslo překvapení ve výkonnostním rozdílu, jenž byl zaznamenán mezi JIT a AOT kompilací. Výsledky byly výrazně v neprospěch AOT kompilace. Samotná rychlost serveru není v mnoha případech kritickým faktorem, avšak v případě velkého množství požadavků, může být rozdíl v řádech milisekund zásadní.
+
 \n{3}{Scénář 2}
+
+První scénář se zabíral jednoduchou funkcionalitou a meřením výkonu kestrel serveru a odpovědí na požadavky v REST API.
+
+\n{4}{Výsledky}
+
+Následující výsledky představují průměrnou dobu odezvy serveru na požadavek v milisekundách. 
+
+Na snímcích jsou zachyceny vybrané dashboardy z nástroje Grafana určené pro monitorování scénaře 1. 
+
+\n{4}{Závěr}
+
+Testování přineslo překvapení ve výkonnostním rozdílu, jenž byl zaznamenán mezi JIT a AOT kompilací. Výsledky byly výrazně v neprospěch AOT kompilace. Samotná rychlost serveru není v mnoha případech kritickým faktorem, avšak v případě velkého množství požadavků, může být rozdíl v řádech milisekund zásadní.
 
 \n{3}{Scénář 3}
 
+První scénář se zabíral jednoduchou funkcionalitou a meřením výkonu kestrel serveru a odpovědí na požadavky v REST API.
+
+\n{4}{Výsledky}
+
+Následující výsledky představují průměrnou dobu odezvy serveru na požadavek v milisekundách. 
+
+Na snímcích jsou zachyceny vybrané dashboardy z nástroje Grafana určené pro monitorování scénaře 1. 
+
+\n{4}{Závěr}
+
+Testování přineslo překvapení ve výkonnostním rozdílu, jenž byl zaznamenán mezi JIT a AOT kompilací. Výsledky byly výrazně v neprospěch AOT kompilace. Samotná rychlost serveru není v mnoha případech kritickým faktorem, avšak v případě velkého množství požadavků, může být rozdíl v řádech milisekund zásadní.
+
 \n{3}{Scénář 4}
 
+První scénář se zabíral jednoduchou funkcionalitou a meřením výkonu kestrel serveru a odpovědí na požadavky v REST API.
+
+\n{4}{Výsledky}
+
+Následující výsledky představují průměrnou dobu odezvy serveru na požadavek v milisekundách. 
+
+Na snímcích jsou zachyceny vybrané dashboardy z nástroje Grafana určené pro monitorování scénaře 1. 
+
+\n{4}{Závěr}
+
+Testování přineslo překvapení ve výkonnostním rozdílu, jenž byl zaznamenán mezi JIT a AOT kompilací. Výsledky byly výrazně v neprospěch AOT kompilace. Samotná rychlost serveru není v mnoha případech kritickým faktorem, avšak v případě velkého množství požadavků, může být rozdíl v řádech milisekund zásadní.
+
 \n{3}{Scénář 5}
+
+První scénář se zabíral jednoduchou funkcionalitou a meřením výkonu kestrel serveru a odpovědí na požadavky v REST API.
+
+\n{4}{Výsledky}
+
+Následující výsledky představují průměrnou dobu odezvy serveru na požadavek v milisekundách. 
+
+Na snímcích jsou zachyceny vybrané dashboardy z nástroje Grafana určené pro monitorování scénaře 1. 
+
+\n{4}{Závěr}
+
+Testování přineslo překvapení ve výkonnostním rozdílu, jenž byl zaznamenán mezi JIT a AOT kompilací. Výsledky byly výrazně v neprospěch AOT kompilace. Samotná rychlost serveru není v mnoha případech kritickým faktorem, avšak v případě velkého množství požadavků, může být rozdíl v řádech milisekund zásadní.
 
 \n{1}{Doporučení pro použití AoT kompilace v dotnet}
 
