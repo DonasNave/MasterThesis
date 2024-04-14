@@ -123,8 +123,8 @@ services:
         condition: service_started
       rabbitmq:
         condition: service_healthy
-      fus-jit-service:
-        condition: service_healthy
+      # fus-jit-service:
+      #   condition: service_healthy
     networks:
       - stack-network
 
@@ -194,12 +194,6 @@ services:
     build:
       context: ../../DTA
       dockerfile: Services/DTA.BPS/Dockerfile-AOT
-    healthcheck:
-      test: ["CMD", "wget", "--spider", "--quiet", "http://localhost:8080/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 10s
     environment:
       - "DTA_AOT_BPS_Logging__LogLevel__Default=Debug"
       - "DTA_AOT_BPS_Logging__LogLevel__OpenTelemetry=Debug"
@@ -214,8 +208,8 @@ services:
         condition: service_started
       rabbitmq:
         condition: service_healthy
-      fus-aot-service:
-        condition: service_healthy
+      # fus-aot-service:
+      #   condition: service_healthy
     networks:
       - stack-network
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.8)  14 APR 2024 19:51
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.8)  14 APR 2024 23:55
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1170,6 +1170,24 @@ Package babel Info: Importing font and identification data for czech
 
 <<tex/pdfa-1b.xmpi>> (./prace.aux
 
+LaTeX Warning: Label `fig:logo' multiply defined.
+
+
+LaTeX Warning: Label `fig:logo' multiply defined.
+
+
+LaTeX Warning: Label `fig:logo' multiply defined.
+
+
+LaTeX Warning: Label `fig:logo' multiply defined.
+
+
+LaTeX Warning: Label `fig:logo' multiply defined.
+
+
+LaTeX Warning: Label `fig:logo' multiply defined.
+
+
 LaTeX Warning: Label `tab:priklad' multiply defined.
 
 )
@@ -1341,39 +1359,89 @@ Overfull \hbox (0.4579pt too wide) in paragraph at lines 326--327
  []\T1/cmr/bx/it/10.95 Telemetrie[] \T1/cmr/m/n/12 Knihovna \T1/cmr/m/it/12 DTA.Extensions.Telemetry \T1/cmr/m/n/12 zpro-st∞ed-ko-v·v· ex-tensi-ons me-tody
  []
 
-[44] [45] [46] [47] [48
+[44]
+<graphics/diagrams/services-architecture.png, id=938, 1142.2675pt x 1152.305pt>
+File: graphics/diagrams/services-architecture.png Graphic file (type png)
+<use graphics/diagrams/services-architecture.png>
+Package pdftex.def Info: graphics/diagrams/services-architecture.png  used on input line 370.
+(pdftex.def)             Requested size: 396.91324pt x 400.39406pt.
+ [45]
+<graphics/diagrams/stack-data-flow.png, id=944, 1577.895pt x 1876.00874pt>
+File: graphics/diagrams/stack-data-flow.png Graphic file (type png)
+<use graphics/diagrams/stack-data-flow.png>
+Package pdftex.def Info: graphics/diagrams/stack-data-flow.png  used on input line 374.
+(pdftex.def)             Requested size: 374.86774pt x 445.67122pt.
 
-] [49] [50] [51]) (./tex/chapters/analytics.tex [52] [53
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[46 <./graphics/diagrams/services-architecture.png>] [47 <./graphics/diagrams/stack-data-flow.png>] [48] [49
+
+]
+<graphics/diagrams/stack-scenario1.png, id=974, 1176.395pt x 1393.205pt>
+File: graphics/diagrams/stack-scenario1.png Graphic file (type png)
+<use graphics/diagrams/stack-scenario1.png>
+Package pdftex.def Info: graphics/diagrams/stack-scenario1.png  used on input line 467.
+(pdftex.def)             Requested size: 396.91324pt x 470.06949pt.
+ [50 <./graphics/diagrams/stack-scenario1.png>]
+<graphics/diagrams/stack-scenario2.png, id=983, 1262.7175pt x 1086.0575pt>
+File: graphics/diagrams/stack-scenario2.png Graphic file (type png)
+<use graphics/diagrams/stack-scenario2.png>
+Package pdftex.def Info: graphics/diagrams/stack-scenario2.png  used on input line 487.
+(pdftex.def)             Requested size: 396.91324pt x 341.38075pt.
+ [51 <./graphics/diagrams/stack-scenario2.png>]
+<graphics/diagrams/stack-scenario3.png, id=992, 1296.845pt x 890.32625pt>
+File: graphics/diagrams/stack-scenario3.png Graphic file (type png)
+<use graphics/diagrams/stack-scenario3.png>
+Package pdftex.def Info: graphics/diagrams/stack-scenario3.png  used on input line 509.
+(pdftex.def)             Requested size: 396.91324pt x 272.49329pt.
+ [52 <./graphics/diagrams/stack-scenario3.png>]
+<graphics/diagrams/stack-scenario4.png, id=1000, 1870.99pt x 1131.22626pt>
+File: graphics/diagrams/stack-scenario4.png Graphic file (type png)
+<use graphics/diagrams/stack-scenario4.png>
+Package pdftex.def Info: graphics/diagrams/stack-scenario4.png  used on input line 530.
+(pdftex.def)             Requested size: 441.01772pt x 266.63222pt.
+ [53 <./graphics/diagrams/stack-scenario4.png>]
+<graphics/diagrams/stack-scenario5.png, id=1009, 1239.63126pt x 1131.22626pt>
+File: graphics/diagrams/stack-scenario5.png Graphic file (type png)
+<use graphics/diagrams/stack-scenario5.png>
+Package pdftex.def Info: graphics/diagrams/stack-scenario5.png  used on input line 558.
+(pdftex.def)             Requested size: 396.91324pt x 362.18967pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[54] [55 <./graphics/diagrams/stack-scenario5.png>]) (./tex/chapters/analytics.tex [56] [57
 
 
 ]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[54
+[58
 
 
-] [55] [56] [57] [58] [59
+] [59] [60] [61] [62] [63
 
-] [60] [61]) (./tex/chapters/conclusion.tex [62
+] [64] [65]) (./tex/chapters/conclusion.tex [66
 
-]) [63
+]) [67
 
-] (./tex/zkratky.tex [64
+] (./tex/zkratky.tex [68
 
-]) [65
+]) [69
 
 ] (./prace.lof)
 \tf@lof=\write9
 \openout9 = `prace.lof'.
 
- [66
+ [70
 
 ] (./prace.lot)
 \tf@lot=\write10
 \openout10 = `prace.lot'.
 
- [67
+ [71
 
 
 ] (./tex/prilohy.tex (./prace.loa)
@@ -1385,43 +1453,38 @@ Underfull \hbox (badness 10000) in paragraph at lines 1--6
 
  []
 
-[68
+[72
 
 ]
 pdfTeX warning (ext4): destination with the same identifier (name{section.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.7 \priloha{N√°zev p≈ô√≠lohy}
-                              )
-
-Package caption Warning: Unused \captionsetup[figure] on input line 82.
-See the caption package documentation for explanation.
-
-(/usr/local/texlive/2023/texmf-dist/tex/generic/stringenc/se-pdfdoc.def
+                              ) (/usr/local/texlive/2023/texmf-dist/tex/generic/stringenc/se-pdfdoc.def
 File: se-pdfdoc.def 2019/11/29 v1.12 stringenc: PDFDocEncoding
 ) (/usr/local/texlive/2023/texmf-dist/tex/generic/stringenc/se-utf8.def
 File: se-utf8.def 2019/11/29 v1.12 stringenc: UTF-8
-) [69
+) [73
 
 ] (./prace.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `prace.out' has not changed.
-(rerunfilecheck)             Checksum: DB37E09FEFFCF825F5BBF34FD867A865;20210.
+(rerunfilecheck)             Checksum: 0E54097911DB3242C2A107812E142C93;20266.
  ) 
 Here is how much of TeX's memory you used:
- 38465 strings out of 476025
- 822814 string characters out of 5790017
+ 38528 strings out of 476025
+ 824961 string characters out of 5790017
  1877388 words of memory out of 5000000
- 57978 multiletter control sequences out of 15000+600000
+ 58022 multiletter control sequences out of 15000+600000
  531050 words of font info for 65 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  140i,17n,135p,1633b,2853s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbi1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
-Output written on prace.pdf (69 pages, 1214107 bytes).
+Output written on prace.pdf (73 pages, 1884080 bytes).
 PDF statistics:
- 1216 PDF objects out of 1440 (max. 8388607)
- 330 named destinations out of 1000 (max. 500000)
- 1071 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1265 PDF objects out of 1440 (max. 8388607)
+ 341 named destinations out of 1000 (max. 500000)
+ 1106 words of extra memory for PDF output out of 10000 (max. 10000000)
 

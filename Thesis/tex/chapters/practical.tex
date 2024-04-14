@@ -353,7 +353,7 @@ TODO: API docs
 
 \n{3}{BPS - Business Processing Service}
 
-Pro splnění role a požadavků na zpracování dat z jiných služeb byla vytvořena služba BPS. Tato služba získává data, provádí náročné výpočetní operace, sloužící k simulaci obtížných doménových operací.
+Pro splnění role a požadavků na zpracování dat z jiných služeb byla vytvořena služba BPS. Tato služba získává data, provádí náročné výpočetní operace, sloužící k simulaci obtížných doménových operací. Konkrétně implementaváno je neefiktivní rekurzivní výpočet Fibonacciho posloupnosti a faktoriálu.
 
 Služba se po spuštění přihlašuje k odběru zpráv na předem definovaný kanál \emph{simulated} na službe \emph{RabbitMQ}. Po získání zprávy získává data ze služby FUS pomocí volání vzdálené procedury. Po získání dat provádí náročné výpočetní operace, které jsou simulovány náhodným čekáním.
 
@@ -367,7 +367,11 @@ Služba poskytuje REST API rozhraní pro vyvolání události. Po vyvolání ud�
 
 \n{3}{Přehled řešení}
 
-Diagram služeb + popis
+\obr{Diagram .NET služeb a závislých služeb}{fig:logo}{0.9}{graphics/diagrams/services-architecture.png}
+
+Následující diagram znázorňuje vztahy mezi jednotlivými službami.
+
+\obr{Telemetrie ve stacku}{fig:logo}{0.85}{graphics/diagrams/stack-data-flow.png}
 
 \n{2}{Konfigurace aplikace}
 
@@ -460,10 +464,12 @@ Jelikož healthcheck endpoint je triviální ve své implementaci, nehraje roli 
 
 Scénář se dělí na více kroků, aby při každém byl zjištěn dostatek zdrojů pro v systému pro testovanou službu. Krok je proveden vždy po určitém časovém intervalu, který je definován v konfiguračním souboru testu.
 
+\obr{Diagram scénáře 1}{fig:logo}{0.9}{graphics/diagrams/stack-scenario1.png}
+
 \n{4}{Relevantní služby}
 
 \begin{itemize}
-    \item \textbf{SRS, FUS, BPS, EPS} - běžné služby s definovaným healthcheck endpointem
+    \item \textbf{SRS, FUS, BPS, EPS} - všechny služby s definovaným healthcheck endpointem
 \end{itemize}
 
 \n{4}{Průběh scénáře}
@@ -476,7 +482,9 @@ Scénář se dělí na více kroků, aby při každém byl zjištěn dostatek zd
 
 \n{3}{Scénář 2 - přístup k perzistenci}
 
-Cílem tohoto scénáře je otestovat schopnost poradit si s vysokým množství asynchroních operací přístupu k datům. Scénář se pokouší identifikovat dodatečné režie spojené s přístupem k perzistenci a zjišťuje, zda jsou služby schopny zpracovat vysoký počet požadavků na perzistenci. Zejména je cílem pozorovat potencionál rozdíl v přístupu AOT a JIT zkompilované služby k systémovému API.
+Cílem tohoto scénáře je otestovat schopnost poradit si s vysokým množství asynchroních operací přístupu k datům. Scénář se pokouší identifikovat dodatečné režie spojené s přístupem k perzistenci a zjišťuje, zda jsou služby schopny zpracovat vysoký počet požadavků na databázi. Zejména je cílem pozorovat potencionál rozdíl v přístupu AOT a JIT zkompilované služby k systémovému API.
+
+\obr{Diagram scénáře 2}{fig:logo}{0.9}{graphics/diagrams/stack-scenario2.png}
 
 \n{4}{Relevantní služby}
 
@@ -494,14 +502,16 @@ Cílem tohoto scénáře je otestovat schopnost poradit si s vysokým množství
 
 \n{3}{Scénář 3 - zátěž zpracování dat}
 
-Cílem tohoto scénáře je otestovat schopnost mikroslužeb v jednotlivých architekturách zpracovat náročnější operace. Scénář se zaměřuje na samotnou podstatu přístupu k vnitřnímu systémového API, efektivitě jeho využití a další režii, která by mohla být odlišná mezi JIT a AoT kompilací.
+Cílem tohoto scénáře je otestovat schopnost mikroslužeb v jednotlivých kompilacích zpracovat náročnější operace. Scénář se zaměřuje na samotnou podstatu přístupu k vnitřnímu systémového API, efektivitě jeho využití a další režii, která by mohla být odlišná mezi JIT a AOT kompilací.
 
 Předmětem scénář jsou dva výpočetně náročné algoritmy - faktoriál a Fibonacciho posloupnost. Tyto algoritmy jsou implementovány v rámci služby a jsou volány zvenčí. Scénář je vytvořen tak, aby simuloval zátěž na výpočetní jednotku a prozkoumal tak potencionální výkonnostní rozdíly v rámci přístupu k systémovému API a organizaci instrukcí.
+
+\obr{Diagram scénáře 3}{fig:logo}{0.9}{graphics/diagrams/stack-scenario3.png}
 
 \n{4}{Relevantní služby}
 
 \begin{itemize}
-    \item \textbf{BPS} - služba, která poskytuje data pro výpočet faktoriálu a Fibonacciho posloupnosti
+    \item \textbf{BPS} - služba, která poskytuje rozhraní a logiku pro výpočet faktoriálu a Fibonacciho posloupnosti
 \end{itemize}
 
 \n{4}{Průběh scénáře}
@@ -515,7 +525,9 @@ Předmětem scénář jsou dva výpočetně náročné algoritmy - faktoriál a 
 
 \n{3}{Scénář 4 - komunikace mezi službami}
 
-Tento scénář je zaměřen na schopnost a výkkonosti mikroslužeb při komunikaci mezi sebou. Toho je docíleno využitím dostupných komunikačních protokolů.
+Tento scénář je zaměřen na rychlost a zátěž celkového systému při splnění požadavků vyžadující komunikaci mezi službami. Scénář je vytvořen tak, aby vyvolal událost z jedné služby, která je zpracována jinou službou. Pro splnění události je potřeba dat z perzistentního úložiště, která jsou získána ze třetí služby.
+
+\obr{Diagram scénáře 4}{fig:logo}{1}{graphics/diagrams/stack-scenario4.png}
 
 \n{4}{Relevantní služby}
 
@@ -537,9 +549,13 @@ Tento scénář je zaměřen na schopnost a výkkonosti mikroslužeb při komuni
     \item \textbf{Krok 7} - Služby ukončují svoji činnost a zasílají data o prevedeném testu
 \end{itemize}
 
-\n{3}{Scénář 5 - rychlost odpovědi služby}
+\n{3}{Scénář 5 - rychlost odpovědi po startu služby}
 
 Cílem tohoto scénáře je otestovat rychlost spuštění služby. Scénář testuje, jak rychle je služba schopna odpovědět na požadavek po spuštění. V rámci testu jsou testovány různé endpointy, které jsou volány po spuštění služby.
+
+Základem scénáře je pomocí CLI příkazů vyvolat spuštění služby a ihned po jejím spuštění zaslat požadavek na získání dat.
+
+\obr{Diagram scénáře 5}{fig:logo}{0.9}{graphics/diagrams/stack-scenario5.png}
 
 \n{4}{Relevantní služby}
 

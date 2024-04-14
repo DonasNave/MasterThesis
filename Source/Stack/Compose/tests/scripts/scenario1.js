@@ -6,7 +6,7 @@ import { services, options } from './config.js';
 export { options };
 
 export default function () {
-  services.filter(service => service.name == 'SRS').forEach(service => {
+  services.filter(service => service.name == 'EPS' && service.protocol == 'http').forEach(service => {
 
     http.get(service.url + 'health', {
       tags: {

@@ -1,9 +1,5 @@
 from diagrams import Cluster, Diagram
-from diagrams.onprem.logging import Loki
-from diagrams.onprem.tracing import Tempo
-from diagrams.onprem.database import Postgresql, Influxdb
-from diagrams.onprem.monitoring import Grafana, Prometheus
-from diagrams.onprem.network import Nginx
+from diagrams.onprem.database import Postgresql
 from diagrams.onprem.queue import Rabbitmq
 from diagrams.programming.language import Csharp
 from diagrams.custom import Custom

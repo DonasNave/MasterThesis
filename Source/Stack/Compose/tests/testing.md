@@ -25,3 +25,23 @@ docker run --network compose_stack-network -v ${PWD}/scripts:/scripts -i grafana
 ```
 
 Where `<test-file>` is the path to the test file you want to run.
+
+## Scenario 1
+
+This scenario tests the performance of the DTA API when creating a new user.
+
+## Scenario 2
+
+This scenario tests the performance of the DTA API when creating a new user and then logging in.
+
+## Scenario 3
+
+This scenario tests the performance of the DTA API when creating a new user, logging in, and then creating a new project.
+
+## Scenario 4
+
+This scenario tests the performance of the DTA API when creating a new user, logging in, creating a new project, and then creating a new task.
+
+## Scenario 5
+
+This scenario tests the performance of the DTA API when creating a new user, logging in, creating a new project, creating a new task, and then updating the task.
