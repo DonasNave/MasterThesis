@@ -29,11 +29,11 @@ Aplikace musí být schopna sbírat a vizualizovat data o výkonu a škálovatel
 
 \n{4}{Testování scénářů}
 
-Aplikace musí být schopna provádět testování scénářů, které simuluje zátěž na mikroslužby a zjišťuje, jak se chovají za různých podmínek.
+Aplikace musí být schopna provádět testování scénářů, které simulují fungování systému a zátěž na mikroslužby. Testovací scénáře musí být konfigurovatelné a spustitelné v manuálním a automatizovaném režimu.
 
 \n{4}{Konfigurace aplikace}
 
-Aplikace musí být schopna konfigurovat testovací scénáře, které se mají provést, a způsob, jakým se mají provést.
+V rámci aplikace musí být možnost konfigurovat chování nasazených služeb.
 
 \n{3}{Nefunkční požadavky}
 
@@ -339,29 +339,35 @@ Součástí řešení je společná konfigurace, která je využita ve všech sl
 
 \n{3}{SRS - Signal reading service}
 
-Služba v systému hraje roli čtecího zařízení, které čte data ze zdroje a poskytuje je ostatním službám. Tato služba simulu základní kámen celého systému, značně ovlivňuje výkon a škálovatelnost celého systému. Očekává se velké množství požadavků na tuto službu.
+Za účelem simulace funkce čtecího zařízení byla vytvořena služba SRS. Tato služba poskytuje základní rozhraní pro získání dat signálu včetně jednotek a značek formou REST API. Pro zjednodušení implementace není využito čtení dat ze skutečného zdroje, ale jsou generována náhodná data. Načež data jsou následně poskytována se simulovaným zdržením, časově založenému na měření skutečného zdržení systému při čtení dat ze vzdáleného zdroje u obdobného systému.
 
-Za účelem zjednodušení implementace není využito čtení dat ze skutečného zdroje, ale jsou generována náhodná data. Načež data jsou následně poskytována se simulovaným zdržením, časově založenému na měření skutečného zdržení systému při čtení dat ze vzdáleného zdroje u obdobného systému. Tato služba je implementována rozhraní jako  které poskytuje data ve formátu JSON. (TODO: Obrázek návrhu architektury a rozhraní služby).
-
-API
+TODO: API docs
 
 \n{3}{FUS - File Upload Service}
 
-Služba v systému hraje roli zapisovacího zařízení, které zapisuje data do zdroje. Tato služba hraje roli méně vytíženého služby, která nemá značný vliv na fungování systému jako celku. Požadavky, jenž musí vyřídit nejsou kritické a nutné řešit s minimální odezvou.
+Služba v systému hraje roli zapisovacího zařízení, které zapisuje a čte data z perzistentního úložiště. Jakožto úložiště je využito PostgreSQL databáze. Služba využívá vlastní databázovou instanci, spravuje vlastní tabulky pomocí migrací.
 
-Služba je implementována s REST API rozhraním. (TODO: Obrázek návrhu architektury a rozhraní služby).
+Poskytuje rozhraní formou REST API pro zápis a čtení dat. Daty je myšlen libovolný soubor v libovolném formátu. Samotná podstata nahraných dat není pro službu důležitá, ale je zpracována a uložena do databáze. Za účelem sehrání testovacích scénářů poskytuje SRS také gRPC rozhraní, které je zajištěno na dedikovaném portu. V rámci gRPC komunikace slouží služba jako server, který splňuje volání vzdálené procudery.
 
-\n{3}{BPS - Batch Processing Service}
+TODO: API docs
 
-Služba v systému hraje roli zpracovávajícího zařízení, které zpracovává data z jiných služeb. Tato služba hraje roli služby, která je závislá na ostatních službách a zpracovává data z nich. Reaguje na požadavek o hromadném zpracování při předem definovaném splnění podmínek.
+\n{3}{BPS - Business Processing Service}
 
-\n{3}{FRS - Fast Response Service}
+Pro splnění role a požadavků na zpracování dat z jiných služeb byla vytvořena služba BPS. Tato služba získává data, provádí náročné výpočetní operace, sloužící k simulaci obtížných doménových operací.
 
-Služba v systému hraje roli rychlého zpracovávajícího zařízení, které zpracovává data z jiných služeb. Tato služba hraje roli služby, která je závislá na kritických systémech 3. strany a potřebují v co nejkratším čase odpovídat.
+Služba se po spuštění přihlašuje k odběru zpráv na předem definovaný kanál \emph{simulated} na službe \emph{RabbitMQ}. Po získání zprávy získává data ze služby FUS pomocí volání vzdálené procedury. Po získání dat provádí náročné výpočetní operace, které jsou simulovány náhodným čekáním.
+
+TODO: API docs
+
+\n{3}{EPS - Event Publishing Service}
+
+Jednoduchá službami umožňující vyvolat událost v systému a docílit spuštění dodatečných operací v systému. V systému simuluje roli vydavatele událostí.
+
+Služba poskytuje REST API rozhraní pro vyvolání události. Po vyvolání události je zpráva publikována na kanál \emph{simulated} na službě \emph{RabbitMQ}.
 
 \n{3}{Přehled řešení}
 
-Obrázek adresářové struktury + diagram služeb + popis
+Diagram služeb + popis
 
 \n{2}{Konfigurace aplikace}
 
