@@ -14,7 +14,10 @@ WORKDIR "/src/Services/DTA.BPS"
 RUN dotnet build "DTA.BPS.csproj" -c Release-JIT -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "DTA.BPS.csproj" -c Release-JIT -o /app/publish
+RUN dotnet publish "DTA.BPS.csproj" -c Release-JIT -o /app/publish \
+    -p:DebugType=None \
+    -p:PublishReadyToRun=true \
+    -p:ExcludeFilesFromPublish=**/appsettings.Development.json
 
 FROM base AS final
 WORKDIR /app
