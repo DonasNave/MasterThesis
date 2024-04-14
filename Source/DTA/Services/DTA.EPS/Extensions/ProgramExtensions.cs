@@ -10,7 +10,7 @@ public static class ProgramExtensions
     public static void InitializeMetrics(this WebApplication _, string meterName, string serviceVersion)
     {
         var meter = new Meter(meterName, serviceVersion);
-        AppMonitor.EventSimulatedCounter = meter.CreateCounter<long>("batch_event_produced_counter");
+        AppMonitor.EventSimulatedCounter = meter.CreateCounter<long>("file_event_produced_counter");
     }
 
     public static void RegisterServices(this IServiceCollection serviceCollection)

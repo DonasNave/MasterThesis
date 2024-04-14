@@ -14,8 +14,41 @@ public class ProcessingService(IOptions<ServiceConnectionOptions> options) : IPr
         var client = new FileServer.FileServerClient(channel);
         
         client.GetFile(new FileRequest { Id = fileId });
+
+        Fibonacci(43); // Do some heavy processing
+        // Thread.Sleep(3000);
+    }
+
+    public long Fibonacci(int n)
+    {
+        if (n <= 1)
+            return n;
         
-        // Simulate processing
-        Thread.Sleep(3000);
+        return Fibonacci(n - 1) + Fibonacci(n - 2);
+    }
+
+    public List<long> PrimeFactors(long n)
+    {
+        var factors = new List<long>();
+        
+        while (n % 2 == 0)
+        {
+            factors.Add(2);
+            n /= 2;
+        }
+        
+        for (long i = 3; i <= Math.Sqrt(n); i += 2)
+        {
+            while (n % i == 0)
+            {
+                factors.Add(i);
+                n /= i;
+            }
+        }
+        
+        if (n > 2)
+            factors.Add(n);
+
+        return factors;
     }
 }

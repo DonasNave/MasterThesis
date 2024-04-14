@@ -1,10 +1,14 @@
 using DTA.BPS.Api.Rabbit;
+using DTA.BPS.Api.Rest;
 using DTA.BPS.Extensions;
 using DTA.Extensions.Common;
 using DTA.Extensions.Telemetry;
 using DTA.Models.Options;
 
-#if DEBUG_JIT
+#if AOT
+using DTA.Models.Extensions;
+using DTA.Models.JsonSerializers;
+#elif DEBUG_JIT
 using DTA.Extensions.Swagger;
 #endif
 
@@ -50,6 +54,11 @@ builder.Services.RegisterServices();
 builder.Services.AddSwaggerEndpoints();
 #endif
 
+// Register context serializers in AOT mode
+#if AOT
+builder.Services.RegisterContextSerializers([ FibonacciResponseContext.Default, PrimesResponseContext.Default ]);
+#endif
+
 var app = builder.Build();
 
 #if DEBUG_JIT
@@ -63,5 +72,6 @@ app.InitializeMetrics(meterName, serviceVersion);
 
 // Map endpoints
 app.MapDefaultEndpoints();
+app.MapProcessingModule();
 
 app.Run();

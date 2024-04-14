@@ -47,7 +47,7 @@ public class RabbitMqConsumerService : IDisposable
         var fileId = BitConverter.ToInt32(body);
 
         _processingService.GetDataAndProcess(fileId);
-        AppMonitor.BatchProcessCounter.Add(1);
+        AppMonitor.FilesProcessedCounter.Add(1);
     }
 
     public void Dispose()
