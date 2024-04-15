@@ -22,53 +22,43 @@ Platforma .NET je postavena na několika klíčových komponentách, které zaji
 
 
 \begin{itemize}
-    \item \textbf{CLR} - běhové prostředí pro programy kompilované do IL
-    \item \textbf{.NET CLI} (konzolové rozhraní) - konzolové rozhraní pro interakci s nástroji .NET
-    \item \textbf{MSBuild} - buildovací engine pro kompilaci, testování a balíčkování aplikací
-    \item \textbf{.NET SDK nástroje} - soubor nástrojů pro testování, debuggování a migraci .NET aplikací
-    \item \textbf{Roslyn} - kompilační nástroj
-    \item \textbf{NuGet} - balíčkovací manager 
+    \item \textbf{CLR} - CLR je základním kamenem frameworku .NET a poskytuje runtime prostředí pro spouštění aplikací .NET. Překládá IL do strojového kódu, spravuje alokaci paměti a garbage collection, zajišťuje zpracování výjimek (exceptions). CLR také kontroluje datové typy, interoperabilitu a zprostředkovává služby nezbytné pro spouštění nejrůznějších aplikací .NET.
+    \item \textbf{.NET CLI} (konzolové rozhraní) - Všestranný nástroj pro vývoj, kompilaci a nasazení aplikací .NET prostřednictvím rozhraní příkazové řádky. Podporuje širokou škálu operací, od vytváření projektů a správy závislostí až po testování a publikování aplikací. Prostředí .NET CLI je multiplatformní a umožňuje sjednocení rozhraní uživatelských nástrojů pro vývoj aplikací .NET.
+    \item \textbf{MSBuild} - Engine používaný v platformě .NET, který umožňuje sestavovat aplikace a vytvářet balíčky pro nasazení. Tento nástroj používá k organizaci a řízení procesu sestavení projektový souboru založený na XML. Tím je zajištěna kontrola nad kompilací a průběhem sestavení. V rámci MSBuild lze doplnit vlastní úlohy a cíle, což poskytuje flexibilitu sestavení pro komplexní procesy ve velkých projektech.
+    \item \textbf{.NET SDK nástroje} - Soubor nástrojů a knihoven podporujících vývoj, debugging a testování aplikací .NET. Zahrnují různé CLI a GUI nástroje, které pomáhají vývojářům spravovat práci s kódem, optimalizovat výkon a zajistit kvalitní výstup programu v platformě .NET.
+    \item \textbf{Roslyn} - Roslyn je sada kompilátorů platformy .NET, která poskytuje bohaté API pro analýzu kódu. Umožňuje vývojářům používat implementace kompilátorů jazyka C\# a Visual Basic jako služby. Roslyn zlepšuje výkonnost vývojářů poskytnutím funkcí jako je refaktoring, generování kódu a sémantická analýza.
+    \item \textbf{NuGet} - Správce balíčků pro platformu .NET. dodává standardizovanou metodu správy externích knihoven, na nichž závisí aplikace v .NET. Zjednodušuje proces inkorporace knihoven, systémových i třetích stran, do projektu. Rovněž spravuje závislosti, čímž zajišťuje, že projekty zůstávajá aktuální a kompatibilní. Tento nástroj je téměř nezbytný pro vývoj na platformě .NET, neboť umožňuje modulární vývoj softwaru.
 \end{itemize}
 
-Tvorbu aplikace zprostředkovává sada nástrojů a knihoven .NET SDK. Tyto nástroje umožňují vývojářům vytvářet, sestavovat a spouštět aplikace v podporovaných programovacích jazycích. Nástroje .NET SDK poskytují sadu nástrojů pro vývoj aplikací, včetně nástrojů pro sestavení, testování a publikaci. Nástroje .NET SDK jsou dostupné pro operační systémy Windows, Linux a macOS a umožňují vývoj aplikací pro různé platformy. Vývojáři mohou vytvářet aplikace pro různé platformy pomocí jednoho kódu a sdílet kód mezi různými platformami. \cite{Richter2012}
+TODO: Přidat obrázek architektury nástrojů platformy .NET
 
 \n{2}{Frameworky a technologie}
 
-Platforma .NET poskytuje mnoho frameworků a technologií pro vývoj aplikací.
+Platforma .NET poskytuje mnoho frameworků a technologií pro vývoj aplikací. Jednotlivé frameworky plní různé role a poskytují různé úrovně funkcionality pro vývoj aplikací. Z hlediska struktury a účelu lze frameworky kategorizovat následujícím způsobem.
 
 \n{3}{Foundtation frameworky}
 
-\n{4}{.NET}
+Jedná se o komplexní frameworky poskytující základní funkcionalitu pro vývoj aplikací. Představují základní stavební kameny a fundamentální sadu nástrojů platformy .NET.
 
-.NET je hlavní framework platformy .NET. Poskytuje sadu nástrojů a knihoven pro vývoj aplikací v jazyce C\# a .NET. .NET obsahuje sadu tříd a metod, které mohou být použity při vývoji aplikací. .NET poskytuje sadu nástrojů pro vývoj aplikací, včetně nástrojů pro sestavení, testování a publikaci. .NET umožňuje vývoj aplikací pro platformy Windows, Linux a macOS pomocí jednoho kódu. Vývojáři mohou vytvářet aplikace pro různé platformy pomocí jednoho kódu a sdílet kód mezi různými platformami.
-
-\n{4}{Mono}
-
-Mono je open-source implementace platformy .NET. Poskytuje sadu nástrojů a knihoven pro vývoj aplikací v jazyce C\# a .NET. Mono umožňuje vývoj aplikací pro platformy Windows, Linux a macOS pomocí jednoho kódu. Vývojáři mohou vytvářet aplikace pro různé platformy pomocí jednoho kódu a sdílet kód mezi různými platformami. Mono je dostupný jako open-source projekt a je vyvíjen komunitou vývojářů. Mono poskytuje sadu nástrojů pro vývoj aplikací, včetně nástrojů pro sestavení, testování a publikaci. Mono umožňuje vývoj aplikací pro platformy Windows, Linux a macOS pomocí jednoho kódu. Vývojáři mohou vytvářet aplikace pro různé platformy pomocí jednoho kódu a sdílet kód mezi různými platformami.
+\begin{itemize}
+    \item \textbf{.NET} - Hlavní framework platformy .NET. Poskytuje sadu nástrojů a knihoven pro vývoj aplikací v jazyce C\# a .NET. .NET obsahuje sadu tříd a metod, které mohou být použity při vývoji aplikací. .NET poskytuje sadu nástrojů pro vývoj aplikací, včetně nástrojů pro sestavení, testování a publikaci. .NET umožňuje vývoj aplikací pro platformy Windows, Linux a macOS pomocí jednoho kódu. Vývojáři mohou vytvářet aplikace pro různé platformy pomocí jednoho kódu a sdílet kód mezi různými platformami.
+    \item \textbf{Mono} - Open-source implementace platformy .NET. Poskytuje sadu nástrojů a knihoven pro vývoj aplikací v jazyce C\# a .NET. Mono umožňuje vývoj aplikací pro platformy Windows, Linux a macOS pomocí jednoho kódu. Vývojáři mohou vytvářet aplikace pro různé platformy pomocí jednoho kódu a sdílet kód mezi různými platformami. Mono je dostupný jako open-source projekt a je vyvíjen komunitou vývojářů. Mono poskytuje sadu nástrojů pro vývoj aplikací, včetně nástrojů pro sestavení, testování a publikaci. Mono umožňuje vývoj aplikací pro platformy Windows, Linux a macOS pomocí jednoho kódu. Vývojáři mohou vytvářet aplikace pro různé platformy pomocí jednoho kódu a sdílet kód mezi různými platformami.
+\end{itemize}
 
 \n{3}{Specializované frameworky}
 
-\n{4}{ASP.NET}
+Představují sady nástrojů a knihoven zaměřených konkrétním oblastem vývoje aplikací a zjednodušují tvorbu cílených typů aplikací. Zaměřují se na konkrétní potřeby vývoje, jako jsou webové, mobilní nebo desktopové aplikace, a umožňují vývojářům efektivně implementovat funkcionalitu optimalizovanou pro konkrétní platformu. 
 
-robustní framework pro vytváření webových aplikací a služeb. Je součástí ekosystému .NET navržený tak, aby umožňoval vývoj vysoce výkonných, dynamických webových stránek, RESTful API a webových aplikací v reálném čase. ASP.NET podporuje jak webové formuláře pro rychlý vývojový model prostřednictvím rozhraní přetahování a serverových ovládacích prvků, tak architekturu MVC (Model-View-Controller), která podporuje čisté oddělení problémů, testovatelnost a výkonné směrování URL pro SEO. -přátelské webové aplikace. S uvedením ASP.NET Core bylo přepracováno pro cloudovou škálovatelnost, vývoj napříč platformami a vysoký výkon, takže je ideální pro vývoj moderních webových aplikací, které lze spustit na Linuxu, Windows a macOS. ASP.NET Core také představuje Blazor, který umožňuje vývojářům používat C\# při vývoji webu, což dále zvyšuje všestrannost ekosystému. Vývojářům, kteří chtějí využít .NET pro vývoj webu, poskytuje ASP.NET komplexní a flexibilní sadu nástrojů pro vytváření všeho od malých webů po složité webové platformy.
-
-\n{4}{MAUI}
-
-je moderní specializovaný framework pro vývoj aplikací napříč platformami v rámci ekosystému .NET. Umožňuje vývojářům vytvářet aplikace pro Android, iOS, macOS a Windows z jediné kódové základny, která zahrnuje to nejlepší z Xamarin.Forms a zároveň rozšiřuje jeho možnosti na desktopové aplikace. .NET MAUI zjednodušuje vývojový proces tím, že poskytuje jednotnou sadu rozhraní API pro vývoj uživatelského rozhraní na všech platformách s možností přístupu k funkcím specifickým pro platformu v případě potřeby. Podporuje moderní vývojové vzory a nástroje, včetně MVVM, datové vazby a asynchronního programování, což usnadňuje vytváření sofistikovaných a citlivých aplikací. Vývojářům, kteří chtějí využít sílu .NET napříč mobilními a desktopovými platformami, nabízí .NET MAUI komplexní a moderní sadu nástrojů navrženou tak, aby vyhovovala dnešním vývojovým výzvám a zároveň zajistila přenositelnost a udržovatelnost kódu.
-
-Předchůdcem MAUI je framework Xamarin, který sloužil pro vytváření mobilních aplikací na platformě .NET.
-
-\n{4}{Blazor}
-
-je specializovaný rámec v rámci ekosystému .NET, který přináší revoluci ve vývoji webu tím, že umožňuje vývojářům vytvářet interaktivní webová uživatelská rozhraní pomocí C\# namísto JavaScriptu. Blazor může běžet na serveru (Blazor Server), kde zpracovává interakce s uživatelským rozhraním přes připojení SignalR, nebo v prohlížeči pomocí WebAssembly (Blazor WebAssembly) ke spouštění kódu C\# přímo ve webovém prohlížeči vedle tradičních webových technologií, jako jsou HTML a CSS. Tento inovativní přístup umožňuje vývojářům využít jejich dovednosti .NET pro komplexní vývoj webových aplikací a vytvářet bohaté webové aplikace na straně klienta s .NET spuštěným v prohlížeči. Architektura Blazor založená na komponentách usnadňuje opětovné použití komponent uživatelského rozhraní a podporuje modulární vývojový přístup. Vývojářům .NET, kteří chtějí vytvářet moderní webové aplikace a přitom zůstat v ekosystému .NET, nabízí Blazor přesvědčivou cestu vpřed, která kombinuje produktivitu a sílu C\# s flexibilitou a dosahem webových technologií.
+\begin{itemize}
+    \item \textbf{ASP.NET} - Robustní framework pro vytváření webových aplikací a služeb. Je součástí ekosystému .NET navržený tak, aby umožňoval vývoj vysoce výkonných, dynamických webových stránek, RESTful API a webových aplikací v reálném čase. ASP.NET podporuje jak webové formuláře pro rychlý vývojový model prostřednictvím rozhraní přetahování a serverových ovládacích prvků, tak architekturu MVC (Model-View-Controller), která podporuje čisté oddělení problémů, testovatelnost a výkonné směrování URL pro SEO. -přátelské webové aplikace. S uvedením ASP.NET Core bylo přepracováno pro cloudovou škálovatelnost, vývoj napříč platformami a vysoký výkon, takže je ideální pro vývoj moderních webových aplikací, které lze spustit na Linuxu, Windows a macOS. ASP.NET Core také představuje Blazor, který umožňuje vývojářům používat C\# při vývoji webu, což dále zvyšuje všestrannost ekosystému. Vývojářům, kteří chtějí využít .NET pro vývoj webu, poskytuje ASP.NET komplexní a flexibilní sadu nástrojů pro vytváření všeho od malých webů po složité webové platformy.
+    \item \textbf{MAUI} - Moderní specializovaný framework pro vývoj aplikací napříč platformami v rámci ekosystému .NET. Umožňuje vývojářům vytvářet aplikace pro Android, iOS, macOS a Windows z jediné kódové základny, která zahrnuje to nejlepší z Xamarin.Forms a zároveň rozšiřuje jeho možnosti na desktopové aplikace. .NET MAUI zjednodušuje vývojový proces tím, že poskytuje jednotnou sadu rozhraní API pro vývoj uživatelského rozhraní na všech platformách s možností přístupu k funkcím specifickým pro platformu v případě potřeby. Podporuje moderní vývojové vzory a nástroje, včetně MVVM, datové vazby a asynchronního programování, což usnadňuje vytváření sofistikovaných a citlivých aplikací. Vývojářům, kteří chtějí využít sílu .NET napříč mobilními a desktopovými platformami, nabízí .NET MAUI komplexní a moderní sadu nástrojů navrženou tak, aby vyhovovala dnešním vývojovým výzvám a zároveň zajistila přenositelnost a udržovatelnost kódu.
+    Předchůdcem MAUI je framework Xamarin, který sloužil pro vytváření mobilních aplikací na platformě .NET.
+    \item \textbf{Blazor} - Specializovaný framework v rámci ekosystému .NET, který zprostředkovává vývojářům tvorbu interaktivních webových uživatelských rozhraní pomocí C\# namísto JavaScriptu. Blazor může běžet na serveru (Blazor Server), kde zpracovává interakce s uživatelským rozhraním přes připojení SignalR, nebo v prohlížeči pomocí WebAssembly (Blazor WebAssembly) ke spouštění kódu C\# přímo ve webovém prohlížeči vedle tradičních webových technologií, jako jsou HTML a CSS. Tento přístup umožňuje vývojářům využít znalosti .NET pro komplexní vývoj webových aplikací a vytvářet bohaté webové aplikace na straně klienta s .NET spuštěným v prohlížeči. Architektura Blazor je založená na komponentách a usnadňuje jejich opětovné použití pro uživatelského rozhraní. Podporuje modulární vývojový přístup. Poskytuje možnost vyvíjet webové aplikace a zůstat v ekosystému .NET.
+\end{itemize}
 
 \n{3}{Knihovny}
 
-Knihovny představují soubor funkcí a nástrojů, které mohou být použity při vývoji aplikací. 
-
-\n{4}{Microsoft knihovny}
-
-Běžnou praxí tvůrce platformy, programovacího jazyka nebo frameworku je poskytnutí sad knihoven, které usnadňují vývoj aplikací. Zároveň tyto knihovny zpravidla implementují nejběžnější funkcionality, které mohou programátoři vyžadovat. Typicky se jedná o přístup k souborovému systému, síti, databázím, grafickému rozhraní a další.
+Knihovny představují soubor funkcí a nástrojů, které mohou být použity při vývoji aplikací. Běžnou praxí tvůrce platformy, programovacího jazyka nebo frameworku je poskytnutí sad knihoven, které usnadňují vývoj aplikací. Zároveň tyto knihovny zpravidla implementují nejběžnější funkcionality, které mohou programátoři vyžadovat. Typicky se jedná o přístup k souborovému systému, síti, databázím, grafickému rozhraní a další.
 
 \begin{itemize}
     \item \textbf{System.IO} - knihovna pro práci se souborovým systémem
@@ -77,8 +67,6 @@ Běžnou praxí tvůrce platformy, programovacího jazyka nebo frameworku je pos
     \item \textbf{System.Windows.Forms} - knihovna pro tvorbu grafického rozhraní
     \item \textbf{System.Drawing} - knihovna pro práci s grafikou
 \end{itemize}
-
-\n{4}{Knihovny třetích stran}
 
 Kromě knihoven poskytovaných společností Microsoft existuje mnoho knihoven třetích stran. Za vývojem těchto knihoven mohou stát vývojařské komunity nebo být vydány velkými společnostmi. Běžně tyto knihovny navazují na sadu funkcí poskytovaných Microsoftem a rozšiřují je o další funkcionality.
 
@@ -260,15 +248,12 @@ Pro tvorbu nativního programu v .NET je nutné využít speciálního atributu 
 
 Vzhledem k tomu, že nativní AoT kompilace je v .NETu stále vývojově nezralá, samotný proces kompilace, tak jako analýza kompilovaného kódu není dostatečně informativní. Za účelem přenesení vysokoúrovňových konceptů a formálních zápisů v C\# je při kompilace prováděno široké spektrum transformací a gerování kódu.
 
-\n{4}{EmitCompilerGeneratedFiles}
-
-Jedná se
-
-\n{4}{Deklarace unmanaged rozhraní}
-
-
-
-\n{4}{Trimming}
+\begin{itemize}
+    \item \textbf{EmitCompilerGeneratedFiles} - Pokud je v projektu nastaven atribut EmitCompilerGeneratedFiles na pravdivou hodnotu, kompilátor generuje soubory, které obsahují podrobné informace o stavu zkompilované aplikace. Ty zahrnují i meziprodukty nebo výpisy strojového kódu, které jsou cenné pro procest ladění a analýzy výstupního produktu. Pomáhají při zacílení na kompilaci do nativního AOT lépe pochopit, jak je vysokoúrovňový kód překládán do strojového kódu.
+    \item \textbf{Deklarace unmanaged rozhraní} - Deklarace unmanaged nebo také nespravovaného rozhraní zahrnuje definování způsobů, jakými spravovaný kód spolupracuje s nespravovanými nativními knihovnami nebo systémy. To je zásadní v nativním AOT, protože celá aplikace je kompilována do nativního kódu před spuštěním, takže nezbývá žádný prostor pro úpravy za běhu, které se obvykle provádějí při kompilaci Just-In-Time (JIT). Tyto deklarace specifikují způsob volání unmanaged funkcí, což jsou funkce operující mimo .NET aplikaci, například v C/C++ knihovně.
+    U nativních AOT aplikací je důležité, aby tato rozhraní byla přesně definována a dodržována, protože jakýkoli nesoulad nebo chyba v deklaraci může vést k chybám za běhu, které se hůře diagnostikují a opravují kvůli absenci runtime prostředí a dynamickým funkcím.
+    \item \textbf{Trimming} - Proces odstraňování nepotřebného kódu a zdrojů z aplikace během sestavení, za účelem snížení velikosti a zvýšení výkonu. V rámci platformy .NET představuje trimming jednu z technik postupu "tree shaking", kdy překladač analyzuje, které části zdrojového kódu jsou skutečně používány, a zbytek vyloučí z výstupního produktu. To je zvláště důležité pro aplikace, kde je úložiště nebo paměť omezená. Ořezávání pomáhá při optimalizaci aplikací a zajišťuje, aby běhové prostředí obsahovalo pouze nezbytné části nutné pro fungování aplikace.
+\end{itemize}
 
 \n{3}{Přehled podpory}
 
@@ -340,15 +325,18 @@ S rozšiřováním mikroslužeb a kontejnerů se jejich správa stává složito
 
 \n{2}{Vlastnosti}
 
+Následující sekce představuje pohled na vlastnosti mikroslužeb, které jsou klíčové pro pochopení a implementaci této architektury.
+
 \n{3}{Komunikace}
 
 Mikroslužby spolu komunikují prostřednictvím rozhraní API, obvykle prostřednictvím protokolů HTTP/HTTPS, i když pro aplikace citlivější na výkon lze použít i jiné protokoly, například gRPC. Komunikační vzory zahrnují synchronní požadavky (např. RESTful API) a asynchronní zasílání zpráv (např. pomocí brokerů zpráv jako RabbitMQ nebo Kafka). Tím je zajištěno volné propojení mezi službami, což umožňuje jejich nezávislý vývoj a nasazení.
 
-\n{4}{REST API}
+\begin{itemize}
+    \item \textbf{REST API} - Představuje vysoce rozšířenou možnost komunikace mezi mikroslužbami. Využívají se při ní standardní metody HTTP, jako jsou GET, POST, PUT a DELETE, k provádění operací na rozhraní identifikovaným prostřednictvím adresy URL. Díky bezstavové povaze je rozhraní REST vysoce škálovatelné a vhodné pro veřejně přístupné služby. Má širokou podporu na různých platformách a v různých jazycích, což pomáhá zajistit interoperabilitu v rozmanitém ekosystému mikroslužeb.
+    \item \textbf{RPC} - Komunikační metoda používaná v distribuovaných systémech, včetně mikroslužeb, kdy program způsobí, že se procedura spustí v jiném adresním prostoru (obvykle na jiné virtualizované ve sdílené síti). Tato technika abstrahuje složitost síťové komunikace do jednoduchosti volání lokální funkce nebo metody. Mezi běžné implementace RPC patří gRPC, Thrift a Apache Avro.
+    \item \textbf{Message Broker} - Jedná se o komunikační vzor kdy broker - prostředník, spravuje asynchronní komunikaci mezi mikroslužbami pomocí front zpráv. Tato metoda odděluje mikroslužby tím, že jim umožňuje publikovat zprávy do fronty, aniž by znaly podrobnosti o tom, které služby je budou spotřebovávat. Mezi běžné zprostředkovatele zpráv patří RabbitMQ, Apache Kafka a AWS SQS. Tato komunikační architektura zvyšuje odolnost proti chybám, protože zprostředkovatel zpráv může zajistit, že zprávy nebudou ztraceny při přenosu, i když je spotřebitelská služba dočasně nedostupná. 
+\end{itemize}
 
-\n{4}{gRPC}
-
-\n{4}{Message brokers}
 
 \n{3}{Škálování}
 
