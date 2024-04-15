@@ -1,2 +1,11 @@
 \nn{Závěr}
-Text závěru.
+
+V rámci diplomové práce byly analyzovány kompilační režimy JIT a nativní AOT na platformě .NET. První částí byla rešerše, ve které byly popsány základní principy fungování platformy .NET, jejich kompilačních režimů a cílů kompilace. Následně byla popsána architektura microservice, která slouží jako primární zacílení nativních AOT aplikací a která poskytuje vzor pro testovací nasazení. V neposlední řadě byla popsána problematika testování, telemetrie a monitorovacích řešení.
+
+Praktická část se zabývala vývojem testovacích služeb a testovací platformy.Dále byly popsány nástroje, které umožňují vytváření nativních AOT aplikací na platformě .NET. V rámci rešerše byly také popsány nástroje, které umožňují měření výkonu aplikací.
+
+V analytické části byly výsledky praktické části popsány a vyhodnoceny. Zhodnocení vývoje probíhalo ve třech režimech: analýza vývoje, výstupu a výkonu.
+
+Výsledkem práce je komplexní analýza použití kompilačních režimů JIT a nativní AOT. Vývojový proces při kompilaci do nativního AOT kódu se ukázal nepřívětivý. Primárně podpora knihoven 3. stran a princip interceptorů a generátorů má za vinu subjektivně neintuitivní proces debugování kódu. Samotný programový výstup vyšel dle očekávání. V porovnání byly obrazy nativních služeb výrazně paměťově efektivnější. Výsledky testování ukázaly, že na platformě .NET nativní AOT aplikace mají obecně srovnatelný výkon jako aplikace v režimu JIT. Rozdíl je znatelný v situacích, kdy je nutno využít velké množství instancí stejné služby (plyne z velikosti obrazu) a v situacích, kdy je pro systém rozhodující rychlost zpracování služby včetně spuštění (Serverless platformy). Výsledky výkonnostního testování byly zaznamenány a zpracovány do dashboardů a grafů, které jsou připraveny v uživatelské rozhraní platformy Grafana.
+
+Dále byla vytvořena sada testovacích služeb, které slouží jako ukázka možností platformy. V neposlední řadě pro účely analýzy byla vytvořena testovací platforma, která umožňuje vytváření a nasazování testovacích služeb v kompilačním režimu JIT a nativní AOT.

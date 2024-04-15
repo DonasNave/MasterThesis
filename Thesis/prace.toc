@@ -225,9 +225,10 @@
 \contentsline {paragraph}{\itshape \bfseries {Výsledky}}{64}{section*.117}%
 \contentsline {paragraph}{\itshape \bfseries {Závěr}}{65}{section*.118}%
 \contentsline {section}{\numberline {8}Doporučení pro použití AoT kompilace v dotnet}{66}{section.8}%
-\contentsline {section}{Závěr}{67}{section*.119}%
-\contentsline {section}{Seznam použité literatury}{68}{section*.121}%
-\contentsline {section}{Seznam použitých symbolů a zkratek}{69}{section*.123}%
-\contentsline {section}{Seznam obrázků}{70}{section*.125}%
-\contentsline {section}{Seznam tabulek}{71}{section*.126}%
-\contentsline {section}{Seznam příloh}{72}{section*.127}%
+\contentsline {section}{\numberline {9}Rozšíření a budoucí práce}{67}{section.9}%
+\contentsline {section}{Závěr}{68}{section*.119}%
+\contentsline {section}{Seznam použité literatury}{69}{section*.121}%
+\contentsline {section}{Seznam použitých symbolů a zkratek}{70}{section*.123}%
+\contentsline {section}{Seznam obrázků}{71}{section*.125}%
+\contentsline {section}{Seznam tabulek}{72}{section*.126}%
+\contentsline {section}{Seznam příloh}{73}{section*.127}%
