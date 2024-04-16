@@ -18,7 +18,6 @@ Aplikace pro svůj účel nezávislého testování výkonu a škálovatelnosti 
 
 Každá aplikace musí poskytovat rozhraní REST API s healtcheck enpointem pro informování celého systému o svém stavu. Dalším požadavkem je obecná komunikace mezi službami pomocí vybraných protokolů. Aplikace musí být schopna sbírat a vizualizovat data o výkonu a škálovatelnosti mikroslužeb. To zahrnuje sběr a vizualizaci metrik, logů a traces.
 
-
 \n{4}{Stack}
 
 Aplikační stack jakožto celek musí zahrnovat komunikaci pomocí protokolů HTTP/2 a gRPC. Je nutné aby implementoval publish - subscribe pattern pro komunikaci mezi vybranými službami. Stack musí zprostředkovat přístup a ukládání dat do relační a timeseries databáze. Musí poskytovat nutné rozhraní pro sběr, uchování a vizualizaci metrik a testovacích dat. Stack musí být schopen konfigurovat testovací scénáře, které se mají provést a také je spouštět v manuálním a automatizovaném režimu.
@@ -157,8 +156,11 @@ Pro implementaci požadované funkcionality bylo zvoleno následující rozděle
 
 obrázek architektury
 
-\n{4}{Řešení kompilačních cílů}
-Pro kompilaci do nativního AOT kódu byl využit atribut PublishAoT v projektovém souboru. Za účelem zajištění co největší podobnosti služeb zacílených na AOT a JIT kompilaci, bude využito zadefinování konstantních hodnot v rámci projektu. Konstanty \emph{JIT} a \emph{AOT} budou využity pro rozlišení chování služeb v rámci obou kompilačních verzí. S použitím direktiv kompilátoru a zmíněných konstant bude v nutných případech docíleno rozdílného volání API při snaze zachovat totožnou funkcionalitu.
+Kompilaci do nativního AOT kódu je deklarována použitím atributu PublishAoT v projektovém souboru. Za účelem zajištění co největší podobnosti služeb zacílených na AOT a JIT kompilaci, bude využito zadefinování konstantních hodnot v rámci projektu. Konstanty \emph{JIT} a \emph{AOT} budou využity pro rozlišení chování služeb v rámci obou kompilačních verzí. S použitím direktiv kompilátoru a zmíněných konstant bude v nutných případech docíleno rozdílného volání API při snaze zachovat totožnou funkcionalitu.
+
+\n{3}{Očekávání vývojového procesu}
+
+Na základě podporované funkcionality, tak jak je definována týmem .NET a popsána v rámci rešerše, je očekáváno, že vývojový proces bude probíhat bez výrazných problémů a bude možné vytvořit služby, které budou schopny zvládnout definované funkční a nefunkční požadavky. Podpora 3. stran byla předem prozkoumána v rámci dostupných dokumentací vybraných knihoven .NET. Konkrétní podoba a rozsah této podpory bude plně ověřitelná až v rámci implementace a testování služeb.
 
 foto využití konstant v kódu
 
@@ -442,9 +444,15 @@ Definice uživatelského rozhraní, respektive dostupných dashboardů, je dána
 
 Testování scénářů je klíčovou součástí testování výkonu mikroslužeb. Scénáře jsou definovány jako soubor kroků, které mají být provedeny, a jsou použity k simulaci zátěže na mikroslužby. Scénáře jsou vytvořeny pomocí testovacích nástrojů, které umožňují vytvářet a spouštět testy, které simuluji reálné uživatelské scénáře.
 
-\n{2}{Požadavky na scénáře}
+\n{2}{Předpoklad scénářů}
 
 Scénáře musí být vytvořeny tak, aby simulovali reálné uživatelské scénáře. To znamená, že musí být vytvořeny tak, aby obsahovaly kroky, které mají být provedeny, a musí být vytvořeny tak, aby obsahovaly data, která mají být použita.
+
+\n{3}{Očekávání výkonnosti služeb}
+
+Pro výsledné obrazy služeb kompilovaných AOT do nativního kódu je očekáváno, že budou zabírat výrazně menší paměť, než je tomu u ekvivalentních obrazů služeb kompilovaných pro JIT. Předpoklad zakládá na požadavku běhového prostředí, kdy nativní služby vyžadují pouze malou množinu knihoven nad OS Alpine. Oproti tomu služby kompilované do JIT vyžadují nad OS Alpine běžící .NET runtime, i když zredukovaný o nepoužívané knihovny. Samotná velikost výstupních souborů služeb je předpokládaná větší u nativního výstupu, než u ekvivalentního JIT výstupu. To je dáno tím, že nativní výstup obsahuje dodatečné třídy, konstrukce a funkce, které substituují běhové prostředí .NET.
+
+Další očekávání se týká rychlosti odezvy služeb po spuštění. Předpokládá se, že služby kompilované do nativního kódu budou mít rychlejší odezvu než služby kompilované do JIT. To je dáno tím, že nativní kód je přímo spustitelný na cílovém systému, zatímco JIT kód vyžaduje dodatečný čas na kompilaci a optimalizaci.
 
 \n{2}{Definice scénářů}
 
