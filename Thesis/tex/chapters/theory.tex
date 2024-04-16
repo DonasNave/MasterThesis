@@ -58,17 +58,24 @@ Představují sady nástrojů a knihoven zaměřených konkrétním oblastem vý
 
 \n{3}{Knihovny}
 
-Knihovny představují soubor funkcí a nástrojů, které mohou být použity při vývoji aplikací. Běžnou praxí tvůrce platformy, programovacího jazyka nebo frameworku je poskytnutí sad knihoven, které usnadňují vývoj aplikací. Zároveň tyto knihovny zpravidla implementují nejběžnější funkcionality, které mohou programátoři vyžadovat. Typicky se jedná o přístup k souborovému systému, síti, databázím, grafickému rozhraní a další.
+Knihovny představují soubor funkcí a tříd, které mohou být použity při vývoji ve více aplikacích. Typicky představují logicky oddělenou a obecnou část funkcionality aplikace. Umožňují distribuovat běžnou funkcionalitu napříč různými projekty a . Knihovny v .NET mohou být tvořeny binárnimi DLL soubory (Dynamic Link Libraries) nebo organizované jako samostatný projekt v rámci solution. Distribuce knihoven je obecně prováděna jejich zabalením pomocí nástroje NuGet a sdíleny přes internetová úložiště.
+
+Běžnou praxí tvůrce platformy, programovacího jazyka nebo frameworku je poskytnutí sad knihoven, které usnadňují vývoj aplikací. Zároveň tyto knihovny zpravidla implementují nejběžnější funkcionality, které mohou programátoři vyžadovat. Typicky se jedná o přístup k souborovému systému, síti, databázím, grafickému rozhraní a další.
+
+Následující seznam obsahuje některé z nejběžněji používaných knihoven v .NET:
 
 \begin{itemize}
-    \item \textbf{System.IO} - knihovna pro práci se souborovým systémem
-    \item \textbf{System.Net} - knihovna pro práci se sítí
-    \item \textbf{System.Data} - knihovna pro práci s databázemi
-    \item \textbf{System.Windows.Forms} - knihovna pro tvorbu grafického rozhraní
-    \item \textbf{System.Drawing} - knihovna pro práci s grafikou
+    \item \textbf{System} - Tato základní knihovna obsahuje třídy, typy a rozhraní, které umožňují a podporují širokou škálu operací na úrovni systému, jako jsou vstupy a výstupy (IO), vlákna, kolekce, diagnostika a další. Je nezbytná prakticky pro každou aplikaci .NET.
+    \item \textbf{System.IO} - Dodáva funkcionalitu čtení z datových proudů, souborů a zápis do nich a práci se souborovým systémem.
+    \item \textbf{System.Net} - Obsahuje třídy a abstrakce pro síťovou komunikaci, včetně HTTP, socketů TCP/IP a SMTP pro elektronickou poštu.
+    \item \textbf{System.Data} - Poskytuje přístup k datovým zdrojům, jako jsou databáze nebo XML soubory, a obsahuje ADO.NET pro přístup k datům ze serveru SQL Server a dalších databází.
+    \item \textbf{System.Collections} - Rozhraní a třídy, které definují různé kolekce objektů, jako jsou seznamy, fronty, bitová pole, hašovací tabulky a slovníky.
+    \item \textbf{System.Linq} - Zaštiťuje dotazování nad kolekcemi objektů pomocí LINQ (Language Integrated Query).
+    \item \textbf{System.Threading} - Zprostředkovává správu vláken, synchronizační primitiva nebo například thread pool. Umožňuje vyvíjet paralelizované aplikace.
+    \item \textbf{System.Security} - Spravuje ověřování, autorizaci a šifrování, a je základem pro vývoj bezpečných aplikací.
 \end{itemize}
 
-Kromě knihoven poskytovaných společností Microsoft existuje mnoho knihoven třetích stran. Za vývojem těchto knihoven mohou stát vývojařské komunity nebo být vydány velkými společnostmi. Běžně tyto knihovny navazují na sadu funkcí poskytovaných Microsoftem a rozšiřují je o další funkcionality.
+Kromě knihoven poskytovaných společností Microsoft existuje mnoho knihoven třetích stran. Za vývojem těchto knihoven mohou stát vývojařské komunity nebo být vydány velkými společnostmi. Běžně tyto knihovny navazují na sadu funkcí poskytovaných Microsoftem a rozšiřují je o další novou funkcionalitu. Mezi nejznámější knihovny třetích stran v .NET patří Dapper, AutoMapper, Newtonsoft.Json a další.
 
 \n{2}{Nástroje .NET}
 
@@ -145,39 +152,34 @@ Zacílení na platformy PC nabízí probíhá několika způsoby. Aplikace obvyk
 
 Pro mobilní vývoj poskytuje .NET MAUI (nebo také Xamarin), sadu nástrojů, které umožňují vývojářům psát nativní aplikace pro Android, iOS a Windows s jedinou sdílenou kódovou základnou .NET. Xamarin se integruje do sady Visual Studio a umožňuje vývojářům používat knihovny C\# a .NET k vytváření a spouštění mobilních aplikací. Tyto aplikace jsou kompilovány specificky pro každou platformu a mohou využívat nativní funkce zařízení.
 
+\n{3}{Obecné postupy kompilace}
+
+Proces kompilace zahrnuje několik charakteristických postupů, které jsou přizpůsobeny optimalizaci výkonu aplikací při vývoji i za běhu. Jejich cílem je zvýšení výkonu a zabezpečení aplikací, ale také zajištění větší kompatibility a efektivity programu napříč platformami. Mezi tyto postupy kompilace patří:
+
+\begin{itemize}
+    \item \textbf{Linkování} - Kompilátor během procesu sestavení aplikace propojuje množství zdrojových souborů a dll, aby vytvořily jeden spustitelný soubor nebo knihovnu. To zahrnuje řešení odkazů mezi různými dll a integraci všech požadovaných zdrojů.
+    \item \textbf{Optimalizace} - Různé optimalizace IL a nativního kódu pro zlepšení výkonu. Tyto optimalizace probíhají jak během kompilace IL, tak během kompilace JIT nebo AOT do nativního kódu.
+    \item \textbf{Tree shaking a trimming} - V moderních aplikacích .NET odstraňují nástroje, jako je IL Linker, během procesu sestavování nepoužívaný kód z konečné sestavy. Toto "protřepávání stromu" snižuje velikost aplikace tím, že vylučuje nepotřebné knihovny a cesty ke kódu.
+    \item \textbf{Vytváření metadat a manifestů} - Překladače .NET také vytvářejí metadata a soubory manifestů, které popisují obsah a závislosti sestav, což má zásadní význam pro verzování, zabezpečení a rozlišení sestav za běhu.
+\end{itemize}
+
 \n{3}{Kompilace pro CLR}
 
 Standartním výstupem sestavení aplikace v .NETu je transformace zdrojového kódu z vybraného podporovaného jazyka do assembly v jazyce IL. Tento výstupní IL se v .NET konkrétně navývaná Common Intermediate language (CIL) nebo také Microsoft Intermediate Language (MSIL). IL je jazyk nezávislý na platformě, který je následně kompilován do nativního kódu za běhu aplikace.
 
-CLR je zodpovědný za interpretaci IL kódu a jeho kompilaci do nativního kódu. Kompilace do nativního kódu je prováděna v rámci běhu aplikace, což zajišťuje, že kód je optimalizován pro konkrétní architekturu systému.
+CLR je zodpovědný za interpretaci IL kódu a jeho kompilaci do nativního kódu. Kompilace do nativního kódu je prováděna v rámci běhu aplikace, což zajišťuje, že kód je optimalizován pro konkrétní architekturu systému. V případě jazyka C\# na platformě Windows slouží ke kompilaci spustitelný soubor \emph{csc.exe}. 
 
-V případě jazyka C\# na platformě Windows slouží ke kompilaci spustitelný soubor \emph{csc.exe}. 
+Výstupem kompilace pro CLR je assembly s popisnými metadaty a IL (v případě režimu R2R i částečně nativním) kódem. Assembly typicky disponují příponou \emph{.dll}, případně jsou zabaleny do spustilného souboru dle cílové platformy a výstupu. Takovýto výstup je následně připraven buďto ke spuštění za pomocí CLR, případně pro využití a referenci při tvorbě dalšího .NET kódu. Kód IL je sada instrukcí nezávislá na procesoru, kterou může spustit běhové prostředí .NET (CLR).
 
-\n{4}{Výstup} 
-
-Assembly s popisnými metadaty a IL (v případě režimu R2R i částečně nativním) kódem. Assembly typicky disponují příponou \emph{.dll}, případně jsou zabaleny do spustilného souboru dle cílové platformy a výstupu. Takovýto výstup je následně připraven buďto ke spuštění za pomocí CLR, případně pro využití a referenci při tvorbě dalšího .NET kódu.
-
-Kód IL je sada instrukcí nezávislá na procesoru, kterou může spustit běhové prostředí .NET (CLR).
+Speciálním případe JIT kompilace je aplikace R2R. Zdrojový kód je při sestavení zkompilován do podoby nativního kódu pomocí nástroje crossgen, čímž vzniknou sestavy R2R. Za běhu se sestavy R2R načtou a spustí s minimální kompilací JIT, protože většina kódu je již v nativní podobě. CLR může přesto JIT kompilovat některé části kódu, které nelze staticky zkompilovat předem. Využití je v aplikacích, které potřebují zkrátit dobu spouštění, ale zachovat určitou funkcionalitu nebo úroveň optimalizace poskytovanou JIT kompilací.
 
 \n{3}{Kompilace do nativního kódu}
 
 Přímá nativní AoT kompilace je proces, při kterém je kód kompilován do podoby sytémově nativního kódu při sestavení programu ze zdrojového kódu. V případě .NETu je tato funkcionalita dostupná při použití jazyka C\# a speciálních projektových atributů. 
 
-Jedná se o funkcionalitu, jenž prošla několika iteracemi. První možnosti sestavení aplikace v nativním kódu na .NET platformě byly aplikace Universal Windows Platform. Jednalo se o aplikace využívající specifické rozhraní, nativní pro produkty Microsoftu. S verzí .NET framework 7 byly rozšířeny možnosti sestavení aplikace jako do podoby nativního kódu i pro další architektury a typy aplikací. Tato nová funkcionalita získala vyráznější podporu v roce 2023 s vydáním dotent framework 8. Filozofie Microsoftu ohledně AoT kompilace je, že vývojáři by měli mít možnost využít AoT kompilace v .NETu, pokud je to pro daný scénář vhodné. Scénáře kladoucí takovéto požadavky se vyskytují především v cloudovém nasazení, na které v současné filosofii apelují. 
-
-\n{4}{Výstup}
+Jedná se o funkcionalitu, jenž prošla několika iteracemi. První možnosti sestavení aplikace v nativním kódu na .NET platformě byly aplikace Universal Windows Platform. Jednalo se o aplikace využívající specifické rozhraní, nativní pro produkty Microsoftu. S verzí .NET framework 7 byly rozšířeny možnosti sestavení aplikace jako do podoby nativního kódu i pro další architektury a typy aplikací. Tato nová funkcionalita získala vyráznější podporu v roce 2023 s vydáním dotent framework 8. Filozofie Microsoftu ohledně AoT kompilace je, že vývojáři by měli mít možnost využít AOT kompilace v .NETu, pokud je to pro daný scénář vhodné. Scénáře kladoucí takovéto požadavky se vyskytují především v cloudovém nasazení, na které v současné filosofii apelují. 
 
 Výstupem nativní AoT kompilace .NET aplikace je spustitelný soubor ve formátu podporovaném operačním systémem konfigurovaným v procesu kompilace. Takto vytvořený soubor je možné spustit přímo bez potřeby CLR. 
-
-\n{3}{Popis procesu}
-
-\begin{enumerate}
-    \item Analýza zdrojového kódu, provádí kontrolu syntaxe
-    \item Kontrola syntaxe
-    \item Transformace vybrané syntaxe - například pro C\# je to transformace "High level C\#" na "Low level C\#"
-    \item Generování pre-build kódu 
-    \item Překlad kódu
-\end{enumerate}
 
 \n{2}{Běh kódu}
 
@@ -187,34 +189,23 @@ Spuštění, respektive běh kódu na HW počítačového zařízení vyžaduje 
 
 Common Language Runtime (CLR) je běhové prostředí frameworku .NET. Poskytuje spravované prostředí pro spouštění aplikací .NET. Podporuje více programovacích jazyků, včetně jazyků C\#, VB.NET a F\#, a umožňuje jejich bezproblémovou spolupráci. Spravuje paměť prostřednictvím automatického garbage collection, který pomáhá předcházet únikům paměti a optimalizuje využití prostředků. CLR také zajišťuje typovou bezpečnost a ověřuje, zda jsou všechny operace typově bezpečné, aby se minimalizovaly chyby při programování.
 
-\n{4}{Funkce}
-
 CLR je zodpovědný za několik důležitých funkcí, které zvyšují produktivitu vývojářů a výkon aplikací.
 
 \begin{itemize}
-    \item Správa paměti - spravuje alokaci paměti, obsluhuje GC
-    \item Bezpečnost
-    \item Zpracování vyjímek - obsluhuje zpracování chyb/vyjímek v programu
-    \item Generování typů 
-    \item Reflexe
+    \item \textbf{Správa paměti} - CLR spravuje alokaci a dealokalizaci paměti, čímž zajišťuje efektivní využití systémových prostředků a zabraňuje memory leaks (únikům paměti). Obsahuje garbage collector (GC), který automaticky přiděluje a sbírá paměť obsazenou objekty.
+    \item \textbf{Bezpečnost} - CLR poskytuje komplexní model zabezpečení, který pomáhá chránit aplikace před neoprávněným přístupem, poškozením dat a dalšími bezpečnostními hrozbami. Vynucuje zásady zabezpečení, jako je zabezpečení přístupu ke kódu (CAS) a zabezpečení založené na rolích. Zajišťuje, aby kód byl spouštěn s příslušnými oprávněními na základě svého původu a úrovně důvěryhodnosti, čímž chrání citlivá data a systémové prostředky.
+    \item \textbf{Zpracování vyjímek} - Zpracování výjimek v CLR zahrnuje detekci, propagaci a zpracování chyb a stavů, které mohou nastat během provádění programu. Mechanismus vyjímek umožňuje elegantně řešit neočekávané situace a zachovat stabilitu aplikace.
+    \item \textbf{Generování typů} - CLR podporuje dynamické generování typů za běhu, což aplikacím umožňuje za běhu dynamicky vytvářet a manipulovat typy dle potřeby. To dává možnost scénářům, jako je dynamické generování kódu, kompilace kódu za běhu a dynamické vytváření objektů.
+    \item \textbf{Reflexe} - Reflexe umožňuje validaci a manipulaci typů, attributů a metadat načtených z dll za běhu. Umožňuje vývojářům dotazovat se a upravovat typy a jejich attributy za běhu, dynamicky volat metody a přistupovat k informacím o metadatech. Díky tomu mají aplikace .NET využívající běhové prostředí výrazné možnosti introspekce a přizpůsobení.
 \end{itemize}
 
 Klíčovými vlasnostmi jsou CLR jsou multiplatformnost kódu, reflexe, optimalizace kódu pro konkrétní architekturu a bezpečnost. CLR nabízí mechanismy, jako je zabezpečení přístupu ke kódu (CAS), které zabraňují neoprávněným operacím. Kompilace JIT (just-in-time) znamená, že kód zprostředkujícího jazyka je zkompilován do nativního kódu těsně před spuštěním, což zajišťuje optimální výkon na cílovém hardwaru. CLR usnadňuje zpracování chyb v různých jazycích a poskytuje konzistentní přístup k řešení výjimek. Navíc obsahuje nástroje pro ladění a profilování, které vývojářům pomáhají efektivně identifikovat a odstraňovat problémy s výkonem.
 
 Aby mohl být kód z IL reprezentace spuštěn na systému, respektive HW stroje, musí být dodatečně kompilován. Za tímto účelem existuje v CLR několik technik, které s sebou přínáší různé benefity a negativa a mají využití v specifických scénářích.
 
-\n{4}{JIT kompilace}
-
-Při JIT kompilaci v rámci CLR dochází ke kompilaci kódu do nativní podoby těsně před spuštěním kódu. Kompilace veškerého kódu aplikace JIT umožňuje optimalizovat běh programu současnému stavu systému. Za běhu je prováděna inspekce kódu, dochází ke kontrole validity, typování a adresace IL kódu. Kompilovány jsou pouze ty části kódu, jenž jsou relevantní pro aktuální stav programu.
-
-\n{4}{R2R kompilace}
-
-Zdrojový kód je při sestavení zkompilován do podoby nativního kódu pomocí nástroje crossgen, čímž vzniknou sestavy R2R. Za běhu se sestavy R2R načtou a spustí s minimální kompilací JIT, protože většina kódu je již v nativní podobě. CLR může přesto JIT kompilovat některé části kódu, které nelze staticky zkompilovat předem. Využití je v aplikacích, které potřebují zkrátit dobu spouštění, ale zachovat určitou funkcionalitu nebo úroveň optimalizace poskytovanou JIT kompilací.
-
 \n{3}{Nativní kód}
 
 Běh nativního kódu je závislý na konkrétní architektuře systému, pro které jsou nativní programové soubory vytvořeny. Nepodléhá další úpravě ze strany .NET nástrojů. Spuštění probíhá nativním příkazem operačního systému, který zprostředkuje spuštění programu.
-
 
 \n{2}{Tvorba programu v dotnet}
 
@@ -257,8 +248,6 @@ Vzhledem k tomu, že nativní AoT kompilace je v .NETu stále vývojově nezral�
 
 \n{3}{Přehled podpory}
 
-\n{4}{Funkcionalita}
-
 Následující přehled představuje rozsah funkcionality implementované v rámci .NET frameworku 8.0, konkrétně APS.NET k datu zvěřejnění práce.
 
 \begin{itemize}
@@ -277,19 +266,6 @@ Následující přehled představuje rozsah funkcionality implementované v rám
     \item \textbf{Rewrite}
     \item \textbf{StaticFiles}
     \item \textbf{WebSockets}
-\end{itemize}
-
-\n{4}{Cíle kompilace}
-
-.NET poskytuje podporu pro kompilaci zdrojového kódu v režimu AoT pouze pro určité operační systémy:
-
-\begin{itemize}
-    \item \textbf{Windows} - plná podpora
-    \item \textbf{Linux} - plná podpora
-    \item \textbf{macOS} - plná podpora
-    \item \textbf{Android} - částečná podpora
-    \item \textbf{iOS} - částečná podpora
-    \item \textbf{WebAssembly} - částečná podpora
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
