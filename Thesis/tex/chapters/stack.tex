@@ -1,10 +1,8 @@
-\cast{Praktická část}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                             Tvorba tech stacku                                %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\n{1}{Tvorba tech stacku}
+\n{1}{Tvorba monitorovacího stacku}
 
 Za účelem důkladného testování výkonu a škálovatelnosti mikroslužeb byl vytvořen tech stack, který zahrnuje technologie pro kontejnerizaci, orchestraci, persistenci, komunikaci, monitorování a testování. 
 
@@ -14,35 +12,41 @@ Aplikace pro svůj účel nezávislého testování výkonu a škálovatelnosti 
 
 \n{3}{Funkční požadavky}
 
-\n{4}{Mikroslužby}
+Funkční požadavky definují chování, funkce a vlastnosti, které musí systém poskytovat. Přímo souvisejí s doménovými požadavky a zahrnují specifikace, jako je zpracování dat, provádění výpočtů nebo podpora konkrétních procesů. Funkční požadavky v podstatě popisují očekávané operace systému, včetně vstupů, chování a výstupů, a jsou tak klíčové pro vývoj a testování.
 
-Každá aplikace musí poskytovat rozhraní REST API s healtcheck enpointem pro informování celého systému o svém stavu. Dalším požadavkem je obecná komunikace mezi službami pomocí vybraných protokolů. Aplikace musí být schopna sbírat a vizualizovat data o výkonu a škálovatelnosti mikroslužeb. To zahrnuje sběr a vizualizaci metrik, logů a traces.
-
-\n{4}{Stack}
-
-Aplikační stack jakožto celek musí zahrnovat komunikaci pomocí protokolů HTTP/2 a gRPC. Je nutné aby implementoval publish - subscribe pattern pro komunikaci mezi vybranými službami. Stack musí zprostředkovat přístup a ukládání dat do relační a timeseries databáze. Musí poskytovat nutné rozhraní pro sběr, uchování a vizualizaci metrik a testovacích dat. Stack musí být schopen konfigurovat testovací scénáře, které se mají provést a také je spouštět v manuálním a automatizovaném režimu.
-
-\n{4}{Sběr a vizualizace dat}
-
-Aplikace musí být schopna sbírat a vizualizovat data o výkonu a škálovatelnosti mikroslužeb. To zahrnuje sběr a vizualizaci metrik, protokolů a tras.
-
-\n{4}{Testování scénářů}
-
-Aplikace musí být schopna provádět testování scénářů, které simulují fungování systému a zátěž na mikroslužby. Testovací scénáře musí být konfigurovatelné a spustitelné v manuálním a automatizovaném režimu.
-
-\n{4}{Konfigurace aplikace}
-
-V rámci aplikace musí být možnost konfigurovat chování nasazených služeb.
+\begin{itemize}
+  \item \textbf{Mikroslužby} - Každá aplikace musí poskytovat rozhraní REST API s healtcheck enpointem pro informování celého systému o svém stavu. Dalším požadavkem je obecná komunikace mezi službami pomocí vybraných protokolů. Aplikace musí být schopna sbírat a vizualizovat data o výkonu a škálovatelnosti mikroslužeb. To zahrnuje sběr a vizualizaci metrik, logů a traces.
+  \item \textbf{Stack} - Aplikační stack jakožto celek musí zahrnovat komunikaci pomocí protokolů HTTP/2 a gRPC. Je nutné aby implementoval publish - subscribe pattern pro komunikaci mezi vybranými službami. Stack musí zprostředkovat přístup a ukládání dat do relační a timeseries databáze. Musí poskytovat nutné rozhraní pro sběr, uchování a vizualizaci metrik a testovacích dat. Stack musí být schopen konfigurovat testovací scénáře, které se mají provést a také je spouštět v manuálním a automatizovaném režimu.
+  \item \textbf{Sběr a vizualizace dat} - Aplikace musí být schopna sbírat a vizualizovat data o výkonu a škálovatelnosti mikroslužeb. To zahrnuje sběr a vizualizaci metrik, protokolů a tras.
+  \item \textbf{Testování scénářů} - Aplikace musí být schopna provádět testování scénářů, které simulují fungování systému a zátěž na mikroslužby. Testovací scénáře musí být konfigurovatelné a spustitelné v manuálním a automatizovaném režimu. 
+  \item \textbf{Konfigurace aplikace} - V rámci aplikace musí být možnost konfigurovat chování nasazených služeb.
+\end{itemize}
 
 \n{3}{Nefunkční požadavky}
 
-\n{4}{Výkon}
+Nefunkční požadavky specifikují celkové vlastnosti systému. Definují atributy kvality, které musí systém splňovat. Nefunkční požadavky mohou zahrnovat omezení týkající se návrhu a implementace systému, jako jsou bezpečnostní standardy, soulad s právními a regulačními směrnicemi, doba odezvy při zpracování dat, kapacita pro souběžné uživatele, integrita dat a mechanismy převzetí služeb při selhání. Mají zásadní význam pro zajištění životaschopnosti a efektivity systému v jeho provozním prostředí a často ovlivňují celkovou uživatelskou zkušenost, výkonnost systému a splnění regulačních podmínek.
 
-Implementace aplikace, respektive jejich služeb, musí být schopna zvládnout zátěž, která je na ně kladena. To zahrnuje schopnost zvládnout požadavky na výkon a škálovatelnost.
+\begin{itemize}
+  \item \textbf{Použitelnost} - Aplikace musí být snadno použitelná a přístupná pro uživatele. To zahrnuje snadnou konfiguraci a spuštění testovacích scénářů.
+  \item \textbf{Udržitelnost} - Aplikace musí být udržitelná a snadno rozšiřitelná. To zahrnuje schopnost přidávat nové služby a rozšiřovat stávající služby.
+  \item \textbf{Výkon} - Implementace aplikace, respektive jejich služeb, musí být schopna zvládnout zátěž, která je na ně kladena. To zahrnuje schopnost zvládnout požadavky na výkon a škálovatelnost.
+\end{itemize}
 
 \n{2}{Požadavky na HW}
 
 Hardware, na kterém bude aplikace provozována, musí výkonnostně dostačovat pro provozování testovacích scénářů a sběr a vizualizaci dat. Týká se to primárně počtu jader, velikosti paměti a rychlosti diskového I/O. Provozované služby mají určitou základní režii, která se musí brát v potaz.
+
+\n{2}{Cíle monitorování}
+
+Efektivní monitorování hraje klíčovou roli při vyhodnocení a porovnání výkonnosti a technických vlastností kompilace JIT a nativní AOT. Hlavní cíle tohoto monitorování jsou následující:
+
+\begin{itemize}
+  \item \textbf{Zkušenosti s vývojem} - Jedním z klíčových cílů je zachytit a analyzovat dopad různých kompilačních strategií na proces vývoje. To zahrnuje sledování doby sestavení, cyklů nasazení a celkové snadnosti integrace a nasazení v rámci architektury mikroslužeb. Posouzením těchto faktorů můžeme poskytnout subjektivní i objektivní náhled na to, jak jednotlivé metody kompilace ovlivňují každodenní zkušenosti vývojářů, včetně potenciálních problémů nebo efektivity, které přinášejí přístupy JIT nebo AOT.
+  \item \textbf{Srovnání výstupů} - Tento cíl se zaměřuje na přímé porovnání hmatatelných výstupů metod kompilace JIT a AOT. Konkrétně se bude sledovat velikost vytvořených spustitelných souborů, inicializační časy (jak rychle jsou služby po nasazení funkční) a využití zdrojů během běhu (využití procesoru a paměti). Pochopení těchto aspektů pomůže vymezit provozní efektivitu nebo režijní náklady spojené s každou kompilační strategií.
+  \item \textbf{Výkonnostní metriky} - Pro tuto studii je rozhodující porovnání výkonnostních ukazatelů za podobných provozních podmínek. Mezi sledované metriky patří doba odezvy, propustnost (počet požadavků, které je služba schopna zpracovat za jednotku času), chybovost a stabilita systému při zatížení. Tyto ukazatele poskytnou kvantitativní základ pro porovnání účinnosti kompilací JIT a AOT při zvládání reálné provozní zátěže.
+\end{itemize}
+
+K dosažení těchto cílů bude zavedena komplexní monitorovací sestava zahrnující nástroje a postupy, které poskytují údaje a poznatky v reálném čase. Tento přístup zajistí, že shromážděná data budou robustní, spolehlivá a vhodná pro provedení důkladné srovnávací analýzy, a podpoří tak informovaná rozhodnutí týkající se optimálního využití kompilace JIT a AOT při nasazení mikroslužeb.
 
 \n{2}{Výběr technlogií}
 
@@ -50,10 +54,8 @@ Součástí tvorby tech stacku je výběr technologií, které budou použity pr
 
 \n{3}{Organizace a správa zdrojů}
 
-\n{4}{Git}
 Pro správu souborů práce byl zvolen SCM Git. Git je open-source verzovací, který umožňuje vytvářet, spravovat a sdílet soubory. Git je schopný pracovat s větvemi, které umožňují vytvářet paralelní vývojové větve.
 
-\n{4}{Struktura}
 Za účelem jednoduché organizace souborů bylo zvoleno řešení monorepozitáře. Monorepozitář je repozitář, který obsahuje veškeré soubory projektu, ale také relevantní dokumentaci, obrázky, podpůrné nástroj a zdrojové soubory diplomové práce. Následující struktura adresářů byla zvolena pro organizaci souborů.
 
 \begin{itemize}
@@ -62,7 +64,6 @@ Za účelem jednoduché organizace souborů bylo zvoleno řešení monorepozitá
     \item \textbf{Thesis} - adresář obsahující zdrojové soubory textu diplomové práce a práci samotnou ve formátu pdf.
 \end{itemize}
 
-\n{4}{GitHub}
 Pro zaručení dostupnosti a sdílení veškerých prostředků souvisejících s prací byl vybrán GitHub, jakožto server pro hostování repozitáře. GitHub je open-source platforma pro verzování souborů a projektů. Navíc poskytuje rozšířující možnosti jako je CI/CD, správa dokumentace a další. Repozitář projektu je veden jako veřejný s licencí MIT.
 
 \n{3}{Kontejnerizace a orchestrace}
@@ -81,25 +82,19 @@ Definice balíčků je řešena pomocí konfiguračních souborů, které jsou p
 
 \n{3}{Persistenční vrstva}
 
-Persistenční vrsta zprostředovává dlouhodobé uchování dat. Z důvodů požadavků na persistenci byly vybrány následující.
+Jako relační databáze byla vybrána Postgres. Je schopná pracovat s relačními daty, které jsou uloženy v tabulkách. Poskytuje základní klientský balíček pro .NET, jenž umožňuje komunikaci s databází. Tento balíček je kompatibilní s nativní AOT kompilací.
 
-\n{4}{Postgres}
-
-Open-source relační databáze, která umožňuje ukládat a spravovat data. Postgres je schopná pracovat s relačními daty, které jsou uloženy v tabulkách. Poskytuje základní klientský balíček pro .NET, který umožňuje komunikaci s databází. Tento balíček je kompatibilní s Native AoT kompilací.
-
-\n{4}{InfluxDB}
-
-Open-source timeseries databáze, která umožňuje ukládat a spravovat časové řady. Využití InfluxDb je pragramtické z důvodu nativní podbory Influxdb napojení z nástroje K6 pro export testovacích dat.
+Za účelem persistence a zprostředkování dat z testování je použita InfluxDB. Tato timeseries databáze umožňuje ukládat a spravovat časové řady. Využití InfluxDb je pragramtické z důvodu nativní podpory napojení InfluxDB v1 z nástroje K6 pro export testovacích dat.
 
 \n{3}{Komunikační metody}
 
 Za účelem analýzy možností komunikace klienta se službami, ale i interní komunikace, bylo vybráno k implementaci hned několik protokolů. 
 
-\n{4}{REST API} V rámci Kestrel serveru každé služby je využit protokol HTTP/1 a komunikace pomocí REST API. Toto rozhraní slouží pro komunikaci klienta se službou a poskytuje data ve formátu JSON.
-
-\n{4}{gRPC} Vybrané služby implementují komunikaci pomocí protokolu HTTP/2 a gRPC. Za tímto účelem mají zmíněné služby otevřené rozhraní na dodatečném portu. gRPC protokol je využit přístupem model first, tedy rozhraní je definováno pomocí protobuf souboru a následně je vygenerován kód pro komunikaci.
-
-\n{4}{RabbitMQ} Pro implementaci komunikace prodle vzoru Publish - Subscribe byl vybrán message broker RabbitMQ. Umožňuje službám odebírat data z jiných služeb a zároveň poskytovat data jiným službám. Tím je zajištěna asynchronní messaging mezi službami.
+\begin{itemize}
+  \item \textbf{REST API} - V rámci Kestrel serveru každé služby je využit protokol HTTP/1 a komunikace pomocí REST API. Toto rozhraní slouží pro komunikaci klienta se službou a poskytuje data ve formátu JSON.
+  \item \textbf{gRPC} - Vybrané služby implementují komunikaci pomocí protokolu HTTP/2 a gRPC. Za tímto účelem mají zmíněné služby otevřené rozhraní na dodatečném portu. gRPC protokol je využit přístupem model first, tedy rozhraní je definováno pomocí protobuf souboru a následně je vygenerován kód pro komunikaci.
+  \item \textbf{RabbitMQ} - Pro implementaci komunikace prodle vzoru Publish - Subscribe byl vybrán message broker RabbitMQ. Umožňuje službám odebírat data z jiných služeb a zároveň poskytovat data jiným službám. Tím je zajištěna asynchronní messaging mezi službami.
+\end{itemize}
 
 \n{3}{Monitorovací nástroje}
 
@@ -127,9 +122,7 @@ Open source collector telemetrických dat. Poskytuje jednotný, vendor-agnostic 
 
 \n{3}{Testovací nástroje}
 
-\n{4}{K6}
-
-Nástroj pro výkonové testování, který umožňuje vývojářům testovat výkon svých aplikací. K6 umožňuje vývojářům vytvářet a spouštět testy, které simuluji reálné uživatelské scénáře. Tímto je zajištěno, že aplikace je schopna zvládnout požadavky uživatelů. K6 je nástroj, který je možné využít pro testování mikroslužeb, protože umožňuje vývojářům vytvářet testy, které simuluji reálné uživatelské scénáře.
+Za účelem testování monitorovacího stacku byl vybrán nástroj K6. Jedná se o moderní open-source nástroj pro testování zátěže. Slouží k vytváření, provádění a analýze výkonnostních testů softwarových aplikací. Nabízí čisté skriptovací rozhraní s jazykem JavaScript, které umožňuje psát, jak komplexní testovací scénáře napodobující reálný provoz systému, tak i vytvářet nereálné nebo hraniční situace. K6 podporuje různé systémové metriky, jako je doba odezvy, propustnost a chybovost. Nabízí šiřoké možnosti rozšíření skrze API, což umožňuje přizpůsobení a integraci s dalšími nástroji pro komplexní sledování výkonu.
 
 \n{3}{Testovací služby}
 
@@ -212,7 +205,7 @@ stromový graf představuje adresářovou strukturu projektu.
     [.gitignore]
     [DTA.sln]
   ]
-  \end{forest}
+\end{forest}
 
 
 \n{3}{Společná struktura služeb}
@@ -434,201 +427,3 @@ InfluxDB má upraven název výchozí databáze a nastavení autentifikace a př
 \n{3}{Nastavení uživatelského rozhraní}
 
 Definice uživatelského rozhraní, respektive dostupných dashboardů, je dána při sestavení obrazu LGTM. V rámci něj jsou předdefinovány hodnoty pro připojení zdrojů dat, tj. Prometheus, Loki, Tempo a InfluxDb. Patřičné dashboardy zobrazující relevantní data pro různé scénáře systému byly předem připraveny a jsou k dispozici po otevření Grafany anonymním uživatelem.
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%                             Testování scénářů                                 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\n{1}{Testování scénářů}
-
-Testování scénářů je klíčovou součástí testování výkonu mikroslužeb. Scénáře jsou definovány jako soubor kroků, které mají být provedeny, a jsou použity k simulaci zátěže na mikroslužby. Scénáře jsou vytvořeny pomocí testovacích nástrojů, které umožňují vytvářet a spouštět testy, které simuluji reálné uživatelské scénáře.
-
-\n{2}{Předpoklad scénářů}
-
-Scénáře musí být vytvořeny tak, aby simulovali reálné uživatelské scénáře. To znamená, že musí být vytvořeny tak, aby obsahovaly kroky, které mají být provedeny, a musí být vytvořeny tak, aby obsahovaly data, která mají být použita.
-
-\n{3}{Očekávání výkonnosti služeb}
-
-Pro výsledné obrazy služeb kompilovaných AOT do nativního kódu je očekáváno, že budou zabírat výrazně menší paměť, než je tomu u ekvivalentních obrazů služeb kompilovaných pro JIT. Předpoklad zakládá na požadavku běhového prostředí, kdy nativní služby vyžadují pouze malou množinu knihoven nad OS Alpine. Oproti tomu služby kompilované do JIT vyžadují nad OS Alpine běžící .NET runtime, i když zredukovaný o nepoužívané knihovny. Samotná velikost výstupních souborů služeb je předpokládaná větší u nativního výstupu, než u ekvivalentního JIT výstupu. To je dáno tím, že nativní výstup obsahuje dodatečné třídy, konstrukce a funkce, které substituují běhové prostředí .NET.
-
-Další očekávání se týká rychlosti odezvy služeb po spuštění. Předpokládá se, že služby kompilované do nativního kódu budou mít rychlejší odezvu než služby kompilované do JIT. To je dáno tím, že nativní kód je přímo spustitelný na cílovém systému, zatímco JIT kód vyžaduje dodatečný čas na kompilaci a optimalizaci.
-
-\n{2}{Definice scénářů}
-
-Scénáře jsou vytvořeny jako množina javascriptových souborů splňujících požadavku API nástroje K6. Každý scénář je definován přes jeden a více scriptových souborů. Tyto soubory obsahují kroky, které mají být provedeny, a data, která mají být použita. Pro sjednocení obecných nastavení jsou vytvořený konfigurační soubory, které jsou využity ve více scénářích.
-
-Každý scénař má definován vlastní dashboard v Grafaně, který je využit pro sledování výsledků testů v reálném čase. Zároveň je součástní každého scénáře readme soubor, jenž podrobněji popisuje jednotlivé kroky a data, která jsou využita.
-
-\n{2}{Popis scénářů}
-
-Následující sekce obsahuje popis scénářů, které byly vytvořeny pro testování výkonu a škálovatelnosti mikroslužeb kompilovaných JIT a AoT. Ke každému scénáři patři odpovídající sada souborů scriptů a konfigurací. Rovněž každý scénář disponuje vlastním interaktivním dashboardem v Grafaně, který umožňuje sledovat výsledky testů v reálném čase.
-
-\n{3}{Scénář 1 - schopnost odpovídat služeb}
-
-Scénář 1 je zaměřen na schopnost mikroslužeb odpovídat na požadavky. K tomuto účelu je využit základní endpoint \emph{/health}, který informuje o stavu služby. Scénář je vytvořen tak, aby simuloval zátěž na mikroslužby a zjišťoval, zda jsou schopny odpovídat na požadavky.
-
-Jelikož healthcheck endpoint je triviální ve své implementaci, nehraje roli další režie spojená se zpracováním logiky požadavku. Tímto je zajištěno, že se otestuje maximální vliv jednotlivých nasazení na výkon a škálovatelnost mikroslužeb.
-
-Scénář se dělí na více kroků, aby při každém byl zjištěn dostatek zdrojů pro v systému pro testovanou službu. Krok je proveden vždy po určitém časovém intervalu, který je definován v konfiguračním souboru testu.
-
-\obr{Diagram scénáře 1}{fig:logo}{0.9}{graphics/diagrams/stack-scenario1.png}
-
-\n{4}{Relevantní služby}
-
-\begin{itemize}
-    \item \textbf{SRS, FUS, BPS, EPS} - všechny služby s definovaným healthcheck endpointem
-\end{itemize}
-
-\n{4}{Průběh scénáře}
-
-\begin{itemize}
-    \item \textbf{Krok 1} - Spuštění služeb v rámci stacku
-    \item \textbf{Krok 2} - Na služby jsou zasílány požadavky na healthcheck endpoint. Charakter požadavků je stupňující se k konfigurovanému maximu, načež zase klesá.
-    \item \textbf{Krok 3} - Služby ukončují svoji činnost a zasílají data o provedeném testu
-\end{itemize}
-
-\n{3}{Scénář 2 - přístup k perzistenci}
-
-Cílem tohoto scénáře je otestovat schopnost poradit si s vysokým množství asynchroních operací přístupu k datům. Scénář se pokouší identifikovat dodatečné režie spojené s přístupem k perzistenci a zjišťuje, zda jsou služby schopny zpracovat vysoký počet požadavků na databázi. Zejména je cílem pozorovat potencionál rozdíl v přístupu AOT a JIT zkompilované služby k systémovému API.
-
-\obr{Diagram scénáře 2}{fig:logo}{0.9}{graphics/diagrams/stack-scenario2.png}
-
-\n{4}{Relevantní služby}
-
-\begin{itemize}
-    \item \textbf{FUS} - služba pro přístup k perzistenci na databázi Postgres
-\end{itemize}
-
-\n{4}{Průběh scénáře}
-
-\begin{itemize}
-    \item \textbf{Krok 1} - Služba je spuštěna v rámci stacku
-    \item \textbf{Krok 2} - Na službu jsou zasílány požadavky na zápis i čtení dat z perzistentního úložiště. Charakter požadavků je stupňující se k konfigurovanému maximu, načež zase klesá.
-    \item \textbf{Krok 3} - Služba ukončuje svoji činnost a zasílá data o prevedeném testu
-\end{itemize}
-
-\n{3}{Scénář 3 - zátěž zpracování dat}
-
-Cílem tohoto scénáře je otestovat schopnost mikroslužeb v jednotlivých kompilacích zpracovat náročnější operace. Scénář se zaměřuje na samotnou podstatu přístupu k vnitřnímu systémového API, efektivitě jeho využití a další režii, která by mohla být odlišná mezi JIT a AOT kompilací.
-
-Předmětem scénář jsou dva výpočetně náročné algoritmy - faktoriál a Fibonacciho posloupnost. Tyto algoritmy jsou implementovány v rámci služby a jsou volány zvenčí. Scénář je vytvořen tak, aby simuloval zátěž na výpočetní jednotku a prozkoumal tak potencionální výkonnostní rozdíly v rámci přístupu k systémovému API a organizaci instrukcí.
-
-\obr{Diagram scénáře 3}{fig:logo}{0.9}{graphics/diagrams/stack-scenario3.png}
-
-\n{4}{Relevantní služby}
-
-\begin{itemize}
-    \item \textbf{BPS} - služba, která poskytuje rozhraní a logiku pro výpočet faktoriálu a Fibonacciho posloupnosti
-\end{itemize}
-
-\n{4}{Průběh scénáře}
-
-\begin{itemize}
-    \item \textbf{Krok 1} - Služba je spuštěna v rámci stacku
-    \item \textbf{Krok 2} - Na službu jsou zasílány požadavky na výpočet faktoriálu a Fibonacciho posloupnosti. Charakter požadavků je stupňující se k konfigurovanému maximu, načež zase klesá.
-    \item \textbf{Krok 3} - Služba ukončuje svoji činnost a zasílá data o prevedeném testu
-    
-\end{itemize}
-
-\n{3}{Scénář 4 - komunikace mezi službami}
-
-Tento scénář je zaměřen na rychlost a zátěž celkového systému při splnění požadavků vyžadující komunikaci mezi službami. Scénář je vytvořen tak, aby vyvolal událost z jedné služby, která je zpracována jinou službou. Pro splnění události je potřeba dat z perzistentního úložiště, která jsou získána ze třetí služby.
-
-\obr{Diagram scénáře 4}{fig:logo}{1}{graphics/diagrams/stack-scenario4.png}
-
-\n{4}{Relevantní služby}
-
-\begin{itemize}
-    \item \textbf{FUS} - služba hraje roli serveru, na něž se dotáže klient gRPC voláním. Následně přistupuje k perzistenci pro získání dat k splnění volání.
-    \item \textbf{BPS} - poslouchá nad předem definovanou frontou a vyčkává na zprávu pro zpracování. V momentu přijetí zprávy, zpracovává vyvolanou událost a získává data ze vzdáleného volání z FUS.
-    \item \textbf{EPS} - na základě přijatého volání přes REST API, zasílá služba EPS zprávu do předem definované fronty, na niž naslouchá BPS.
-\end{itemize}
-
-\n{4}{Průběh scénáře}
-
-\begin{itemize}
-    \item \textbf{Krok 1} - Služby jsou spuštěny v rámci stacku
-    \item \textbf{Krok 2} - Do služby EPS je zaslán požadavek na zpracování dat. 
-    \item \textbf{Krok 3} - Služba EPS zprávu zasílá do fronty, na kterou naslouchá služba BPS. 
-    \item \textbf{Krok 4} - Služba BPS zprávu zpracovává a získává data ze vzdáleného volání na službu FUS. 
-    \item \textbf{Krok 5} - Služba FUS získává data z perzistence a zasílá je zpět službě BPS. 
-    \item \textbf{Krok 6} - Služba BPS zpracovává data.
-    \item \textbf{Krok 7} - Služby ukončují svoji činnost a zasílají data o prevedeném testu
-\end{itemize}
-
-\n{3}{Scénář 5 - rychlost odpovědi po startu služby}
-
-Cílem tohoto scénáře je otestovat rychlost spuštění služby. Scénář testuje, jak rychle je služba schopna odpovědět na požadavek po spuštění. V rámci testu jsou testovány různé endpointy, které jsou volány po spuštění služby.
-
-Základem scénáře je pomocí CLI příkazů vyvolat spuštění služby a ihned po jejím spuštění zaslat požadavek na získání dat.
-
-\obr{Diagram scénáře 5}{fig:logo}{0.9}{graphics/diagrams/stack-scenario5.png}
-
-\n{4}{Relevantní služby}
-
-\begin{itemize}
-    \item \textbf{SRS} - služba je testována pro svoji nutnost serializace vygenerované datové odpovědi. Vyžaduje určitou množinu operací, jenž se podepíše dále nad rychlostí odpovědi služby a více přiblíží reálnému scénáři.
-    \item \textbf{FUS} - za účelem otestování rychlosti odpovědi služby s ohledem na vazbu do dalšího systému je využita i služba FUS. S jejím přístupem k persistentnímu úložišti přiblíží scénář, kdy je nutné pro zpracování odpovědi nejen nastartovat službu, ale i získat data ze vzdáleného zdroje.
-\end{itemize}
-
-\n{4}{Průběh scénáře}
-
-\begin{itemize}
-    \item \textbf{Krok 1} - Služba je spuštěn v rámci stacku
-    \item \textbf{Krok 2} - V návaznosti na spuštění služby je zaslán požadavek na získání dat.
-    \item \textbf{Krok 3} - Služba SRS/FUS zpracovává požadavek a zprostředkovává data.
-    \item \textbf{Krok 4} - Data jsou zaslána zpět klientovi.
-    \item \textbf{Krok 5} - Služba ukončuje svoji činnost.
-\end{itemize}
-
-\n{2}{Spouštění scénářů}
-
-Jednotlivé scénáře jsou spouštěny dle definice v příslušném readme souboru. Jedná se o sekvenci instrkcí/příkazů pro přípravu požadovaného stavu systému a spuštění K6 testu v rámci kontejneru.
-
-\n{2}{Zpracování a vizualizace dat}
-
-Po provedení testování scénářů je nutné zpracovat a vizualizovat data, která byla získána. To zahrnuje zpracování dat, která byla získána z testování scénářů, a zpracování dat, která byla získána z monitorovacích nástrojů.
-
-\n{3}{Monitorování v reálném čase}
-
-Monitorování v reálném čase je klíčovou součástí testování výkonu a škálovatelnosti mikroslužeb. Umožňuje sledovat výkon a škálovatelnost mikroslužeb při běhu testů.
-
-Toho je docíleno využitím dashboardů v Grafaně, důkladnou konfigurací a zobrazením metrik, kterých sběr je implementován v rámci mikroslužeb.
-
-Dalším aspektem monitorování v reálném čase je zobrazení výsledků testů v reálném čase. Toho je rovněž docíleno pomocí specifických dashboardů v Grafaně, které integrují data z K6 testovacího nástroje a zaslané do InfluxDb. Díky propojení Grafany s InfluxDb je možné sledovat výsledky testů v reálném čase.
-
-\n{3}{Sběr historických dat}
-
-Historická data jsou automaticky ukládána do jednotlivých databází při sběru. Po propagaci telemetrických dat do jednotného collectoru OpenTelemetry jsou data dále poskytována službám Loki, Tempo a Prometheus. Ty jedna jednotlivá telemetrická data zpracují, zároveň ale slouží jako jejich persistence. Data z výsledků testů jsou ukládána do InfluxDb.
-
-% \n{2}{Obrázek}
-% Obrázek \ref{fig:logo} prezentuje logo Fakulty aplikované informatiky.
-
-% % Obrázek lze vkládat pomocí následujícího zjednodušeného stylu, nebo klasickým LaTex způsobem
-% % Pozor! Obrázek nesmí obsahovat alfa kanál (průhlednost). Jde to totiž proti požadovanému standardu PDF/A.
-% \obr{Popisek obrázku}{fig:logo}{0.5}{graphics/logo/fai_logo_cz.png}
-
-
-% \n{2}{Tabulka}
-% Tabulka \ref{tab:priklad} obsahuje dva řádky a celkem 7 sloupců.
-
-% % Tabulku lze vkládat pomocí následujícího zjednodušeného stylu, nebo klasickým LaTex způsobem
-% \tab{Popisek tabulky}{tab:priklad}{0.65}{|l|c|c|c|c|c|r|}{
-%   \hline
-%    & 1 & 2 & 3 & 4 & 5 & Cena [Kč] \\ \hline
-%   \emph{F} & (jedna) & (dva) & (tři) & (čtyři) & (pět) & 300 \\ \hline
-% }
-
-
-% \n{2}{Citování}
-% Následuje ukázka odkazování na různé zdroje:
-% \begin{itemize}
-% 	\item kniha \cite{HRW1997},
-% 	\item kapitola v knize \cite{Delorme2006},
-% 	\item článek v odborném žurnálu \cite{Bourreau2006},
-% 	\item konferenční příspěvek \cite{Judish1999},
-% 	\item doktorská práce \cite{Valente2005},
-% 	\item technická zpráva \cite{Fralick1997},
-% 	\item webová stránka \cite{WWWCST}.
-% \end{itemize}

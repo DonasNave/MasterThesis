@@ -1,0 +1,7 @@
+\n{1}{Rozšíření a budoucí práce}
+
+V návaznosti na platformu, která v práci vznikla v rámci výkonnostního testování služeb, je možné doplnit implementaci dalších služeb, případně rozšířit stávající. Podle vzoru současného řešení lze dodat další funkcionalitu, nastavit další zdroje telemetrie, případně rozšířit možnosti vizualizace dat.
+
+Z pohledu uživatelské přívětivosti se nabízí rozšíření o webovou aplikaci využívající princip Docker outside of Docker (DooD). Tímto by bylo možné zjednodušit spouštění konkrétních testovacích scénářů v GUI. V rámci webové aplikace by bylo možné nastavit parametry testování, spustit konkrétní test a prokliknout se odkazem na relevantní dashboard v Grafaně. 
+
+S ohledem na citlivé data a přístupy, které aplikace zprostředkovává, se nabízí rozšíření o autentizaci a autorizaci v případě vystavení stacku v síti. Jelikož grafické rozhraní aplikace je založeno na aplikaci Grafana, jež je schopna připojit se k externím zprostředkovatelům autentizace, bylo by vhodné zapojit službu jako Keycloak pro sjednocení autentifikace napříč stackem.

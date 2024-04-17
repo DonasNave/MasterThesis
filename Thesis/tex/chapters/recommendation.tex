@@ -1,0 +1,10 @@
+
+\n{1}{Doporučení pro použití AoT kompilace v dotnet}
+
+AOT kód přináší jasné výhody výkonnostní výhody za cenu kompatibility. Řešení tvorby toho kódu, je však s ohledem na běžný postup velmi nešťastné. Využití interceptorů a generátorů bere inciativu z rukou vývojáře a vytváří naprosto nový program. Toto chování není natolik odlišné od průběhu kompilace do nativního systémového kódu v jiných jazycích, v případě .NET avšak bylo dodáno znatelně "post mortem".
+
+Valná většina konkurenčních výhod, jenž z .NET plyne souvisí s možnostmi jeho runtime prostředí. Nativní AOT kompilace má smysl jen ve velice specifický situacích, jenž lze blíže identifikovat jako poskytování cludové infrastruktury a s tím spojenou potřebu běhu velkého množství instancí. Dalším příkladem je využití Serverless nebo také jako lambda funkce, kdy je poskytována funkcionalita a běh spuštění aplikace pro její vykonání je dílčí režie.
+
+Případy konkurenční výhody pro AOT kompilaci staví na jednom předpokladu a to je zájem či potřeba mít zdrojové kódy v .NET, respektive jazyce C\#. Při unimodálním přístupu, kdy je vývojář, respektive zapojený tým schopen přijmout jiný jazyk, jsou výhody AOT kompilace značně zmenšeny, zatímco nedostatky jsou zvýrazněny.
+
+Nativní AOT kompilace má nesporné výhody za splnění uričtých podmínek na požadavky vůči nasazení, codebase a vývojového týmu. Zaplňuje určitou díru na trhu, která je však vzhledem k výše uvedeným podmínkám velice specifická. Pro běžné vývojáře usilující o výkonostní výhody, je však AOT kompilace v současné podobě nevhodná.

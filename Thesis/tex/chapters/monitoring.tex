@@ -1,0 +1,75 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                  MONITORING                                   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\n{1}{Monitorování aplikace}
+
+Monitorování aplikací je klíčovým aspektem moderního vývoje a provozu softwaru, který týmům umožňuje sledovat výkon, stav a celkové chování aplikací v reálném čase. Zahrnuje shromažďování, analýzu a interpretaci různých typů dat a informací, které zajišťují hladký a efektivní chod aplikací a umožňují rychle identifikovat a řešit případné problémy.
+
+\n{2}{Cíle monitorování}
+
+Cílem monitorování v kontextu mikroslužeb je poskytnout využitelné informace v několika klíčových oblastech:
+
+\begin {itemize}
+    \item \textbf{Výkonnost systému} - Monitorování se snaží zachytit kritické výkonnostní metriky, jako je latence, propustnost a chybovost. Tyto metriky pomáhají pochopit, jak dobře služby fungují za normálních podmínek a při zátěži.
+    \item \textbf{Využití zdrojů} - Je důležité sledovat využití systémových prostředků včetně procesoru, paměti a diskových I/O. Poznatky o využití zdrojů pomáhají při optimalizaci výkonu aplikací a při plánování škálovacích operací.
+    \item \textbf{Stav a dostupnost služeb} - Sledování stavu a dostupnosti jednotlivých mikroslužeb zajišťuje, že lze rychle identifikovat a odstranit případné problémy, aby byla zachována integrita a spolehlivost systému.
+    \item \textbf{Dopad na vývoj a nasazení} - Ačkoli je monitorování spíše kvalitativní, může také poskytnout zpětnou vazbu o dopadu různých strategií nasazení a sestavení na výkon systému. To zahrnuje míru úspěšnosti nasazení, problémy vyplývající z nových nasazení a chování nových funkcí v ostrém prostředí.
+\end{itemize}
+
+\n{2}{Druhy dat}
+
+Pro efektivní monitorování aplikace je nezbytné porozumět různým typům dat a informací, které lze shromažďovat:
+
+\n{3}{Logy}
+
+Protokoly jsou záznamy o událostech, ke kterým dochází v rámci aplikace nebo jejího provozního prostředí. Poskytují podrobné, časově označené záznamy o činnostech, chybách a transakcích, které mohou vývojáři a provozní týmy použít k řešení problémů, pochopení chování aplikace a zlepšení spolehlivosti systému.
+
+\n{3}{Traces}
+
+Trasy se používají ke sledování toku požadavků v aplikaci, zejména v distribuovaných systémech, kde jedna transakce může zahrnovat více služeb nebo komponent. Sledování pomáhá identifikovat úzká místa, pochopit problémy s latencí a zlepšit celkový výkon aplikací.
+
+\n{3}{Metriky}
+
+Metriky jsou kvantitativní údaje, které poskytují přehled o výkonu a stavu aplikace. Mezi běžné metriky patří doba odezvy, využití systémových prostředků (CPU, paměť, diskové I/O), chybovost a propustnost. Sledování těchto metrik pomáhá při proaktivním ladění výkonu a plánování kapacity.
+
+\n{2}{Sběr dat}
+
+Efektivita monitorování aplikací do značné míry závisí na schopnosti efektivně shromažďovat relevantní data.
+
+\n{3}{Collectory}
+
+Kolektory jsou nástroje nebo agenti, kteří shromažďují data z různých zdrojů v rámci aplikace a jejího prostředí. Mohou být nasazeny jako součást infrastruktury aplikace nebo mohou být provozovány jako externí služby. Kolektory jsou zodpovědné za shromažďování protokolů, stop a metrik a za předávání těchto dat do monitorovacích řešení, kde je lze analyzovat a vizualizovat. Efektivní sběr dat je nezbytný pro monitorování v reálném čase a pro zajištění toho, aby shromážděná data přesně odrážela stav a výkon aplikace.
+
+\n{2}{Analýza a interpretace}
+
+\n{3}{Vizualizace dat}
+
+Vizualizace dat je klíčovým aspektem monitorování aplikací, který umožňuje rychle porozumět stavu a chování aplikací. Vizualizace může zahrnovat různé typy grafů, tabulek, dashboardů a dalších nástrojů, které umožňují zobrazit data v uživatelsky přívětivé podobě. Vizualizace dat umožňuje týmům identifikovat vzory, problémy a příležitosti, které by jinak mohly zůstat skryty v datech.
+
+\n{2}{Implementace monitorování}
+
+Implementace monitorování aplikací zahrnuje několik klíčových kroků, včetně definice klíčových metrik, výběru monitorovacích nástrojů, nasazení kolektorů a vizualizaci dat. Týmy by měly také vytvořit procesy pro řešení problémů, které byly identifikovány prostřednictvím monitorování, a pro využití dat k plánování kapacity a optimalizaci výkonu.
+
+\n{3}{Sběr dat v monitorovaných službách}
+
+Implementace sběru dat zahrnuje inkorporaci funkcionality monitorování a zprostředkování dat v rámci předdefinovaného rozhraní. Sběr je realizován zpravidla sérií čítačů a zapisovačů, které jsou využívány k získávání dat z různých zdrojů. Takto sbíraná datá jsou kategorizována a značkována pro identifikaci.
+
+Realizace monitorování je zajištěna buďto použitím existujících implementací v rámci sw knihoven nebo vytvořením vlastní implementace dle potřeb aplikace a monitorovacích protokolů.
+
+\n{3}{Nasazení služeb pro správu a kolekci dat}
+
+Nasazení služeb pro správu a kolekci dat je zajištěno pomocí nástrojů, které jsou schopny zprostředkovat sběr dat z různých zdrojů a zároveň zajišťují jejich zpracování a zobrazení. Tímto je zajištěno, že data jsou zpracována a zobrazena v reálném čase.
+
+\n{3}{Vizualizace dat}
+
+Vizualizace dat je zajištěna pomocí nástrojů, které jsou schopny zobrazit data v uživatelsky přívětivé podobě. Tímto je zajištěno, že data jsou zobrazena v reálném čase a jsou přehledná a srozumitelná.
+
+\n{2}{Konfigurace}
+
+Konfigurace monitorování je zajištěna pomocí konfiguračních souborů, které definují chování monitorovacích nástrojů a sběr dat. Ovlivnit chování monitorovacího systému může být provedeno jak na straně monitorovacích nástrojů, respektive služeb, tak i na straně aplikací a služeb, které jsou monitorovány.
+
+\n{2}{Závěr}
+
+Monitorování aplikací je nezbytným nástrojem pro vývoj a provoz moderních softwarových systémů. Zahrnuje shromažďování, analýzu a interpretaci různých typů dat a informací, které umožňují týmům sledovat výkon, stav a chování aplikací v reálném čase. Tímto je zajištěno, že aplikace jsou spolehlivé, výkonné a efektivní.
