@@ -1,0 +1,50 @@
+services:
+  - name: "SRS"
+    compilation: "JIT"
+    url: "http://localhost:12001/"
+    protocol: "http"
+
+  - name: "FUS"
+    compilation: "JIT"
+    url: "http://localhost:12002/"
+    protocol: "http"
+
+  - name: "FUS"
+    compilation: "JIT"
+    url: "http://localhost:12102/"
+    protocol: "grpc"
+
+  - name: "EPS"
+    compilation: "JIT"
+    url: "http://localhost:12003/"
+    protocol: "http"
+
+  - name: "BPS"
+    compilation: "JIT"
+    url: "http://localhost:12004/"
+    protocol: "http"
+
+  - name: "SRS"
+    compilation: "AOT"
+    url: "http://localhost:13001/"
+    protocol: "http"
+
+  - name: "FUS"
+    compilation: "AOT"
+    url: "http://localhost:13002/"
+    protocol: "http"
+
+  - name: "FUS"
+    compilation: "AOT"
+    url: "http://localhost:13102/"
+    protocol: "grpc"
+
+  - name: "EPS"
+    compilation: "AOT"
+    url: "http://localhost:13003/"
+    protocol: "http"
+
+  - name: "BPS"
+    compilation: "AOT"
+    url: "http://localhost:13004/"
+    protocol: "http"

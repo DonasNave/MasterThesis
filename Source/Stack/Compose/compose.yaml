@@ -1,5 +1,3 @@
-version: '3.9'
-
 volumes:
   grafana_data:
   otel_data:
@@ -40,6 +38,14 @@ services:
         condition: service_started
     networks:
       - stack-network
+    # deploy:
+    #   resources:
+    #     limits:
+    #       cpus: '0.50'
+    #       memory: 400M
+    #     reservations:
+    #       cpus: '0.25'
+    #       memory: 200M
 
   fus-jit-service:
     image: dta-fus:jit-latest
@@ -68,6 +74,14 @@ services:
         condition: service_started
     networks:
       - stack-network
+    # deploy:
+    #   resources:
+    #     limits:
+    #       cpus: '0.50'
+    #       memory: 400M
+    #     reservations:
+    #       cpus: '0.25'
+    #       memory: 200M
 
   eps-jit-service:
     image: dta-eps:jit-latest
@@ -96,6 +110,14 @@ services:
         condition: service_healthy
     networks:
       - stack-network
+    # deploy:
+    #   resources:
+    #     limits:
+    #       cpus: '0.50'
+    #       memory: 400M
+    #     reservations:
+    #       cpus: '0.25'
+    #       memory: 200M
 
   bps-jit-service:
     image: dta-bps:jit-latest
@@ -127,6 +149,14 @@ services:
       #   condition: service_healthy
     networks:
       - stack-network
+    # deploy:
+    #   resources:
+    #     limits:
+    #       cpus: '0.50'
+    #       memory: 400M
+    #     reservations:
+    #       cpus: '0.25'
+    #       memory: 200M
 
 ################
 # AOT Services #
@@ -146,6 +176,14 @@ services:
       - "DTA_AOT_SRS_OpenTelemetrySettings__ExporterEndpoint=http://otel-lgtm:4317"
     networks:
       - stack-network
+    # deploy:
+    #   resources:
+    #     limits:
+    #       cpus: '0.50'
+    #       memory: 400M
+    #     reservations:
+    #       cpus: '0.25'
+    #       memory: 200M
 
   fus-aot-service:
     image: dta-fus:aot-latest
@@ -165,6 +203,14 @@ services:
       - "DTA_AOT_SRS_ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=FUS-AOT;Username=postgres;Password=postgres;"
     networks:
       - stack-network
+    # deploy:
+    #   resources:
+    #     limits:
+    #       cpus: '0.50'
+    #       memory: 400M
+    #     reservations:
+    #       cpus: '0.25'
+    #       memory: 200M
 
   eps-aot-service:
     image: dta-eps:aot-latest
@@ -187,6 +233,14 @@ services:
         condition: service_healthy
     networks:
       - stack-network
+    # deploy:
+    #   resources:
+    #     limits:
+    #       cpus: '0.50'
+    #       memory: 400M
+    #     reservations:
+    #       cpus: '0.25'
+    #       memory: 200M
 
   bps-aot-service:
     image: dta-bps:aot-latest
@@ -212,6 +266,14 @@ services:
       #   condition: service_healthy
     networks:
       - stack-network
+    # deploy:
+    #   resources:
+    #     limits:
+    #       cpus: '0.50'
+    #       memory: 400M
+    #     reservations:
+    #       cpus: '0.25'
+    #       memory: 200M
 
 ##################
 # Infrastructure #
