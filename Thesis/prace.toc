@@ -189,6 +189,6 @@
 \contentsline {section}{\numberline {9}Rozšíření a budoucí práce}{74}{section.9}%
 \contentsline {section}{Závěr}{75}{section*.71}%
 \contentsline {section}{Seznam použité literatury}{76}{section*.73}%
-\contentsline {section}{Seznam použitých symbolů a zkratek}{78}{section*.75}%
-\contentsline {section}{Seznam obrázků}{79}{section*.77}%
-\contentsline {section}{Seznam tabulek}{80}{section*.78}%
+\contentsline {section}{Seznam použitých symbolů a zkratek}{79}{section*.75}%
+\contentsline {section}{Seznam obrázků}{80}{section*.77}%
+\contentsline {section}{Seznam tabulek}{81}{section*.78}%
