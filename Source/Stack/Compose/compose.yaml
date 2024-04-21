@@ -38,14 +38,14 @@ services:
         condition: service_started
     networks:
       - stack-network
-    # deploy:
-    #   resources:
-    #     limits:
-    #       cpus: '0.50'
-    #       memory: 400M
-    #     reservations:
-    #       cpus: '0.25'
-    #       memory: 200M
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 400M
+        reservations:
+          cpus: '0.25'
+          memory: 200M
 
   fus-jit-service:
     image: dta-fus:jit-latest

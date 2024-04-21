@@ -4,6 +4,18 @@ Within this folder, you will find the tests for the DTA Scenarios. The tests are
 
 ## Running the tests
 
+Running the tests requires bash and docker to be installed on your machine. Additional requirement is jq library/tool.
+
+Running test scenarios is as simple as launching scenarioX-test.sh script. The script will load the required environment variables, launches services and tests as necessary
+
+```bash
+sh ./scenario1-runner.sh <test-id>
+```
+
+Where `<test-id>` is name of test instance for further identification within Grafana.
+
+## Running raw scripts
+
 ### Local
 
 To run the tests, you will need to have k6 installed. You can find the installation instructions [here](https://k6.io/docs/getting-started/installation/).
