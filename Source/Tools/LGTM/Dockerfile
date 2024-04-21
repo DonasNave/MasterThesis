@@ -39,8 +39,10 @@ COPY prometheus.yaml .
 COPY run-prometheus.sh .
 COPY grafana-datasources.yaml ./grafana-v$GRAFANA_VERSION/conf/provisioning/datasources/
 COPY grafana-dashboards.yaml grafana-v$GRAFANA_VERSION/conf/provisioning/dashboards/
+# copy custom dashboards
 COPY domain-metrics.json .
 COPY performance-data.json .
+COPY scenario1.json .
 COPY run-grafana.sh .
 COPY loki-config.yaml .
 COPY run-loki.sh .

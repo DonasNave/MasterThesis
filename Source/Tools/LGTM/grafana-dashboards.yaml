@@ -12,3 +12,9 @@ providers:
     options:
       path: /otel-lgtm/performance-data.json # place into root no problem
       foldersFromFilesStructure: false
+
+  - name: 'Scenario 1 - Simple response metrics'
+    type: file
+    options:
+      path: /otel-lgtm/scenario1.json # place into root no problem
+      foldersFromFilesStructure: false
