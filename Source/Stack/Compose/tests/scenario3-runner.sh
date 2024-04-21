@@ -16,23 +16,29 @@ run_k6_test() {
     local compilation=$3
 
     echo "Starting k6 test for $service_name"
-    k6 run --out influxdb=http://localhost:8086/k6 scripts/scenario3.js -e SERVICE_URL=$url -e TEST_ID=$TEST_ID -e COMPILATION_MODE=$compilation
+    k6 run --out influxdb=http://dta:dtapass@localhost:8086/k6 scripts/scenario3.js -e SERVICE_URL=$url -e TEST_ID=$TEST_ID -e COMPILATION_MODE=$compilation
 }
 
-SERVICES=$(yq e '.services[] | select(.name == "BPS")' config.yaml)
+echo "Starting tests for services"
 
 # Loop over services and perform actions
-for service in $SERVICES; do
-    name=$(echo $service | yq e '.name' -)
-    compilation=$(echo $service | yq e '.compilation' -)
-    url=$(echo $service | yq e '.url' -)
-    protocol=$(echo $service | yq e '.protocol' -)
+jq -c '.services[] | select(.protocol == "http")' config.json | while IFS= read -r service; do
+    name=$(echo "$service" | jq -r '.name')
+    url=$(echo "$service" | jq -r '.url')
+    compilation=$(echo "$service" | jq -r '.compilation')
+    protocol=$(echo "$service" | jq -r '.protocol')
+
+    echo "Service data loaded: $name, $compilation, $url, $protocol"
 
     # Standardize service name for docker-compose
-    standardized_name=$(echo "${service_name}-${compilation}-service" | tr '[:upper:]' '[:lower:]')
+    standardized_name=$(echo "${name}-${compilation}-service" | tr '[:upper:]' '[:lower:]')
+
+    echo "Starting service $standardized_name"
 
     # Start the service
     $COMPOSE_CMD up -d $standardized_name
+
+    echo "Waiting for service to start"
 
     # Run k6 test
     run_k6_test $name $url $compilation
