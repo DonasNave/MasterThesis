@@ -19,7 +19,16 @@ Další očekávání se týká rychlosti odezvy služeb po spuštění. Předpo
 
 \n{2}{Definice scénářů}
 
-Scénáře jsou vytvořeny jako množina javascriptových souborů splňujících požadavku API nástroje K6. Každý scénář je definován přes jeden a více scriptových souborů. Tyto soubory obsahují kroky, které mají být provedeny, a data, která mají být použita. Pro sjednocení obecných nastavení jsou vytvořený konfigurační soubory, které jsou využity ve více scénářích.
+Scénáře jsou vytvořeny jako množina javascriptových souborů splňujících požadavku API nástroje K6. Každý scénář je definován přes jeden nebo více scriptových souborů. Tyto soubory obsahují kroky, které mají být provedeny, a data, která mají být použita. Pro sjednocení obecných nastavení jsou vytvořený konfigurační soubory, které jsou využity ve více scénářích. Pro zjednodušené a automatizované spuštění testovacích scénářů jsou definovány runner skripty, které zajišťují spuštění testů spolu se správou orchestrace.
+
+Pro dodatečnou identifikaci dat jednotlivých scénářů je užito InfluxDB tagů, které jsou přidány k jednotlivým voláním v testech. Tím je zajištěno, že data z jednotlivých scénářů jsou jednoznačně identifikována a lze je následně zpracovat. 
+
+\begin{itemize}
+    \item \textbf{dta\_service} - Značka pro identifikaci služby, která je testována. Má standardní formát hodnot \emph{Služba-Kompilační režim}, kdy služba může nabývat hodnot \emph{SRS, FUS, BPS, EPS} a kompilační režim nabývá hodnot \emph{JIT, AOT}.
+    \item \textbf{test\_scenario} - Značka pro identifikaci scénáře, který je testován. Má standardní formát hodnot \emph{scenario 
+    + číslo}.
+    \item \textbf{test\_id} - Identifikátor konkrétního testovacího scénáře. Nabývá libovolné hodnoty a slouží pro identifikaci konkrétních instancí, tedy spuštění testovacího scénáře.
+\end{itemize}
 
 Každý scénař má definován vlastní dashboard v Grafaně, který je využit pro sledování výsledků testů v reálném čase. Zároveň je součástní každého scénáře readme soubor, jenž podrobněji popisuje jednotlivé kroky a data, která jsou využita.
 
