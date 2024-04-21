@@ -160,32 +160,28 @@
 \contentsline {paragraph}{\itshape \bfseries {Nevýhody}}{70}{section*.56}%
 \contentsline {subsubsection}{\numberline {6.3.3}Vývojové prostředí}{71}{subsubsection.6.3.3}%
 \contentsline {subsubsection}{\numberline {6.3.4}Knihovny třetích stran}{71}{subsubsection.6.3.4}%
-\contentsline {paragraph}{\itshape \bfseries {Entity Framework}}{71}{section*.57}%
-\contentsline {paragraph}{\itshape \bfseries {Fluent Migrator}}{71}{section*.58}%
-\contentsline {paragraph}{\itshape \bfseries {Grpc}}{72}{section*.59}%
-\contentsline {paragraph}{\itshape \bfseries {Párování konfigurace}}{72}{section*.60}%
 \contentsline {section}{\numberline {7}Analýza testování}{73}{section.7}%
 \contentsline {subsection}{\numberline {7.1}Charakteristika testovacího prostředí}{73}{subsection.7.1}%
 \contentsline {subsection}{\numberline {7.2}Výsledky testování}{73}{subsection.7.2}%
 \contentsline {subsubsection}{\numberline {7.2.1}Scénář 1}{73}{subsubsection.7.2.1}%
-\contentsline {paragraph}{\itshape \bfseries {Výsledky}}{73}{section*.61}%
-\contentsline {paragraph}{\itshape \bfseries {Závěr}}{73}{section*.62}%
+\contentsline {paragraph}{\itshape \bfseries {Výsledky}}{73}{section*.57}%
+\contentsline {paragraph}{\itshape \bfseries {Závěr}}{73}{section*.58}%
 \contentsline {subsubsection}{\numberline {7.2.2}Scénář 2}{73}{subsubsection.7.2.2}%
-\contentsline {paragraph}{\itshape \bfseries {Výsledky}}{73}{section*.63}%
-\contentsline {paragraph}{\itshape \bfseries {Závěr}}{73}{section*.64}%
+\contentsline {paragraph}{\itshape \bfseries {Výsledky}}{73}{section*.59}%
+\contentsline {paragraph}{\itshape \bfseries {Závěr}}{73}{section*.60}%
 \contentsline {subsubsection}{\numberline {7.2.3}Scénář 3}{74}{subsubsection.7.2.3}%
-\contentsline {paragraph}{\itshape \bfseries {Výsledky}}{74}{section*.65}%
-\contentsline {paragraph}{\itshape \bfseries {Závěr}}{74}{section*.66}%
+\contentsline {paragraph}{\itshape \bfseries {Výsledky}}{74}{section*.61}%
+\contentsline {paragraph}{\itshape \bfseries {Závěr}}{74}{section*.62}%
 \contentsline {subsubsection}{\numberline {7.2.4}Scénář 4}{74}{subsubsection.7.2.4}%
-\contentsline {paragraph}{\itshape \bfseries {Výsledky}}{74}{section*.67}%
-\contentsline {paragraph}{\itshape \bfseries {Závěr}}{74}{section*.68}%
+\contentsline {paragraph}{\itshape \bfseries {Výsledky}}{74}{section*.63}%
+\contentsline {paragraph}{\itshape \bfseries {Závěr}}{74}{section*.64}%
 \contentsline {subsubsection}{\numberline {7.2.5}Scénář 5}{74}{subsubsection.7.2.5}%
-\contentsline {paragraph}{\itshape \bfseries {Výsledky}}{74}{section*.69}%
-\contentsline {paragraph}{\itshape \bfseries {Závěr}}{75}{section*.70}%
+\contentsline {paragraph}{\itshape \bfseries {Výsledky}}{75}{section*.65}%
+\contentsline {paragraph}{\itshape \bfseries {Závěr}}{75}{section*.66}%
 \contentsline {section}{\numberline {8}Doporučení pro použití AoT kompilace v dotnet}{76}{section.8}%
 \contentsline {section}{\numberline {9}Rozšíření a budoucí práce}{77}{section.9}%
-\contentsline {section}{Závěr}{78}{section*.71}%
-\contentsline {section}{Seznam použité literatury}{79}{section*.73}%
-\contentsline {section}{Seznam použitých symbolů a zkratek}{82}{section*.75}%
-\contentsline {section}{Seznam obrázků}{83}{section*.77}%
-\contentsline {section}{Seznam tabulek}{84}{section*.78}%
+\contentsline {section}{Závěr}{78}{section*.67}%
+\contentsline {section}{Seznam použité literatury}{79}{section*.69}%
+\contentsline {section}{Seznam použitých symbolů a zkratek}{82}{section*.71}%
+\contentsline {section}{Seznam obrázků}{83}{section*.73}%
+\contentsline {section}{Seznam tabulek}{84}{section*.74}%
