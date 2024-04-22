@@ -1,20 +1,28 @@
 import http from 'k6/http';
 import { check, sleep } from 'k6';
-import fs from 'k6/compat/fs';
+import { open, SeekMode } from 'k6/experimental/fs';
+
+let file;
+(async function () {
+  file = await open('../sample-file.txt');
+})();
 
 export let options = {
     vus: 1,
     duration: '1m',
 };
 
-export default function () {
+export default async function () {
     const serviceUrl = __ENV.SERVICE_URL;
     const compilationMode = __ENV.COMPILATION_MODE;
     const serviceName = "FUS";
     const testId = __ENV.TEST_ID;
 
-    // Load the file. Make sure the path is correct.
-    var file = fs.readFileSync('../sample.txt');
+
+    const fileinfo = await file.stat();
+    if (fileinfo.name != 'sample-file.txt') {
+        throw new Error('Unexpected file name');
+    }
 
     // Define the boundary for the multipart form data
     var boundary = '----WebKitFormBoundaryxyxyxyxyxyxyx';
