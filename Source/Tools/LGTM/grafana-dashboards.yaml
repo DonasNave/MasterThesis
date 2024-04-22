@@ -18,3 +18,15 @@ providers:
     options:
       path: /otel-lgtm/scenario1.json # place into root no problem
       foldersFromFilesStructure: false
+
+  - name: 'Scenario 2 - File upload/download metrics'
+    type: file
+    options:
+      path: /otel-lgtm/scenario2.json # place into root no problem
+      foldersFromFilesStructure: false
+
+  - name: 'Scenario 3 - Performance processing metrics'
+    type: file
+    options:
+      path: /otel-lgtm/scenario3.json # place into root no problem
+      foldersFromFilesStructure: false

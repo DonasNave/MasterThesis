@@ -14,19 +14,19 @@ export const options = {
   },
 };
 
-export default function () {
-    const serviceUrl = __ENV.SERVICE_URL;
-    const serviceName = "BPS";
-    const compilationMode = __ENV.COMPILATION_MODE;
-    const testId = __ENV.TEST_ID;
+export default async function () {
+  const serviceUrl = __ENV.SERVICE_URL;
+  const serviceName = "BPS";
+  const compilationMode = __ENV.COMPILATION_MODE;
+  const testId = __ENV.TEST_ID;
 
-    http.get(`${serviceUrl}api/processFibonacci/42`, {
-        tags: {
-            dta_service: serviceName + '-' + compilationMode,
-            test_scenario: 'scenario3',
-            test_id: testId,
-        },
-    });
+  http.get(`${serviceUrl}api/processFibonacci/43`, {
+    tags: {
+      dta_service: serviceName + '-' + compilationMode,
+      test_scenario: 'scenario3',
+      test_id: testId,
+    },
+  });
 
-    sleep(1);
+  sleep(1);
 }
