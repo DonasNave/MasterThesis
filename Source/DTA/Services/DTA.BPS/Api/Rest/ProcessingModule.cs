@@ -1,3 +1,4 @@
+using DTA.BPS.Monitoring;
 using DTA.BPS.Services.Interfaces;
 using DTA.Models.Response;
 
@@ -10,16 +11,18 @@ public static class ProcessingModule
         app.MapGet("/api/processFibonacci/{degree:int}", ProcessFibonacci);
         app.MapGet("/api/processPrimeFactors/{number:long}", ProcessPrimeFactors);
     }
-    
+
     private static IResult ProcessFibonacci(int degree, IProcessingService processingService)
     {
         var result = processingService.Fibonacci(degree);
-        return Results.Ok(new FibonacciResponse { Result = result});
+        AppMonitor.FibonacciProcessedCounter.Add(1);
+        return Results.Ok(new FibonacciResponse { Result = result });
     }
-    
+
     private static IResult ProcessPrimeFactors(long number, IProcessingService processingService)
     {
         var result = processingService.PrimeFactors(number);
+        AppMonitor.PrimesProcessedCounter.Add(1);
         return Results.Ok(new PrimesReponse { Primes = result });
     }
 }
