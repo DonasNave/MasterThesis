@@ -56,11 +56,11 @@ export default function () {
 
     http.get(`${serviceUrl}api/simulateEvent/${fileId}`, {
         tags: {
-            dta_service: serviceName + 'EPS-' + compilationMode,
+            dta_service: 'EPS-' + compilationMode,
             test_scenario: 'scenario4',
             test_id: testId,
         },
     });
 
-    sleep(4);
+    sleep(5);
 }
