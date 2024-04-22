@@ -1,6 +1,6 @@
 import http from 'k6/http';
 import { check, sleep } from 'k6';
-import { open, SeekMode } from 'k6/experimental/fs';
+import { open } from 'k6/experimental/fs';
 
 let file;
 (async function () {
@@ -17,7 +17,6 @@ export default async function () {
     const compilationMode = __ENV.COMPILATION_MODE;
     const serviceName = "FUS";
     const testId = __ENV.TEST_ID;
-
 
     const fileinfo = await file.stat();
     if (fileinfo.name != 'sample-file.txt') {

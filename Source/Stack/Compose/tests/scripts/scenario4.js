@@ -1,7 +1,13 @@
-// scenario1.js
+// scenario4.js
 // launch with k6 run scenario3.js --env SERVICE_URL=#url# --env SERVICE_NAME=#name# --env COMPILATION_MODE=#mode#
 import http from 'k6/http';
 import { sleep } from 'k6';
+import { open } from 'k6/experimental/fs';
+
+let file;
+(async function () {
+  file = await open('../sample-file.txt');
+})();
 
 export const options = {
     vus: 1,
@@ -13,8 +19,10 @@ export default function () {
     const compilationMode = __ENV.COMPILATION_MODE;
     const testId = __ENV.TEST_ID;
 
-    // Load the file. Make sure the path is correct.
-    var file = fs.readFileSync('../sample.txt');
+    const fileinfo = await file.stat();
+    if (fileinfo.name != 'sample-file.txt') {
+        throw new Error('Unexpected file name');
+    }
 
     // Define the boundary for the multipart form data
     var boundary = '----WebKitFormBoundaryxyxyxyxyxyxyx';
@@ -46,7 +54,7 @@ export default function () {
     // Assume the response returns an ID that can be used to download the file
     let fileId = uploadResponse.json().id;
 
-    http.get(`${serviceUrl}api/simulateEvent/1`, {
+    http.get(`${serviceUrl}api/simulateEvent/${fileId}`, {
         tags: {
             dta_service: serviceName + 'EPS-' + compilationMode,
             test_scenario: 'scenario4',
@@ -54,5 +62,5 @@ export default function () {
         },
     });
 
-    sleep(1);
+    sleep(4);
 }
