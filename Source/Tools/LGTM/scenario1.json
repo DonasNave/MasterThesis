@@ -1,2041 +1,2179 @@
 {
-    "annotations": {
-      "list": [
-        {
-          "builtIn": 1,
-          "datasource": {
-            "type": "grafana",
-            "uid": "-- Grafana --"
-          },
-          "enable": true,
-          "hide": true,
-          "iconColor": "rgba(0, 211, 255, 1)",
-          "name": "Annotations & Alerts",
-          "type": "dashboard"
-        }
-      ]
-    },
-    "editable": true,
-    "fiscalYearStartMonth": 0,
-    "graphTooltip": 0,
-    "id": 3,
-    "links": [],
-    "panels": [
+  "annotations": {
+    "list": [
       {
-        "gridPos": {
-          "h": 1,
-          "w": 24,
-          "x": 0,
-          "y": 0
-        },
-        "id": 3,
-        "title": "Scenario 1",
-        "type": "row"
-      },
-      {
+        "builtIn": 1,
         "datasource": {
-          "type": "influxdb",
-          "uid": "P951FEA4DE68E13C5"
+          "type": "grafana",
+          "uid": "-- Grafana --"
         },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "ms"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 4,
-          "w": 6,
-          "x": 0,
-          "y": 1
-        },
-        "id": 1,
-        "options": {
-          "colorMode": "background",
-          "graphMode": "area",
-          "justifyMode": "auto",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "showPercentChange": false,
-          "textMode": "auto",
-          "wideLayout": true
-        },
-        "pluginVersion": "10.4.1",
-        "targets": [
-          {
-            "alias": "SRS-AOT",
-            "datasource": {
-              "type": "influxdb",
-              "uid": "P951FEA4DE68E13C5"
-            },
-            "groupBy": [
-              {
-                "params": [
-                  "$__interval"
-                ],
-                "type": "time"
-              },
-              {
-                "params": [
-                  "null"
-                ],
-                "type": "fill"
-              }
-            ],
-            "measurement": "http_req_duration",
-            "orderByTime": "ASC",
-            "policy": "default",
-            "refId": "A",
-            "resultFormat": "time_series",
-            "select": [
-              [
-                {
-                  "params": [
-                    "value"
-                  ],
-                  "type": "field"
-                },
-                {
-                  "params": [],
-                  "type": "mean"
-                }
-              ]
-            ],
-            "tags": [
-              {
-                "key": "dta_service::tag",
-                "operator": "=",
-                "value": "SRS-AOT"
-              },
-              {
-                "condition": "AND",
-                "key": "test_scenario::tag",
-                "operator": "=",
-                "value": "scenario1"
-              }
-            ]
-          },
-          {
-            "alias": "SRS-JIT",
-            "datasource": {
-              "type": "influxdb",
-              "uid": "P951FEA4DE68E13C5"
-            },
-            "groupBy": [
-              {
-                "params": [
-                  "$__interval"
-                ],
-                "type": "time"
-              },
-              {
-                "params": [
-                  "null"
-                ],
-                "type": "fill"
-              }
-            ],
-            "hide": false,
-            "measurement": "http_req_duration",
-            "orderByTime": "ASC",
-            "policy": "default",
-            "refId": "B",
-            "resultFormat": "time_series",
-            "select": [
-              [
-                {
-                  "params": [
-                    "value"
-                  ],
-                  "type": "field"
-                },
-                {
-                  "params": [],
-                  "type": "mean"
-                }
-              ]
-            ],
-            "tags": [
-              {
-                "key": "dta_service::tag",
-                "operator": "=",
-                "value": "SRS-JIT"
-              },
-              {
-                "condition": "AND",
-                "key": "test_scenario::tag",
-                "operator": "=",
-                "value": "scenario1"
-              }
-            ]
-          }
-        ],
-        "title": "SRS - Healtheck request duration",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "type": "influxdb",
-          "uid": "P951FEA4DE68E13C5"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "dark-yellow",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "ms"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 4,
-          "w": 6,
-          "x": 6,
-          "y": 1
-        },
-        "id": 7,
-        "options": {
-          "colorMode": "background",
-          "graphMode": "area",
-          "justifyMode": "auto",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "showPercentChange": false,
-          "textMode": "auto",
-          "wideLayout": true
-        },
-        "pluginVersion": "10.4.1",
-        "targets": [
-          {
-            "alias": "FUS-AOT",
-            "datasource": {
-              "type": "influxdb",
-              "uid": "P951FEA4DE68E13C5"
-            },
-            "groupBy": [
-              {
-                "params": [
-                  "$__interval"
-                ],
-                "type": "time"
-              },
-              {
-                "params": [
-                  "null"
-                ],
-                "type": "fill"
-              }
-            ],
-            "measurement": "http_req_duration",
-            "orderByTime": "ASC",
-            "policy": "default",
-            "refId": "A",
-            "resultFormat": "time_series",
-            "select": [
-              [
-                {
-                  "params": [
-                    "value"
-                  ],
-                  "type": "field"
-                },
-                {
-                  "params": [],
-                  "type": "mean"
-                }
-              ]
-            ],
-            "tags": [
-              {
-                "key": "dta_service::tag",
-                "operator": "=",
-                "value": "FUS-AOT"
-              },
-              {
-                "condition": "AND",
-                "key": "test_scenario::tag",
-                "operator": "=",
-                "value": "scenario1"
-              }
-            ]
-          },
-          {
-            "alias": "FUS-JIT",
-            "datasource": {
-              "type": "influxdb",
-              "uid": "P951FEA4DE68E13C5"
-            },
-            "groupBy": [
-              {
-                "params": [
-                  "$__interval"
-                ],
-                "type": "time"
-              },
-              {
-                "params": [
-                  "null"
-                ],
-                "type": "fill"
-              }
-            ],
-            "hide": false,
-            "measurement": "http_req_duration",
-            "orderByTime": "ASC",
-            "policy": "default",
-            "refId": "B",
-            "resultFormat": "time_series",
-            "select": [
-              [
-                {
-                  "params": [
-                    "value"
-                  ],
-                  "type": "field"
-                },
-                {
-                  "params": [],
-                  "type": "mean"
-                }
-              ]
-            ],
-            "tags": [
-              {
-                "key": "dta_service::tag",
-                "operator": "=",
-                "value": "FUS-JIT"
-              },
-              {
-                "condition": "AND",
-                "key": "test_scenario::tag",
-                "operator": "=",
-                "value": "scenario1"
-              }
-            ]
-          }
-        ],
-        "title": "FUS - Healtheck request duration",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "type": "influxdb",
-          "uid": "P951FEA4DE68E13C5"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "light-blue",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "ms"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 4,
-          "w": 6,
-          "x": 12,
-          "y": 1
-        },
-        "id": 5,
-        "options": {
-          "colorMode": "background",
-          "graphMode": "area",
-          "justifyMode": "auto",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "showPercentChange": false,
-          "textMode": "auto",
-          "wideLayout": true
-        },
-        "pluginVersion": "10.4.1",
-        "targets": [
-          {
-            "alias": "EPS-AOT",
-            "datasource": {
-              "type": "influxdb",
-              "uid": "P951FEA4DE68E13C5"
-            },
-            "groupBy": [
-              {
-                "params": [
-                  "$__interval"
-                ],
-                "type": "time"
-              },
-              {
-                "params": [
-                  "null"
-                ],
-                "type": "fill"
-              }
-            ],
-            "measurement": "http_req_duration",
-            "orderByTime": "ASC",
-            "policy": "default",
-            "refId": "A",
-            "resultFormat": "time_series",
-            "select": [
-              [
-                {
-                  "params": [
-                    "value"
-                  ],
-                  "type": "field"
-                },
-                {
-                  "params": [],
-                  "type": "mean"
-                }
-              ]
-            ],
-            "tags": [
-              {
-                "key": "dta_service::tag",
-                "operator": "=",
-                "value": "EPS-AOT"
-              },
-              {
-                "condition": "AND",
-                "key": "test_scenario::tag",
-                "operator": "=",
-                "value": "scenario1"
-              }
-            ]
-          },
-          {
-            "alias": "EPS-JIT",
-            "datasource": {
-              "type": "influxdb",
-              "uid": "P951FEA4DE68E13C5"
-            },
-            "groupBy": [
-              {
-                "params": [
-                  "$__interval"
-                ],
-                "type": "time"
-              },
-              {
-                "params": [
-                  "null"
-                ],
-                "type": "fill"
-              }
-            ],
-            "hide": false,
-            "measurement": "http_req_duration",
-            "orderByTime": "ASC",
-            "policy": "default",
-            "refId": "B",
-            "resultFormat": "time_series",
-            "select": [
-              [
-                {
-                  "params": [
-                    "value"
-                  ],
-                  "type": "field"
-                },
-                {
-                  "params": [],
-                  "type": "mean"
-                }
-              ]
-            ],
-            "tags": [
-              {
-                "key": "dta_service::tag",
-                "operator": "=",
-                "value": "EPS-JIT"
-              },
-              {
-                "condition": "AND",
-                "key": "test_scenario::tag",
-                "operator": "=",
-                "value": "scenario1"
-              }
-            ]
-          }
-        ],
-        "title": "EPS - Healtheck request duration",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "type": "influxdb",
-          "uid": "P951FEA4DE68E13C5"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "orange",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "ms"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 4,
-          "w": 6,
-          "x": 18,
-          "y": 1
-        },
-        "id": 6,
-        "options": {
-          "colorMode": "background",
-          "graphMode": "area",
-          "justifyMode": "auto",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "showPercentChange": false,
-          "textMode": "auto",
-          "wideLayout": true
-        },
-        "pluginVersion": "10.4.1",
-        "targets": [
-          {
-            "alias": "BPS-AOT",
-            "datasource": {
-              "type": "influxdb",
-              "uid": "P951FEA4DE68E13C5"
-            },
-            "groupBy": [
-              {
-                "params": [
-                  "$__interval"
-                ],
-                "type": "time"
-              },
-              {
-                "params": [
-                  "null"
-                ],
-                "type": "fill"
-              }
-            ],
-            "measurement": "http_req_duration",
-            "orderByTime": "ASC",
-            "policy": "default",
-            "refId": "A",
-            "resultFormat": "time_series",
-            "select": [
-              [
-                {
-                  "params": [
-                    "value"
-                  ],
-                  "type": "field"
-                },
-                {
-                  "params": [],
-                  "type": "mean"
-                }
-              ]
-            ],
-            "tags": [
-              {
-                "key": "dta_service::tag",
-                "operator": "=",
-                "value": "BPS-AOT"
-              },
-              {
-                "condition": "AND",
-                "key": "test_scenario::tag",
-                "operator": "=",
-                "value": "scenario1"
-              }
-            ]
-          },
-          {
-            "alias": "BPS-JIT",
-            "datasource": {
-              "type": "influxdb",
-              "uid": "P951FEA4DE68E13C5"
-            },
-            "groupBy": [
-              {
-                "params": [
-                  "$__interval"
-                ],
-                "type": "time"
-              },
-              {
-                "params": [
-                  "null"
-                ],
-                "type": "fill"
-              }
-            ],
-            "hide": false,
-            "measurement": "http_req_duration",
-            "orderByTime": "ASC",
-            "policy": "default",
-            "refId": "B",
-            "resultFormat": "time_series",
-            "select": [
-              [
-                {
-                  "params": [
-                    "value"
-                  ],
-                  "type": "field"
-                },
-                {
-                  "params": [],
-                  "type": "mean"
-                }
-              ]
-            ],
-            "tags": [
-              {
-                "key": "dta_service::tag",
-                "operator": "=",
-                "value": "BPS-JIT"
-              },
-              {
-                "condition": "AND",
-                "key": "test_scenario::tag",
-                "operator": "=",
-                "value": "scenario1"
-              }
-            ]
-          }
-        ],
-        "title": "BPS - Healtheck request duration",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "type": "influxdb",
-          "uid": "P951FEA4DE68E13C5"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "ms"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 4,
-          "w": 6,
-          "x": 0,
-          "y": 5
-        },
-        "id": 4,
-        "options": {
-          "colorMode": "background",
-          "graphMode": "area",
-          "justifyMode": "auto",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "showPercentChange": false,
-          "textMode": "auto",
-          "wideLayout": true
-        },
-        "pluginVersion": "10.4.1",
-        "targets": [
-          {
-            "alias": "SRS-AOT",
-            "datasource": {
-              "type": "influxdb",
-              "uid": "P951FEA4DE68E13C5"
-            },
-            "groupBy": [
-              {
-                "params": [
-                  "$__interval"
-                ],
-                "type": "time"
-              },
-              {
-                "params": [
-                  "null"
-                ],
-                "type": "fill"
-              }
-            ],
-            "measurement": "http_req_sending",
-            "orderByTime": "ASC",
-            "policy": "default",
-            "refId": "A",
-            "resultFormat": "time_series",
-            "select": [
-              [
-                {
-                  "params": [
-                    "value"
-                  ],
-                  "type": "field"
-                },
-                {
-                  "params": [],
-                  "type": "mean"
-                }
-              ]
-            ],
-            "tags": [
-              {
-                "key": "dta_service::tag",
-                "operator": "=",
-                "value": "SRS-AOT"
-              },
-              {
-                "condition": "AND",
-                "key": "test_scenario::tag",
-                "operator": "=",
-                "value": "scenario1"
-              }
-            ]
-          },
-          {
-            "alias": "SRS-JIT",
-            "datasource": {
-              "type": "influxdb",
-              "uid": "P951FEA4DE68E13C5"
-            },
-            "groupBy": [
-              {
-                "params": [
-                  "$__interval"
-                ],
-                "type": "time"
-              },
-              {
-                "params": [
-                  "null"
-                ],
-                "type": "fill"
-              }
-            ],
-            "hide": false,
-            "measurement": "http_req_sending",
-            "orderByTime": "ASC",
-            "policy": "default",
-            "refId": "B",
-            "resultFormat": "time_series",
-            "select": [
-              [
-                {
-                  "params": [
-                    "value"
-                  ],
-                  "type": "field"
-                },
-                {
-                  "params": [],
-                  "type": "mean"
-                }
-              ]
-            ],
-            "tags": [
-              {
-                "key": "dta_service::tag",
-                "operator": "=",
-                "value": "SRS-JIT"
-              },
-              {
-                "condition": "AND",
-                "key": "test_scenario::tag",
-                "operator": "=",
-                "value": "scenario1"
-              }
-            ]
-          }
-        ],
-        "title": "SRS - Healtheck request sending duration",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "type": "influxdb",
-          "uid": "P951FEA4DE68E13C5"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "dark-yellow",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "ms"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 4,
-          "w": 6,
-          "x": 6,
-          "y": 5
-        },
-        "id": 10,
-        "options": {
-          "colorMode": "background",
-          "graphMode": "area",
-          "justifyMode": "auto",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "showPercentChange": false,
-          "textMode": "auto",
-          "wideLayout": true
-        },
-        "pluginVersion": "10.4.1",
-        "targets": [
-          {
-            "alias": "FUS-AOT",
-            "datasource": {
-              "type": "influxdb",
-              "uid": "P951FEA4DE68E13C5"
-            },
-            "groupBy": [
-              {
-                "params": [
-                  "$__interval"
-                ],
-                "type": "time"
-              },
-              {
-                "params": [
-                  "null"
-                ],
-                "type": "fill"
-              }
-            ],
-            "measurement": "http_req_sending",
-            "orderByTime": "ASC",
-            "policy": "default",
-            "refId": "A",
-            "resultFormat": "time_series",
-            "select": [
-              [
-                {
-                  "params": [
-                    "value"
-                  ],
-                  "type": "field"
-                },
-                {
-                  "params": [],
-                  "type": "mean"
-                }
-              ]
-            ],
-            "tags": [
-              {
-                "key": "dta_service::tag",
-                "operator": "=",
-                "value": "FUS-AOT"
-              },
-              {
-                "condition": "AND",
-                "key": "test_scenario::tag",
-                "operator": "=",
-                "value": "scenario1"
-              }
-            ]
-          },
-          {
-            "alias": "FUS-JIT",
-            "datasource": {
-              "type": "influxdb",
-              "uid": "P951FEA4DE68E13C5"
-            },
-            "groupBy": [
-              {
-                "params": [
-                  "$__interval"
-                ],
-                "type": "time"
-              },
-              {
-                "params": [
-                  "null"
-                ],
-                "type": "fill"
-              }
-            ],
-            "hide": false,
-            "measurement": "http_req_sending",
-            "orderByTime": "ASC",
-            "policy": "default",
-            "refId": "B",
-            "resultFormat": "time_series",
-            "select": [
-              [
-                {
-                  "params": [
-                    "value"
-                  ],
-                  "type": "field"
-                },
-                {
-                  "params": [],
-                  "type": "mean"
-                }
-              ]
-            ],
-            "tags": [
-              {
-                "key": "dta_service::tag",
-                "operator": "=",
-                "value": "FUS-JIT"
-              },
-              {
-                "condition": "AND",
-                "key": "test_scenario::tag",
-                "operator": "=",
-                "value": "scenario1"
-              }
-            ]
-          }
-        ],
-        "title": "FUS - Healtheck request sending duration",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "type": "influxdb",
-          "uid": "P951FEA4DE68E13C5"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "light-blue",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "ms"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 4,
-          "w": 6,
-          "x": 12,
-          "y": 5
-        },
-        "id": 8,
-        "options": {
-          "colorMode": "background",
-          "graphMode": "area",
-          "justifyMode": "auto",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "showPercentChange": false,
-          "textMode": "auto",
-          "wideLayout": true
-        },
-        "pluginVersion": "10.4.1",
-        "targets": [
-          {
-            "alias": "EPS-AOT",
-            "datasource": {
-              "type": "influxdb",
-              "uid": "P951FEA4DE68E13C5"
-            },
-            "groupBy": [
-              {
-                "params": [
-                  "$__interval"
-                ],
-                "type": "time"
-              },
-              {
-                "params": [
-                  "null"
-                ],
-                "type": "fill"
-              }
-            ],
-            "measurement": "http_req_sending",
-            "orderByTime": "ASC",
-            "policy": "default",
-            "refId": "A",
-            "resultFormat": "time_series",
-            "select": [
-              [
-                {
-                  "params": [
-                    "value"
-                  ],
-                  "type": "field"
-                },
-                {
-                  "params": [],
-                  "type": "mean"
-                }
-              ]
-            ],
-            "tags": [
-              {
-                "key": "dta_service::tag",
-                "operator": "=",
-                "value": "EPS-AOT"
-              },
-              {
-                "condition": "AND",
-                "key": "test_scenario::tag",
-                "operator": "=",
-                "value": "scenario1"
-              }
-            ]
-          },
-          {
-            "alias": "EPS-JIT",
-            "datasource": {
-              "type": "influxdb",
-              "uid": "P951FEA4DE68E13C5"
-            },
-            "groupBy": [
-              {
-                "params": [
-                  "$__interval"
-                ],
-                "type": "time"
-              },
-              {
-                "params": [
-                  "null"
-                ],
-                "type": "fill"
-              }
-            ],
-            "hide": false,
-            "measurement": "http_req_sending",
-            "orderByTime": "ASC",
-            "policy": "default",
-            "refId": "B",
-            "resultFormat": "time_series",
-            "select": [
-              [
-                {
-                  "params": [
-                    "value"
-                  ],
-                  "type": "field"
-                },
-                {
-                  "params": [],
-                  "type": "mean"
-                }
-              ]
-            ],
-            "tags": [
-              {
-                "key": "dta_service::tag",
-                "operator": "=",
-                "value": "EPS-JIT"
-              },
-              {
-                "condition": "AND",
-                "key": "test_scenario::tag",
-                "operator": "=",
-                "value": "scenario1"
-              }
-            ]
-          }
-        ],
-        "title": "EPS - Healtheck request sending duration",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "type": "influxdb",
-          "uid": "P951FEA4DE68E13C5"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "orange",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "ms"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 4,
-          "w": 6,
-          "x": 18,
-          "y": 5
-        },
-        "id": 9,
-        "options": {
-          "colorMode": "background",
-          "graphMode": "area",
-          "justifyMode": "auto",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "showPercentChange": false,
-          "textMode": "auto",
-          "wideLayout": true
-        },
-        "pluginVersion": "10.4.1",
-        "targets": [
-          {
-            "alias": "BPS-AOT",
-            "datasource": {
-              "type": "influxdb",
-              "uid": "P951FEA4DE68E13C5"
-            },
-            "groupBy": [
-              {
-                "params": [
-                  "$__interval"
-                ],
-                "type": "time"
-              },
-              {
-                "params": [
-                  "null"
-                ],
-                "type": "fill"
-              }
-            ],
-            "measurement": "http_req_sending",
-            "orderByTime": "ASC",
-            "policy": "default",
-            "refId": "A",
-            "resultFormat": "time_series",
-            "select": [
-              [
-                {
-                  "params": [
-                    "value"
-                  ],
-                  "type": "field"
-                },
-                {
-                  "params": [],
-                  "type": "mean"
-                }
-              ]
-            ],
-            "tags": [
-              {
-                "key": "dta_service::tag",
-                "operator": "=",
-                "value": "BPS-AOT"
-              },
-              {
-                "condition": "AND",
-                "key": "test_scenario::tag",
-                "operator": "=",
-                "value": "scenario1"
-              }
-            ]
-          },
-          {
-            "alias": "BPS-JIT",
-            "datasource": {
-              "type": "influxdb",
-              "uid": "P951FEA4DE68E13C5"
-            },
-            "groupBy": [
-              {
-                "params": [
-                  "$__interval"
-                ],
-                "type": "time"
-              },
-              {
-                "params": [
-                  "null"
-                ],
-                "type": "fill"
-              }
-            ],
-            "hide": false,
-            "measurement": "http_req_sending",
-            "orderByTime": "ASC",
-            "policy": "default",
-            "refId": "B",
-            "resultFormat": "time_series",
-            "select": [
-              [
-                {
-                  "params": [
-                    "value"
-                  ],
-                  "type": "field"
-                },
-                {
-                  "params": [],
-                  "type": "mean"
-                }
-              ]
-            ],
-            "tags": [
-              {
-                "key": "dta_service::tag",
-                "operator": "=",
-                "value": "BPS-JIT"
-              },
-              {
-                "condition": "AND",
-                "key": "test_scenario::tag",
-                "operator": "=",
-                "value": "scenario1"
-              }
-            ]
-          }
-        ],
-        "title": "BPS - Healtheck request sending duration",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "type": "influxdb",
-          "uid": "P951FEA4DE68E13C5"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            }
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 4,
-          "w": 6,
-          "x": 0,
-          "y": 9
-        },
-        "id": 2,
-        "options": {
-          "colorMode": "background",
-          "graphMode": "area",
-          "justifyMode": "auto",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "showPercentChange": false,
-          "textMode": "auto",
-          "wideLayout": true
-        },
-        "pluginVersion": "10.4.1",
-        "targets": [
-          {
-            "alias": "SRS-AOT",
-            "datasource": {
-              "type": "influxdb",
-              "uid": "P951FEA4DE68E13C5"
-            },
-            "groupBy": [
-              {
-                "params": [
-                  "$__interval"
-                ],
-                "type": "time"
-              },
-              {
-                "params": [
-                  "null"
-                ],
-                "type": "fill"
-              }
-            ],
-            "measurement": "http_req_failed",
-            "orderByTime": "ASC",
-            "policy": "default",
-            "refId": "A",
-            "resultFormat": "time_series",
-            "select": [
-              [
-                {
-                  "params": [
-                    "value"
-                  ],
-                  "type": "field"
-                },
-                {
-                  "params": [],
-                  "type": "mean"
-                }
-              ]
-            ],
-            "tags": [
-              {
-                "key": "dta_service::tag",
-                "operator": "=",
-                "value": "SRS-AOT"
-              },
-              {
-                "condition": "AND",
-                "key": "test_scenario::tag",
-                "operator": "=",
-                "value": "scenario1"
-              }
-            ]
-          },
-          {
-            "alias": "SRS-JIT",
-            "datasource": {
-              "type": "influxdb",
-              "uid": "P951FEA4DE68E13C5"
-            },
-            "groupBy": [
-              {
-                "params": [
-                  "$__interval"
-                ],
-                "type": "time"
-              },
-              {
-                "params": [
-                  "null"
-                ],
-                "type": "fill"
-              }
-            ],
-            "hide": false,
-            "measurement": "http_req_failed",
-            "orderByTime": "ASC",
-            "policy": "default",
-            "refId": "B",
-            "resultFormat": "time_series",
-            "select": [
-              [
-                {
-                  "params": [
-                    "value"
-                  ],
-                  "type": "field"
-                },
-                {
-                  "params": [],
-                  "type": "mean"
-                }
-              ]
-            ],
-            "tags": [
-              {
-                "key": "dta_service::tag",
-                "operator": "=",
-                "value": "SRS-JIT"
-              },
-              {
-                "condition": "AND",
-                "key": "test_scenario::tag",
-                "operator": "=",
-                "value": "scenario1"
-              }
-            ]
-          }
-        ],
-        "title": "SRS - Healtheck failed requests",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "type": "influxdb",
-          "uid": "P951FEA4DE68E13C5"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "dark-yellow",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            }
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 4,
-          "w": 6,
-          "x": 6,
-          "y": 9
-        },
-        "id": 11,
-        "options": {
-          "colorMode": "background",
-          "graphMode": "area",
-          "justifyMode": "auto",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "showPercentChange": false,
-          "textMode": "auto",
-          "wideLayout": true
-        },
-        "pluginVersion": "10.4.1",
-        "targets": [
-          {
-            "alias": "FUS-AOT",
-            "datasource": {
-              "type": "influxdb",
-              "uid": "P951FEA4DE68E13C5"
-            },
-            "groupBy": [
-              {
-                "params": [
-                  "$__interval"
-                ],
-                "type": "time"
-              },
-              {
-                "params": [
-                  "null"
-                ],
-                "type": "fill"
-              }
-            ],
-            "measurement": "http_req_failed",
-            "orderByTime": "ASC",
-            "policy": "default",
-            "refId": "A",
-            "resultFormat": "time_series",
-            "select": [
-              [
-                {
-                  "params": [
-                    "value"
-                  ],
-                  "type": "field"
-                },
-                {
-                  "params": [],
-                  "type": "mean"
-                }
-              ]
-            ],
-            "tags": [
-              {
-                "key": "dta_service::tag",
-                "operator": "=",
-                "value": "FUS-AOT"
-              },
-              {
-                "condition": "AND",
-                "key": "test_scenario::tag",
-                "operator": "=",
-                "value": "scenario1"
-              }
-            ]
-          },
-          {
-            "alias": "FUS-JIT",
-            "datasource": {
-              "type": "influxdb",
-              "uid": "P951FEA4DE68E13C5"
-            },
-            "groupBy": [
-              {
-                "params": [
-                  "$__interval"
-                ],
-                "type": "time"
-              },
-              {
-                "params": [
-                  "null"
-                ],
-                "type": "fill"
-              }
-            ],
-            "hide": false,
-            "measurement": "http_req_failed",
-            "orderByTime": "ASC",
-            "policy": "default",
-            "refId": "B",
-            "resultFormat": "time_series",
-            "select": [
-              [
-                {
-                  "params": [
-                    "value"
-                  ],
-                  "type": "field"
-                },
-                {
-                  "params": [],
-                  "type": "mean"
-                }
-              ]
-            ],
-            "tags": [
-              {
-                "key": "dta_service::tag",
-                "operator": "=",
-                "value": "FUS-JIT"
-              },
-              {
-                "condition": "AND",
-                "key": "test_scenario::tag",
-                "operator": "=",
-                "value": "scenario1"
-              }
-            ]
-          }
-        ],
-        "title": "FUS - Healtheck failed requests",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "type": "influxdb",
-          "uid": "P951FEA4DE68E13C5"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "light-blue",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            }
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 4,
-          "w": 6,
-          "x": 12,
-          "y": 9
-        },
-        "id": 12,
-        "options": {
-          "colorMode": "background",
-          "graphMode": "area",
-          "justifyMode": "auto",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "showPercentChange": false,
-          "textMode": "auto",
-          "wideLayout": true
-        },
-        "pluginVersion": "10.4.1",
-        "targets": [
-          {
-            "alias": "EPS-AOT",
-            "datasource": {
-              "type": "influxdb",
-              "uid": "P951FEA4DE68E13C5"
-            },
-            "groupBy": [
-              {
-                "params": [
-                  "$__interval"
-                ],
-                "type": "time"
-              },
-              {
-                "params": [
-                  "null"
-                ],
-                "type": "fill"
-              }
-            ],
-            "measurement": "http_req_failed",
-            "orderByTime": "ASC",
-            "policy": "default",
-            "refId": "A",
-            "resultFormat": "time_series",
-            "select": [
-              [
-                {
-                  "params": [
-                    "value"
-                  ],
-                  "type": "field"
-                },
-                {
-                  "params": [],
-                  "type": "mean"
-                }
-              ]
-            ],
-            "tags": [
-              {
-                "key": "dta_service::tag",
-                "operator": "=",
-                "value": "EPS-AOT"
-              },
-              {
-                "condition": "AND",
-                "key": "test_scenario::tag",
-                "operator": "=",
-                "value": "scenario1"
-              }
-            ]
-          },
-          {
-            "alias": "EPS-JIT",
-            "datasource": {
-              "type": "influxdb",
-              "uid": "P951FEA4DE68E13C5"
-            },
-            "groupBy": [
-              {
-                "params": [
-                  "$__interval"
-                ],
-                "type": "time"
-              },
-              {
-                "params": [
-                  "null"
-                ],
-                "type": "fill"
-              }
-            ],
-            "hide": false,
-            "measurement": "http_req_failed",
-            "orderByTime": "ASC",
-            "policy": "default",
-            "refId": "B",
-            "resultFormat": "time_series",
-            "select": [
-              [
-                {
-                  "params": [
-                    "value"
-                  ],
-                  "type": "field"
-                },
-                {
-                  "params": [],
-                  "type": "mean"
-                }
-              ]
-            ],
-            "tags": [
-              {
-                "key": "dta_service::tag",
-                "operator": "=",
-                "value": "EPS-JIT"
-              },
-              {
-                "condition": "AND",
-                "key": "test_scenario::tag",
-                "operator": "=",
-                "value": "scenario1"
-              }
-            ]
-          }
-        ],
-        "title": "EPS - Healtheck failed requests",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "type": "influxdb",
-          "uid": "P951FEA4DE68E13C5"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "orange",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            }
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 4,
-          "w": 6,
-          "x": 18,
-          "y": 9
-        },
-        "id": 13,
-        "options": {
-          "colorMode": "background",
-          "graphMode": "area",
-          "justifyMode": "auto",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "showPercentChange": false,
-          "textMode": "auto",
-          "wideLayout": true
-        },
-        "pluginVersion": "10.4.1",
-        "targets": [
-          {
-            "alias": "BPS-AOT",
-            "datasource": {
-              "type": "influxdb",
-              "uid": "P951FEA4DE68E13C5"
-            },
-            "groupBy": [
-              {
-                "params": [
-                  "$__interval"
-                ],
-                "type": "time"
-              },
-              {
-                "params": [
-                  "null"
-                ],
-                "type": "fill"
-              }
-            ],
-            "measurement": "http_req_failed",
-            "orderByTime": "ASC",
-            "policy": "default",
-            "refId": "A",
-            "resultFormat": "time_series",
-            "select": [
-              [
-                {
-                  "params": [
-                    "value"
-                  ],
-                  "type": "field"
-                },
-                {
-                  "params": [],
-                  "type": "mean"
-                }
-              ]
-            ],
-            "tags": [
-              {
-                "key": "dta_service::tag",
-                "operator": "=",
-                "value": "BPS-AOT"
-              },
-              {
-                "condition": "AND",
-                "key": "test_scenario::tag",
-                "operator": "=",
-                "value": "scenario1"
-              }
-            ]
-          },
-          {
-            "alias": "BPS-JIT",
-            "datasource": {
-              "type": "influxdb",
-              "uid": "P951FEA4DE68E13C5"
-            },
-            "groupBy": [
-              {
-                "params": [
-                  "$__interval"
-                ],
-                "type": "time"
-              },
-              {
-                "params": [
-                  "null"
-                ],
-                "type": "fill"
-              }
-            ],
-            "hide": false,
-            "measurement": "http_req_failed",
-            "orderByTime": "ASC",
-            "policy": "default",
-            "refId": "B",
-            "resultFormat": "time_series",
-            "select": [
-              [
-                {
-                  "params": [
-                    "value"
-                  ],
-                  "type": "field"
-                },
-                {
-                  "params": [],
-                  "type": "mean"
-                }
-              ]
-            ],
-            "tags": [
-              {
-                "key": "dta_service::tag",
-                "operator": "=",
-                "value": "BPS-JIT"
-              },
-              {
-                "condition": "AND",
-                "key": "test_scenario::tag",
-                "operator": "=",
-                "value": "scenario1"
-              }
-            ]
-          }
-        ],
-        "title": "BPS - Healtheck failed requests",
-        "type": "stat"
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
       }
-    ],
-    "refresh": "",
-    "schemaVersion": 39,
-    "tags": [],
-    "templating": {
-      "list": [
-        {
-          "current": {
-            "selected": false,
-            "text": "test_run_2104_08",
-            "value": "test_run_2104_08"
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 3,
+  "links": [],
+  "panels": [
+    {
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 3,
+      "title": "Scenario 1",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "P951FEA4DE68E13C5"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
           },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 0,
+        "y": 1
+      },
+      "id": 1,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.4.1",
+      "targets": [
+        {
+          "alias": "SRS-AOT",
           "datasource": {
             "type": "influxdb",
             "uid": "P951FEA4DE68E13C5"
           },
-          "definition": "SHOW TAG VALUES FROM \"http_req_duration\" WITH KEY = \"test_id\"",
-          "hide": 0,
-          "includeAll": false,
-          "label": "Test ID Query",
-          "multi": false,
-          "name": "testIdQuery",
-          "options": [],
-          "query": "SHOW TAG VALUES FROM \"http_req_duration\" WITH KEY = \"test_id\"",
-          "refresh": 1,
-          "regex": "",
-          "skipUrlSync": false,
-          "sort": 0,
-          "type": "query"
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "http_req_duration",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "dta_service::tag",
+              "operator": "=",
+              "value": "SRS-AOT"
+            },
+            {
+              "condition": "AND",
+              "key": "test_scenario::tag",
+              "operator": "=",
+              "value": "scenario1"
+            },
+            {
+              "condition": "AND",
+              "key": "test_id::tag",
+              "operator": "=~",
+              "value": "/^$testIdQuery$/"
+            }
+          ]
+        },
+        {
+          "alias": "SRS-JIT",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P951FEA4DE68E13C5"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "http_req_duration",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "dta_service::tag",
+              "operator": "=",
+              "value": "SRS-JIT"
+            },
+            {
+              "condition": "AND",
+              "key": "test_scenario::tag",
+              "operator": "=",
+              "value": "scenario1"
+            },
+            {
+              "condition": "AND",
+              "key": "test_id::tag",
+              "operator": "=~",
+              "value": "/^$testIdQuery$/"
+            }
+          ]
         }
-      ]
+      ],
+      "title": "SRS - Healtheck request duration",
+      "type": "stat"
     },
-    "time": {
-      "from": "now-3h",
-      "to": "now"
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "P951FEA4DE68E13C5"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-yellow",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 6,
+        "y": 1
+      },
+      "id": 7,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.4.1",
+      "targets": [
+        {
+          "alias": "FUS-AOT",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P951FEA4DE68E13C5"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "http_req_duration",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "dta_service::tag",
+              "operator": "=",
+              "value": "FUS-AOT"
+            },
+            {
+              "condition": "AND",
+              "key": "test_scenario::tag",
+              "operator": "=",
+              "value": "scenario1"
+            },
+            {
+              "condition": "AND",
+              "key": "test_id::tag",
+              "operator": "=~",
+              "value": "/^$testIdQuery$/"
+            }
+          ]
+        },
+        {
+          "alias": "FUS-JIT",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P951FEA4DE68E13C5"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "http_req_duration",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "dta_service::tag",
+              "operator": "=",
+              "value": "FUS-JIT"
+            },
+            {
+              "condition": "AND",
+              "key": "test_scenario::tag",
+              "operator": "=",
+              "value": "scenario1"
+            },
+            {
+              "condition": "AND",
+              "key": "test_id::tag",
+              "operator": "=~",
+              "value": "/^$testIdQuery$/"
+            }
+          ]
+        }
+      ],
+      "title": "FUS - Healtheck request duration",
+      "type": "stat"
     },
-    "timepicker": {},
-    "timezone": "browser",
-    "title": "Scenario 1 dashboard",
-    "uid": "ddicbhotizchsf",
-    "version": 5,
-    "weekStart": ""
-  }
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "P951FEA4DE68E13C5"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "light-blue",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 12,
+        "y": 1
+      },
+      "id": 5,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.4.1",
+      "targets": [
+        {
+          "alias": "EPS-AOT",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P951FEA4DE68E13C5"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "http_req_duration",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "dta_service::tag",
+              "operator": "=",
+              "value": "EPS-AOT"
+            },
+            {
+              "condition": "AND",
+              "key": "test_scenario::tag",
+              "operator": "=",
+              "value": "scenario1"
+            },
+            {
+              "condition": "AND",
+              "key": "test_id::tag",
+              "operator": "=~",
+              "value": "/^$testIdQuery$/"
+            }
+          ]
+        },
+        {
+          "alias": "EPS-JIT",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P951FEA4DE68E13C5"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "http_req_duration",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "dta_service::tag",
+              "operator": "=",
+              "value": "EPS-JIT"
+            },
+            {
+              "condition": "AND",
+              "key": "test_scenario::tag",
+              "operator": "=",
+              "value": "scenario1"
+            },
+            {
+              "condition": "AND",
+              "key": "test_id::tag",
+              "operator": "=~",
+              "value": "/^$testIdQuery$/"
+            }
+          ]
+        }
+      ],
+      "title": "EPS - Healtheck request duration",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "P951FEA4DE68E13C5"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "orange",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 18,
+        "y": 1
+      },
+      "id": 6,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.4.1",
+      "targets": [
+        {
+          "alias": "BPS-AOT",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P951FEA4DE68E13C5"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "http_req_duration",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "dta_service::tag",
+              "operator": "=",
+              "value": "BPS-AOT"
+            },
+            {
+              "condition": "AND",
+              "key": "test_scenario::tag",
+              "operator": "=",
+              "value": "scenario1"
+            },
+            {
+              "condition": "AND",
+              "key": "test_id::tag",
+              "operator": "=~",
+              "value": "/^$testIdQuery$/"
+            }
+          ]
+        },
+        {
+          "alias": "BPS-JIT",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P951FEA4DE68E13C5"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "http_req_duration",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "dta_service::tag",
+              "operator": "=",
+              "value": "BPS-JIT"
+            },
+            {
+              "condition": "AND",
+              "key": "test_scenario::tag",
+              "operator": "=",
+              "value": "scenario1"
+            },
+            {
+              "condition": "AND",
+              "key": "test_id::tag",
+              "operator": "=~",
+              "value": "/^$testIdQuery$/"
+            }
+          ]
+        }
+      ],
+      "title": "BPS - Healtheck request duration",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "P951FEA4DE68E13C5"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 0,
+        "y": 5
+      },
+      "id": 4,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.4.1",
+      "targets": [
+        {
+          "alias": "SRS-AOT",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P951FEA4DE68E13C5"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "http_req_sending",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "dta_service::tag",
+              "operator": "=",
+              "value": "SRS-AOT"
+            },
+            {
+              "condition": "AND",
+              "key": "test_scenario::tag",
+              "operator": "=",
+              "value": "scenario1"
+            },
+            {
+              "condition": "AND",
+              "key": "test_id::tag",
+              "operator": "=~",
+              "value": "/^$testIdQuery$/"
+            }
+          ]
+        },
+        {
+          "alias": "SRS-JIT",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P951FEA4DE68E13C5"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "http_req_sending",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "dta_service::tag",
+              "operator": "=",
+              "value": "SRS-JIT"
+            },
+            {
+              "condition": "AND",
+              "key": "test_scenario::tag",
+              "operator": "=",
+              "value": "scenario1"
+            }
+          ]
+        }
+      ],
+      "title": "SRS - Healtheck request sending duration",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "P951FEA4DE68E13C5"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-yellow",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 6,
+        "y": 5
+      },
+      "id": 10,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.4.1",
+      "targets": [
+        {
+          "alias": "FUS-AOT",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P951FEA4DE68E13C5"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "http_req_sending",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "dta_service::tag",
+              "operator": "=",
+              "value": "FUS-AOT"
+            },
+            {
+              "condition": "AND",
+              "key": "test_scenario::tag",
+              "operator": "=",
+              "value": "scenario1"
+            },
+            {
+              "condition": "AND",
+              "key": "test_id::tag",
+              "operator": "=~",
+              "value": "/^$testIdQuery$/"
+            }
+          ]
+        },
+        {
+          "alias": "FUS-JIT",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P951FEA4DE68E13C5"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "http_req_sending",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "dta_service::tag",
+              "operator": "=",
+              "value": "FUS-JIT"
+            },
+            {
+              "condition": "AND",
+              "key": "test_scenario::tag",
+              "operator": "=",
+              "value": "scenario1"
+            },
+            {
+              "condition": "AND",
+              "key": "test_id::tag",
+              "operator": "=~",
+              "value": "/^$testIdQuery$/"
+            }
+          ]
+        }
+      ],
+      "title": "FUS - Healtheck request sending duration",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "P951FEA4DE68E13C5"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "light-blue",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 12,
+        "y": 5
+      },
+      "id": 8,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.4.1",
+      "targets": [
+        {
+          "alias": "EPS-AOT",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P951FEA4DE68E13C5"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "http_req_sending",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "dta_service::tag",
+              "operator": "=",
+              "value": "EPS-AOT"
+            },
+            {
+              "condition": "AND",
+              "key": "test_scenario::tag",
+              "operator": "=",
+              "value": "scenario1"
+            },
+            {
+              "condition": "AND",
+              "key": "test_id::tag",
+              "operator": "=~",
+              "value": "/^$testIdQuery$/"
+            }
+          ]
+        },
+        {
+          "alias": "EPS-JIT",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P951FEA4DE68E13C5"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "http_req_sending",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "dta_service::tag",
+              "operator": "=",
+              "value": "EPS-JIT"
+            },
+            {
+              "condition": "AND",
+              "key": "test_scenario::tag",
+              "operator": "=",
+              "value": "scenario1"
+            },
+            {
+              "condition": "AND",
+              "key": "test_id::tag",
+              "operator": "=~",
+              "value": "/^$testIdQuery$/"
+            }
+          ]
+        }
+      ],
+      "title": "EPS - Healtheck request sending duration",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "P951FEA4DE68E13C5"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "orange",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 18,
+        "y": 5
+      },
+      "id": 9,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.4.1",
+      "targets": [
+        {
+          "alias": "BPS-AOT",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P951FEA4DE68E13C5"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "http_req_sending",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "dta_service::tag",
+              "operator": "=",
+              "value": "BPS-AOT"
+            },
+            {
+              "condition": "AND",
+              "key": "test_scenario::tag",
+              "operator": "=",
+              "value": "scenario1"
+            },
+            {
+              "condition": "AND",
+              "key": "test_id::tag",
+              "operator": "=~",
+              "value": "/^$testIdQuery$/"
+            }
+          ]
+        },
+        {
+          "alias": "BPS-JIT",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P951FEA4DE68E13C5"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "http_req_sending",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "dta_service::tag",
+              "operator": "=",
+              "value": "BPS-JIT"
+            },
+            {
+              "condition": "AND",
+              "key": "test_scenario::tag",
+              "operator": "=",
+              "value": "scenario1"
+            },
+            {
+              "condition": "AND",
+              "key": "test_id::tag",
+              "operator": "=~",
+              "value": "/^$testIdQuery$/"
+            }
+          ]
+        }
+      ],
+      "title": "BPS - Healtheck request sending duration",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "P951FEA4DE68E13C5"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 0,
+        "y": 9
+      },
+      "id": 2,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.4.1",
+      "targets": [
+        {
+          "alias": "SRS-AOT",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P951FEA4DE68E13C5"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "http_req_failed",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "count"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "dta_service::tag",
+              "operator": "=",
+              "value": "SRS-AOT"
+            },
+            {
+              "condition": "AND",
+              "key": "test_scenario::tag",
+              "operator": "=",
+              "value": "scenario1"
+            },
+            {
+              "condition": "AND",
+              "key": "test_id::tag",
+              "operator": "=~",
+              "value": "/^$testIdQuery$/"
+            }
+          ]
+        },
+        {
+          "alias": "SRS-JIT",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P951FEA4DE68E13C5"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "http_req_failed",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "count"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "dta_service::tag",
+              "operator": "=",
+              "value": "SRS-JIT"
+            },
+            {
+              "condition": "AND",
+              "key": "test_scenario::tag",
+              "operator": "=",
+              "value": "scenario1"
+            },
+            {
+              "condition": "AND",
+              "key": "test_id::tag",
+              "operator": "=~",
+              "value": "/^$testIdQuery$/"
+            }
+          ]
+        }
+      ],
+      "title": "SRS - Healtheck failed requests",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "P951FEA4DE68E13C5"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-yellow",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 6,
+        "y": 9
+      },
+      "id": 11,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.4.1",
+      "targets": [
+        {
+          "alias": "FUS-AOT",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P951FEA4DE68E13C5"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "http_req_failed",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "count"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "dta_service::tag",
+              "operator": "=",
+              "value": "FUS-AOT"
+            },
+            {
+              "condition": "AND",
+              "key": "test_scenario::tag",
+              "operator": "=",
+              "value": "scenario1"
+            },
+            {
+              "condition": "AND",
+              "key": "test_id::tag",
+              "operator": "=~",
+              "value": "/^$testIdQuery$/"
+            }
+          ]
+        },
+        {
+          "alias": "FUS-JIT",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P951FEA4DE68E13C5"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "http_req_failed",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "count"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "dta_service::tag",
+              "operator": "=",
+              "value": "FUS-JIT"
+            },
+            {
+              "condition": "AND",
+              "key": "test_scenario::tag",
+              "operator": "=",
+              "value": "scenario1"
+            },
+            {
+              "condition": "AND",
+              "key": "test_id::tag",
+              "operator": "=~",
+              "value": "/^$testIdQuery$/"
+            }
+          ]
+        }
+      ],
+      "title": "FUS - Healtheck failed requests",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "P951FEA4DE68E13C5"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "light-blue",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 12,
+        "y": 9
+      },
+      "id": 12,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.4.1",
+      "targets": [
+        {
+          "alias": "EPS-AOT",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P951FEA4DE68E13C5"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "http_req_failed",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "count"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "dta_service::tag",
+              "operator": "=",
+              "value": "EPS-AOT"
+            },
+            {
+              "condition": "AND",
+              "key": "test_scenario::tag",
+              "operator": "=",
+              "value": "scenario1"
+            },
+            {
+              "condition": "AND",
+              "key": "test_id::tag",
+              "operator": "=~",
+              "value": "/^$testIdQuery$/"
+            }
+          ]
+        },
+        {
+          "alias": "EPS-JIT",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P951FEA4DE68E13C5"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "http_req_failed",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "count"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "dta_service::tag",
+              "operator": "=",
+              "value": "EPS-JIT"
+            },
+            {
+              "condition": "AND",
+              "key": "test_scenario::tag",
+              "operator": "=",
+              "value": "scenario1"
+            },
+            {
+              "condition": "AND",
+              "key": "test_id::tag",
+              "operator": "=~",
+              "value": "/^$testIdQuery$/"
+            }
+          ]
+        }
+      ],
+      "title": "EPS - Healtheck failed requests",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "P951FEA4DE68E13C5"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "orange",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 18,
+        "y": 9
+      },
+      "id": 13,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.4.1",
+      "targets": [
+        {
+          "alias": "BPS-AOT",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P951FEA4DE68E13C5"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "http_req_failed",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "count"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "dta_service::tag",
+              "operator": "=",
+              "value": "BPS-AOT"
+            },
+            {
+              "condition": "AND",
+              "key": "test_scenario::tag",
+              "operator": "=",
+              "value": "scenario1"
+            },
+            {
+              "condition": "AND",
+              "key": "test_id::tag",
+              "operator": "=~",
+              "value": "/^$testIdQuery$/"
+            }
+          ]
+        },
+        {
+          "alias": "BPS-JIT",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P951FEA4DE68E13C5"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "http_req_failed",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "count"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "dta_service::tag",
+              "operator": "=",
+              "value": "BPS-JIT"
+            },
+            {
+              "condition": "AND",
+              "key": "test_scenario::tag",
+              "operator": "=",
+              "value": "scenario1"
+            },
+            {
+              "condition": "AND",
+              "key": "test_id::tag",
+              "operator": "=~",
+              "value": "/^$testIdQuery$/"
+            }
+          ]
+        }
+      ],
+      "title": "BPS - Healtheck failed requests",
+      "type": "stat"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 39,
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": true,
+          "text": "test_run_2104_08",
+          "value": "test_run_2104_08"
+        },
+        "datasource": {
+          "type": "influxdb",
+          "uid": "P951FEA4DE68E13C5"
+        },
+        "definition": "SHOW TAG VALUES FROM \"http_req_duration\" WITH KEY = \"test_id\"",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Test ID Query",
+        "multi": false,
+        "name": "testIdQuery",
+        "options": [],
+        "query": "SHOW TAG VALUES FROM \"http_req_duration\" WITH KEY = \"test_id\"",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-24h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Scenario 1 dashboard",
+  "uid": "ddicbhotizchsf",
+  "version": 6,
+  "weekStart": ""
+}
