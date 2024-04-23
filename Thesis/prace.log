@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.8)  21 APR 2024 23:09
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.8)  23 APR 2024 23:19
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1256,12 +1256,12 @@ LaTeX Font Info:    Trying to load font information for OT1+phv on input line 73
  (/usr/local/texlive/2023/texmf-dist/tex/latex/psnfss/ot1phv.fd
 File: ot1phv.fd 2020/03/25 scalable font definitions for OT1/phv.
 )
-<graphics/logo/fai_logo_cz.png, id=540, 325.68428pt x 76.49358pt>
+<graphics/logo/fai_logo_cz.png, id=536, 325.68428pt x 76.49358pt>
 File: graphics/logo/fai_logo_cz.png Graphic file (type png)
 <use graphics/logo/fai_logo_cz.png>
 Package pdftex.def Info: graphics/logo/fai_logo_cz.png  used on input line 73.
 (pdftex.def)             Requested size: 256.0748pt x 60.14912pt.
-<zadani.pdf, id=541, 597.432pt x 844.83629pt>
+<zadani.pdf, id=537, 597.432pt x 844.83629pt>
 File: zadani.pdf Graphic file (type pdf)
 <use zadani.pdf>
 Package pdftex.def Info: zadani.pdf  used on input line 75.
@@ -1270,7 +1270,7 @@ File: zadani.pdf Graphic file (type pdf)
 <use zadani.pdf>
 Package pdftex.def Info: zadani.pdf  used on input line 75.
 (pdftex.def)             Requested size: 597.43054pt x 844.83423pt.
-<zadani.pdf, id=544, page=1, 597.432pt x 844.83629pt>
+<zadani.pdf, id=540, page=1, 597.432pt x 844.83629pt>
 File: zadani.pdf Graphic file (type pdf)
 <use zadani.pdf, page 1>
 Package pdftex.def Info: zadani.pdf , page1 used on input line 75.
@@ -1295,7 +1295,7 @@ File: zadani.pdf Graphic file (type pdf)
 Package pdftex.def Info: zadani.pdf , page1 used on input line 75.
 (pdftex.def)             Requested size: 597.93192pt x 845.54323pt.
  [2 <./zadani.pdf, page is rotated 270 degrees>]
-<zadani.pdf, id=558, page=2, 597.432pt x 844.83629pt>
+<zadani.pdf, id=554, page=2, 597.432pt x 844.83629pt>
 File: zadani.pdf Graphic file (type pdf)
 <use zadani.pdf, page 2>
 Package pdftex.def Info: zadani.pdf , page2 used on input line 75.
@@ -1330,37 +1330,52 @@ Package pdftex.def Info: zadani.pdf , page2 used on input line 75.
 ] (./tex/chapters/dotnet.tex [13
 
 
-] [14] [15] [16] [17]
-LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 97.
+] [14] [15] [16]
+Overfull \hbox (5.54114pt too wide) in paragraph at lines 72--73
+[]\T1/cmr/bx/n/12 Entity Fra-mework \T1/cmr/m/n/12 - ORM (Object-Relational Map-ping) fra-mework, který umoº-
+ []
+
+[17]
+LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 95.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2022/07/10 v2.5l Standard LaTeX font definitions
-) [18] [19] [20] [21] [22] [23] [24] [25] [26]) (./tex/chapters/microservices.tex [27] [28
-
-] [29] [30] [31] [32] [33] [34]) (./tex/chapters/monitoring.tex [35] [36
-
-] [37] [38] [39]) [40] [41] [42
-
-
-] (./tex/chapters/stack.tex [43
+) [18]
+Overfull \hbox (7.38638pt too wide) in paragraph at lines 118--119
+[]\T1/cmr/bx/n/12 Directory.Build.props \T1/cmr/m/n/12 - zpro-st°ed-ko-vává glo-bální na-sta-vení atri-but· pro v²echny
+ []
 
 
-] [44] [45] [46] [47]
+Overfull \hbox (7.77519pt too wide) in paragraph at lines 119--120
+[]\T1/cmr/bx/n/12 Directory.Build.targets \T1/cmr/m/n/12 - ob-sa-huje glo-bální na-sta-vení cíl· kom-pi-lace pro v²echny
+ []
+
+[19] [20] [21] [22] [23] [24] [25]) (./tex/chapters/microservices.tex [26] [27
+
+] [28] [29] [30] [31] [32] [33]) (./tex/chapters/monitoring.tex [34] [35
+
+] [36] [37] [38]) [39] [40] [41
+
+
+] (./tex/chapters/stack.tex [42
+
+
+] [43] [44] [45] [46]
 Overfull \hbox (3.1494pt too wide) in paragraph at lines 121--122
  []\T1/cmr/bx/it/10.95 OpenTelemetry[] \T1/cmr/m/n/12 Open source ko-lek-tor te-le-me-t-ric-kých dat. Po-sky-tuje jed-notný, vendor-
  []
 
-[48] [49] [50] [51] [52]
+[47] [48] [49] [50] [51]
 Overfull \hbox (0.4579pt too wide) in paragraph at lines 321--322
  []\T1/cmr/bx/it/10.95 Telemetrie[] \T1/cmr/m/n/12 Knihovna \T1/cmr/m/it/12 DTA.Extensions.Telemetry \T1/cmr/m/n/12 zpro-st°ed-ko-vává ex-tensi-ons me-tody
  []
 
-[53] [54]
-<graphics/diagrams/services-architecture.png, id=958, 1142.2675pt x 1152.305pt>
+[52] [53]
+<graphics/diagrams/services-architecture.png, id=944, 1142.2675pt x 1152.305pt>
 File: graphics/diagrams/services-architecture.png Graphic file (type png)
 <use graphics/diagrams/services-architecture.png>
 Package pdftex.def Info: graphics/diagrams/services-architecture.png  used on input line 365.
 (pdftex.def)             Requested size: 396.91324pt x 400.39406pt.
-<graphics/diagrams/stack-data-flow.png, id=960, 1577.895pt x 1876.00874pt>
+<graphics/diagrams/stack-data-flow.png, id=946, 1577.895pt x 1876.00874pt>
 File: graphics/diagrams/stack-data-flow.png Graphic file (type png)
 <use graphics/diagrams/stack-data-flow.png>
 Package pdftex.def Info: graphics/diagrams/stack-data-flow.png  used on input line 369.
@@ -1369,10 +1384,10 @@ Package pdftex.def Info: graphics/diagrams/stack-data-flow.png  used on input li
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[55 <./graphics/diagrams/services-architecture.png>] [56 <./graphics/diagrams/stack-data-flow.png>]) (./tex/chapters/testing.tex [57] [58] [59
+[54 <./graphics/diagrams/services-architecture.png>] [55 <./graphics/diagrams/stack-data-flow.png>]) (./tex/chapters/testing.tex [56] [57] [58
 
 ]
-<graphics/diagrams/stack-scenario1.png, id=994, 1176.395pt x 1393.205pt>
+<graphics/diagrams/stack-scenario1.png, id=980, 1176.395pt x 1393.205pt>
 File: graphics/diagrams/stack-scenario1.png Graphic file (type png)
 <use graphics/diagrams/stack-scenario1.png>
 Package pdftex.def Info: graphics/diagrams/stack-scenario1.png  used on input line 47.
@@ -1381,26 +1396,26 @@ Package pdftex.def Info: graphics/diagrams/stack-scenario1.png  used on input li
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[60]
-<graphics/diagrams/stack-scenario2.png, id=1000, 1262.7175pt x 1086.0575pt>
+[59]
+<graphics/diagrams/stack-scenario2.png, id=986, 1262.7175pt x 1086.0575pt>
 File: graphics/diagrams/stack-scenario2.png Graphic file (type png)
 <use graphics/diagrams/stack-scenario2.png>
 Package pdftex.def Info: graphics/diagrams/stack-scenario2.png  used on input line 67.
 (pdftex.def)             Requested size: 396.91324pt x 341.38075pt.
- [61 <./graphics/diagrams/stack-scenario1.png>] [62 <./graphics/diagrams/stack-scenario2.png>]
-<graphics/diagrams/stack-scenario3.png, id=1017, 1296.845pt x 890.32625pt>
+ [60 <./graphics/diagrams/stack-scenario1.png>] [61 <./graphics/diagrams/stack-scenario2.png>]
+<graphics/diagrams/stack-scenario3.png, id=1003, 1296.845pt x 890.32625pt>
 File: graphics/diagrams/stack-scenario3.png Graphic file (type png)
 <use graphics/diagrams/stack-scenario3.png>
 Package pdftex.def Info: graphics/diagrams/stack-scenario3.png  used on input line 89.
 (pdftex.def)             Requested size: 396.91324pt x 272.49329pt.
- [63 <./graphics/diagrams/stack-scenario3.png>]
-<graphics/diagrams/stack-scenario4.png, id=1026, 1870.99pt x 1131.22626pt>
+ [62 <./graphics/diagrams/stack-scenario3.png>]
+<graphics/diagrams/stack-scenario4.png, id=1012, 1870.99pt x 1131.22626pt>
 File: graphics/diagrams/stack-scenario4.png Graphic file (type png)
 <use graphics/diagrams/stack-scenario4.png>
 Package pdftex.def Info: graphics/diagrams/stack-scenario4.png  used on input line 110.
 (pdftex.def)             Requested size: 441.01772pt x 266.63222pt.
- [64 <./graphics/diagrams/stack-scenario4.png>]
-<graphics/diagrams/stack-scenario5.png, id=1034, 1239.63126pt x 1131.22626pt>
+ [63 <./graphics/diagrams/stack-scenario4.png>]
+<graphics/diagrams/stack-scenario5.png, id=1020, 1239.63126pt x 1131.22626pt>
 File: graphics/diagrams/stack-scenario5.png Graphic file (type png)
 <use graphics/diagrams/stack-scenario5.png>
 Package pdftex.def Info: graphics/diagrams/stack-scenario5.png  used on input line 138.
@@ -1409,30 +1424,30 @@ Package pdftex.def Info: graphics/diagrams/stack-scenario5.png  used on input li
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[65] [66 <./graphics/diagrams/stack-scenario5.png>]) [67] [68
+[64] [65 <./graphics/diagrams/stack-scenario5.png>]) [66] [67
 
 
 ] (./tex/chapters/analytics.tex
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[69
+[68
 
 
-] [70] [71]
+] [69] [70]
 Overfull \hbox (1.48775pt too wide) in paragraph at lines 111--112
 \T1/cmr/m/n/12 Pro zjed-no-du-²ení pro-cesu vý-voje a vy-u-ºití exis-tu-jící funk-ci-o-na-lity byly vy-u-ºity knihovny
  []
 
-[72] [73] [74
+[71] [72] [73
 
-] [75]) (./tex/chapters/recommendation.tex [76]) (./tex/chapters/continuation.tex [77
+] [74]) (./tex/chapters/recommendation.tex [75]) (./tex/chapters/continuation.tex [76
 
-]) (./tex/chapters/conclusion.tex [78
+]) (./tex/chapters/conclusion.tex [77
 
-]) [79
+]) [78
 
-] [80
+] [79
 
 ]
 Underfull \hbox (badness 4416) in paragraph at lines 151--151
@@ -1459,7 +1474,7 @@ Underfull \hbox (badness 1303) in paragraph at lines 151--151
 []\T1/cmr/m/n/12 DOCKER INC. \T1/cmr/m/it/12 Docker Docs \T1/cmr/m/n/12 [on-line]. 2013 [cit. 2024-03-13]. Do-stupné z:
  []
 
-[81]
+[80]
 Underfull \hbox (badness 10000) in paragraph at lines 151--151
 []\T1/cmr/m/n/12 THE POST-GRE-SQL GLO-BAL DE-VE-LO-P-MENT GROUP. \T1/cmr/m/it/12 Post-
  []
@@ -1469,13 +1484,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 151--151
 \T1/cmr/m/it/12 gre-SQL Do-cu-men-tation \T1/cmr/m/n/12 [on-line]. [cit. 2024-04-14]. Do-stupné z:
  []
 
-(./tex/zkratky.tex [82]) [83
+(./tex/zkratky.tex [81]) [82
 
 ] (./prace.lof)
 \tf@lof=\write9
 \openout9 = `prace.lof'.
 
- [84
+ [83
 
 ] (./prace.lot)
 \tf@lot=\write10
@@ -1485,7 +1500,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 151--151
 File: se-pdfdoc.def 2019/11/29 v1.12 stringenc: PDFDocEncoding
 ) (/usr/local/texlive/2023/texmf-dist/tex/generic/stringenc/se-utf8.def
 File: se-utf8.def 2019/11/29 v1.12 stringenc: UTF-8
-) [85
+) [84
 
 
 ] (./tex/prilohy.tex) (./prace.aux)
@@ -1493,20 +1508,20 @@ File: se-utf8.def 2019/11/29 v1.12 stringenc: UTF-8
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `prace.out' has not changed.
-(rerunfilecheck)             Checksum: B6FFBFD133CDE532B449344B01A7B6F8;21944.
+(rerunfilecheck)             Checksum: 082EBF62D0A3A2D23404C0FE6C3744E3;21845.
  ) 
 Here is how much of TeX's memory you used:
- 38559 strings out of 476025
- 825860 string characters out of 5790017
+ 38551 strings out of 476025
+ 825758 string characters out of 5790017
  1870388 words of memory out of 5000000
- 58055 multiletter control sequences out of 15000+600000
+ 58054 multiletter control sequences out of 15000+600000
  531050 words of font info for 65 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  140i,17n,135p,1633b,2853s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbi1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
-Output written on prace.pdf (85 pages, 1937397 bytes).
+Output written on prace.pdf (84 pages, 1935095 bytes).
 PDF statistics:
- 1310 PDF objects out of 1440 (max. 8388607)
- 327 named destinations out of 1000 (max. 500000)
- 1154 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1293 PDF objects out of 1440 (max. 8388607)
+ 320 named destinations out of 1000 (max. 500000)
+ 1146 words of extra memory for PDF output out of 10000 (max. 10000000)
 

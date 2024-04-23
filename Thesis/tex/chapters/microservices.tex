@@ -5,9 +5,9 @@
 
 \n{1}{Microservice architektura}
 
-Při vývoji softwaru je možné využít z několika architektur. Jednou z těchto architektur je monolitická architektura. V monolitické architektuře je celá aplikace rozdělena do několika vrstev, které jsou využívány k oddělení logiky aplikace.
+Při vývoji softwaru je možné aplikovat různé architektury a návrhové vzory. Mezi obecně populární a rozšířenou architekturu patří monolitická. V monolitické architektuře je celá aplikace rozdělena do několika vrstev, které jsou využívány k oddělení logiky. Tato architektura je jednoduchá na vývoj a nasazení, ale může být obtížné škálovat a udržovat s rostoucí složitostí aplikace. Monolitická architektura je založena na principu, že celá aplikace je spuštěna jako jediný proces a sdílí stejný kód a zdroje. To může způsobit problémy s výkonem, škálovatelností a odolností aplikace.
 
-Oproti tomu microservice architektura je založena na principu oddělení aplikace do několika samostatných služeb. Každá z těchto služeb je zodpovědná za určitou část funkcionality aplikace. Služby jsou navzájem nezávislé a komunikují mezi sebou pomocí definovaných rozhraní. \cite{Richardson2018}
+Principiálně opačná je architektura microservice. Ta je založena na principu oddělení aplikace do několika samostatných služeb. Každá z těchto služeb je zodpovědná za určitou část funkcionality aplikace. Služby jsou navzájem nezávislé a komunikují mezi sebou pomocí definovaných rozhraní. Tím je zajištěno, že každá služba může být vyvíjena, nasazována a škálována nezávisle na ostatních. Tato architektura umožňuje vývojářům pracovat na menších a jednodušších částech aplikace, což zvyšuje produktivitu a umožňuje rychlejší iterace. Díky nezávislosti služeb je také možné dosáhnout vyšší odolnosti a škálovatelnosti aplikace. \cite{Martin2018}
 
 \n{2}{Historie}
 
@@ -27,7 +27,7 @@ Jedním z hlavních principů microservice architektury je decentralizace. To zn
 
 Virtualizace a kontejnerizace jsou klíčové technologie, které umožňují architekturu mikroslužeb. Virtualizace umožňuje provozovat více operačních systémů na jednom fyzickém hardwarovém hostiteli, čímž se snižuje počet potřebných fyzických strojů a zvyšuje efektivita využití zdrojů. Kontejnerizace jde ještě o krok dále tím, že zabalí aplikaci a její závislosti do kontejneru, který může běžet na libovolném serveru Linux nebo Windows. Tím je zajištěno, že aplikace funguje jednotně i přes rozdíly v prostředí nasazení.
 
-Kontejnerizace je obzvláště důležitá pro mikroslužby, protože zapouzdřuje každou mikroslužbu do vlastního kontejneru, což usnadňuje její nasazení, škálování a správu nezávisle na ostatních. Synonymem kontejnerizace se staly nástroje jako Docker, které nabízejí ekosystém pro vývoj, odesílání a provoz kontejnerových aplikací.
+Kontejnerizace je obzvláště důležitá pro mikroslužby, protože zapouzdřuje každou mikroslužbu do vlastního kontejneru, což usnadňuje její nasazení, škálování a správu nezávisle na ostatních. Synonymem kontejnerizace je nástroj Docker, který nabízí ekosystém pro vývoj, správu a provoz kontejnerových aplikací.
 
 \n{3}{Orchestrace}
 
@@ -35,7 +35,7 @@ S rozšiřováním mikroslužeb a kontejnerů se jejich správa stává složito
 
 \n{3}{Odolnost}
 
-Robustnosti mikroslužeb je dosaženo pomocí strategií, jako jsou přerušovače, záložní řešení a opakované pokusy, které pomáhají zabránit tomu, aby se selhání jedné služby kaskádově přeneslo na ostatní. Izolace služeb také znamená, že problémy lze omezit a vyřešit s minimálním dopadem na celý systém. Kromě toho jsou kontroly stavu a monitorování nezbytné pro včasné odhalení a řešení problémů.
+Robustnosti mikroslužeb je dosaženo pomocí strategií, jako jsou přerušení, záložní řešení a opakování, které pomáhají zabránit tomu, aby se selhání jedné služby kaskádově přeneslo na ostatní. Izolace služeb také znamená, že problémy lze omezit a vyřešit s minimálním dopadem na celý systém. Kromě toho jsou kontroly stavu a monitorování nezbytné pro včasné odhalení a řešení problémů.
 
 \n{3}{Škálování}
 
@@ -49,11 +49,9 @@ Architektura mikroslužeb rozkládá aplikace do menších, oddělených služeb
 
 API Gateway je služba, která slouží jako vstupní bod pro komunikaci s mikroslužbami. Zajišťuje směrování požadavků, autentizaci, autorizaci, zabezpečení a další funkce, které jsou společné pro všechny služby. API Gateway může také poskytovat další funkce, jako jsou cachování, transformace zpráv a řízení toku dat. Tím zjednodušuje a centralizuje správu komunikace mezi klienty a mikroslužbami.
 
-
 \n{3}{Service Discovery}
 
 Service Discovery je mechanismus, který umožňuje mikroslužbám dynamicky najít a komunikovat s ostatními službami v systému. To je důležité pro dynamické škálování, nasazování a správu služeb. Service Discovery může být implementován pomocí centrálního registru služeb nebo distribuovaného protokolu, jako je DNS nebo Consul.
-
 
 \n{3}{Load Balancer}
 
@@ -88,13 +86,11 @@ Integrace kontinuální integrace a kontinuálního nasazování (CI/CD) je zás
 
 \n{2}{Výhody a nevýhody}
 
-XXX
-
-Mezi hlavní výhody patří:
+Mezi hlavní výhody microservice architekture lze zařadit:
 
 \begin{itemize}
 
-\item \textbf{Zvýšená agilita} - Mikroslužby umožňují rychlé, časté a spolehlivé poskytování rozsáhlých a komplexních aplikací. Týmy mohou aktualizovat určité oblasti aplikace, aniž by to mělo dopad na celý systém, což umožňuje rychlejší iterace.
+\item \textbf{Přizpůsobitelnost} - Mikroslužby umožňují rychlé, časté a spolehlivé poskytování rozsáhlých a komplexních aplikací. Týmy mohou aktualizovat určité oblasti aplikace, aniž by to mělo dopad na celý systém, což umožňuje rychlejší iterace.
 
 \item \textbf{Škálovatelnost} - Služby lze škálovat nezávisle, což umožňuje přesnější přidělování zdrojů na základě poptávky. To usnadňuje zvládání proměnlivého zatížení a může zlepšit celkovou efektivitu aplikace.
 
@@ -108,9 +104,7 @@ Mezi hlavní výhody patří:
 
 \end{itemize}
 
-XXX
-
-Mezi nevýhody patří:
+Zatímco mezi nevýhody patří:
 
 \begin{itemize}
 
@@ -127,8 +121,6 @@ Mezi nevýhody patří:
 \item \textbf{Integrace služeb} - Zajištění bezproblémové spolupráce služeb vyžaduje robustní správu API, řízení verzí a strategie zpětné kompatibility.
 
 \end{itemize}
-
-XXX
 
 \n{2}{Nasazení založené na mikroslužbách}
 
