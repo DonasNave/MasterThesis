@@ -14,9 +14,10 @@ run_k6_test() {
     local service_name=$1
     local url=$2
     local compilation=$3
+    local fus_url=$4
 
     echo "Starting k6 test for $service_name"
-    k6 run --out influxdb=http://dta:dtapass@localhost:8086/k6 scripts/scenario4.js -e SERVICE_URL=$url -e TEST_ID=$TEST_ID -e COMPILATION_MODE=$compilation
+    k6 run --out influxdb=http://dta:dtapass@localhost:8086/k6 scripts/scenario4.js -e SERVICE_URL=$url -e TEST_ID=$TEST_ID -e COMPILATION_MODE=$compilation -e FUS_URL=$fus_url
 }
 
 echo "Starting tests for services"
@@ -28,11 +29,12 @@ jq -c '.services[] | select((.protocol == "http") and (.name == "EPS"))' config.
     compilation=$(echo "$service" | jq -r '.compilation')
     protocol=$(echo "$service" | jq -r '.protocol')
 
+    fus_url=$(jq -r '.services[] | select((.compilation == "'$compilation'") and (.protocol == "http") and (.name == "FUS")).url' config.json)
     fus_service_name=$(echo "fus-${compilation}-service" | tr '[:upper:]' '[:lower:]')
     bps_service_name=$(echo "bps-${compilation}-service" | tr '[:upper:]' '[:lower:]')
 
 
-    echo "Service data loaded: $name, $compilation, $url, $protocol"
+    echo "Service data loaded: $name, $compilation, $url, $protocol, $fus_url"
 
     # Standardize service name for docker-compose
     standardized_name=$(echo "${name}-${compilation}-service" | tr '[:upper:]' '[:lower:]')
@@ -46,7 +48,7 @@ jq -c '.services[] | select((.protocol == "http") and (.name == "EPS"))' config.
     echo "Waiting for service to start"
 
     # Run k6 test
-    run_k6_test $name $url $compilation
+    run_k6_test $name $url $compilation $fus_url
 
     # Stop the service
     $COMPOSE_CMD down $standardized_name

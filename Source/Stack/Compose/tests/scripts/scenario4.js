@@ -18,6 +18,7 @@ export default async function () {
     const serviceUrl = __ENV.SERVICE_URL;
     const compilationMode = __ENV.COMPILATION_MODE;
     const testId = __ENV.TEST_ID;
+    const fusUrl = __ENV.FUS_URL;
 
     const fileinfo = await file.stat();
     if (fileinfo.name != 'sample-file.txt') {
@@ -46,7 +47,7 @@ export default async function () {
     };
 
     // Perform the upload
-    let uploadResponse = http.post(`${serviceUrl}api/file/upload`, body, params);
+    let uploadResponse = http.post(`${fusUrl}api/file/upload`, body, params);
     check(uploadResponse, {
         'is status 200': (r) => r.status === 200,
     });
