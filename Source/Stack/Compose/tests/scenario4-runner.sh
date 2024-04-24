@@ -28,6 +28,10 @@ jq -c '.services[] | select((.protocol == "http") and (.name == "EPS"))' config.
     compilation=$(echo "$service" | jq -r '.compilation')
     protocol=$(echo "$service" | jq -r '.protocol')
 
+    fus_service_name=$(echo "fus-${compilation}-service" | tr '[:upper:]' '[:lower:]')
+    bps_service_name=$(echo "bps-${compilation}-service" | tr '[:upper:]' '[:lower:]')
+
+
     echo "Service data loaded: $name, $compilation, $url, $protocol"
 
     # Standardize service name for docker-compose
@@ -36,6 +40,7 @@ jq -c '.services[] | select((.protocol == "http") and (.name == "EPS"))' config.
     echo "Starting service $standardized_name"
 
     # Start the service
+    $COMPOSE_CMD up -d $bps_service_name
     $COMPOSE_CMD up -d $standardized_name
 
     echo "Waiting for service to start"
@@ -45,6 +50,8 @@ jq -c '.services[] | select((.protocol == "http") and (.name == "EPS"))' config.
 
     # Stop the service
     $COMPOSE_CMD down $standardized_name
+    $COMPOSE_CMD down $fus_service_name
+    $COMPOSE_CMD down $bps_service_name
 done
 
 echo "All tests completed."

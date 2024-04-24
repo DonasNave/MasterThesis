@@ -7,6 +7,12 @@
       "protocol": "http"
     },
     {
+      "name": "SRS",
+      "compilation": "AOT",
+      "url": "http://localhost:13001/",
+      "protocol": "http"
+    },
+    {
       "name": "FUS",
       "compilation": "JIT",
       "url": "http://localhost:12002/",
@@ -17,24 +23,6 @@
       "compilation": "JIT",
       "url": "http://localhost:12102/",
       "protocol": "grpc"
-    },
-    {
-      "name": "EPS",
-      "compilation": "JIT",
-      "url": "http://localhost:12003/",
-      "protocol": "http"
-    },
-    {
-      "name": "BPS",
-      "compilation": "JIT",
-      "url": "http://localhost:12004/",
-      "protocol": "http"
-    },
-    {
-      "name": "SRS",
-      "compilation": "AOT",
-      "url": "http://localhost:13001/",
-      "protocol": "http"
     },
     {
       "name": "FUS",
@@ -50,8 +38,20 @@
     },
     {
       "name": "EPS",
+      "compilation": "JIT",
+      "url": "http://localhost:12003/",
+      "protocol": "http"
+    },
+    {
+      "name": "EPS",
       "compilation": "AOT",
       "url": "http://localhost:13003/",
+      "protocol": "http"
+    },
+    {
+      "name": "BPS",
+      "compilation": "JIT",
+      "url": "http://localhost:12004/",
       "protocol": "http"
     },
     {

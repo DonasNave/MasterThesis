@@ -1,7 +1,7 @@
 // scenario4.js
 // launch with k6 run scenario3.js --env SERVICE_URL=#url# --env SERVICE_NAME=#name# --env COMPILATION_MODE=#mode#
 import http from 'k6/http';
-import { sleep } from 'k6';
+import { check, sleep } from 'k6';
 import { open } from 'k6/experimental/fs';
 
 let file;
@@ -14,7 +14,7 @@ export const options = {
     duration: '1m',
 };
 
-export default function () {
+export default async function () {
     const serviceUrl = __ENV.SERVICE_URL;
     const compilationMode = __ENV.COMPILATION_MODE;
     const testId = __ENV.TEST_ID;
