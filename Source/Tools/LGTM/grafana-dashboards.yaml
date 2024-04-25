@@ -30,3 +30,15 @@ providers:
     options:
       path: /otel-lgtm/scenario3.json # place into root no problem
       foldersFromFilesStructure: false
+
+  - name: 'Scenario 4 - Multi service requests metrics'
+    type: file
+    options:
+      path: /otel-lgtm/scenario4.json # place into root no problem
+      foldersFromFilesStructure: false
+
+  - name: 'Scenario 5 - Cold start processing metrics'
+    type: file
+    options:
+      path: /otel-lgtm/scenario5.json # place into root no problem
+      foldersFromFilesStructure: false

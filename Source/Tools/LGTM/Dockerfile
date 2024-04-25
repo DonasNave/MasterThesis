@@ -45,6 +45,8 @@ COPY performance-data.json .
 COPY scenario1.json .
 COPY scenario2.json .
 COPY scenario3.json .
+COPY scenario4.json .
+COPY scenario5.json .
 COPY run-grafana.sh .
 COPY loki-config.yaml .
 COPY run-loki.sh .
