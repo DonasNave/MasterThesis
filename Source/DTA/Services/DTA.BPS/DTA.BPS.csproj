@@ -30,10 +30,12 @@
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release-JIT' ">
+      <DefineConstants>$(DefineConstants);RELEASE;JIT</DefineConstants>
       <Optimize Condition=" '$(Optimize)' == '' ">true</Optimize>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug-JIT' ">
+      <DefineConstants>$(DefineConstants);DEBUG;JIT</DefineConstants>
       <DebugSymbols Condition=" '$(DebugSymbols)' == '' ">true</DebugSymbols>
       <Optimize Condition=" '$(Optimize)' == '' ">false</Optimize>
     </PropertyGroup>

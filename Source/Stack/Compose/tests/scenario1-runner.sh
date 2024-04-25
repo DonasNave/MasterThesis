@@ -1,12 +1,13 @@
 #!/bin/bash
 
-# The name of the compose file without the file extension, e.g., "docker-compose"
+source common_lib.sh
+
+TEST_ID=${1:-test-$(date +%s)}
+
+SCENARIO_FILE="scripts/scenario1.js"
+INFLUXDB_WRITE_URL="http://dta:dtapass@localhost:8086/k6"
+
 COMPOSE_FILE_NAME="../compose"
-
-# The ID of the test run, you can use this to tag your test runs
-TEST_ID=$1
-
-# Base command for docker-compose if you have a single compose file or a standardized naming convention
 COMPOSE_CMD="docker-compose -f ${COMPOSE_FILE_NAME}.yaml"
 
 # Define a function to run k6 test
@@ -16,7 +17,7 @@ run_k6_test() {
     local compilation=$3
 
     echo "Starting k6 test for $service_name"
-    k6 run --out influxdb=http://dta:dtapass@localhost:8086/k6 scripts/scenario1.js -e SERVICE_URL=$url -e SERVICE_NAME=$service_name -e TEST_ID=$TEST_ID -e COMPILATION_MODE=$compilation
+    k6 run --out influxdb=$INFLUXDB_WRITE_URL $SCENARIO_FILE -e SERVICE_URL=$url -e SERVICE_NAME=$service_name -e TEST_ID=$TEST_ID -e COMPILATION_MODE=$compilation
 }
 
 echo "Starting tests for services"
@@ -38,7 +39,12 @@ jq -c '.services[] | select(.protocol == "http")' config.json | while IFS= read 
     # Start the service
     $COMPOSE_CMD up -d $standardized_name
 
-    echo "Waiting for service to start"
+    # Wait for the service to be fully up by checking health endpoint
+    if ! check_health $url; then
+        echo "Error: Service failed to start"
+        $COMPOSE_CMD down $standardized_name
+        continue  # Skip this iteration
+    fi
 
     # Run k6 test
     run_k6_test $name $url $compilation

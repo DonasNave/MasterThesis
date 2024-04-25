@@ -26,9 +26,19 @@ var serviceVersion = typeof(Program).Assembly.GetName().Version?.ToString() ?? "
 // Add Environment variables
 builder.Configuration.AddEnvironmentVariables(prefix: $"{serviceName}_");
 
-// Get application settings
-var telemetrySettings = builder.Configuration.GetSection(nameof(OpenTelemetrySettings))
-                                    .Get<OpenTelemetrySettings>()!;
+
+// Telemetry settings
+#if AOT
+var telemetrySettings = new OpenTelemetrySettings()
+{
+    ExporterEndpoint = new Uri(builder.Configuration["OpenTelemetrySettings:ExporterEndpoint"] ?? string.Empty),
+    ExporterProtocol = builder.Configuration["OpenTelemetrySettings:ExporterProtocol"] ?? "grpc"
+};
+#elif JIT
+var telemetrySettings =
+    builder.Configuration.GetSection(nameof(OpenTelemetrySettings)).Get<OpenTelemetrySettings>()!;
+#endif
+
 
 builder.Services.Configure<RabbitMqOptions>(builder.Configuration.GetSection("RabbitMQ"));
 builder.Services.Configure<ServiceConnectionOptions>(builder.Configuration.GetSection("ServiceConnections"));

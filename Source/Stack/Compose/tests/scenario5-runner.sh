@@ -1,34 +1,17 @@
 #!/bin/bash
 
-# The name of the compose file without the file extension, e.g., "docker-compose"
-COMPOSE_FILE_NAME="../compose"
-CHECK_INTERVAL=0.01  # Check every 10ms
-MAX_WAIT=30  # Maximum number of seconds to wait for the service to become healthy
+source common_lib.sh
 
-# The ID of the test run, you can use this to tag your test runs
-TEST_ID=$1
+TEST_ID=${1:-test-$(date +%s)}
 
-# Base command for docker-compose if you have a single compose file or a standardized naming convention
-COMPOSE_CMD="docker-compose -f ${COMPOSE_FILE_NAME}.yaml"
-
-# InfluxDB configuration
 INFLUXDB_WRITE_URL="http://dta:dtapass@localhost:8086/write?db=k6"
 
-MEASUREMENT="http_req_duration"
+COMPOSE_FILE_NAME="../compose"
+COMPOSE_CMD="docker-compose -f ${COMPOSE_FILE_NAME}.yaml"
 
-# Function to check service health
-check_health() {
-    local health_url=$1
-    for ((i=0; i<=$MAX_WAIT; i++)); do
-        if curl -f $health_url >/dev/null 2>&1; then
-            echo "Service is up after $(echo "$i * $CHECK_INTERVAL" | bc) seconds"
-            return 0
-        fi
-        sleep $CHECK_INTERVAL
-    done
-    echo "Service did not become healthy in time"
-    return 1
-}
+MEASUREMENT="http_req_duration"
+CHECK_INTERVAL=0.01  # Check every 10ms
+MAX_WAIT=30  # Maximum number of seconds to wait for the service to become healthy
 
 # Function to perform HTTP request and log time
 run_http_request() {
@@ -40,6 +23,7 @@ run_http_request() {
     START_TIME=$(date +%s%N)  # Start time in nanoseconds
 
     echo "Starting service $service_name"
+
     $COMPOSE_CMD up -d $service_name
 
     # Wait for the service to be fully up by checking health endpoint

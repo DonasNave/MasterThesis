@@ -20,13 +20,18 @@ export default async function () {
   const compilationMode = __ENV.COMPILATION_MODE;
   const testId = __ENV.TEST_ID;
 
-  http.get(`${serviceUrl}api/processFibonacci/43`, {
+  const params = {
+    headers: {
+      'test_id': testId
+    },
     tags: {
       dta_service: serviceName + '-' + compilationMode,
       test_scenario: 'scenario3',
-      test_id: testId,
+      test_id: testId, 
     },
-  });
+  };
+
+  http.get(`${serviceUrl}api/processFibonacci/37`, params);
 
   sleep(1);
 }
