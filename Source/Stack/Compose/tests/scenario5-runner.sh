@@ -44,7 +44,7 @@ run_http_request() {
 
     # Log to InfluxDB
     curl -i -XPOST "$INFLUXDB_WRITE_URL" \
-        --data-binary "$MEASUREMENT,dta_service=SRS-$compilation,test_scenario=scenario5,test_id=$TEST_ID, duration=$DURATION"
+        --data-binary "$MEASUREMENT,dta_service=SRS-$compilation test_scenario=scenario5 test_id=$TEST_ID  duration=$DURATION"
 
     echo "Stopping service $service_name"
     $COMPOSE_CMD down
