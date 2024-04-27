@@ -1196,8 +1196,8 @@
       {
         "current": {
           "selected": true,
-          "text": "test_run_2204_01",
-          "value": "test_run_2204_01"
+          "text": "test-1714208204",
+          "value": "test-1714208204"
         },
         "datasource": {
           "type": "influxdb",

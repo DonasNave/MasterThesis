@@ -1,44 +1,50 @@
 apiVersion: 1
 
 providers:
+  - name: 'Docker metrics'
+    type: file
+    options:
+      path: /otel-lgtm/dashboards/docker-performance.json # place into root no problem
+      foldersFromFilesStructure: false
+
   - name: 'Domain metrics'
     type: file
     options:
-      path: /otel-lgtm/domain-metrics.json # place into root no problem
+      path: /otel-lgtm/dashboards/domain-metrics.json # place into root no problem
       foldersFromFilesStructure: false
 
   - name: 'Performance metrics'
     type: file
     options:
-      path: /otel-lgtm/performance-data.json # place into root no problem
+      path: /otel-lgtm/dashboards/performance-data.json # place into root no problem
       foldersFromFilesStructure: false
 
   - name: 'Scenario 1 - Simple response metrics'
     type: file
     options:
-      path: /otel-lgtm/scenario1.json # place into root no problem
+      path: /otel-lgtm/dashboards/scenario1.json # place into root no problem
       foldersFromFilesStructure: false
 
   - name: 'Scenario 2 - File upload/download metrics'
     type: file
     options:
-      path: /otel-lgtm/scenario2.json # place into root no problem
+      path: /otel-lgtm/dashboards/scenario2.json # place into root no problem
       foldersFromFilesStructure: false
 
   - name: 'Scenario 3 - Performance processing metrics'
     type: file
     options:
-      path: /otel-lgtm/scenario3.json # place into root no problem
+      path: /otel-lgtm/dashboards/scenario3.json # place into root no problem
       foldersFromFilesStructure: false
 
   - name: 'Scenario 4 - Multi service requests metrics'
     type: file
     options:
-      path: /otel-lgtm/scenario4.json # place into root no problem
+      path: /otel-lgtm/dashboards/scenario4.json # place into root no problem
       foldersFromFilesStructure: false
 
   - name: 'Scenario 5 - Cold start processing metrics'
     type: file
     options:
-      path: /otel-lgtm/scenario5.json # place into root no problem
+      path: /otel-lgtm/dashboards/scenario5.json # place into root no problem
       foldersFromFilesStructure: false

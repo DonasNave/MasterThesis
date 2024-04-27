@@ -5,8 +5,8 @@ import { sleep } from 'k6';
 
 export const options = {
   stages: [
-    { duration: '5s', target: 4 },
-    { duration: '10s', target: 8 },
+    { duration: '5s', target: 3 },
+    { duration: '10s', target: 6 },
     { duration: '5s', target: 0 },
   ],
   thresholds: {
@@ -31,7 +31,7 @@ export default async function () {
     },
   };
 
-  http.get(`${serviceUrl}api/processFibonacci/37`, params);
+  http.get(`${serviceUrl}api/processFibonacci/40`, params);
 
   sleep(1);
 }
