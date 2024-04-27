@@ -13,13 +13,11 @@ check_health() {
 
     for ((i=0; i<=$max_attempts; i++)); do
         if curl -f $health_url >/dev/null 2>&1; then
-            local seconds_up=$(echo "scale=2; $i*$check_interval" | bc)
-            echo "Service is up after $seconds_up seconds"
             return 0
         fi
         sleep $check_interval
     done
 
-    echo "Service did not become healthy in time"
+    echo "Service did not become healthy"
     return 1
 }

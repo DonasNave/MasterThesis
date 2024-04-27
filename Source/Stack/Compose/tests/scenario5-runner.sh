@@ -10,8 +10,6 @@ COMPOSE_FILE_NAME="../compose"
 COMPOSE_CMD="docker-compose -f ${COMPOSE_FILE_NAME}.yaml"
 
 MEASUREMENT="http_req_duration"
-CHECK_INTERVAL=0.01  # Check every 10ms
-MAX_WAIT=30  # Maximum number of seconds to wait for the service to become healthy
 
 # Function to perform HTTP request and log time
 run_http_request() {
@@ -19,35 +17,21 @@ run_http_request() {
     local url=$2
     local compilation=$3
 
-    # Start time is recorded before attempting to start the service
-    START_TIME=$(date +%s%N)  # Start time in nanoseconds
-
     echo "Starting service $service_name"
 
     $COMPOSE_CMD up -d $service_name
 
     # Wait for the service to be fully up by checking health endpoint
-    if ! check_health "$url/health"; then
+    if ! check_health $url; then
         echo "Error: Service failed to start"
-        $COMPOSE_CMD down
+        $COMPOSE_CMD down $service_name
         continue  # Skip this iteration
     fi
 
+    signals_endpoint="${url}api/signals/3"
+
     # Perform HTTP request
-    curl -s -o /dev/null -w "%{http_code}" $url/api/signals/3
-
-    # Measure end time
-    END_TIME=$(date +%s%N)  # End time in nanoseconds
-
-    # Calculate duration in milliseconds
-    DURATION=$((($END_TIME - $START_TIME)/1000000))
-
-    # Log to InfluxDB
-    curl -i -XPOST "$INFLUXDB_WRITE_URL" \
-        --data-binary "$MEASUREMENT,dta_service=SRS-$compilation test_scenario=scenario5 test_id=$TEST_ID  duration=$DURATION"
-
-    echo "Stopping service $service_name"
-    $COMPOSE_CMD down
+    curl -s -o /dev/null -w "Request response code: %{http_code}\n" $signals_endpoint
 }
 
 echo "Starting tests for services"
@@ -59,13 +43,27 @@ jq -c '.services[] | select((.protocol == "http") and (.name == "SRS"))' config.
     compilation=$(echo "$service" | jq -r '.compilation')
     protocol=$(echo "$service" | jq -r '.protocol')
 
+    echo "Service data loaded: $name, $compilation, $url, $protocol"
+
     # Standardize service name for docker-compose
     standardized_name=$(echo "${name}-${compilation}-service" | tr '[:upper:]' '[:lower:]')
 
-    echo "Running HTTP request test for $standardized_name"
+    echo "Running HTTP request with startup test for $standardized_name"
 
-    run_http_request $standardized_name $url $compilation
+    # Repeat the test 10 times
+    for i in {1..10}; do
+        REAL_TIME=$( { time run_http_request $standardized_name $url $compilation; } 2>&1 | awk '/real/ {print $2}' )
+        REAL_TIME_MS=$(echo $REAL_TIME | awk -F'[ms]' '{ print ($1 * 60 * 1000) + ($2 * 1000) }')
 
+        echo "Test completed in $REAL_TIME_MS ms"
+
+        # Log to InfluxDB
+        curl -i -XPOST "$INFLUXDB_WRITE_URL" \
+            --data-binary "${MEASUREMENT},dta_service=SRS-${compilation},test_scenario=scenario5,test_id=${TEST_ID} value=${REAL_TIME_MS} ${current_time_ns}"
+    done
+
+    echo "Stopping service $standardized_name"
+    $COMPOSE_CMD down $standardized_name
 done
 
 echo "All tests completed."
