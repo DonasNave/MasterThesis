@@ -1,41 +1,11 @@
 \n{1}{Analýza aplikace}
 
+Tato kapitola se zabývá analýzou aplikace z hlediska vývoje, výstupu a výkonu. Využívá k tomu definovanou metodiku a scénáře testování. Výsledky jsou důkladně analyzovány a závěry shrnuty v jednotlivých sekcích.
+
 \n{2}{Architektura}
 
-Výsledná architektura aplikace je založena na mikroslužbách. Splňuje předem definované funkční a nefunkční požadavky. V případě testovaných služeb, zapojuje základní množinu systémových knihoven a knihoven 3. stran.
+Výsledná architektura aplikace je založena na mikroslužbách. Splňuje předem definované funkční a nefunkční požadavky. V případě testovaných služeb, zapojuje základní množinu systémových knihoven a knihoven 3. stran. Po straně telemetrie, implementuje sběr a zpracování dat z různých zdrojů. Výsledná data jsou následně zpracována a uložena do databáze, dle druhu dat. Veškeré dostupné zdroje jsou uživatelsky přívětivě vizualizovány v rámci webového aplikace Grafana. Aplikační stack je testovatelný a nasaditelný na všech hlavních platformách (po sestavení se zacílením na vybranou architekturu a využitím variant služeb třetích stran s cílovou architekturou).
 
-Po straně telemetrie, implementuje sběr a zpracování dat z různých zdrojů. Výsledná data jsou následně zpracována a uložena do databáze, dle druhu dat. Veškeré dostupné zdroje jsou uživatelsky přívětive vizualizovány v rámci webového rozhraní.
-
-Stack je testovatelný a nasaditelný na všech hlavních platformách.
-
-
-\n{2}{Výstup služeb}
-
-Samotný proces nativní AOT a JIT kompilace je různě výkonnostně náročný. Při tvorbě samotného obrazu služby, ale i kompilace je hlavní náročná operace \emph{restore}, která stahuje potřebné závislosti a balíčky pro projekt. Následující tabulka zobrazuje přehled časové náročnosti kompilace služeb pro oba kompilační cíle. Kompilace probíhá v rámci systému MacOS Sonoma 14.4.1, na čipu M1 v dispozici s 8GB RAM. Použitý příkaz je \emph{dotnet build /p:Rebuild=True -c Release-<target>}, kdy \emph{<target>} představuje vybranou kompilační metodu AOT nebo JIT.
-
-Proces kompilace je vysoce závislý na specifickém HW a SW, následující tabulka poukazuje na výsledky testování na konkrétním HW a SW a má pouze informativní charakter.
-
-% Tabulku lze vkládat pomocí následujícího zjednodušeného stylu, nebo klasickým LaTex způsobem
-\tab{Čas kompilace služeb}{tab:priklad}{0.65}{|l|c|c|r|}{
-  \hline
-    & JIT (s) & AOT (s) & AOT \% nárůst \\ \hline
-  \emph{SRS} & 01.01 & 01.92 & 90.0 \\ \hline
-  \emph{FUS} & 01.98 & 02.24 & 13.1 \\ \hline
-  \emph{BPS} & 01.44 & 01.59 & 10.4 \\ \hline
-  \emph{EPS} & 01.41 & 01.55 & 9.9 \\ \hline
-}
-
-Výstupem služby jsou obrazy založené na linuxovém systému, Alpine s .NET runtime v případě JIT výstupu služby, zredukované Ubuntu v případě nativního AOT výstupu. Z pohledu použitelnosti výsledných služeb má smysl měřit samotný výstupní obraz služby se všemi závislostmi. Následující tabulka zobrazuje velikost obrazu služeb pro oba kompilační cíle.
-
-% Tabulku lze vkládat pomocí následujícího zjednodušeného stylu, nebo klasickým LaTex způsobem
-\tab{Velikost obrazu služeb}{tab:priklad}{0.65}{|l|c|c|r|}{
-  \hline
-    & JIT (MB) & AOT (MB) & AOT \% zmenšení \\ \hline
-  \emph{SRS} & 125.63 & 31.41 & 75.0 \\ \hline
-  \emph{FUS} & 143.19 & 38.32 & 73.2 \\ \hline
-  \emph{BPS} & 126.50 & 31.40 & 75.2 \\ \hline
-  \emph{EPS} & 126.45 & 31.74 & 74.9 \\ \hline
-}
 
 \n{2}{Vývojový proces}
 
@@ -99,6 +69,41 @@ Zatímco za nevýhody CLR se dá považovat:
     \item \textbf{Kompatibilita knihoven s AOT} - né všechny knihovny runtime jsou plně anotovány tak, aby byly kompatibilní s Native AOT. To znamená, že některá varování v knihovnách runtime nejsou pro koncové vývojáře použitelná.
 \end{itemize}
 
+\n{2}{Výstup služeb}
+
+Samotný proces nativní AOT a JIT kompilace je různě výkonnostně náročný. Při tvorbě obrazu službeb, ale i kompilace je hlavní náročná operace \emph{restore}, která stahuje potřebné závislosti a balíčky pro projekt. Proces kompilace je vysoce závislý na specifickém HW, SW a přítomnosti závislostí. Pro účely testování byly potřebné NuGet balíčky nacachovány v systému. Následující tabulka zobrazuje přehled časové náročnosti kompilace služeb pro oba kompilační cíle. K získání času výstupu bylo využity diagnostického režimu příkazu \emph{dotnet}. Pro AOT byl použit příkaz \emph{dotnet publish -v d -c Release-AOT -r osx-x64}, pro získání výstupu JIT byl použit příkaz \emph{dotnet publish -v d -c Release-JIT -r osx-x64 --self-contained false}.
+
+
+\tab{Čas kompilace služeb}{tab:priklad}{0.65}{|l|c|c|r|}{
+  \hline
+    & JIT (s) & AOT (s) & AOT \% nárůst \\ \hline
+  \emph{SRS} & 01.99 & 19.49 & 979.3 \\ \hline
+  \emph{FUS} & 03.85 & 30.36 & 788.5 \\ \hline
+  \emph{BPS} & 02.02 & 20.74 & 1026.7 \\ \hline
+  \emph{EPS} & 01.85 & 20.05 & 1083.7 \\ \hline
+}
+
+Velikost samotného výstupního programu je dle očekávání výrazně menší v případě JIT kompilace. To je dáno tím, že výstupní program je závislý na .NET runtime, který poskytuje dodatečnou obecnou funkcionalitu a vytváří nativní kód včetně generování typů až za běhu aplikace. Následující tabulka zobrazuje velikost služeb pro oba kompilační cíle. Pro vytvoření výstupů na základě JIT byl použit příkaz \emph{dotnet publish -c Release-JIT -r osx-x64 /p:PublishSingleFile=true --self-contained false}, pro vytvoření výstupů AOT byl použit příkaz \emph{dotnet publish -c Release-JIT -r osx-x64 /p:PublishSingleFile=true --self-contained false}.
+
+\tab{Velikost programu služeb}{tab:priklad}{0.65}{|l|c|c|r|}{
+  \hline
+    & JIT (MB) & AOT (MB) & AOT \% nárůst \\ \hline
+  \emph{SRS} & 05.70 & 21.40 & 375.4 \\ \hline
+  \emph{FUS} & 12.40 & 28.40 & 229.0 \\ \hline
+  \emph{BPS} & 06.00 & 21.80 & 363.3 \\ \hline
+  \emph{EPS} & 06.00 & 21.70 & 361.6 \\ \hline
+}
+
+Sestavení obrazu je závislé na přípravu prostředí, vyhodnocení a stažení závislostí, kompilaci a publikování aplikace. Výstupné obrazy jsou založené na linuxovém systému, Alpine s .NET runtime v případě JIT výstupu služby, zredukované Ubuntu v případě nativního AOT výstupu. Z pohledu použitelnosti výsledného obrazu služeb má smysl měřit velikost výstupního obrazu. Následující tabulka zobrazuje velikost obrazu služeb pro oba kompilační cíle. Použitý příkaz je \emph{docker build -t <service>:<tag> -f Dockerfile-<target> .}, kdy \emph{<target>} představuje vybranou kompilační metodu AOT nebo JIT. Před každým sestavením byl obraz a cache smazány. I přes toto opatření není zaručena konzistentní časová náročnost sestavení obrazu.
+
+\tab{Velikost obrazu služeb}{tab:priklad}{0.65}{|l|c|c|r|}{
+  \hline
+    & JIT (MB) & AOT (MB) & AOT \% zmenšení \\ \hline
+  \emph{SRS} & 125.63 & 31.41 & 75.0 \\ \hline
+  \emph{FUS} & 143.19 & 38.32 & 73.2 \\ \hline
+  \emph{BPS} & 126.50 & 31.40 & 75.2 \\ \hline
+  \emph{EPS} & 126.45 & 31.74 & 74.9 \\ \hline
+}
 
 \n{3}{Vývojové prostředí}
 
@@ -117,27 +122,16 @@ Pro zjednodušení procesu vývoje a využití existující funkcionality byly v
   \item \textbf{Párování konfigurace} - V rámci systémové .NET knihovny je umožněno volání API, jenž načte data ze sjednocení stavu proměnných prostředi a konfiguračního souboru. Součástí API je volání metody mapující tuto konfiguraci na předem definovaný objekt. Toto chování dle dostupných informací není v rozporu s AOT kompilací a volání relevantního kódu neprodukuje AOT warning. Z testování však vyplynulo, že mapování konfigurace ne objekt bylo problematické a neprobíhalo správně. Z toho důvodu je v případě AOT kompilace za pomocí deriktivy použité přímé načtení jednotlivých hodnot z konfigurace, dle stromomvého klíče.
 \end{itemize}
 
-\n{1}{Analýza testování}
+\n{2}{Analýza testování}
 
-Následující sekce se zabývá analýzou testovacích scénářů a výsledků testování. Testování bylo provedeno na základě předem definovaných scénářů, které byly vytvořeny s ohledem na funkční a nefunkční požadavky.
-
-\n{2}{Charakteristika testovacího prostředí}
-
-Testovací prostředí, na němž došlo k testování, bylo založeno na operačním systému OSX Ventura. Pro testování byl využit docker engine. Testování bylo provedeno na stroji s čipem Mac M1.
-
-\n{2}{Výsledky testování}
+Následující sekce se zabývá analýzou testovacích scénářů a výsledků testování. Testování bylo provedeno na základě předem definované metodiky. Podkladem testů byly definované scénáře, které byly vytvořeny s ohledem na funkční a nefunkční požadavky. Výsledky testování byly zaznamenány a analyzovány.
 
 \n{3}{Scénář 1}
 
 První scénář se zabíral jednoduchou funkcionalitou dotazu na healthcheck endpoint a meřením výkonu kestrel serveru u odpovědí na požadavky skrze REST API.
-
-\n{4}{Výsledky}
-
 Následující výsledky představují průměrnou dobu odezvy serveru na požadavek v milisekundách. 
 
 Na snímcích jsou zachyceny vybrané dashboardy z nástroje Grafana určené pro monitorování scénaře 1. 
-
-\n{4}{Závěr}
 
 Testování přineslo překvapení ve výkonnostním rozdílu, jenž byl zaznamenán mezi JIT a AOT kompilací. Výsledky byly výrazně v neprospěch AOT kompilace. Samotná rychlost serveru není v mnoha případech kritickým faktorem, avšak v případě velkého množství požadavků, může být rozdíl v řádech milisekund zásadní.
 
@@ -145,13 +139,9 @@ Testování přineslo překvapení ve výkonnostním rozdílu, jenž byl zazname
 
 První scénář se zabíral jednoduchou funkcionalitou a meřením výkonu kestrel serveru a odpovědí na požadavky v REST API.
 
-\n{4}{Výsledky}
-
 Následující výsledky představují průměrnou dobu odezvy serveru na požadavek v milisekundách. 
 
 Na snímcích jsou zachyceny vybrané dashboardy z nástroje Grafana určené pro monitorování scénaře 1. 
-
-\n{4}{Závěr}
 
 Testování přineslo překvapení ve výkonnostním rozdílu, jenž byl zaznamenán mezi JIT a AOT kompilací. Výsledky byly výrazně v neprospěch AOT kompilace. Samotná rychlost serveru není v mnoha případech kritickým faktorem, avšak v případě velkého množství požadavků, může být rozdíl v řádech milisekund zásadní.
 
@@ -159,13 +149,9 @@ Testování přineslo překvapení ve výkonnostním rozdílu, jenž byl zazname
 
 První scénář se zabíral jednoduchou funkcionalitou a meřením výkonu kestrel serveru a odpovědí na požadavky v REST API.
 
-\n{4}{Výsledky}
-
 Následující výsledky představují průměrnou dobu odezvy serveru na požadavek v milisekundách. 
 
 Na snímcích jsou zachyceny vybrané dashboardy z nástroje Grafana určené pro monitorování scénaře 1. 
-
-\n{4}{Závěr}
 
 Testování přineslo překvapení ve výkonnostním rozdílu, jenž byl zaznamenán mezi JIT a AOT kompilací. Výsledky byly výrazně v neprospěch AOT kompilace. Samotná rychlost serveru není v mnoha případech kritickým faktorem, avšak v případě velkého množství požadavků, může být rozdíl v řádech milisekund zásadní.
 
@@ -173,13 +159,9 @@ Testování přineslo překvapení ve výkonnostním rozdílu, jenž byl zazname
 
 První scénář se zabíral jednoduchou funkcionalitou a meřením výkonu kestrel serveru a odpovědí na požadavky v REST API.
 
-\n{4}{Výsledky}
-
 Následující výsledky představují průměrnou dobu odezvy serveru na požadavek v milisekundách. 
 
 Na snímcích jsou zachyceny vybrané dashboardy z nástroje Grafana určené pro monitorování scénaře 1. 
-
-\n{4}{Závěr}
 
 Testování přineslo překvapení ve výkonnostním rozdílu, jenž byl zaznamenán mezi JIT a AOT kompilací. Výsledky byly výrazně v neprospěch AOT kompilace. Samotná rychlost serveru není v mnoha případech kritickým faktorem, avšak v případě velkého množství požadavků, může být rozdíl v řádech milisekund zásadní.
 
@@ -187,12 +169,18 @@ Testování přineslo překvapení ve výkonnostním rozdílu, jenž byl zazname
 
 První scénář se zabíral jednoduchou funkcionalitou a meřením výkonu kestrel serveru a odpovědí na požadavky v REST API.
 
-\n{4}{Výsledky}
-
 Následující výsledky představují průměrnou dobu odezvy serveru na požadavek v milisekundách. 
 
 Na snímcích jsou zachyceny vybrané dashboardy z nástroje Grafana určené pro monitorování scénaře 1. 
 
-\n{4}{Závěr}
-
 Testování přineslo překvapení ve výkonnostním rozdílu, jenž byl zaznamenán mezi JIT a AOT kompilací. Výsledky byly výrazně v neprospěch AOT kompilace. Samotná rychlost serveru není v mnoha případech kritickým faktorem, avšak v případě velkého množství požadavků, může být rozdíl v řádech milisekund zásadní.
+
+\n{2}{Závěr analýzy}
+
+Na základě výsledků vývoje, výstupu a testování služeb lze odpovědět na definované hypotézy následujícím způsobem:
+
+\begin{itemize}
+  \item \textbf{Hypotéza 1} - Hypotéza, že vývoj služeb s jak AOT, tak JIT kompilací je v rámci podporované funkcionality systémových knihoven a ASP.NET možný s podobným API se ukázal jako ne zcela pravdivý. Při vývoji nastaly komplikace se serializací konfigurace, na které bylo nutné reagovat využitím odlišného API. Zároveň tento způsob serializace nebyl kompilátorem označen jako potencionálně problematický. Další problémy nastaly s využitím Entity Framework. Tento ORM využívá pro provádění operací nad databází tzv. tracking, který zaznamená změny nad aplikačními objekty a podle nich tvoří výsledné databázové operace. Vypnutím trackingu bylo umožněno se na datové entity dotázat a aktualizovat je. Operace vložení nové entity však bez trackingu nebyla možná. Pro knihovny 3. stran lze obecně říci, že podpora AOT kompilace není vždy úplně zřejmá a i v situacích kdy AOT varování jsou implementovány, lze očekávat chybné chování.
+  \item \textbf{Hypotéza 2} - Výsledky ukazují, že služby napsané v nativním kódu se výrazněji rychleji spouští jak na hostitelských systémech, tak ve virtualizovaném prostředí. Zároveň binární velikosti samotných aplikací jsou mnohonásobně větší, než je tomu u služeb vyžadující .NET runtime. To je ovšem kompenzováno při virtualizovaném spuštění, kdy obraz služby pro vytvoření plnohodnotného kontejneru vyžaduje mnohem méně závislotí z hlediska paměti. Výsledné obrazy jsou tedy menší a rychleji spustitelné. Hypotéza byla potvrzena.
+  \item \textbf{Hypotéza 3} - Na základě dostupných metrik bylo potvrzeno, že obecně služby kompilované do nativního kódu poskytují o něco horší výkon a jsou paměťově náročnější než služby kompilované do .NET runtime. Tento fakt je způsoben optimalizacemi runtime za běhu, které jsou v případě nativního kódu ztraceny. Dynamická kompilace a generování typů za běhu je náročnější než statická kompilace a generování typů při kompilaci, ale pouze při prvním použití. Rozdíl však není natolik patrný a je rychle zastíněn režií na doménovou logiku, výpočet či přístup k vzdáleným datům. Výsledky testování potvrzují hypotézu.
+\end{itemize}
