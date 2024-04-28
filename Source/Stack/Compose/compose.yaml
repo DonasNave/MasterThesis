@@ -1,3 +1,7 @@
+#################
+#    Volumes    #
+#################
+
 volumes:
   grafana_data:
   otel_data:
@@ -5,15 +9,19 @@ volumes:
   postgres:
   influxdb:
 
+##################
+#   Networking   #
+##################
+
 networks:
   stack-network:
     driver: bridge
   
 services:
 
-################
-# JIT Services #
-################
+##################
+#  JIT Services  #
+##################
 
   srs-jit-service:
     image: dta-srs:jit-latest
@@ -158,9 +166,9 @@ services:
           cpus: '0.25'
           memory: 200M
 
-################
-# AOT Services #
-################
+##################
+#  AOT Services  #
+##################
 
   srs-aot-service:
     image: dta-srs:aot-latest
@@ -275,9 +283,9 @@ services:
           cpus: '0.25'
           memory: 200M
 
-##################
-# Infrastructure #
-##################
+###################
+#  Communication  #
+###################
 
   rabbitmq:
     image: rabbitmq:3-management-alpine
@@ -293,6 +301,10 @@ services:
       start_period: 40s
     networks:
       - stack-network
+
+###################
+#    Telemetry    #
+###################
 
   otel-lgtm:
     build:
@@ -334,13 +346,18 @@ services:
     container_name: monitoring_cadvisor
     restart: unless-stopped
     volumes:
-      - /:/rootfs:ro
-      - /var/run:/var/run:rw
-      - /sys:/sys
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
       - /var/lib/docker/:/var/lib/docker:ro
-      - /dev/disk/:/dev/disk:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /etc/machine-id:/etc/machine-id:ro
+      - /var/lib/dbus/machine-id:/var/lib/dbus/machine-id:ro
     networks:
       - stack-network
+
+###################
+#   Persistence   #
+###################
 
   postgres:
     image: postgres:latest
@@ -375,6 +392,11 @@ services:
       - influxdb:/var/lib/influxdb
     networks:
       - stack-network
+
+
+###################
+#     Routing     #
+###################
 
   proxy:
     image: nginx:alpine

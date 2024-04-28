@@ -1390,7 +1390,6 @@ INPUT ./tex/chapters/stack.tex
 INPUT tex/chapters/stack.tex
 INPUT ./tex/chapters/stack.tex
 INPUT tex/chapters/stack.tex
-INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/jknappen/ec/ecbi1095.tfm
 INPUT ./graphics/diagrams/services-architecture.png
 INPUT ./graphics/diagrams/services-architecture.png
 INPUT graphics/diagrams/services-architecture.png
@@ -1410,6 +1409,7 @@ INPUT ./graphics/diagrams/stack-scenario1.png
 INPUT graphics/diagrams/stack-scenario1.png
 INPUT ./graphics/diagrams/stack-scenario1.png
 INPUT ./graphics/diagrams/stack-scenario1.png
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/jknappen/ec/ecbi1095.tfm
 INPUT ./graphics/diagrams/stack-scenario2.png
 INPUT ./graphics/diagrams/stack-scenario2.png
 INPUT graphics/diagrams/stack-scenario2.png

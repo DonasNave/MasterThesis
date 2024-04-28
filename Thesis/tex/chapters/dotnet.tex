@@ -4,7 +4,7 @@
 
 \n{1}{Platforma .NET}
 
-Platforma .NET od společnosti Microsoft představuje sadu nástrojů k vývoji aplikací v podporovaných jazycích. Tato platforma je multiplatformní a umožňuje vývoj aplikací pro operační systémy jako Windows, Linux, MacOS ale i pro mobilní platformy. Vývojáři mohou využívat nástroje pro vývoj webových aplikací, desktopových aplikací, mobilních aplikací a dalších. Platforma .NET je postavena na dvou hlavních nástrojích. Prvním z nich je \textit{Common Language Runtime} (CLR), běhové prostředí zodpovídající za běh aplikací. Druhým nástrojem je \textit{dotnet CLI}, konzolový nástroj-rozhraní, zodpovědné za interakci s dílčími nástroji v platformě. \cite{Richter2012}
+Platforma .NET od společnosti Microsoft představuje sadu nástrojů k vývoji aplikací v podporovaných jazycích. Tato platforma je multiplatformní a umožňuje vývoj aplikací pro operační systémy jako Windows, Linux, MacOS ale i pro mobilní platformy. Vývojáři mohou využívat nástroje pro vývoj webových aplikací, desktopových aplikací, mobilních aplikací a dalších. Platforma .NET je postavena na dvou hlavních nástrojích. Prvním z nich je \textit{Common Language Runtime} (CLR), běhové prostředí zodpovídající za běh aplikací. Druhým nástrojem je \textit{.NET CLI}, konzolový nástroj-rozhraní, zodpovědné za interakci s dílčími nástroji v platformě. \cite{Richter2012}
 
 \n{2}{Historie}
 
@@ -96,7 +96,7 @@ Dokumentace je důležitou součástí vývoje aplikací. Poskytuje informace o 
 
 \n{2}{Jazyky a struktura aplikace}
 
-Základem aplikace je zdrojový kód, který je v případě platformy dotnet reprezentován nejčastěji jedním ze podporovaných jazyků, Mezi nejčastěji využívané patří VisualBasic (VB), C\# a F\#.
+Základem aplikace je zdrojový kód, který je v případě platformy .NET reprezentován nejčastěji jedním ze podporovaných jazyků, Mezi nejčastěji využívané patří VisualBasic (VB), C\# a F\#.
 
 \begin{itemize}
     \item \textbf{C\#} - Představuje všestranný, objektově orientovaný jazyk navržený tak, aby umožnil vývojářům vytvářet širokou škálu bezpečných a robustních aplikací, které běží na .NET Framework. Kombinuje sílu a flexibilitu C++ s jednoduchostí jazyka Visual Basic.
@@ -158,15 +158,15 @@ Speciálním případem JIT kompilace je aplikace R2R. Zdrojový kód je při se
 
 \n{3}{Kompilace do nativního kódu}
 
-Přímá nativní AoT kompilace je proces, při kterém je kód kompilován do podoby sytémově nativního kódu při sestavení programu ze zdrojového kódu. V případě .NETu je tato funkcionalita dostupná při použití jazyka C\# a speciálních projektových atributů. 
+Přímá nativní AOT kompilace je proces, při kterém je kód kompilován do podoby sytémově nativního kódu při sestavení programu ze zdrojového kódu. V případě .NETu je tato funkcionalita dostupná při použití jazyka C\# a speciálních projektových atributů. 
 
-Jedná se o funkcionalitu, jenž prošla několika iteracemi. První možnosti sestavení aplikace v nativním kódu na .NET platformě byly aplikace Universal Windows Platform. Jednalo se o aplikace využívající specifické rozhraní, nativní pro produkty Microsoftu. S verzí .NET framework 7 byly rozšířeny možnosti sestavení aplikace jako do podoby nativního kódu i pro další architektury a typy aplikací. Tato nová funkcionalita získala vyráznější podporu v roce 2023 s vydáním dotent framework 8. Filozofie Microsoftu ohledně AoT kompilace je, že vývojáři by měli mít možnost využít AOT kompilace v .NETu, pokud je to pro daný scénář vhodné. Scénáře kladoucí takovéto požadavky se vyskytují především v cloudovém nasazení, na které v současné filosofii apelují. 
+Jedná se o funkcionalitu, jenž prošla několika iteracemi. První možnosti sestavení aplikace v nativním kódu na .NET platformě byly aplikace Universal Windows Platform. Jednalo se o aplikace využívající specifické rozhraní, nativní pro produkty Microsoftu. S verzí .NET framework 7 byly rozšířeny možnosti sestavení aplikace jako do podoby nativního kódu i pro další architektury a typy aplikací. Tato nová funkcionalita získala vyráznější podporu v roce 2023 s vydáním dotent framework 8. Filozofie Microsoftu ohledně AOT kompilace je, že vývojáři by měli mít možnost využít AOT kompilace v .NETu, pokud je to pro daný scénář vhodné. Scénáře kladoucí takovéto požadavky se vyskytují především v cloudovém nasazení, na které v současné filosofii apelují. 
 
-Výstupem nativní AoT kompilace .NET aplikace je spustitelný soubor ve formátu podporovaném operačním systémem konfigurovaným v procesu kompilace. Takto vytvořený soubor je možné spustit přímo bez potřeby CLR. 
+Výstupem nativní AOT kompilace .NET aplikace je spustitelný soubor ve formátu podporovaném operačním systémem konfigurovaným v procesu kompilace. Takto vytvořený soubor je možné spustit přímo bez potřeby CLR. 
 
 \n{2}{Běh kódu}
 
-Spuštění, respektive běh kódu na HW počítačového zařízení vyžaduje instrukční sadu, které daná architektura rozumí, tedy nativní kód. V případě nativní AoT kompilace v .NET tento kód získáme již při sestavení aplikace. Při využití kompilace do IL je nutné kód získat pomocí jednoho z kompilačních způsobů podporovaného CLR. Výsledná nativní reprezentace se v obou případech spouští zavoláním vstupní metody v binárním souboru dle specifikace architektury.
+Spuštění, respektive běh kódu na HW počítačového zařízení vyžaduje instrukční sadu, které daná architektura rozumí, tedy nativní kód. V případě nativní AOT kompilace v .NET tento kód získáme již při sestavení aplikace. Při využití kompilace do IL je nutné kód získat pomocí jednoho z kompilačních způsobů podporovaného CLR. Výsledná nativní reprezentace se v obou případech spouští zavoláním vstupní metody v binárním souboru dle specifikace architektury.
 
 \n{3}{CLR}
 
@@ -190,9 +190,9 @@ Aby mohl být kód z IL reprezentace spuštěn na systému, respektive HW stroje
 
 Běh nativního kódu je závislý na konkrétní architektuře systému, pro které jsou nativní programové soubory vytvořeny. Nepodléhá další úpravě ze strany .NET nástrojů. Spuštění probíhá nativním příkazem operačního systému, který zprostředkuje spuštění programu.
 
-\n{2}{Tvorba programu v dotnet}
+\n{2}{Tvorba programu v .NET}
 
-Následující část popisuje obecnou koncepci a strukturu projektu aplikace v dotnet. Součástí je postup pro tvorbu a vydání projektu. Blížší pozornost bude věnována tvorbě nativního AoT projektu.
+Následující část popisuje obecnou koncepci a strukturu projektu aplikace v .NET. Součástí je postup pro tvorbu a vydání projektu. Blížší pozornost bude věnována tvorbě nativního AOT projektu.
 
 \n{3}{Struktura aplikačních zdrojů}
 
@@ -211,16 +211,16 @@ Pro tvorbu složitějších aplikací je možné využít více projektových so
 
     \item \textbf{Správa závislostí}: Pomocí nástrojů .NET CLI je možno referencovat balíčky a knihovny v rámci projektu.
     
-    \item \textbf{Kompilace}: Kompilace aplikace probíhá pomocí příkazu \texttt{dotnet build}, který převede vysokoúrovňový kód do IL. V případě AoT dochází k dodatečné kompilace do nativního kódu dle cílové architektury.
+    \item \textbf{Kompilace}: Kompilace aplikace probíhá pomocí příkazu \texttt{dotnet build}, který převede vysokoúrovňový kód do IL. V případě AOT dochází k dodatečné kompilace do nativního kódu dle cílové architektury.
     
     \item \textbf{Publikování}: Použitím příkazu příkazu \texttt{dotnet publish} dochází k vydání aplikace, tedy specifickému sestavení v konfigurovaném nastavení.
 \end{enumerate}
 
 \n{3}{Tvorba nativního programu}
 
-Pro tvorbu nativního programu v .NET je nutné využít speciálního atributu \emph{PublishAoT} v projektovém souboru. Tento atribut je zodpovědný za konfiguraci projektu pro nativní AoT kompilaci. Při jeho použití je nutné specifikovat cílovou architekturu, pro kterou je nativní kód vytvářen. Po kompilaci kódu do IL dochází k dodatečné kompilaci do nativního kódu, která dodává další konzolový výstup s informacemi o průběhu kompilace.
+Pro tvorbu nativního programu v .NET je nutné využít speciálního atributu \emph{PublishAoT} v projektovém souboru. Tento atribut je zodpovědný za konfiguraci projektu pro nativní AOT kompilaci. Při jeho použití je nutné specifikovat cílovou architekturu, pro kterou je nativní kód vytvářen. Po kompilaci kódu do IL dochází k dodatečné kompilaci do nativního kódu, která dodává další konzolový výstup s informacemi o průběhu kompilace.
 
-Vzhledem k tomu, že nativní AoT kompilace je v .NETu stále vývojově nezralá, samotný proces kompilace, tak jako analýza kompilovaného kódu není dostatečně informativní. Za účelem přenesení vysokoúrovňových konceptů a formálních zápisů v C\# je při kompilace prováděno široké spektrum transformací a gerování kódu.
+Vzhledem k tomu, že nativní AOT kompilace je v .NETu stále vývojově nezralá, samotný proces kompilace, tak jako analýza kompilovaného kódu není dostatečně informativní. Za účelem přenesení vysokoúrovňových konceptů a formálních zápisů v C\# je při kompilace prováděno široké spektrum transformací a gerování kódu.
 
 \begin{itemize}
     \item \textbf{EmitCompilerGeneratedFiles} - Pokud je v projektu nastaven atribut EmitCompilerGeneratedFiles na pravdivou hodnotu, kompilátor generuje soubory, které obsahují podrobné informace o stavu zkompilované aplikace. Ty zahrnují i meziprodukty nebo výpisy strojového kódu, které jsou cenné pro procest ladění a analýzy výstupního produktu. Pomáhají při zacílení na kompilaci do nativního AOT lépe pochopit, jak je vysokoúrovňový kód překládán do strojového kódu.

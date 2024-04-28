@@ -118,7 +118,7 @@ Za účelem testování monitorovacího stacku byl vybrán nástroj K6. Jedná s
 
 Pro implementaci testovacích služeb z podstaty práce zvolena technologie .NET, konkrétně jazyk C\#. Služby budou implementovány jako mikroslužby a budou podporovat kontejnerizované nasazení v microservice architektuře. Služby budou vytvořeny tak, že každou dílčí službu reprezentuje projektový soubor s doménových kódem. Celé řešení spolu s dílčími knihovnami bude součástí jednoho solution souboru.
 
-Pro řešení byla vybrána nejnovější verze .NET SDK 8.0, která poskytuje nejrozsáhlejší impelmentaci a podporu pro nativní AoT kompilaci. Jakožto nástroj pro vývoj a správu projektů byl zvolen JetBrains Rider. Rider je IDE, které poskytuje širokou škálu funkcí pro vývoj aplikací v .NET.
+Pro řešení byla vybrána nejnovější verze .NET SDK 8.0, která poskytuje nejrozsáhlejší impelmentaci a podporu pro nativní AOT kompilaci. Jakožto nástroj pro vývoj a správu projektů byl zvolen JetBrains Rider. Rider je IDE, které poskytuje širokou škálu funkcí pro vývoj aplikací v .NET.
 
 Konkrétní knihovny použité v rámci implementace budou záviset na konkrétních požadavcích na služby a popsány v následující sekci.
 
@@ -268,55 +268,28 @@ Specifické služby obsahují dodatečné adresáře a soubory nutné pro implem
 
 \n{3}{Knihovny 3. stran}
 
-Pro implementaci funkcionality aplikace byly využity následující knihovny třetích stran.
+Pro implementaci funkcionality aplikace byly využity následující knihovny třetích stran:
 
-\n{4}{Npgsql}
-
-Npgsql je open-source ADO.NET provider pro PostgreSQL, který umožňuje komunikaci s PostgreSQL databází. Npgsql poskytuje základní balíček funkcí pro vytvoření připojení na základě standardizovaného řetězce pro připojení. Tento balíček sice není plně kompatibilní s AOT kompilací, funkce které jsou využity v rámci aplikace jsou avšak kompatibilní.
-
-\n{4}{Dapper}
-
-Dapper je open-source ORM knihovna pro .NET, která umožňuje mapovat databázové struktury na C\# objekty a vytvářet a provádět dotazy na databázi. \emph{Dapper.AOT} je dílčí knihovna, která umožňuje vytvářet a provádět dotazy na databázi v rámci AOT kompilace. Toho je zajištěno tím, že Dapper.AOT generuje kód pro dotazy na databázi v době kompilace. Využívá k tomu interceptorů a generátorů. Samotný balíček Dapper.AOT obsahuje další knihovnu - \emph{Dapper.Advisor}, která pomáhá s analýzou zdrojového kódu a generováním kódu pro dotazy na databázi.
-
-\n{4}{OpenTelemetry}
-
-OpenTelemetry zprostředkovává množinu knihoven pro sběr, zpracování a export telemetrických dat. V rámci knihovny je umožňeno registrace vlastních metrik, logů a traces, ale také nastavení exportu vybraných systémových dat sbíraných v rámci knihoven .NET.
-
-\n{4}{Grpc}
-
-Knihovny pro implementaci komunikace pomocí protokolu HTTP/2 a gRPC. Konkrétně jsou využity \emph{Grpc.AspNetCore} v případě serveru, \emph{Grpc.Net.Client} pro klienta a \emph{Google.Protobuf} s \emph{Grpc.Tools} pro generování modelů v přístupu model first.
-
-\n{4}{RabbitMQ}
-
-Komunikace a implementace publish subscribe vzoru je umožněna knihovnou \emph{RabbitMQ.Client}. S její pomocí jsou vytvářeny fronty, dochází k přihlášení k odběru zpráv a jejich publikování.
-
-\n{4}{Swagger}
-
-Grafické rozhraní pro vizualizaci a testování REST API služeb. Swagger je využit pouze v kombinaci konfigurací \emph{JIT Debug}. K tomuto účelou jsou využity knihovny \emph{Swashbuckle.AspNetCore} a \emph{Microsoft.AspNetCore.OpenApi}.
+\begin{itemize}
+  \item \textbf{Npgsql} - Npgsql je open-source ADO.NET provider pro PostgreSQL, který umožňuje komunikaci s PostgreSQL databází. Npgsql poskytuje základní balíček funkcí pro vytvoření připojení na základě standardizovaného řetězce pro připojení. Tento balíček sice není plně kompatibilní s AOT kompilací, funkce které jsou využity v rámci aplikace jsou avšak kompatibilní.
+  \item \textbf{Dapper} - ORM knihovna pro .NET, která umožňuje mapovat databázové struktury na C\# objekty a vytvářet a provádět dotazy na databázi. \emph{Dapper.AOT} je dílčí knihovna, která umožňuje vytvářet a provádět dotazy na databázi v rámci AOT kompilace. Toho je zajištěno tím, že Dapper.AOT generuje kód pro dotazy na databázi v době kompilace. Využívá k tomu interceptorů a generátorů. Samotný balíček Dapper.AOT obsahuje další knihovnu - \emph{Dapper.Advisor}, která pomáhá s analýzou zdrojového kódu a generováním kódu pro dotazy na databázi.
+  \item \textbf{OpenTelemetry} - OpenTelemetry zprostředkovává množinu knihoven pro sběr, zpracování a export telemetrických dat. V rámci knihovny je umožněno registrace vlastních metrik, logů a traces, ale také nastavení exportu vybraných systémových dat sbíraných v rámci knihoven .NET.
+  \item \textbf{Grpc} - Knihovny pro implementaci komunikace pomocí protokolu HTTP/2 a gRPC. Konkrétně jsou využity \emph{Grpc.AspNetCore} v případě serveru, \emph{Grpc.Net.Client} pro klienta a \emph{Google.Protobuf} s \emph{Grpc.Tools} pro generování modelů v přístupu model first.
+  \item \textbf{RabbitMQ} - Komunikace a implementace publish subscribe vzoru je umožněna knihovnou \emph{RabbitMQ.Client}. S její pomocí jsou vytvářeny fronty, dochází k přihlášení k odběru zpráv a jejich publikování.
+  \item \textbf{Swagger} - Grafické rozhraní pro vizualizaci a testování REST API služeb. Swagger je využit pouze v kombinaci konfigurací \emph{JIT Debug}. K tomuto účelou jsou využity knihovny \emph{Swashbuckle.AspNetCore} a \emph{Microsoft.AspNetCore.OpenApi}.
+\end{itemize}
 
 \n{3}{Společné knihovny}
 
 V rámci zjednodušení tvorby služeb, jednotné implementaci a konfiguraci, ale také z důvodu zajištění některé základní ale klíčové funkcionality, byly vytvořeny společné knihovny. Tyto knihovny obsahují společné třídy, rozhraní a konfigurace, které jsou použity ve všech službách.
 
-\n{4}{Persistence}
-
-Pro implementaci persistence byla vytvořena pomocná knihovna \\ \emph{DTA.Extensions.Postgres}, která poskytuje pomocnou funkcionalitu pro zajištění existence databáze pro službu, dle konfigurace v řetězci pro připojení.
-
-\n{4}{Migrace}
-
-Zajištění migrace databáze bylo implementováno po vlastní ose minimalistickým migrátorem v knihovně \emph{DTA.Migrator}. Tato knihovna poskytuje základní funkcionalitu pro vytvoření databáze, vytvoření tabulek a indexů, ale také zajištění migrace dat a verzování změn.
-
-\n{4}{Telemetrie}
-
-Knihovna \emph{DTA.Extensions.Telemetry} zprostředkovává extensions metody pro jednotnou a jednoduchou registraci sběru a export telemetrických dat napříč službami.
-
-\n{4}{Modely}
-
-Knihovna \emph{DTA.Models} obsahuje společné modely, které jsou využity ve službách. Je tím docílena viditelnost na datové struktury rozhraní aplikace napříč všemi službami, jež knihovnu referencují.
-
-\n{4}{Obecná funkcionalita}
-
-Za účelem sjednocení funkcionality využité napříč všemi službami jsou implementovány extension metody v knihovně \emph{DTA.Extensions.Common}. Zde je poskytnuta funkcionalita pro sestavení názvů pro službu.
+\begin{itemize}
+  \item \textbf{Persistence} - Pro implementaci persistence byla vytvořena pomocná knihovna \\ \emph{DTA.Extensions.Postgres}, která poskytuje pomocnou funkcionalitu pro zajištění existence databáze pro službu, dle konfigurace v řetězci pro připojení.
+  \item \textbf{Migrace} - Zajištění migrace databáze bylo implementováno po vlastní ose minimalistickým migrátorem v knihovně \emph{DTA.Migrator}. Tato knihovna poskytuje základní funkcionalitu pro vytvoření databáze, vytvoření tabulek a indexů, ale také zajištění migrace dat a verzování změn.
+  \item \textbf{Telemetrie} - Knihovna \emph{DTA.Extensions.Telemetry} zprostředkovává extensions metody pro jednotnou a jednoduchou registraci sběru a export telemetrických dat napříč službami.
+  \item \textbf{Modely} - Knihovna \emph{DTA.Models} obsahuje společné modely, které jsou využity ve službách. Je tím docílena viditelnost na datové struktury rozhraní aplikace napříč všemi službami, jež knihovnu referencují.
+  \item \textbf{Obecná funkcionalita} - Za účelem sjednocení funkcionality využité napříč všemi službami jsou implementovány extension metody v knihovně \emph{DTA.Extensions.Common}. Zde je poskytnuta funkcionalita pro sestavení názvů pro službu.
+\end{itemize}
 
 \n{3}{Společná konfigurace}
 
@@ -324,9 +297,13 @@ Součástí řešení je společná konfigurace, která je využita ve všech sl
 
 \n{3}{SRS - Signal reading service}
 
-Za účelem simulace funkce čtecího zařízení byla vytvořena služba SRS. Tato služba poskytuje základní rozhraní pro získání dat signálu včetně jednotek a značek formou REST API. Pro zjednodušení implementace není využito čtení dat ze skutečného zdroje, ale jsou generována náhodná data. Načež data jsou následně poskytována se simulovaným zdržením, časově založenému na měření skutečného zdržení systému při čtení dat ze vzdáleného zdroje u obdobného systému.
+Za účelem simulace funkce čtecího zařízení byla vytvořena služba SRS. Tato služba poskytuje základní rozhraní pro získání dat signálu včetně jednotek a značek formou REST API. Pro zjednodušení implementace není využito čtení dat ze skutečného zdroje, ale jsou generována náhodná data. Načež data jsou následně poskytována se zdržením simulujícím čtení dat ze vzdáleného zdroje.
 
-TODO: API docs
+Služba poskytuje následující rozhraní
+
+\begin{itemize}
+    \item \textbf{GET /api/signals/\{int:amount\}} - Vygeneruje zadané množství náhodných signálů
+\end{itemize}
 
 \n{3}{FUS - File Upload Service}
 
@@ -334,7 +311,13 @@ Služba v systému hraje roli zapisovacího zařízení, které zapisuje a čte 
 
 Poskytuje rozhraní formou REST API pro zápis a čtení dat. Daty je myšlen libovolný soubor v libovolném formátu. Samotná podstata nahraných dat není pro službu důležitá, ale je zpracována a uložena do databáze. Za účelem sehrání testovacích scénářů poskytuje SRS také gRPC rozhraní, které je zajištěno na dedikovaném portu. V rámci gRPC komunikace slouží služba jako server, který splňuje volání vzdálené procudery.
 
-TODO: API docs
+Služba poskytuje následující rozhraní
+
+\begin{itemize}
+    \item \textbf{GET /api/file/download/\{int:id\}} - Stáhne soubor podle zadaného ID.
+    \item \textbf{POST /api/file/upload} - Nahraje soubor do systému.
+    \item \textbf{gRPC Operation FileServer.GetFile} - Stáhne soubor podle zadaného objektu s ID.
+\end{itemize}
 
 \n{3}{BPS - Business Processing Service}
 
@@ -342,15 +325,64 @@ Pro splnění role a požadavků na zpracování dat z jiných služeb byla vytv
 
 Služba se po spuštění přihlašuje k odběru zpráv na předem definovaný kanál \emph{simulated} na službe \emph{RabbitMQ}. Po získání zprávy získává data ze služby FUS pomocí volání vzdálené procedury. Po získání dat provádí náročné výpočetní operace, které jsou simulovány náhodným čekáním.
 
-TODO: API docs
+Služba poskytuje následující rozhraní
+
+\begin{itemize}
+    \item \textbf{GET /api/processFibonacci/\{int:degree\}} - Vypočítá číslo z Fibonacciho posloupnosti na zadané pozici náročným rekurzivním způsobem.
+    \item \textbf{Event subscribed: \{queue-name\}\_simulated} - Přihlášení k odběru zpráv v rámci kanálu na službě RabbitMQ.
+\end{itemize}
 
 \n{3}{EPS - Event Publishing Service}
 
-Jednoduchá službami umožňující vyvolat událost v systému a docílit spuštění dodatečných operací v systému. V systému simuluje roli vydavatele událostí.
+Jednoduchá službami umožňující vyvolat událost v systému a docílit spuštění dodatečných operací v systému. V systému simuluje roli vydavatele událostí Poskytuje REST API rozhraní pro vyvolání události. Po vyvolání události je zpráva publikována do RabbitMQ kanálu, kde je zpracována jinými službami.
 
-Služba poskytuje REST API rozhraní pro vyvolání události. Po vyvolání události je zpráva publikována na kanál \emph{simulated} na službě \emph{RabbitMQ}.
+Služba poskytuje následující rozhraní
+
+\begin{itemize}
+    \item \textbf{GET api/simulateEvent/\{int:id\}} - Vyvolá simulovanou událost s daným ID.
+    \item \textbf{Event published: \{queue-name\}\_simulated} - Vyvolá údalost se zprávou obsahující identifikator na konfigurovaném kanálu do služby RabbitMQ.
+\end{itemize}
 
 \n{3}{Přehled řešení}
+
+Řešení aplikace sestává z následujících sekcí a jednotlivých obrazů služeb a verzí, definovaných v rámci Docker Compose souboru. Obrazy jsou zapsány ve formátu \emph{repository:tag}.
+
+\begin{itemize}
+    \item \textbf{Testovací služby - JIT}
+    \begin{itemize}
+        \item \textbf{dta-srs:jit-latest}
+        \item \textbf{dta-fus:jit-latest}
+        \item \textbf{dta-bps:jit-latest}
+        \item \textbf{dta-eps:jit-latest}
+    \end{itemize}
+    \item \textbf{Testovací služby - AOT}
+    \begin{itemize}
+        \item \textbf{dta-srs:aot-latest}
+        \item \textbf{dta-fus:aot-latest}
+        \item \textbf{dta-bps:aot-latest}
+        \item \textbf{dta-eps:aot-latest}
+    \end{itemize}
+    \item \textbf{Komunikace}
+    \begin{itemize}
+        \item \textbf{rabbitmq:3-management-alpine}
+    \end{itemize}
+    \item \textbf{Monitorovací nástroje}
+    \begin{itemize}
+        \item \textbf{dta-lgtm:latest}
+        \item \textbf{node-exporter:latest}
+        \item \textbf{cadvisor-arm64:v0.49.1}
+    \end{itemize}
+    \item \textbf{Persistence}
+    \begin{itemize}
+        \item \textbf{postgres:latest}
+        \item \textbf{influxdb:1.8.10}
+    \end{itemize}
+    \item \textbf{Směrování}
+    \begin{itemize}
+        \item \textbf{nginx:alpine}
+    \end{itemize}
+
+\end{itemize}
 
 \obr{Diagram .NET služeb a závislých služeb}{fig:logo}{0.9}{graphics/diagrams/services-architecture.png}
 
@@ -360,63 +392,63 @@ Následující diagram znázorňuje vztahy mezi jednotlivými službami.
 
 \n{2}{Konfigurace aplikace}
 
+Za účelem běhu aplikace je klíčové správné nastavení konfigurace. Konfigurace je řešena na různých úrovních. Základní úroveň představuje soubor \emph{compose.yaml}, který inforumje Docker orchestrátor jaká infrastrukura má být vytvořena a jak má být nastavena, které služby mají být vytvořeny a jaké zdroje jim mají být přiděleny. Dále jsou v tomto souboru nastaveny základní parametry jako je jméno sítě, názvy volume (persistentní úložiště orchestrátoru), závislosti mezi službami a další. V neposlední řadě je dílčí konfigurace jednotlivých služeb řešena v rámci konfiguračních souborů a proměnných prostředí.
+
 \n{3}{Konfigurace infrastruktury}
 
-\n{4}{Nginx}
+Jak již bylo zmíněno, základní konfigurace je řešena v souboru \emph{compose.yaml} a je rozdělena do následujících částí:
 
-Pro nginx je dodatečná konfigurace dodána pomocí souboru nginx.conf jenž je namountován do kontejneru. Tento soubor obsahuje konfiguraci pro nginx, která je použita při spuštění kontejneru.
+\begin{itemize}
+  \item \textbf{volumes} - V této sekci jsou definovány všechny volume, které jsou využity v rámci stacku. Volume jsou definovány názvem a využity pro ukládání dat služeb. Konkrétně jsou využity úložiště pro data Grafany, OpenTelemetry, Prometheus a InfluxDB.
+  \item \textbf{networks} - Konfigurace pro vnitřní síť aplikace, která je využita pro komunikaci mezi službami. Síť je definována názvem a typem. Pro potřeby aplikace se využívá síť s názvem \emph{stack-network} a typ \emph{bridge}, jenž funguje jako síťový most.
+  \item \textbf{services} - Definuji sekci pro jednotlivé služby, které jsou součástí stacku. Každá služba je definována názvem služby - \emph{container\_name}, názvem obrazu - \emph{image}, v případě lokálně sestavených služeb také definicí sestavení - \emph{build}. Dále je definováno, jaké porty jsou mapovány z kontejneru do hostitelského systému - \emph{ports}, jaké volume jsou připojeny k kontejneru - \emph{volumes}, použité síťové rozhraní - \emph{networks}, závislosti služby - \emph{depends\_on} a proměnné prostředí - \emph{environment}. V případech testovaných služeb je uvedena dodatečná konfigurační sekce nasazení - \emph{deploy}, jenž limituje dostupné zdroje paměti a procesoru.
+\end{itemize}
 
-Základní pravidla směrování
+\n{3}{Konfigurace směrování}
+
+Nastavení směrování v rámci stacku je řešeno konfigurací proxy služby Nginx. To je řešeno odděleně dodatečným konfiguračním souborem nginx.conf jenž je připojen do kontejneru služby. Soubor obsahuje následující směrovací pravidla:
 
 \begin{itemize}
     \item / - cesta na statickou hlavní stránku-rozcestník aplikace
     \item /grafana - směrování na Grafanu
 \end{itemize}
 
-Statická stránka html.index je obdobným způsobem napojena do virualizovaného repozitáře kontejneru.
+Rozcestník představuje soubor html.index a je připojen do virualizovaného repozitáře kontejneru obdobným způsobem jako konfigurační soubor. 
 
 \n{3}{Konfigurace telemetrie}
 
-\n{4}{LGTM - Monitorovací stack}
-
-LGTM jakožto monitorovací stack zároveň konfiguruje veškeré monitorovací nástroje. Značnou část konfigurace představuje propojení nástrojů a tato konfigurace je řešena pomocí konfiguračních souborů, které jsou použity již při tvorbě obecného obrazu.
-
-Dodatečná konfigurace je řešena podle proměnných prostředí a týká se pouze malé množiny nastavení specifickýh pro správný běh monitorovacích nástrojů v celém stacku.
+Nastavení telemetrie spočívá v definici rozhraní, nastavení chování služeb a systémů z niž se telemetrická data sbírají, jejich cíl pro zpracování, správu a vizualizaci. Značnou část konfigurace představuje propojení nástrojů stacku LGTM, k čemuž slouží konfigurační soubory. Ty obsahují výchozí minimalistickou konfiguraci pro jednotlivé nástroje. Výstupem LGTM je individuální kontejner a zmíněná konfigurace je náturou interní a není potřeba s ní manipulovat s ohledem na požadavky práce uživateli. Mezi dodatečné konfigurace telemetrie napříč službami patří:
 
 \begin{itemize}
-    \item \textbf{GF\_SERVER\_ROOT\_URL} - nastavení URL, na které bude Grafana dostupná. Toto nastavení je důležité pro správné směrování požadavků na Grafanu.
-    \item \textbf{GF\_SERVER\_SERVE\_FROM\_SUB\_PATH} - nastavení, které určuje, zda bude Grafana dostupná z podadresáře v URL. Toto nastavení je důležité pro správné směrování požadavků na Grafanu.
-    \item \textbf{GF\_AUTH\_ANONYMOUS\_ENABLED} - nastavení, které určuje, zda bude povoleno anonymní přihlášení do Grafany.
+    \item \textbf{Testované služby} - Veškeré testovací služby mají nastavený endpoint pro export telemetrických dat. Toto nastavení je zprostředkováno proměnnou prostředí \emph{OpenTelemetrySettings\_ExporterEndpoint}.
+    \item \textbf{LGTM} - Konfigurace pro LGTM je řešena pomocí proměnných prostředí. Je definována adresa a cesta, z které je k dispozici Grafana. Dále je umožněno anonymní přihlášení do Grafany.
+    \item \textbf{Cadvisor} - Nastavení služby představuje dodatečné nastavení volumes, které jsou připojeny k kontejneru. Připojením systémových souborů je zajištěno sběr dat o využití systémových zdrojů. Toto nastavení je závislé na operačním systému.
 \end{itemize}
 
 \n{3}{Konfigurace testovacích služeb}
 
-\n{4}{SRS - Signal Reading Service}
+Jednotlivé služby mají vlastní dodatečné konfigurace, které jsou řešeny pomocí kombinace dle standardizovaného postupu pro konfiguraci .NET aplikací, a to konfiguračního souboru \emph{appsettings.json} a proměnných prostředí. V první řadě řadě je použita konfigurace ze souboru, načež je přepsána odpovídajícími hodnotami proměnných prostředí. Každá služba má definovaný specifický prefix pro identifikaci proměnných prostředí. Následující seznam popisuje dodatečné konfigurace jednotlivých služeb.
 
-Nasazení obsahuje konfiguraci definifující úroveň logování a cíl exportu telemetrických dat.
-
-\n{4}{FUS - File Upload Service}
-
-Nasazení obsahuje konfiguraci definifující úroveň logování a cíl exportu telemetrických dat.
-
-\n{4}{BPS - Batch Processing Service}
-
-Nasazení obsahuje konfiguraci definifující úroveň logování a cíl exportu telemetrických dat.
-
-\n{4}{EPS - Fast Response Service}
-
-Nasazení obsahuje konfiguraci definifující úroveň logování a cíl exportu telemetrických dat.
+\begin{itemize}
+  \item \textbf{FUS - File Upload Service} - Obsahuje connection string (přístupový řetězec) pro připojení do databáze PostgreSQL.
+  \item \textbf{BPS - Batch Processing Service} - Disponuje konfigurací pro připojení k RabbitMQ a konkrétní frontě.
+  \item \textbf{EPS - Event Publishing Service} - Drží informaci o rozhraní RabbitMQ, konkrétní frontě a gRPC rozhraní služby FUS.
+\end{itemize}
 
 \n{3}{Konfigurace persistence}
 
-\n{4}{PostgreSQL}
+Služby využité pro perzistentní ukládání dat jsou konfigurovány pomocí proměnných prostředí. Jedná se o následující služby:
 
-PostgreSQL je konfigurována pomocí proměnných prostředí, kdy rozdíl od základní konfiguraci činí pouze definice přihlašovacích údajů pro připojení k databázi.
-
-\n{4}{InfluxDB}
-
-InfluxDB má upraven název výchozí databáze a nastavení autentifikace a přihlašovacích údajů. Tyto změny jsou provedeny za pomocí proměnných prostředí.
+\begin{itemize}
+  \item \textbf{PostgreSQL} - Jsou definovány údaje pro uživatele databáze a název databáze.
+  \item \textbf{InfluxDB} - Proměnné prostředí definují název databáze, uživatelské údaje a povolení přihlášení pomocí http.
+\end{itemize}
 
 \n{3}{Nastavení uživatelského rozhraní}
 
-Definice uživatelského rozhraní, respektive dostupných dashboardů, je dána při sestavení obrazu LGTM. V rámci něj jsou předdefinovány hodnoty pro připojení zdrojů dat, tj. Prometheus, Loki, Tempo a InfluxDb. Patřičné dashboardy zobrazující relevantní data pro různé scénáře systému byly předem připraveny a jsou k dispozici po otevření Grafany anonymním uživatelem.
+Definice uživatelského rozhraní, respektive dostupných dashboardů, je dána při sestavení obrazu LGTM. V rámci něj jsou předdefinovány hodnoty pro připojení zdrojů dat, tj. Prometheus, Loki, Tempo a InfluxDb. Patřičné dashboardy zobrazující relevantní data pro různé scénáře systému byly předem připraveny a jsou k dispozici po otevření Grafany anonymním uživatelem. Následující seznam popisuje klíčové soubory konfigurace uživatelského rozhraní.
+
+\begin{itemize}
+  \item \textbf{grafana-dashboards.json} - Definuje dostupné dashboardy v Grafaně. Dashboardy jsou definovány v JSON formátu a obsahují definici panelů, zdrojů dat a dalších parametrů.
+  \item \textbf{grafana-datasources.json} - Obsahuje  zdroje dat z kterých Grafana, respektive dashboardy, čerpají data.
+\end{itemize}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.8)  27 APR 2024 23:44
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.8)  28 APR 2024 16:10
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1256,12 +1256,12 @@ LaTeX Font Info:    Trying to load font information for OT1+phv on input line 73
  (/usr/local/texlive/2023/texmf-dist/tex/latex/psnfss/ot1phv.fd
 File: ot1phv.fd 2020/03/25 scalable font definitions for OT1/phv.
 )
-<graphics/logo/fai_logo_cz.png, id=544, 325.68428pt x 76.49358pt>
+<graphics/logo/fai_logo_cz.png, id=560, 325.68428pt x 76.49358pt>
 File: graphics/logo/fai_logo_cz.png Graphic file (type png)
 <use graphics/logo/fai_logo_cz.png>
 Package pdftex.def Info: graphics/logo/fai_logo_cz.png  used on input line 73.
 (pdftex.def)             Requested size: 256.0748pt x 60.14912pt.
-<zadani.pdf, id=545, 597.432pt x 844.83629pt>
+<zadani.pdf, id=561, 597.432pt x 844.83629pt>
 File: zadani.pdf Graphic file (type pdf)
 <use zadani.pdf>
 Package pdftex.def Info: zadani.pdf  used on input line 75.
@@ -1270,7 +1270,7 @@ File: zadani.pdf Graphic file (type pdf)
 <use zadani.pdf>
 Package pdftex.def Info: zadani.pdf  used on input line 75.
 (pdftex.def)             Requested size: 597.43054pt x 844.83423pt.
-<zadani.pdf, id=548, page=1, 597.432pt x 844.83629pt>
+<zadani.pdf, id=564, page=1, 597.432pt x 844.83629pt>
 File: zadani.pdf Graphic file (type pdf)
 <use zadani.pdf, page 1>
 Package pdftex.def Info: zadani.pdf , page1 used on input line 75.
@@ -1295,7 +1295,7 @@ File: zadani.pdf Graphic file (type pdf)
 Package pdftex.def Info: zadani.pdf , page1 used on input line 75.
 (pdftex.def)             Requested size: 597.93192pt x 845.54323pt.
  [2 <./zadani.pdf, page is rotated 270 degrees>]
-<zadani.pdf, id=562, page=2, 597.432pt x 844.83629pt>
+<zadani.pdf, id=578, page=2, 597.432pt x 844.83629pt>
 File: zadani.pdf Graphic file (type pdf)
 <use zadani.pdf, page 2>
 Package pdftex.def Info: zadani.pdf , page2 used on input line 75.
@@ -1359,91 +1359,103 @@ Overfull \hbox (7.77519pt too wide) in paragraph at lines 119--120
 ] (./tex/chapters/stack.tex [42
 
 
-] [43] [44] [45] [46] [47] [48] [49] [50] [51] [52]
-Overfull \hbox (0.4579pt too wide) in paragraph at lines 311--312
- []\T1/cmr/bx/it/10.95 Telemetrie[] \T1/cmr/m/n/12 Knihovna \T1/cmr/m/it/12 DTA.Extensions.Telemetry \T1/cmr/m/n/12 zpro-st°ed-ko-vává ex-tensi-ons me-tody
+] [43] [44] [45] [46] [47] [48] [49] [50] [51]
+Overfull \hbox (11.99777pt too wide) in paragraph at lines 277--278
+\T1/cmr/m/n/12 gRPC. Kon-krétn¥ jsou vy-u-ºity \T1/cmr/m/it/12 Grpc.AspNetCore \T1/cmr/m/n/12 v p°í-pad¥ ser-veru, \T1/cmr/m/it/12 Grpc.Net.Client
  []
 
-[53]
-<graphics/diagrams/services-architecture.png, id=949, 1142.2675pt x 1152.305pt>
+[52]
+Overfull \hbox (62.79654pt too wide) in paragraph at lines 291--292
+\T1/cmr/m/n/12 v²emi sluº-bami jsou im-ple-men-to-vány ex-tension me-tody v knihovn¥ \T1/cmr/m/it/12 DTA.Extensions.Common\T1/cmr/m/n/12 .
+ []
+
+[53] [54] [55]
+<graphics/diagrams/services-architecture.png, id=966, 1142.2675pt x 1152.305pt>
 File: graphics/diagrams/services-architecture.png Graphic file (type png)
 <use graphics/diagrams/services-architecture.png>
-Package pdftex.def Info: graphics/diagrams/services-architecture.png  used on input line 355.
+Package pdftex.def Info: graphics/diagrams/services-architecture.png  used on input line 387.
 (pdftex.def)             Requested size: 396.91324pt x 400.39406pt.
- [54]
-<graphics/diagrams/stack-data-flow.png, id=955, 1577.895pt x 1876.00874pt>
+<graphics/diagrams/stack-data-flow.png, id=968, 1577.895pt x 1876.00874pt>
 File: graphics/diagrams/stack-data-flow.png Graphic file (type png)
 <use graphics/diagrams/stack-data-flow.png>
-Package pdftex.def Info: graphics/diagrams/stack-data-flow.png  used on input line 359.
+Package pdftex.def Info: graphics/diagrams/stack-data-flow.png  used on input line 391.
 (pdftex.def)             Requested size: 374.86774pt x 445.67122pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[55 <./graphics/diagrams/services-architecture.png>] [56 <./graphics/diagrams/stack-data-flow.png>]) (./tex/chapters/testing.tex [57] [58
+[56 <./graphics/diagrams/services-architecture.png>] [57 <./graphics/diagrams/stack-data-flow.png>] [58] [59]) (./tex/chapters/testing.tex [60] [61
 
-]
-<graphics/diagrams/stack-scenario1.png, id=985, 1176.395pt x 1393.205pt>
+] [62] [63]
+<graphics/diagrams/stack-scenario1.png, id=1006, 1176.395pt x 1393.205pt>
 File: graphics/diagrams/stack-scenario1.png Graphic file (type png)
 <use graphics/diagrams/stack-scenario1.png>
-Package pdftex.def Info: graphics/diagrams/stack-scenario1.png  used on input line 47.
+Package pdftex.def Info: graphics/diagrams/stack-scenario1.png  used on input line 77.
 (pdftex.def)             Requested size: 352.8155pt x 417.83717pt.
+ [64 <./graphics/diagrams/stack-scenario1.png>]
+<graphics/diagrams/stack-scenario2.png, id=1013, 1262.7175pt x 1086.0575pt>
+File: graphics/diagrams/stack-scenario2.png Graphic file (type png)
+<use graphics/diagrams/stack-scenario2.png>
+Package pdftex.def Info: graphics/diagrams/stack-scenario2.png  used on input line 97.
+(pdftex.def)             Requested size: 396.91324pt x 341.38075pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[59]
-<graphics/diagrams/stack-scenario2.png, id=991, 1262.7175pt x 1086.0575pt>
-File: graphics/diagrams/stack-scenario2.png Graphic file (type png)
-<use graphics/diagrams/stack-scenario2.png>
-Package pdftex.def Info: graphics/diagrams/stack-scenario2.png  used on input line 67.
-(pdftex.def)             Requested size: 396.91324pt x 341.38075pt.
- [60 <./graphics/diagrams/stack-scenario1.png>] [61 <./graphics/diagrams/stack-scenario2.png>]
-<graphics/diagrams/stack-scenario3.png, id=1008, 1296.845pt x 890.32625pt>
+[65]
+<graphics/diagrams/stack-scenario3.png, id=1023, 1296.845pt x 890.32625pt>
 File: graphics/diagrams/stack-scenario3.png Graphic file (type png)
 <use graphics/diagrams/stack-scenario3.png>
-Package pdftex.def Info: graphics/diagrams/stack-scenario3.png  used on input line 89.
+Package pdftex.def Info: graphics/diagrams/stack-scenario3.png  used on input line 119.
 (pdftex.def)             Requested size: 396.91324pt x 272.49329pt.
- [62 <./graphics/diagrams/stack-scenario3.png>]
-<graphics/diagrams/stack-scenario4.png, id=1017, 1870.99pt x 1131.22626pt>
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[66 <./graphics/diagrams/stack-scenario2.png>]
+<graphics/diagrams/stack-scenario4.png, id=1032, 1870.99pt x 1131.22626pt>
 File: graphics/diagrams/stack-scenario4.png Graphic file (type png)
 <use graphics/diagrams/stack-scenario4.png>
-Package pdftex.def Info: graphics/diagrams/stack-scenario4.png  used on input line 110.
+Package pdftex.def Info: graphics/diagrams/stack-scenario4.png  used on input line 140.
 (pdftex.def)             Requested size: 441.01772pt x 266.63222pt.
- [63 <./graphics/diagrams/stack-scenario4.png>]
-<graphics/diagrams/stack-scenario5.png, id=1025, 1239.63126pt x 1131.22626pt>
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[67 <./graphics/diagrams/stack-scenario3.png>]
+<graphics/diagrams/stack-scenario5.png, id=1042, 1239.63126pt x 1131.22626pt>
 File: graphics/diagrams/stack-scenario5.png Graphic file (type png)
 <use graphics/diagrams/stack-scenario5.png>
-Package pdftex.def Info: graphics/diagrams/stack-scenario5.png  used on input line 138.
+Package pdftex.def Info: graphics/diagrams/stack-scenario5.png  used on input line 168.
 (pdftex.def)             Requested size: 396.91324pt x 362.18967pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[64] [65 <./graphics/diagrams/stack-scenario5.png>]) [66] [67
+[68 <./graphics/diagrams/stack-scenario4.png>] [69 <./graphics/diagrams/stack-scenario5.png>]) [70] [71] [72
 
 
 ] (./tex/chapters/analytics.tex
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[68
+[73
 
 
-] [69] [70]
+] [74] [75]
 Overfull \hbox (1.48775pt too wide) in paragraph at lines 111--112
 \T1/cmr/m/n/12 Pro zjed-no-du-²ení pro-cesu vý-voje a vy-u-ºití exis-tu-jící funk-ci-o-na-lity byly vy-u-ºity knihovny
  []
 
-[71] [72] [73
+[76] [77] [78
 
-] [74]) (./tex/chapters/recommendation.tex [75]) (./tex/chapters/continuation.tex [76
+] [79]) (./tex/chapters/recommendation.tex [80]) (./tex/chapters/continuation.tex [81
 
-]) (./tex/chapters/conclusion.tex [77
+]) (./tex/chapters/conclusion.tex [82
 
-]) [78
+]) [83
 
-] [79
+] [84
 
 ]
 Underfull \hbox (badness 4416) in paragraph at lines 151--151
@@ -1470,7 +1482,7 @@ Underfull \hbox (badness 1303) in paragraph at lines 151--151
 []\T1/cmr/m/n/12 DOCKER INC. \T1/cmr/m/it/12 Docker Docs \T1/cmr/m/n/12 [on-line]. 2013 [cit. 2024-03-13]. Do-stupné z:
  []
 
-[80]
+[85]
 Underfull \hbox (badness 10000) in paragraph at lines 151--151
 []\T1/cmr/m/n/12 THE POST-GRE-SQL GLO-BAL DE-VE-LO-P-MENT GROUP. \T1/cmr/m/it/12 Post-
  []
@@ -1480,13 +1492,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 151--151
 \T1/cmr/m/it/12 gre-SQL Do-cu-men-tation \T1/cmr/m/n/12 [on-line]. [cit. 2024-04-14]. Do-stupné z:
  []
 
-(./tex/zkratky.tex [81]) [82
+(./tex/zkratky.tex [86]) [87
 
 ] (./prace.lof)
 \tf@lof=\write9
 \openout9 = `prace.lof'.
 
- [83
+ [88
 
 ] (./prace.lot)
 \tf@lot=\write10
@@ -1496,7 +1508,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 151--151
 File: se-pdfdoc.def 2019/11/29 v1.12 stringenc: PDFDocEncoding
 ) (/usr/local/texlive/2023/texmf-dist/tex/generic/stringenc/se-utf8.def
 File: se-utf8.def 2019/11/29 v1.12 stringenc: UTF-8
-) [84
+) [89
 
 
 ] (./tex/prilohy.tex) (./prace.aux)
@@ -1504,20 +1516,20 @@ File: se-utf8.def 2019/11/29 v1.12 stringenc: UTF-8
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `prace.out' has not changed.
-(rerunfilecheck)             Checksum: AD8090B7698A6F47BB371DED67422F64;22283.
+(rerunfilecheck)             Checksum: 10E665D687C9396A1CD634515D770567;22877.
  ) 
 Here is how much of TeX's memory you used:
- 38550 strings out of 476025
- 825783 string characters out of 5790017
+ 38544 strings out of 476025
+ 825759 string characters out of 5790017
  1877388 words of memory out of 5000000
- 58056 multiletter control sequences out of 15000+600000
+ 58060 multiletter control sequences out of 15000+600000
  531050 words of font info for 65 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  140i,17n,135p,1633b,2853s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbi1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
-Output written on prace.pdf (84 pages, 1936910 bytes).
+Output written on prace.pdf (89 pages, 1943791 bytes).
 PDF statistics:
- 1297 PDF objects out of 1440 (max. 8388607)
- 317 named destinations out of 1000 (max. 500000)
- 1162 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1318 PDF objects out of 1440 (max. 8388607)
+ 307 named destinations out of 1000 (max. 500000)
+ 1194 words of extra memory for PDF output out of 10000 (max. 10000000)
 
