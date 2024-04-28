@@ -102,19 +102,19 @@
 \contentsline {subsubsection}{\numberline {5.2.1}Hypotézy}{62}{subsubsection.5.2.1}%
 \contentsline {subsection}{\numberline {5.3}Definice scénářů}{63}{subsection.5.3}%
 \contentsline {subsection}{\numberline {5.4}Popis scénářů}{63}{subsection.5.4}%
-\contentsline {subsubsection}{\numberline {5.4.1}Scénář 1 - schopnost odpovídat služeb}{64}{subsubsection.5.4.1}%
+\contentsline {subsubsection}{\numberline {5.4.1}Scénář 1 - Výkonnost komunikace}{64}{subsubsection.5.4.1}%
 \contentsline {paragraph}{\itshape \bfseries {Relevantní služby}}{65}{section*.8}%
 \contentsline {paragraph}{\itshape \bfseries {Průběh scénáře}}{65}{section*.9}%
-\contentsline {subsubsection}{\numberline {5.4.2}Scénář 2 - přístup k perzistenci}{65}{subsubsection.5.4.2}%
+\contentsline {subsubsection}{\numberline {5.4.2}Scénář 2 - Přístup k perzistenci}{65}{subsubsection.5.4.2}%
 \contentsline {paragraph}{\itshape \bfseries {Relevantní služby}}{65}{section*.11}%
 \contentsline {paragraph}{\itshape \bfseries {Průběh scénáře}}{65}{section*.12}%
-\contentsline {subsubsection}{\numberline {5.4.3}Scénář 3 - zátěž zpracování dat}{65}{subsubsection.5.4.3}%
+\contentsline {subsubsection}{\numberline {5.4.3}Scénář 3 - Výpočetní zátěž}{65}{subsubsection.5.4.3}%
 \contentsline {paragraph}{\itshape \bfseries {Relevantní služby}}{66}{section*.14}%
 \contentsline {paragraph}{\itshape \bfseries {Průběh scénáře}}{66}{section*.15}%
-\contentsline {subsubsection}{\numberline {5.4.4}Scénář 4 - komunikace mezi službami}{67}{subsubsection.5.4.4}%
+\contentsline {subsubsection}{\numberline {5.4.4}Scénář 4 - Vzájemná komunikace služeb}{67}{subsubsection.5.4.4}%
 \contentsline {paragraph}{\itshape \bfseries {Relevantní služby}}{67}{section*.17}%
 \contentsline {paragraph}{\itshape \bfseries {Průběh scénáře}}{67}{section*.18}%
-\contentsline {subsubsection}{\numberline {5.4.5}Scénář 5 - rychlost odpovědi po startu služby}{68}{subsubsection.5.4.5}%
+\contentsline {subsubsection}{\numberline {5.4.5}Scénář 5 - Rychlost odpovědi po startu služby}{68}{subsubsection.5.4.5}%
 \contentsline {paragraph}{\itshape \bfseries {Relevantní služby}}{68}{section*.20}%
 \contentsline {paragraph}{\itshape \bfseries {Průběh scénáře}}{69}{section*.21}%
 \contentsline {subsection}{\numberline {5.5}Spouštění scénářů}{70}{subsection.5.5}%
@@ -136,12 +136,12 @@
 \contentsline {subsubsection}{\numberline {6.3.1}Vývojové prostředí}{76}{subsubsection.6.3.1}%
 \contentsline {subsubsection}{\numberline {6.3.2}Knihovny třetích stran}{77}{subsubsection.6.3.2}%
 \contentsline {subsection}{\numberline {6.4}Analýza testování}{78}{subsection.6.4}%
-\contentsline {subsubsection}{\numberline {6.4.1}Scénář 1}{78}{subsubsection.6.4.1}%
-\contentsline {subsubsection}{\numberline {6.4.2}Scénář 2}{78}{subsubsection.6.4.2}%
-\contentsline {subsubsection}{\numberline {6.4.3}Scénář 3}{79}{subsubsection.6.4.3}%
-\contentsline {subsubsection}{\numberline {6.4.4}Scénář 4}{79}{subsubsection.6.4.4}%
-\contentsline {subsubsection}{\numberline {6.4.5}Scénář 5}{79}{subsubsection.6.4.5}%
-\contentsline {subsection}{\numberline {6.5}Závěr analýzy}{80}{subsection.6.5}%
+\contentsline {subsubsection}{\numberline {6.4.1}Scénář 1 - Výkonnost komunikace}{78}{subsubsection.6.4.1}%
+\contentsline {subsubsection}{\numberline {6.4.2}Scénář 2 - Přístup k perzistenci}{78}{subsubsection.6.4.2}%
+\contentsline {subsubsection}{\numberline {6.4.3}Scénář 3 - Výpočetní zátěž}{78}{subsubsection.6.4.3}%
+\contentsline {subsubsection}{\numberline {6.4.4}Scénář 4 - Vzájemná komunikace služeb}{79}{subsubsection.6.4.4}%
+\contentsline {subsubsection}{\numberline {6.4.5}Scénář 5 - Rychlost odpovědi služby po startu}{79}{subsubsection.6.4.5}%
+\contentsline {subsection}{\numberline {6.5}Závěr analýzy}{79}{subsection.6.5}%
 \contentsline {section}{\numberline {7}Doporučení pro použití AOT kompilace v dotnet}{81}{section.7}%
 \contentsline {section}{\numberline {8}Rozšíření a budoucí práce}{82}{section.8}%
 \contentsline {section}{Závěr}{83}{section*.29}%

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.8)  28 APR 2024 19:39
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.8)  28 APR 2024 21:37
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1517,7 +1517,7 @@ File: se-utf8.def 2019/11/29 v1.12 stringenc: UTF-8
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `prace.out' has not changed.
-(rerunfilecheck)             Checksum: 22B5D164BEDB274B2AD86475A3C5508A;22369.
+(rerunfilecheck)             Checksum: 947092E377D2E056FDD8667E48654929;23081.
  ) 
 Here is how much of TeX's memory you used:
  38530 strings out of 476025
@@ -1528,7 +1528,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  140i,17n,135p,1633b,2853s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbi1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
-Output written on prace.pdf (89 pages, 1944684 bytes).
+Output written on prace.pdf (89 pages, 1946771 bytes).
 PDF statistics:
  1298 PDF objects out of 1440 (max. 8388607)
  296 named destinations out of 1000 (max. 500000)

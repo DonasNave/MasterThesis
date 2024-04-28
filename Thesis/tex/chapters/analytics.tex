@@ -124,56 +124,37 @@ Pro zjednodušení procesu vývoje a využití existující funkcionality byly v
 
 \n{2}{Analýza testování}
 
-Následující sekce se zabývá analýzou testovacích scénářů a výsledků testování. Testování bylo provedeno na základě předem definované metodiky. Podkladem testů byly definované scénáře, které byly vytvořeny s ohledem na funkční a nefunkční požadavky. Výsledky testování byly zaznamenány a analyzovány.
+Následující sekce se zabývá analýzou testovacích scénářů a výsledků testování. Testování bylo provedeno na základě předem definované metodiky. Podkladem testů byly definované scénáře, které byly vytvořeny s ohledem na funkční a nefunkční požadavky. Při testování byl nezávisle na spuštěný test zaznaménáván stav hostitelského systému s ohledem na spuštěné kontejnery a využití systémových prostředků. Samotné služby využívaly předem definované metry ve frameworku ASP.NET pro dodatečnou diagnostiku a monitorování. Výsledky testování byly zaznamenány a analyzovány.
 
-\n{3}{Scénář 1}
+\n{3}{Scénář 1 - Výkonnost komunikace}
 
-První scénář se zabíral jednoduchou funkcionalitou dotazu na healthcheck endpoint a meřením výkonu kestrel serveru u odpovědí na požadavky skrze REST API.
-Následující výsledky představují průměrnou dobu odezvy serveru na požadavek v milisekundách. 
+První scénář se zabíral jednoduchou funkcionalitou dotazu na healthcheck endpoint a meřením výkonu kestrel serveru u odpovědí na požadavky skrze REST API. Testování přineslo rozdílné výkonostní výsledky mezi JIT a AOT kompilací. Druhá zmíněna si vyžádaval větší systémové zdroje pro obsloužení požadavků a obecně byl pomalejší ve zpracování požadvaků. Čistá rychlost zpracování požadavku a odpovědi není v mnoha případech kritickým faktorem. Avšak v případě velkého množství požadavků, může být rozdíl v řádech milisekund zásadní.
 
-Na snímcích jsou zachyceny vybrané dashboardy z nástroje Grafana určené pro monitorování scénaře 1. 
+TODO: Foto dashboard + tabulka výsledků + stručné vysvětlení
 
-Testování přineslo překvapení ve výkonnostním rozdílu, jenž byl zaznamenán mezi JIT a AOT kompilací. Výsledky byly výrazně v neprospěch AOT kompilace. Samotná rychlost serveru není v mnoha případech kritickým faktorem, avšak v případě velkého množství požadavků, může být rozdíl v řádech milisekund zásadní.
+\n{3}{Scénář 2 - Přístup k perzistenci}
 
-\n{3}{Scénář 2}
+Scénář se zabýval výkonností přístupu k persistenci, respektive zachystením reálného scénáře, kdy jsou data získávána a ukládána do databáze. Faktorem byla jak samotná rychlost služby v ohledu komunikace a serializace dat, tak rychlost zpracování požadavku databází. Ve výsledku je znatelný rozdíl rychlosti odpovědi v porovnání s prvním scénářem. Databáze vnesla další režii a zmenšila procentuální rozdíl mezi AOT a JIT.
 
-První scénář se zabíral jednoduchou funkcionalitou a meřením výkonu kestrel serveru a odpovědí na požadavky v REST API.
+TODO: Foto dashboard + tabulka výsledků + stručné vysvětlení
 
-Následující výsledky představují průměrnou dobu odezvy serveru na požadavek v milisekundách. 
+\n{3}{Scénář 3 - Výpočetní zátěž}
 
-Na snímcích jsou zachyceny vybrané dashboardy z nástroje Grafana určené pro monitorování scénaře 1. 
+Za účelem zjištění výkonnosti služeb, jejich potencionálně odlišné využití systémového API byl otestován scénář výpočetní zátěže. Na jednotlivé služby byly vysílány požadavky na výpočet 40-tého Fibonacciho čísla rekurzivní metodou. Výsledky testování ukázaly konsistnetně vyšší počet zpracovaných požadavků v případě AOT kompilace. 
 
-Testování přineslo překvapení ve výkonnostním rozdílu, jenž byl zaznamenán mezi JIT a AOT kompilací. Výsledky byly výrazně v neprospěch AOT kompilace. Samotná rychlost serveru není v mnoha případech kritickým faktorem, avšak v případě velkého množství požadavků, může být rozdíl v řádech milisekund zásadní.
+TODO: Foto dashboard + tabulka výsledků + stručné vysvětlení
 
-\n{3}{Scénář 3}
+\n{3}{Scénář 4 - Vzájemná komunikace služeb}
 
-První scénář se zabíral jednoduchou funkcionalitou a meřením výkonu kestrel serveru a odpovědí na požadavky v REST API.
+Komplexnější situace pro aplikaci byla simulována ve čtvrtém scénáři. Zde na základě požadavku na EPS byla vyvolána událost do RabbitMQ, načež byla zpracována službou BPS. Ta na jejím základě stáhla patřičný záznam pomocí RPC z FUS a provedla simulaci zpracování dat výpočtem Fibonacciho čísla. Situace simulovala kombinaci synchronní a asynchronní komunikace mezi službami doplněnou o výpočetní zátěž. Výsledky přiblížily služby v obou kompilačních režimech a ukázaly pohled bližší reálnému nasazení, kdy čistě výkkonostní rozdíly kompilací nehrají tak zásadní roli. 
 
-Následující výsledky představují průměrnou dobu odezvy serveru na požadavek v milisekundách. 
+TODO: Foto dashboard + tabulka výsledků
 
-Na snímcích jsou zachyceny vybrané dashboardy z nástroje Grafana určené pro monitorování scénaře 1. 
+\n{3}{Scénář 5 - Rychlost odpovědi služby po startu}
 
-Testování přineslo překvapení ve výkonnostním rozdílu, jenž byl zaznamenán mezi JIT a AOT kompilací. Výsledky byly výrazně v neprospěch AOT kompilace. Samotná rychlost serveru není v mnoha případech kritickým faktorem, avšak v případě velkého množství požadavků, může být rozdíl v řádech milisekund zásadní.
+Simulaci serveless nasazení byla vyvolána v tomto scénáři. Jednotlivé varianty služby SRS byly v rámci testu zpuštěny, kontrolovány než se dostaly do stavu \emph{healthy} a následně nad nimi zavolán dotaz na generovaná data. Výsledky ukázaly, že služba kompilované nativním AOT způsobem byly mnohem rychleji dostupné a odpovídaly na požadavky dříve, než služba kompilované do .NET runtime.
 
-\n{3}{Scénář 4}
-
-První scénář se zabíral jednoduchou funkcionalitou a meřením výkonu kestrel serveru a odpovědí na požadavky v REST API.
-
-Následující výsledky představují průměrnou dobu odezvy serveru na požadavek v milisekundách. 
-
-Na snímcích jsou zachyceny vybrané dashboardy z nástroje Grafana určené pro monitorování scénaře 1. 
-
-Testování přineslo překvapení ve výkonnostním rozdílu, jenž byl zaznamenán mezi JIT a AOT kompilací. Výsledky byly výrazně v neprospěch AOT kompilace. Samotná rychlost serveru není v mnoha případech kritickým faktorem, avšak v případě velkého množství požadavků, může být rozdíl v řádech milisekund zásadní.
-
-\n{3}{Scénář 5}
-
-První scénář se zabíral jednoduchou funkcionalitou a meřením výkonu kestrel serveru a odpovědí na požadavky v REST API.
-
-Následující výsledky představují průměrnou dobu odezvy serveru na požadavek v milisekundách. 
-
-Na snímcích jsou zachyceny vybrané dashboardy z nástroje Grafana určené pro monitorování scénaře 1. 
-
-Testování přineslo překvapení ve výkonnostním rozdílu, jenž byl zaznamenán mezi JIT a AOT kompilací. Výsledky byly výrazně v neprospěch AOT kompilace. Samotná rychlost serveru není v mnoha případech kritickým faktorem, avšak v případě velkého množství požadavků, může být rozdíl v řádech milisekund zásadní.
+TODO: Foto dashboard + tabulka výsledků
 
 \n{2}{Závěr analýzy}
 

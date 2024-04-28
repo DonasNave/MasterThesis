@@ -66,7 +66,7 @@ Každý scénař má definován vlastní dashboard v Grafaně, který je využit
 
 Následující sekce obsahuje popis scénářů, které byly vytvořeny pro testování výkonu a škálovatelnosti mikroslužeb kompilovaných JIT a AOT. Ke každému scénáři patři odpovídající sada souborů scriptů a konfigurací. Rovněž každý scénář disponuje vlastním interaktivním dashboardem v Grafaně, který umožňuje sledovat výsledky testů v reálném čase.
 
-\n{3}{Scénář 1 - schopnost odpovídat služeb}
+\n{3}{Scénář 1 - Výkonnost komunikace}
 
 Scénář 1 je zaměřen na schopnost mikroslužeb odpovídat na požadavky. K tomuto účelu je využit základní endpoint \emph{/health}, který informuje o stavu služby. Scénář je vytvořen tak, aby simuloval zátěž na mikroslužby a zjišťoval, zda jsou schopny odpovídat na požadavky.
 
@@ -90,7 +90,7 @@ Scénář se dělí na více kroků, aby při každém byl zjištěn dostatek zd
     \item \textbf{Krok 3} - Služby ukončují svoji činnost a zasílají data o provedeném testu
 \end{itemize}
 
-\n{3}{Scénář 2 - přístup k perzistenci}
+\n{3}{Scénář 2 - Přístup k perzistenci}
 
 Cílem tohoto scénáře je otestovat schopnost poradit si s vysokým množství asynchroních operací přístupu k datům. Scénář se pokouší identifikovat dodatečné režie spojené s přístupem k perzistenci a zjišťuje, zda jsou služby schopny zpracovat vysoký počet požadavků na databázi. Zejména je cílem pozorovat potencionál rozdíl v přístupu AOT a JIT zkompilované služby k systémovému API.
 
@@ -110,7 +110,7 @@ Cílem tohoto scénáře je otestovat schopnost poradit si s vysokým množství
     \item \textbf{Krok 3} - Služba ukončuje svoji činnost a zasílá data o prevedeném testu
 \end{itemize}
 
-\n{3}{Scénář 3 - zátěž zpracování dat}
+\n{3}{Scénář 3 - Výpočetní zátěž}
 
 Cílem tohoto scénáře je otestovat schopnost mikroslužeb v jednotlivých kompilacích zpracovat náročnější operace. Scénář se zaměřuje na samotnou podstatu přístupu k vnitřnímu systémového API, efektivitě jeho využití a další režii, která by mohla být odlišná mezi JIT a AOT kompilací.
 
@@ -133,7 +133,7 @@ Předmětem scénář jsou dva výpočetně náročné algoritmy - faktoriál a 
     
 \end{itemize}
 
-\n{3}{Scénář 4 - komunikace mezi službami}
+\n{3}{Scénář 4 - Vzájemná komunikace služeb}
 
 Tento scénář je zaměřen na rychlost a zátěž celkového systému při splnění požadavků vyžadující komunikaci mezi službami. Scénář je vytvořen tak, aby vyvolal událost z jedné služby, která je zpracována jinou službou. Pro splnění události je potřeba dat z perzistentního úložiště, která jsou získána ze třetí služby.
 
@@ -159,7 +159,7 @@ Tento scénář je zaměřen na rychlost a zátěž celkového systému při spl
     \item \textbf{Krok 7} - Služby ukončují svoji činnost a zasílají data o prevedeném testu
 \end{itemize}
 
-\n{3}{Scénář 5 - rychlost odpovědi po startu služby}
+\n{3}{Scénář 5 - Rychlost odpovědi po startu služby}
 
 Cílem tohoto scénáře je otestovat rychlost spuštění služby. Scénář testuje, jak rychle je služba schopna odpovědět na požadavek po spuštění. V rámci testu jsou testovány různé endpointy, které jsou volány po spuštění služby.
 
