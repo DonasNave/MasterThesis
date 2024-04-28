@@ -1,19 +1,8 @@
-# Master's thesis - SDT
+# Master's thesis
+
+Masters thesis analysing differences between service compiled in .NET using native AOT and JIT compilation.
 
 ## Guide
 
-- [Idea](./Documentation/Assignment/idea.md)
-- Tool Architecture
-  - [Core Framework](./Documentation/Tool-architecture/framework.md)
-  - [Plugin System](./Documentation/Tool-architecture/plugin.md)
-  - [Configuration and Deployment Datasets and Rules](./Documentation/Tool-architecture/abstraction.md)
-
-## Abstract
-
-## Introduction
-
-## Related work
-
-## Methodology
-
-## Results
+- [Thesis text](./Thesis/prace.pdf)
+- [Tools](./Source/Tools/readme.md)
