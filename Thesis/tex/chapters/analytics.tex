@@ -99,10 +99,10 @@ Sestavení obrazu je závislé na přípravu prostředí, vyhodnocení a stažen
 \tab{Velikost obrazu služeb}{tab:priklad}{0.65}{|l|c|c|r|}{
   \hline
     & JIT (MB) & AOT (MB) & AOT \% zmenšení \\ \hline
-  \emph{SRS} & 125.63 & 31.41 & 75.0 \\ \hline
-  \emph{FUS} & 143.19 & 38.32 & 73.2 \\ \hline
-  \emph{BPS} & 126.50 & 31.40 & 75.2 \\ \hline
-  \emph{EPS} & 126.45 & 31.74 & 74.9 \\ \hline
+  \emph{SRS} & 121.97 & 31.41 & 74.3 \\ \hline
+  \emph{FUS} & 134.36 & 38.32 & 71.5 \\ \hline
+  \emph{BPS} & 122.39 & 31.40 & 74.3 \\ \hline
+  \emph{EPS} & 122.26 & 31.74 & 74.0 \\ \hline
 }
 
 \n{3}{Vývojové prostředí}
@@ -163,5 +163,5 @@ Na základě výsledků vývoje, výstupu a testování služeb lze odpovědět 
 \begin{itemize}
   \item \textbf{Hypotéza 1} - Hypotéza, že vývoj služeb s jak AOT, tak JIT kompilací je v rámci podporované funkcionality systémových knihoven a ASP.NET možný s podobným API se ukázal jako ne zcela pravdivý. Při vývoji nastaly komplikace se serializací konfigurace, na které bylo nutné reagovat využitím odlišného API. Zároveň tento způsob serializace nebyl kompilátorem označen jako potencionálně problematický. Další problémy nastaly s využitím Entity Framework. Tento ORM využívá pro provádění operací nad databází tzv. tracking, který zaznamená změny nad aplikačními objekty a podle nich tvoří výsledné databázové operace. Vypnutím trackingu bylo umožněno se na datové entity dotázat a aktualizovat je. Operace vložení nové entity však bez trackingu nebyla možná. Pro knihovny 3. stran lze obecně říci, že podpora AOT kompilace není vždy úplně zřejmá a i v situacích kdy AOT varování jsou implementovány, lze očekávat chybné chování.
   \item \textbf{Hypotéza 2} - Výsledky ukazují, že služby napsané v nativním kódu se výrazněji rychleji spouští jak na hostitelských systémech, tak ve virtualizovaném prostředí. Zároveň binární velikosti samotných aplikací jsou mnohonásobně větší, než je tomu u služeb vyžadující .NET runtime. To je ovšem kompenzováno při virtualizovaném spuštění, kdy obraz služby pro vytvoření plnohodnotného kontejneru vyžaduje mnohem méně závislotí z hlediska paměti. Výsledné obrazy jsou tedy menší a rychleji spustitelné. Hypotéza byla potvrzena.
-  \item \textbf{Hypotéza 3} - Na základě dostupných metrik bylo potvrzeno, že obecně služby kompilované do nativního kódu poskytují o něco horší výkon a jsou paměťově náročnější než služby kompilované do .NET runtime. Tento fakt je způsoben optimalizacemi runtime za běhu, které jsou v případě nativního kódu ztraceny. Dynamická kompilace a generování typů za běhu je náročnější než statická kompilace a generování typů při kompilaci, ale pouze při prvním použití. Rozdíl však není natolik patrný a je rychle zastíněn režií na doménovou logiku, výpočet či přístup k vzdáleným datům. Výsledky testování potvrzují hypotézu.
+  \item \textbf{Hypotéza 3} - Na základě dostupných metrik bylo potvrzeno, že obecně služby kompilované do nativního kódu poskytují vyšší výkon a jsou méně paměťově náročné než služby kompilované pro .NET runtime. Tento fakt je způsoben rozdílem v době, kdy se část generují typy a část funkcionality aplikace. Pro .NET runtime za běhu a pro nativní AOT při sestavení. Zároveň bylo ale pozorováno zvýšené využití GC v případě služeb kompilovaných do nativního kódu. I přes tuto dodatečnou režii byly nativní služby efektivnější a hypotéza byla potvrzena.
 \end{itemize}

@@ -26,7 +26,7 @@ Experimentální nastavení zahruje dvě hlavní součásti řízení testovací
 Testy budou prováděny na identických hardwarových nastaveních s následujícími specifikacemi:
 
 \begin{itemize}
-    \item \textbf{Operační systém}: MacOS Sonoma 14.4.1
+    \item \textbf{Operační systém}: macOS Sonoma 14.4.1
     \item \textbf{Procesor}: Apple M1 8-core CPU
     \item \textbf{Paměť}: 8 GB LPDDR4X
 \end{itemize}
@@ -44,7 +44,7 @@ Na základě předběžného přehledu literatury a teoretických výhod každé
 \begin{itemize}
     \item \textbf{Hypotéza 1}: Vývoj služeb bude možný za pomocí obou kompilačních režimů, s minimálními rozdíly v použitém API a systémových knihovnách. Při použití knihoven 3. stran bude dostatečně jasná kompatibilita mezi oběma režimy.
     \item \textbf{Hypotéza 2}: Kompilace AOT má za následek rychlejší spouštění, ale může vést k větším binárním velikostem ve srovnání s kompilací JIT. Výsledný virtualizovaný obraz bude ovšem mít výrazně nižší velikost kvůli absenci .NET runtime.
-    \item \textbf{Hypotéza 3}: Kompilace JIT poskytuje lepší optimalizaci výkonu a paměti za běhu díky své schopnosti přizpůsobit se skutečnému běhovému prostředí.
+    \item \textbf{Hypotéza 3}: Kompilace AOT poskytuje lepší optimalizaci výkonu díky generování typů a funkcí, jež by museli být dodatečně tvořeny za běhu. Tím pádem je očekáváno, že služby kompilované do nativního kódu budou mít nižší využití CPU, paměti a diskových operací.
 \end{itemize}
 
 \n{2}{Definice scénářů}

@@ -153,8 +153,6 @@ services:
         condition: service_started
       rabbitmq:
         condition: service_started
-      fus-jit-service:
-        condition: service_healthy
     networks:
       - stack-network
     deploy:
@@ -269,8 +267,6 @@ services:
       otel-lgtm:
         condition: service_started
       rabbitmq:
-        condition: service_started
-      fus-aot-service:
         condition: service_started
     networks:
       - stack-network
