@@ -22,12 +22,65 @@
   "links": [],
   "panels": [
     {
-      "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
         "y": 0
+      },
+      "id": 29,
+      "title": "Container perfromance",
+      "type": "row"
+    },
+    {
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 1
+      },
+      "id": 31,
+      "libraryPanel": {
+        "name": "Container - CPU Usage (s) - rate",
+        "uid": "edk7lrjfhcx6of"
+      },
+      "title": "CPU Usage (s) - rate"
+    },
+    {
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 1
+      },
+      "id": 35,
+      "libraryPanel": {
+        "name": "Container - Memory footprint (B)",
+        "uid": "cdk7ltqiylzb4d"
+      },
+      "title": "Container - Memory footprint (B)"
+    },
+    {
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 1
+      },
+      "id": 33,
+      "libraryPanel": {
+        "name": "Container - IO Time spent (s)",
+        "uid": "fdk7lunyy639cd"
+      },
+      "title": "Container - IO Time spent (s)"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 9
       },
       "id": 3,
       "panels": [],
@@ -66,7 +119,7 @@
         "h": 4,
         "w": 6,
         "x": 0,
-        "y": 1
+        "y": 10
       },
       "id": 19,
       "options": {
@@ -240,7 +293,7 @@
         "h": 2,
         "w": 5,
         "x": 6,
-        "y": 1
+        "y": 10
       },
       "id": 22,
       "options": {
@@ -409,12 +462,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "light-blue",
+                "color": "light-purple",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
           },
@@ -426,9 +475,9 @@
         "h": 2,
         "w": 5,
         "x": 11,
-        "y": 1
+        "y": 10
       },
-      "id": 23,
+      "id": 24,
       "options": {
         "colorMode": "background",
         "graphMode": "area",
@@ -454,14 +503,13 @@
           },
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "file_event_consumed_counter_total{job=\"DTA_AOT_BPS\"}",
+          "expr": "get_file_procedure_calls_counter_total{job=\"DTA_JIT_FUS\"}",
           "fullMetaSearch": false,
-          "hide": false,
           "includeNullMetadata": true,
           "instant": false,
-          "legendFormat": "AOT",
+          "legendFormat": "JIT",
           "range": true,
-          "refId": "B",
+          "refId": "A",
           "useBackend": false
         },
         {
@@ -471,17 +519,18 @@
           },
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "file_event_consumed_counter_total{job=\"DTA_JIT_BPS\"}",
+          "expr": "get_file_procedure_calls_counter_total{job=\"DTA_AOT_FUS\"}",
           "fullMetaSearch": false,
+          "hide": false,
           "includeNullMetadata": true,
           "instant": false,
-          "legendFormat": "JIT",
+          "legendFormat": "AOT",
           "range": true,
-          "refId": "A",
+          "refId": "B",
           "useBackend": false
         }
       ],
-      "title": "BPS - File events consumed",
+      "title": "FUS - gRPC Get File calls",
       "type": "stat"
     },
     {
@@ -512,7 +561,7 @@
         "h": 4,
         "w": 8,
         "x": 16,
-        "y": 1
+        "y": 10
       },
       "id": 14,
       "options": {
@@ -581,7 +630,7 @@
         "h": 2,
         "w": 5,
         "x": 6,
-        "y": 3
+        "y": 12
       },
       "id": 5,
       "options": {
@@ -656,8 +705,12 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "light-purple",
+                "color": "light-blue",
                 "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
               }
             ]
           },
@@ -669,9 +722,9 @@
         "h": 2,
         "w": 5,
         "x": 11,
-        "y": 3
+        "y": 12
       },
-      "id": 24,
+      "id": 23,
       "options": {
         "colorMode": "background",
         "graphMode": "area",
@@ -697,13 +750,14 @@
           },
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "get_file_procedure_calls_counter_total{job=\"DTA_JIT_FUS\"}",
+          "expr": "file_event_consumed_counter_total{job=\"DTA_AOT_BPS\"}",
           "fullMetaSearch": false,
+          "hide": false,
           "includeNullMetadata": true,
           "instant": false,
-          "legendFormat": "JIT",
+          "legendFormat": "AOT",
           "range": true,
-          "refId": "A",
+          "refId": "B",
           "useBackend": false
         },
         {
@@ -713,18 +767,17 @@
           },
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "get_file_procedure_calls_counter_total{job=\"DTA_AOT_FUS\"}",
+          "expr": "file_event_consumed_counter_total{job=\"DTA_JIT_BPS\"}",
           "fullMetaSearch": false,
-          "hide": false,
           "includeNullMetadata": true,
           "instant": false,
-          "legendFormat": "AOT",
+          "legendFormat": "JIT",
           "range": true,
-          "refId": "B",
+          "refId": "A",
           "useBackend": false
         }
       ],
-      "title": "FUS - gRPC Get File calls",
+      "title": "BPS - File events consumed",
       "type": "stat"
     },
     {
@@ -758,7 +811,7 @@
         "h": 4,
         "w": 4,
         "x": 0,
-        "y": 5
+        "y": 14
       },
       "id": 21,
       "options": {
@@ -847,7 +900,7 @@
         "h": 4,
         "w": 4,
         "x": 4,
-        "y": 5
+        "y": 14
       },
       "id": 20,
       "options": {
@@ -932,7 +985,7 @@
         "h": 4,
         "w": 4,
         "x": 8,
-        "y": 5
+        "y": 14
       },
       "id": 25,
       "options": {
@@ -1017,7 +1070,7 @@
         "h": 4,
         "w": 4,
         "x": 12,
-        "y": 5
+        "y": 14
       },
       "id": 27,
       "options": {
@@ -1102,7 +1155,7 @@
         "h": 4,
         "w": 4,
         "x": 16,
-        "y": 5
+        "y": 14
       },
       "id": 26,
       "options": {
@@ -1187,7 +1240,7 @@
         "h": 4,
         "w": 4,
         "x": 20,
-        "y": 5
+        "y": 14
       },
       "id": 28,
       "options": {
@@ -1277,7 +1330,7 @@
         "h": 4,
         "w": 8,
         "x": 0,
-        "y": 9
+        "y": 18
       },
       "id": 12,
       "options": {
@@ -1350,7 +1403,7 @@
         "h": 4,
         "w": 8,
         "x": 8,
-        "y": 9
+        "y": 18
       },
       "id": 16,
       "options": {
@@ -1423,7 +1476,7 @@
         "h": 4,
         "w": 8,
         "x": 16,
-        "y": 9
+        "y": 18
       },
       "id": 18,
       "options": {
@@ -1496,7 +1549,7 @@
         "h": 4,
         "w": 24,
         "x": 0,
-        "y": 13
+        "y": 22
       },
       "id": 17,
       "options": {
@@ -1545,9 +1598,9 @@
     "list": [
       {
         "current": {
-          "selected": true,
-          "text": "test-1714230008",
-          "value": "test-1714230008"
+          "selected": false,
+          "text": "test_run_2404_06",
+          "value": "test_run_2404_06"
         },
         "datasource": {
           "type": "influxdb",
@@ -1570,13 +1623,13 @@
     ]
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "Scenario 4 dashboard",
   "uid": "eficbhotizcxsf",
-  "version": 5,
+  "version": 6,
   "weekStart": ""
 }

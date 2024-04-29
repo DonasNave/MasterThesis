@@ -22,12 +22,65 @@
   "links": [],
   "panels": [
     {
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 0
+      },
+      "id": 27,
+      "libraryPanel": {
+        "name": "Container - CPU Usage (s) - rate",
+        "uid": "edk7lrjfhcx6of"
+      },
+      "title": "CPU Usage (s) - rate"
+    },
+    {
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 0
+      },
+      "id": 29,
+      "libraryPanel": {
+        "name": "Container - Memory footprint (B)",
+        "uid": "cdk7ltqiylzb4d"
+      },
+      "title": "Container - Memory footprint (B)"
+    },
+    {
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 0
+      },
+      "id": 31,
+      "libraryPanel": {
+        "name": "Container - IO Time spent (s)",
+        "uid": "fdk7lunyy639cd"
+      },
+      "title": "Container - IO Time spent (s)"
+    },
+    {
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 8
+      },
+      "id": 25,
+      "title": "Container performance",
+      "type": "row"
+    },
+    {
       "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 0
+        "y": 9
       },
       "id": 3,
       "panels": [],
@@ -65,7 +118,7 @@
         "h": 3,
         "w": 6,
         "x": 0,
-        "y": 1
+        "y": 10
       },
       "id": 21,
       "options": {
@@ -137,7 +190,7 @@
         "h": 3,
         "w": 6,
         "x": 6,
-        "y": 1
+        "y": 10
       },
       "id": 20,
       "options": {
@@ -211,7 +264,7 @@
         "h": 6,
         "w": 12,
         "x": 12,
-        "y": 1
+        "y": 10
       },
       "id": 23,
       "options": {
@@ -383,7 +436,7 @@
         "h": 3,
         "w": 6,
         "x": 0,
-        "y": 4
+        "y": 13
       },
       "id": 19,
       "options": {
@@ -561,7 +614,7 @@
         "h": 3,
         "w": 6,
         "x": 6,
-        "y": 4
+        "y": 13
       },
       "id": 5,
       "options": {
@@ -650,7 +703,7 @@
         "h": 4,
         "w": 8,
         "x": 0,
-        "y": 7
+        "y": 16
       },
       "id": 12,
       "options": {
@@ -723,7 +776,7 @@
         "h": 4,
         "w": 8,
         "x": 8,
-        "y": 7
+        "y": 16
       },
       "id": 16,
       "options": {
@@ -796,7 +849,7 @@
         "h": 4,
         "w": 8,
         "x": 16,
-        "y": 7
+        "y": 16
       },
       "id": 18,
       "options": {
@@ -869,7 +922,7 @@
         "h": 3,
         "w": 24,
         "x": 0,
-        "y": 11
+        "y": 20
       },
       "id": 24,
       "options": {
@@ -943,7 +996,7 @@
         "h": 3,
         "w": 24,
         "x": 0,
-        "y": 14
+        "y": 23
       },
       "id": 17,
       "options": {
@@ -992,9 +1045,9 @@
     "list": [
       {
         "current": {
-          "selected": true,
-          "text": "test-1714216217",
-          "value": "test-1714216217"
+          "selected": false,
+          "text": "test_run_2204_01",
+          "value": "test_run_2204_01"
         },
         "datasource": {
           "type": "influxdb",
@@ -1017,13 +1070,13 @@
     ]
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "Scenario 3 dashboard",
   "uid": "fficbhotizcxsf",
-  "version": 10,
+  "version": 11,
   "weekStart": ""
 }

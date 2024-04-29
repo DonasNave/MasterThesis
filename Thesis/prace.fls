@@ -1466,6 +1466,11 @@ INPUT ./prace.loa
 INPUT prace.loa
 INPUT prace.loa
 OUTPUT prace.loa
+INPUT ./graphics/images/scenario1-dashboard.png
+INPUT ./graphics/images/scenario1-dashboard.png
+INPUT graphics/images/scenario1-dashboard.png
+INPUT ./graphics/images/scenario1-dashboard.png
+INPUT ./graphics/images/scenario1-dashboard.png
 INPUT /usr/local/texlive/2023/texmf-dist/tex/generic/stringenc/se-pdfdoc.def
 INPUT /usr/local/texlive/2023/texmf-dist/tex/generic/stringenc/se-pdfdoc.def
 INPUT /usr/local/texlive/2023/texmf-dist/tex/generic/stringenc/se-pdfdoc.def
