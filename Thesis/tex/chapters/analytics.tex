@@ -147,7 +147,12 @@ První scénář se zabíral jednoduchou funkcionalitou dotazu na healthcheck en
 
 Scénář se zabýval výkonností přístupu k persistenci, respektive zachystením reálného scénáře, kdy jsou data získávána a ukládána do databáze. Faktorem byla jak samotná rychlost služby v ohledu komunikace a serializace dat, tak rychlost zpracování požadavku databází. Ve výsledku je znatelný rozdíl rychlosti odpovědi v porovnání s prvním scénářem. Databáze vnesla další režii a zmenšila procentuální rozdíl mezi AOT a JIT.
 
-TODO: Foto dashboard + tabulka výsledků + stručné vysvětlení
+\tab{Průměrné využití zdrojů službou FUS a doba odpovědi stažení a nahrání souboru}{tab:service_metrics}{1.0}{|l|r|r|r|r|}{
+  \hline
+  Služba - Kompilace & CPU (ms) & IO (ns) & Paměť (MB) & Doba požadavku (ms) \\ \hline \hline
+  \emph{FUS-AOT} & 1.845 & 2.208 & 29.3 & - \\ \hline
+  \emph{FUS-JIT} & 16.7 & 2.000 & 60.9 & - \\ \hline
+}
 
 \n{3}{Scénář 3 - Výpočetní zátěž}
 
