@@ -16,7 +16,6 @@ RUN dotnet build "DTA.SRS.csproj" -c Release-JIT -o /app/build
 FROM build AS publish
 RUN dotnet publish "DTA.SRS.csproj" -c Release-JIT -o /app/publish \
     -p:DebugType=None \
-    -p:PublishReadyToRun=true \
     -p:ExcludeFilesFromPublish=**/appsettings.Development.json
 
 # Clean up

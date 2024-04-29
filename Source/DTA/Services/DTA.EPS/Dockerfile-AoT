@@ -21,7 +21,6 @@ WORKDIR "/src/Services/DTA.EPS"
 FROM build AS publish
 RUN dotnet publish "DTA.EPS.csproj" -c Release-AOT -o /app/publish \
     -p:DebugType=None \
-    -p:PublishReadyToRun=true \
     -p:ExcludeFilesFromPublish=**/appsettings.Development.json
 
 # Clean up
