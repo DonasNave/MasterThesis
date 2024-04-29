@@ -128,9 +128,20 @@ Následující sekce se zabývá analýzou testovacích scénářů a výsledků
 
 \n{3}{Scénář 1 - Výkonnost komunikace}
 
-První scénář se zabíral jednoduchou funkcionalitou dotazu na healthcheck endpoint a meřením výkonu kestrel serveru u odpovědí na požadavky skrze REST API. Testování přineslo rozdílné výkonostní výsledky mezi JIT a AOT kompilací. Druhá zmíněna si vyžádaval větší systémové zdroje pro obsloužení požadavků a obecně byl pomalejší ve zpracování požadvaků. Čistá rychlost zpracování požadavku a odpovědi není v mnoha případech kritickým faktorem. Avšak v případě velkého množství požadavků, může být rozdíl v řádech milisekund zásadní.
+První scénář se zabíral jednoduchou funkcionalitou dotazu na healthcheck endpoint a meřením výkonu kestrel serveru u odpovědí na požadavky skrze REST API. Testování přineslo rozdílné výkonostní výsledky mezi JIT a AOT kompilací. Dle předpokladu služby s nativním kódem využívaly méně času procesoru. Paměťová stopa však u nich byla větší. Konečně, AOT služby byly schopné v průměru rychleji odpovídat. Čistá rychlost zpracování požadavku a odpovědi není v mnoha případech kritickým faktorem. Avšak v případě velkého množství požadavků, může být rozdíl v řádech milisekund zásadní.
 
-TODO: Foto dashboard + tabulka výsledků + stručné vysvětlení
+\tab{Průměrné využití zdrojů a doba odpovědi healthcheck služeb}{tab:service_metrics}{1.0}{|l|r|r|r|r|}{
+  \hline
+    Služba - Kompilace & CPU (ms) & IO (ns) & Paměť (MB) & Doba požadavku (ms) \\ \hline \hline
+  \emph{SRS-AOT} & 3.41 & 0.550 & 41.1 & 1.61 \\ \hline
+  \emph{SRS-JIT} & 9.69 & 0.453 & 41.3 & 3.84 \\ \hline
+  \emph{FUS-AOT} & 1.99 & 0.825 & 52.5 & 1.27 \\ \hline
+  \emph{FUS-JIT} & 7.62 & 0.458 & 39.3 & 2.22 \\ \hline
+  \emph{BPS-AOT} & 1.21 & 0.425 & 37.9 & 2.57 \\ \hline
+  \emph{BPS-JIT} & 9.24 & 0.550 & 36.3 & 1.96 \\ \hline
+  \emph{EPS-AOT} & 2.47 & 0.451 & 36.5 & 2.07 \\ \hline
+  \emph{EPS-JIT} & 6.63 & 0.686 & 35.3 & 3.09 \\ \hline
+}
 
 \n{3}{Scénář 2 - Přístup k perzistenci}
 

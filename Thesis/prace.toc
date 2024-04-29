@@ -135,15 +135,15 @@
 \contentsline {subsection}{\numberline {6.4}Analýza testování}{78}{subsection.6.4}%
 \contentsline {subsubsection}{\numberline {6.4.1}Scénář 1 - Výkonnost komunikace}{78}{subsubsection.6.4.1}%
 \contentsline {subsubsection}{\numberline {6.4.2}Scénář 2 - Přístup k perzistenci}{78}{subsubsection.6.4.2}%
-\contentsline {subsubsection}{\numberline {6.4.3}Scénář 3 - Výpočetní zátěž}{78}{subsubsection.6.4.3}%
+\contentsline {subsubsection}{\numberline {6.4.3}Scénář 3 - Výpočetní zátěž}{79}{subsubsection.6.4.3}%
 \contentsline {subsubsection}{\numberline {6.4.4}Scénář 4 - Vzájemná komunikace služeb}{79}{subsubsection.6.4.4}%
 \contentsline {subsubsection}{\numberline {6.4.5}Scénář 5 - Rychlost odpovědi služby po startu}{79}{subsubsection.6.4.5}%
 \contentsline {subsection}{\numberline {6.5}Závěr analýzy}{79}{subsection.6.5}%
 \contentsline {section}{\numberline {7}Doporučení pro použití AOT kompilace v dotnet}{81}{section.7}%
 \contentsline {section}{\numberline {8}Rozšíření a budoucí práce}{82}{section.8}%
-\contentsline {section}{Závěr}{83}{section*.29}%
-\contentsline {section}{Seznam použité literatury}{84}{section*.31}%
-\contentsline {section}{Seznam použitých symbolů a zkratek}{87}{section*.33}%
-\contentsline {section}{Seznam obrázků}{89}{section*.35}%
-\contentsline {section}{Seznam tabulek}{90}{section*.36}%
-\contentsline {section}{Seznam příloh}{91}{section*.37}%
+\contentsline {section}{Závěr}{83}{section*.30}%
+\contentsline {section}{Seznam použité literatury}{84}{section*.32}%
+\contentsline {section}{Seznam použitých symbolů a zkratek}{87}{section*.34}%
+\contentsline {section}{Seznam obrázků}{89}{section*.36}%
+\contentsline {section}{Seznam tabulek}{90}{section*.37}%
+\contentsline {section}{Seznam příloh}{91}{section*.38}%

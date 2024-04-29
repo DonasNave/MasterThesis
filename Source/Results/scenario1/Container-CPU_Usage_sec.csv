@@ -1,0 +1,7 @@
+﻿"Time","fus-aot-service","eps-aot-service","bps-jit-service","srs-jit-service","fus-jit-service","bps-aot-service","eps-jit-service","srs-aot-service"
+2024-04-29 18:23:00,,,,9.77 ms,,,,3.41 ms
+2024-04-29 18:24:00,1.99 ms,,,9.77 ms,7.62 ms,,6.96 ms,3.41 ms
+2024-04-29 18:25:00,1.99 ms,2.48 ms,9.24 ms,9.77 ms,7.62 ms,,6.52 ms,3.41 ms
+2024-04-29 18:26:00,1.99 ms,2.48 ms,9.24 ms,9.45 ms,7.62 ms,1.21 ms,6.52 ms,3.41 ms
+2024-04-29 18:27:00,1.99 ms,2.48 ms,9.24 ms,,,1.21 ms,6.52 ms,
+2024-04-29 18:28:00,,2.43 ms,9.24 ms,,,1.21 ms,,
