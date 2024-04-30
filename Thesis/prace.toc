@@ -27,23 +27,16 @@
 \contentsline {section}{\numberline {2}Microservice architektura}{27}{section.2}%
 \contentsline {subsection}{\numberline {2.1}Historie}{27}{subsection.2.1}%
 \contentsline {subsection}{\numberline {2.2}Základní principy}{27}{subsection.2.2}%
-\contentsline {subsubsection}{\numberline {2.2.1}Decentralizace}{28}{subsubsection.2.2.1}%
-\contentsline {subsubsection}{\numberline {2.2.2}Virtualizace a kontejnerizace}{28}{subsubsection.2.2.2}%
-\contentsline {subsubsection}{\numberline {2.2.3}Orchestrace}{28}{subsubsection.2.2.3}%
-\contentsline {subsubsection}{\numberline {2.2.4}Odolnost}{28}{subsubsection.2.2.4}%
-\contentsline {subsubsection}{\numberline {2.2.5}Škálování}{29}{subsubsection.2.2.5}%
 \contentsline {subsection}{\numberline {2.3}Komponenty}{29}{subsection.2.3}%
-\contentsline {subsubsection}{\numberline {2.3.1}API Gateway}{29}{subsubsection.2.3.1}%
-\contentsline {subsubsection}{\numberline {2.3.2}Service Discovery}{29}{subsubsection.2.3.2}%
-\contentsline {subsubsection}{\numberline {2.3.3}Load Balancer}{29}{subsubsection.2.3.3}%
-\contentsline {subsubsection}{\numberline {2.3.4}Komunikační systémy}{29}{subsubsection.2.3.4}%
-\contentsline {subsubsection}{\numberline {2.3.5}Databáze}{30}{subsubsection.2.3.5}%
-\contentsline {subsubsection}{\numberline {2.3.6}Bezpečnost}{31}{subsubsection.2.3.6}%
-\contentsline {subsection}{\numberline {2.4}Vývoj, testování a nasazení}{31}{subsection.2.4}%
-\contentsline {subsection}{\numberline {2.5}Výhody a nevýhody}{31}{subsection.2.5}%
+\contentsline {subsubsection}{\numberline {2.3.1}Obecné komponenty}{29}{subsubsection.2.3.1}%
+\contentsline {subsubsection}{\numberline {2.3.2}Komunikační systémy}{29}{subsubsection.2.3.2}%
+\contentsline {subsubsection}{\numberline {2.3.3}Databáze}{30}{subsubsection.2.3.3}%
+\contentsline {subsubsection}{\numberline {2.3.4}Bezpečnost}{30}{subsubsection.2.3.4}%
+\contentsline {subsection}{\numberline {2.4}Testování}{31}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Výhody a nevýhody}{32}{subsection.2.5}%
 \contentsline {subsection}{\numberline {2.6}Nasazení založené na mikroslužbách}{33}{subsection.2.6}%
 \contentsline {subsubsection}{\numberline {2.6.1}Strategie}{33}{subsubsection.2.6.1}%
-\contentsline {subsubsection}{\numberline {2.6.2}Cloud native nasazení}{33}{subsubsection.2.6.2}%
+\contentsline {subsubsection}{\numberline {2.6.2}Cloud-native nasazení}{34}{subsubsection.2.6.2}%
 \contentsline {section}{\numberline {3}Monitorování aplikace}{35}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Cíle monitorování}{35}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}Druhy dat}{35}{subsection.3.2}%
@@ -144,6 +137,6 @@
 \contentsline {section}{Závěr}{83}{section*.31}%
 \contentsline {section}{Seznam použité literatury}{84}{section*.33}%
 \contentsline {section}{Seznam použitých symbolů a zkratek}{87}{section*.35}%
-\contentsline {section}{Seznam obrázků}{89}{section*.37}%
-\contentsline {section}{Seznam tabulek}{90}{section*.38}%
-\contentsline {section}{Seznam příloh}{91}{section*.39}%
+\contentsline {section}{Seznam obrázků}{90}{section*.37}%
+\contentsline {section}{Seznam tabulek}{91}{section*.38}%
+\contentsline {section}{Seznam příloh}{92}{section*.39}%

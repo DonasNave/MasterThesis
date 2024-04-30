@@ -1,13 +1,12 @@
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                 MICROSERVICE                                  %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \n{1}{Microservice architektura}
 
-Při vývoji softwaru je možné aplikovat různé architektury a návrhové vzory. Mezi obecně populární a rozšířenou architekturu patří monolitická. V monolitické architektuře je celá aplikace rozdělena do několika vrstev, které jsou využívány k oddělení logiky. Tato architektura je jednoduchá na vývoj a nasazení, ale může být obtížné škálovat a udržovat s rostoucí složitostí aplikace. Monolitická architektura je založena na principu, že celá aplikace je spuštěna jako jediný proces a sdílí stejný kód a zdroje. To může způsobit problémy s výkonem, škálovatelností a odolností aplikace.
+Při vývoji softwaru je možné aplikovat různé architektury a návrhové vzory. Za základní vysoce rozšířenou architekturu lze považovat monolitickou architekturu. V rámci ní je celá aplikace rozdělena do několika vrstev, které jsou využívány k oddělení logiky. Tato architektura je jednoduchá na vývoj a nasazení, ale může být obtížně škálovatelná a udržitelná s rostoucí složitostí aplikace. Monolitická architektura je založena na principu, že celá aplikace je spuštěna jako jednotná instance, jenž sdílí stejný kód a zdroje. Tento styl nasazení aplikace je vystaven riziku problémů s výkonem, škálovatelností a odolností.
 
-Principiálně opačná je architektura microservice. Ta je založena na principu oddělení aplikace do několika samostatných služeb. Každá z těchto služeb je zodpovědná za určitou část funkcionality aplikace. Služby jsou navzájem nezávislé a komunikují mezi sebou pomocí definovaných rozhraní. Tím je zajištěno, že každá služba může být vyvíjena, nasazována a škálována nezávisle na ostatních. Tato architektura umožňuje vývojářům pracovat na menších a jednodušších částech aplikace, což zvyšuje produktivitu a umožňuje rychlejší iterace. Díky nezávislosti služeb je také možné dosáhnout vyšší odolnosti a škálovatelnosti aplikace. \cite{Martin2018}
+Fundamentálně opačná je architektura microservice. Ta je založena na principu oddělení aplikace do několika samostatných služeb. Každá z těchto služeb je zodpovědná za určitou část funkcionality aplikace. Služby jsou navzájem nezávislé a komunikují mezi sebou pomocí definovaných rozhraní. Tím je zajištěno, že každá služba může být vyvíjena, nasazována a škálována nezávisle na ostatních. Tato architektura umožňuje vývojářům pracovat na menších a jednodušších částech aplikace, což zvyšuje produktivitu a umožňuje rychlejší iterace. Díky nezávislosti služeb je také možné dosáhnout vyšší odolnosti a škálovatelnosti aplikace. \cite{Martin2018}
 
 \n{2}{Historie}
 
@@ -17,72 +16,61 @@ Opravdový přelom přišel postupně, nástupem a popularizací virtualizace a 
 
 \n{2}{Základní principy}
 
-V oblasti architektury mikroslužeb existuje několik základních principů, které tento přístup odlišují od tradičnějších softwarových architektur. Tyto principy nejsou jen teoretické, mají přímý dopad na to, jak jsou služby vyvíjeny, nasazovány a udržovány. Jejich využití přispívá k tvorbě vysoce flexibilní, škálovatelné a odolné architektuře.
+V oblasti architektury microservice existuje několik základních principů, které tento přístup odlišují od tradičnějších softwarových architektur. Tyto principy nejsou jen teoretické, mají přímý dopad na to, jak jsou služby vyvíjeny, nasazovány a udržovány. Jejich využití přispívá k tvorbě vysoce flexibilní, škálovatelné a odolné architektuře.
 
-\n{3}{Decentralizace}
-
-Jedním z hlavních principů microservice architektury je decentralizace. To znamená, že každá mikroslužba je zodpovědná za určitou část funkcionality aplikace. Mikroslužby jsou navzájem nezávislé a komunikují mezi sebou pomocí definovaných rozhraní. Tím je zajištěno, že každá mikroslužba může být vyvíjena, nasazována a škálována nezávisle na ostatních.
-
-\n{3}{Virtualizace a kontejnerizace}
-
-Virtualizace a kontejnerizace jsou klíčové technologie, které umožňují architekturu mikroslužeb. Virtualizace umožňuje provozovat více operačních systémů na jednom fyzickém hardwarovém hostiteli, čímž se snižuje počet potřebných fyzických strojů a zvyšuje efektivita využití zdrojů. Kontejnerizace jde ještě o krok dále tím, že zabalí aplikaci a její závislosti do kontejneru, který může běžet na libovolném serveru Linux nebo Windows. Tím je zajištěno, že aplikace funguje jednotně i přes rozdíly v prostředí nasazení.
-
-Kontejnerizace je obzvláště důležitá pro mikroslužby, protože zapouzdřuje každou mikroslužbu do vlastního kontejneru, což usnadňuje její nasazení, škálování a správu nezávisle na ostatních. Synonymem kontejnerizace je nástroj Docker, který nabízí ekosystém pro vývoj, správu a provoz kontejnerových aplikací.
-
-\n{3}{Orchestrace}
-
-S rozšiřováním mikroslužeb a kontejnerů se jejich správa stává složitou. Nástroje pro orchestraci pomáhají automatizovat nasazení, škálování a správu kontejnerů. Mezi oblíbené orchestrační nástroje patří Kubernetes, Docker Swarm a Mesos. Zejména Kubernetes se stal de facto standardem, který poskytuje robustní rámec pro nasazení, škálování a provoz kontejnerových aplikací v clusteru strojů. Řeší vyhledávání služeb, vyvažování zátěže, sledování přidělování prostředků a škálování na základě výkonu pracovní zátěže.
-
-\n{3}{Odolnost}
-
-Robustnosti mikroslužeb je dosaženo pomocí strategií, jako jsou přerušení, záložní řešení a opakování, které pomáhají zabránit tomu, aby se selhání jedné služby kaskádově přeneslo na ostatní. Izolace služeb také znamená, že problémy lze omezit a vyřešit s minimálním dopadem na celý systém. Kromě toho jsou kontroly stavu a monitorování nezbytné pro včasné odhalení a řešení problémů.
-
-\n{3}{Škálování}
-
-Architektura mikroslužeb zvyšuje škálovatelnost. Služby lze škálovat nezávisle, což umožňuje efektivnější využití zdrojů a zlepšuje schopnost systému zvládat velké objemy požadavků. Běžně se používá horizontální škálování (přidávání dalších instancí služby), které usnadňují nástroje pro kontejnerizaci a orchestraci.
+\begin{itemize}
+    \item \textbf{Decentralizace} - Jeden z hlavních principů microservice architektury. Její význam je, že každá služba zodpovídá za určitou část funkcionality aplikace. Služby jsou navzájem nezávislé a komunikují mezi sebou pomocí definovaných rozhraní. Tím je zajištěno, že každá služba může být vyvíjena, nasazována a škálována nezávisle na ostatních. Díky decentralizaci a izolaci služeb je možné minimalizovat dopad chyb na celý systém.
+    \item \textbf{Odolnost} - Robustnost microservice architektury je definována schopností systému zůstat v provozu i přes výskyt chyb v jeho dílčích částech. To znamená, že pokud jedna služba selže, zbytek systému může pokračovat v provozu. Toho je dosaženo použitím vzorů jako je \emph{Circuit Breaker}, tedy využitím stabilních proxy služeb pro vzájemnou komunikaci služeb. Součástí odolnosti je využití vzoru opakovaného volání požadavku (\emph{Retry Policy}), jenž je obvykle doplněno o nastavení mechanismů chování na základě času nebo počtu neúspěšných volání. 
+    \item \textbf{Virtualizace} - Virtualizace reprezentuje vzor provozování více operačních systémů na jednom fyzickém hardwarovém hostiteli. Tím snižuje počet potřebných fyzických strojů a zvyšuje efektivita využití zdrojů.
+    \item \textbf{Kontejnerizace} - Kontejnerizace představuje proces zabalení aplikace a jejich závislosti do kontejneru. Kontejner představuje základní spustitelnou jednotku microservice architektury. Je založen na minimalistický obraz OS, k němuž jsou dodány potřebné nástroj, knihovny a výstup aplikace. Umožňuje spustit aplikaci ve vybraném prostředí s vybranou konfigurací při co nejmenší režii. Synonymem kontejnerizace je nástroj Docker, který nabízí ekosystém pro vývoj, správu a provoz kontejnerových aplikací.
+    \item \textbf{Orchestrace} - Rozšířováním počtu služeb respektive kontejnerů se jejich správa stává složitou. Nástroje pro orchestraci pomáhají automatizovat nasazení, škálování a správu kontejnerů. Mezi oblíbené orchestrační nástroje patří Kubernetes, Docker Swarm a Mesos. Zejména Kubernetes se stal de facto standardem, který poskytuje robustní rámec pro nasazení, škálování a provoz kontejnerových aplikací v clusteru strojů. Řeší vyhledávání služeb, vyvažování zátěže, sledování přidělování prostředků a škálování na základě výkonu pracovní zátěže.
+    \item \textbf{Škálování} - Architektura mikroslužeb zvyšuje škálovatelnost. Služby lze škálovat nezávisle, což umožňuje efektivnější využití zdrojů a zlepšuje schopnost systému zvládat velké objemy požadavků. Běžně se používá horizontální škálování, které usnadňují nástroje pro kontejnerizaci a orchestraci. To funguje na principu vytváření dodatečných instancí škálované služby a rozložení zátěže mezi tyto instance dle definovaných mechanismů (např. dle váhy, rychlosti odpovědi nebo hashe IP adresy).
+\end{itemize}
 
 \n{2}{Komponenty}
 
 Architektura mikroslužeb rozkládá aplikace do menších, oddělených služeb, z nichž každá plní samostatnou funkci. Pro efektivní správu těchto služeb, zejména v distribuovaném prostředí, se používá několik základních komponent. Tato část se zabývá klíčovými architektonickými komponentami, které usnadňují robustní provoz, komunikaci a škálovatelnost mikroslužeb.
 
-\n{3}{API Gateway}
+\n{3}{Obecné komponenty}
 
-API Gateway je služba, která slouží jako vstupní bod pro komunikaci s mikroslužbami. Zajišťuje směrování požadavků, autentizaci, autorizaci, zabezpečení a další funkce, které jsou společné pro všechny služby. API Gateway může také poskytovat další funkce, jako jsou cachování, transformace zpráv a řízení toku dat. Tím zjednodušuje a centralizuje správu komunikace mezi klienty a mikroslužbami.
-
-\n{3}{Service Discovery}
-
-Service Discovery je mechanismus, který umožňuje mikroslužbám dynamicky najít a komunikovat s ostatními službami v systému. To je důležité pro dynamické škálování, nasazování a správu služeb. Service Discovery může být implementován pomocí centrálního registru služeb nebo distribuovaného protokolu, jako je DNS nebo Consul.
-
-\n{3}{Load Balancer}
-
-Load Balancer je služba, která rozděluje provoz mezi několik instancí služby, aby se zajistila rovnoměrná zátěž a zvýšila odolnost proti chybám. Load Balancer může být implementován jako hardwareové zařízení nebo softwarová služba, která poskytuje rozhraní pro konfiguraci a správu zátěže.
-
+\begin{itemize}
+    \item \textbf{API Gateway} - Brána, která slouží jako vstupní bod pro komunikaci s mikroslužbami. Zajišťuje směrování požadavků, autentizaci, autorizaci, zabezpečení a další funkce, které jsou společné pro všechny služby. API Gateway může také poskytovat další funkce, jako jsou cachování, transformace zpráv a řízení toku dat. Tím zjednodušuje a centralizuje správu komunikace mezi klienty a mikroslužbami.
+    \item \textbf{Service Discovery} - Mechanismus, který umožňuje mikroslužbám dynamicky najít a komunikovat s ostatními službami v systému. To je důležité pro dynamické škálování, nasazování a správu služeb. Service Discovery může být implementován pomocí centrálního registru služeb nebo distribuovaného protokolu.
+    \item \textbf{Load Balancer} - Služba rozděluje provoz mezi několik instancí stejné služby, aby se zajistila rovnoměrná zátěž a zvýšila odolnost proti chybám. Load Balancer může být implementován jako hardwareové zařízení nebo softwarová služba, která poskytuje rozhraní pro konfiguraci a správu zátěže.
+\end{itemize}
 
 \n{3}{Komunikační systémy}
 
-Mikroslužby spolu komunikují prostřednictvím rozhraní API, obvykle prostřednictvím protokolů HTTP/HTTPS, i když pro aplikace citlivější na výkon lze použít i jiné protokoly, například gRPC. Komunikační vzory zahrnují synchronní požadavky (např. RESTful API) a asynchronní zasílání zpráv (např. pomocí brokerů zpráv jako RabbitMQ nebo Kafka). Tím je zajištěno volné propojení mezi službami, což umožňuje jejich nezávislý vývoj a nasazení.
+Mikroslužby spolu komunikují skrze rozhraní prostřednictvím vybraných protokolů, nástrojů a vzorů. Mezi nejčastěji využívané patří:
 
 \begin{itemize}
-    \item \textbf{REST API} - Představuje vysoce rozšířenou možnost komunikace mezi mikroslužbami. Využívají se při ní standardní metody HTTP, jako jsou GET, POST, PUT a DELETE, k provádění operací na rozhraní identifikovaným prostřednictvím adresy URL. Díky bezstavové povaze je rozhraní REST vysoce škálovatelné a vhodné pro veřejně přístupné služby. Má širokou podporu na různých platformách a v různých jazycích, což pomáhá zajistit interoperabilitu v rozmanitém ekosystému mikroslužeb.
-    \item \textbf{RPC} - Komunikační metoda používaná v distribuovaných systémech, včetně mikroslužeb, kdy program způsobí, že se procedura spustí v jiném adresním prostoru (obvykle na jiné virtualizované ve sdílené síti). Tato technika abstrahuje složitost síťové komunikace do jednoduchosti volání lokální funkce nebo metody. Mezi běžné implementace RPC patří gRPC, Thrift a Apache Avro.
+    \item \textbf{REpresentational State Transfer} (dále REST) - Představuje vysoce rozšířenou možnost komunikace mezi mikroslužbami. Využívají se při ní standardní metody protokolu Hypertext Transfer Protocol (dále HTTP) k provádění operací na rozhraní identifikovaným prostřednictvím adresy URL. Díky bezstavové povaze je rozhraní REST vysoce škálovatelné a vhodné pro veřejně přístupné služby. Má širokou podporu na různých platformách a v různých jazycích, což pomáhá zajistit interoperabilitu v rozmanitém ekosystému mikroslužeb.
+    \item \textbf{Remote Procedure Call} (dále RPC) - Komunikační metoda používaná v distribuovaných systémech, včetně mikroslužeb, kdy program způsobí, že se procedura spustí v jiném adresním prostoru (obvykle na jiné virtualizované ve sdílené síti). Tato technika abstrahuje složitost síťové komunikace do jednoduchosti volání lokální funkce nebo metody. Mezi běžné implementace RPC patří generic RPC (dále gRPC), Thrift anebo Apache Avro.
     \item \textbf{Message Broker} - Jedná se o komunikační vzor kdy broker - prostředník, spravuje asynchronní komunikaci mezi mikroslužbami pomocí front zpráv. Tato metoda odděluje mikroslužby tím, že jim umožňuje publikovat zprávy do fronty, aniž by znaly podrobnosti o tom, které služby je budou spotřebovávat. Mezi běžné zprostředkovatele zpráv patří RabbitMQ, Apache Kafka a AWS SQS. Tato komunikační architektura zvyšuje odolnost proti chybám, protože zprostředkovatel zpráv může zajistit, že zprávy nebudou ztraceny při přenosu, i když je spotřebitelská služba dočasně nedostupná. 
 \end{itemize}
 
 \n{3}{Databáze}
 
-V architekturách mikroslužeb si každá služba obvykle spravuje vlastní databázi, což je přístup, který podtrhuje princip decentralizované správy dat. Tato izolace pomáhá službám být volně provázané a nezávisle nasaditelné, přičemž každé databázové schéma je přizpůsobeno konkrétním potřebám služby. V závislosti na případu použití mohou služby používat různé typy databází - SQL pro transakční data vyžadující silnou konzistenci a vlastnosti ACID nebo NoSQL pro flexibilnější možnosti ukládání dat, které umožňují horizontální škálování a podporu velkých objemů strukturovaných, částečně strukturovaných nebo nestrukturovaných dat. Tato různorodost databázových technologií přináší výzvy, jako je udržování konzistence dat napříč službami, což se často řeší pomocí strategií, jako je vzor Saga nebo případná konzistence pro zajištění integrity dat napříč distribuovanými transakcemi.
+V microservice architektuře si každá služba obvykle spravuje vlastní databázi, což je přístup, který podtrhuje princip decentralizované správy dat. Tato izolace pomáhá službám být volně provázané a nezávisle nasaditelné, přičemž každé databázové schéma je přizpůsobeno konkrétním potřebám služby. V závislosti na případu použití mohou služby používat různé typy databází. Structured Query Language (dále SQL) pro transakční data vyžadující silnou konzistenci a vlastnosti Atomocity Consistency Isolation Duratibility (dále ACID). Nebo Not only SQL (dále NoSQL) pro flexibilnější možnosti ukládání dat, které nabývají velkých objemů, nejsou definovány schématy nebo mají specifickou vazbu například na čas. Tato různorodost databázových technologií přináší výzvy, jako je jednotný přístup k různým datovým zdrojům pomocí abstrakce ve vzoru \emph{Repository}. Další častou problematikou je udržování konzistence dat napříč službami a distribuovanými transakcemi. K řešení se využívájí specifické vzory, jako je například \emph{Saga}.
 
 \n{3}{Bezpečnost}
 
-Bezpečnost v architektuře mikroslužeb je velmi důležitá, protože distribuovaná povaha těchto systémů přináší mnoho zranitelných míst. Bezpečnostní prvky se zaměřují na ochranu dat při přenosu a v klidovém stavu a zajišťují, že ke službám a datům mají přístup pouze oprávněné subjekty. Mezi klíčové strategie patří implementace bran API s vestavěnými bezpečnostními prvky, jako je ověřování, autorizace a ukončení SSL. Zásadní význam mají systémy správy identit a přístupu (IAM), často integrované s tokeny OAuth a JWT pro správu identit uživatelů a řízení přístupu na základě definovaných zásad. Zajištění šifrované komunikace mezi službami pomocí protokolů, jako je TLS, může navíc chránit před odposlechem a manipulací. Zásadní jsou také účinné strategie protokolování a monitorování, které poskytují možnost odhalovat bezpečnostní hrozby, reagovat na ně a zmírňovat je v reálném čase. Každá z těchto složek hraje klíčovou roli při vytváření bezpečného ekosystému mikroslužeb a umožňuje robustní obranné mechanismy proti interním i externím bezpečnostním rizikům.
+Bezpečnost v architektuře microservice je velmi důležitá, protože distribuovaná povaha těchto systémů přináší mnoho zranitelných míst. Bezpečnostní prvky se zaměřují na ochranu dat při přenosu i v klidovém stavu a zajišťují, že k službám a datům mají přístup pouze oprávněné subjekty. Mezi klíčové strategie patří implementace API Gateway s vestavěnými bezpečnostními prvky, jako je ověřování, autorizace a terminace SSL. Zásadní význam mají systémy správy identit a přístupu (Identity and Access Management, dále IAM), často integrované s tokeny Open Authorization (dále OAuth) a JWT pro správu identit uživatelů a řízení přístupu na základě definovaných zásad. Zajištění šifrované komunikace mezi službami pomocí protokolů, jako je Transport Layer Security (dále TLS), může navíc chránit před odposlechem a manipulací. Zásadní jsou také účinné strategie logování, auditování a monitorování, které poskytují možnost odhalovat bezpečnostní hrozby, reagovat na ně a zmírňovat je v reálném čase. Každá z těchto složek hraje klíčovou roli při vytváření bezpečného ekosystému služeb a umožňuje robustní obranné mechanismy proti interním i externím bezpečnostním rizikům.
 
-\n{2}{Vývoj, testování a nasazení}
+\n{2}{Testování}
 
-Mikroslužby umožňují agilní vývojové postupy. Týmy mohou vyvíjet, testovat a nasazovat služby nezávisle, což umožňuje rychlejší iteraci a zpětnou vazbu. Nedílnou součástí jsou pipelines pro kontinuální integraci a doručování (CI/CD), které umožňují automatizované testování a nasazení. Tento přístup podporuje kulturu DevOps a podporuje užší spolupráci mezi vývojovými a provozními týmy.
+Testování mikroslužeb je klíčové pro zajištění kvality a spolehlivosti systému. Mikroslužby lze testovat na několika následujících úrovních:
 
-Testování mikroslužeb je klíčové pro zajištění kvality a spolehlivosti systému. Mikroslužby lze testovat na několika úrovních, včetně jednotkových testů, integračních testů a testů end-to-end. Jednotkové testy se zaměřují na testování jednotlivých komponent služby, zatímco integrační testy testují komunikaci mezi službami. Testy end-to-end testují celý systém z pohledu uživatele. Automatizované testování je klíčové pro rychlé a spolehlivé nasazení.
+\begin{itemize}
+    \item \textbf{Jednotkové testy} - Testují jednotlivé komponenty služby, jako jsou třídy, metody a funkce. Cílem je ověřit, že jednotlivé části fungují správně a splňují požadavky.
+    \item \textbf{Integrační testy} - Testují komunikaci mezi službami a ověřují, že služby spolupracují správně. Zjišťují, jestli služby komunikují správně a zda jsou data přenášena a zpracovávána správně.
+    \item \textbf{End-to-end testy} - Testují celý systém z pohledu uživatele. Cílem je ověřit, že systém funguje správně a splňuje požadavky uživatele.
+    \item \textbf{Smoke testy} - Testují základní funkce systému, aby se ověřilo, že je systém správně sestaven, dokáže se spustit a provést základní operace.
+    \item \textbf{Load testy} - Testují výkonnost systému za zátěžových podmínek. Cílem je ověřit, že systém je schopen zvládnout požadavky uživatelů a udržet výkon při zátěži.
+    \item \textbf{Penetrační testy} - Testují bezpečnost systému a identifikují potenciální bezpečnostní chyby. Cílem je odhalit slabá místa v systému a zlepšit jeho odolnost proti útokům.
+\end{itemize}
 
-Integrace kontinuální integrace a kontinuálního nasazování (CI/CD) je zásadní pro správu mikroslužeb, jelikož podporuje rychlé iterace a minimalizuje rizika spojená s nasazováním změn. CI/CD automatizuje procesy sestavení, testování a nasazení softwaru, což zajišťuje, že nový kód prochází důkladným testováním a je pravidelně a bezpečně nasazován do produkce. V prostředí mikroslužeb umožňuje CI/CD týmům aktualizovat služby nezávisle na ostatních částech systému, což vede k vyšší agilitě a rychlejší reakci na požadavky trhu nebo na potřeby zákazníků.
+Automatizované testování je klíčové pro rychlé a spolehlivé nasazení. Pomáhá odhalit chyby a problémy v raných fázích vývoje a minimalizuje riziko selhání v produkci. Testování microservice architektury je však složitější než testování monolitických aplikací, protože služby jsou distribuované a navzájem závislé. To vyžaduje efektivní kombinované strategie testování. Automatizace pomáhá zjednodušit komplexní testovací strategie a zajišťuje, že jednotlivé části aplikace jsou spolehlivé.
 
 \n{2}{Výhody a nevýhody}
 
@@ -90,17 +78,17 @@ Mezi hlavní výhody microservice architekture lze zařadit:
 
 \begin{itemize}
 
-\item \textbf{Přizpůsobitelnost} - Mikroslužby umožňují rychlé, časté a spolehlivé poskytování rozsáhlých a komplexních aplikací. Týmy mohou aktualizovat určité oblasti aplikace, aniž by to mělo dopad na celý systém, což umožňuje rychlejší iterace.
+\item \textbf{Přizpůsobitelnost} - Mikroslužby umožňují rychlé, modulární a spolehlivé poskytování rozsáhlých a komplexních aplikací. Týmy mohou aktualizovat určité oblasti aplikace, aniž by to mělo dopad na celý systém, což umožňuje rychlejší iterace.
 
-\item \textbf{Škálovatelnost} - Služby lze škálovat nezávisle, což umožňuje přesnější přidělování zdrojů na základě poptávky. To usnadňuje zvládání proměnlivého zatížení a může zlepšit celkovou efektivitu aplikace.
+\item \textbf{Škálovatelnost} - Služby lze škálovat nezávisle, což umožňuje přesnější přidělování zdrojů na základě aktuálního stavu systému. Tím je řešena problematika proměnlivého zatížení aplikace.
 
-\item \textbf{Odolnost} - Decentralizovaná povaha mikroslužeb pomáhá izolovat selhání na jedinou službu nebo malou skupinu služeb, čímž zabraňuje selhání celé aplikace. Techniky, jako jsou jističe, zvyšují odolnost systému.
+\item \textbf{Odolnost} - Decentralizovaná povaha služeb pomáhá izolovat selhání na jedinou službu nebo malou skupinu služeb, čímž zabraňuje selhání celé aplikace.
 
-\item \textbf{Technologická rozmanitost} - Týmy si mohou vybrat nejlepší nástroj pro danou práci a podle potřeby používat různé programovací jazyky, databáze nebo jiné nástroje pro různé služby, což vede k potenciálně optimalizovanějším řešením.
+\item \textbf{Technologická rozmanitost} - Týmy si mohou vybrat nejlepší nástroj pro danou práci a podle potřeby používat různé programovací jazyky, databáze nebo jiné nástroje pro různé služby, což vede k optimalizovanějším řešením.
 
-\item \textbf{Flexibilita nasazení} - Mikroslužby lze nasazovat nezávisle, což je ideální pro kontinuální nasazení a integrační pracovní postupy. To také umožňuje průběžné aktualizace, modrozelené nasazení a kanárkové verze, což snižuje prostoje a rizika.
+\item \textbf{Flexibilita nasazení} - Mikroslužby lze nasazovat nezávisle, což je ideální pro vzory CI/CD. Umožňuje průběžné aktualizace při minimalizaci prodlevy a minimalizaci rizika.
 
-\item \textbf{Modularita} - Tato architektura zvyšuje modularitu, což usnadňuje pochopení, vývoj, testování a údržbu aplikací. Týmy se mohou zaměřit na konkrétní obchodní funkce, což zvyšuje produktivitu a kvalitu.
+\item \textbf{Modularita} - Microservice architektura zvyšuje modularitu, což usnadňuje vývoj, testování a údržbu aplikací. Týmy se mohou zaměřit na konkrétní doménovou logiku, což zvyšuje produktivitu a kvalitu. Rovněž umožňuje geograficky dislokované nasazení.
 
 \end{itemize}
 
@@ -116,7 +104,7 @@ Zatímco mezi nevýhody patří:
 
 \item \textbf{Provozní režie} - S počtem služeb roste potřeba orchestrace, monitorování, protokolování a dalších provozních záležitostí. To vyžaduje další nástroje a odborné znalosti.
 
-\item \textbf{Složitost vývoje a testování} - Mikroslužby sice zvyšují flexibilitu vývoje, ale také komplikují testování, zejména pokud jde o testování end-to-end, které zahrnuje více služeb.
+\item \textbf{Složitost vývoje a testování} - Mikroslužby sice zvyšují flexibilitu vývoje, ale také komplikují testování, zejména pokud jde o testování \emph{end-to-end}, které zahrnuje více služeb.
 
 \item \textbf{Integrace služeb} - Zajištění bezproblémové spolupráce služeb vyžaduje robustní správu API, řízení verzí a strategie zpětné kompatibility.
 
@@ -128,20 +116,20 @@ Efektivní nasazení mikroslužeb je klíčové pro využití jejich potenciáln
 
 \n{3}{Strategie}
 
-Existuje několik strategií nasazení, které jsou pro mikroslužby obzvláště vhodné:
+Existuje několik strategií nasazení, které jsou v microservice architektuře aplikovatelné:
 
 \begin{itemize}
-    \item \textbf{Jedna služba na hostitele} - Strategie zahrnuje nasazení každé mikroslužby na vlastní server, ať už virtuální, nebo fyzický. Tento přístup zjednodušuje ladění a izolaci služeb, ale může vést k nedostatečnému využití zdrojů a vyšším nákladům.
+    \item \textbf{Jedna služba na hostitele} - Strategie zahrnuje nasazení každé služby na vlastní server, ať už virtuální, nebo fyzický. Tento přístup zjednodušuje ladění a izolaci služeb, ale může vést k nedostatečnému využití zdrojů a vyšším nákladům.
     \item \textbf{Více služeb na jednoho hostitele} - Nasazení více služeb na jednom hostiteli maximalizuje využití zdrojů a snižuje náklady. Vyžaduje však pečlivou správu, aby nedocházelo ke konfliktům a aby se služby vzájemně nerušily.
     \item \textbf{Instance služby na kontejner} - Moderní nasazení mikroslužeb často používají kontejnery (například Docker) pro umístění jednotlivých služeb. Kontejnery poskytují odlehčené, konzistentní prostředí pro každou službu, zjednodušují nasazení a škálování v různých prostředích a zajišťují, že každá služba má splněny své závislosti bez konfliktů.
 \end{itemize}
 
-\n{3}{Cloud native nasazení}
+\n{3}{Cloud-native nasazení}
 
-Mikroslužby jsou obzvláště vhodné pro cloudová nativní prostředí, která podporují jejich dynamickou povahu:
+Microservice architektura je obzvláště vhodná pro nativní cloudová prostředí, která podporují jejich dynamickou povahu. Příklady strategií cloud-native nasazení zahrnují:
 
 \begin{itemize}
-    \item \textbf{Kontejnery a orchestrace} - Nástroje jako Kubernetes orchestrují kontejnerové služby a řídí jejich životní cyklus od nasazení až po ukončení. Kubernetes se stará o škálování, vyrovnávání zátěže a obnovu, což usnadňuje vysokou dostupnost a efektivní využívání zdrojů.
-    \item \textbf{Mikroslužby na platformě jako služba (PaaS)} - Nabídky PaaS, jako jsou AWS Elastic Beanstalk, Microsoft Azure App Service a Google App Engine, poskytují prostředí, kde lze mikroslužby snadno nasadit, škálovat a spravovat bez nutnosti starat se o základní infrastrukturu.
-    \item \textbf{Serverless} - Bezserverové výpočetní modely umožňují nasazení mikroslužeb jako funkcí (FaaS), které se spouštějí v reakci na události, přičemž poskytovatel cloudu spravuje prostředí pro jejich provádění. Tento model je vysoce škálovatelný a nákladově efektivní, protože zdroje jsou spotřebovávány pouze během provádění funkcí.
+    \item \textbf{Kontejnery a orchestrace} - Nástroje jako například Kubernetes orchestrují kontejnerové služby a řídí jejich životní cyklus od nasazení až po ukončení. Kubernetes se stará o škálování, vyrovnávání zátěže a obnovu. Umožňuje také deklarativní konfiguraci a  definici infrastruktury formou kódu, což zjednodušuje správu a automatizaci nasazení. Využití kontejnerů a orchestrace umožňuje rychlé a spolehlivé nasazení mikroslužeb při maximální kontrole nad prostředím.
+    \item \textbf{Mikroslužby na platformě jako služba} - Platform as a Service (dále PaaS) je typ nasazení poskytovující prostředí, kde lze mikroslužby snadno nasadit, škálovat a spravovat bez nutnosti starat se o základní infrastrukturu. Poskytovatel cloudu je zodpovědný za provoz a správu platformy, což uživatelům umožňuje soustředit se na vývoj aplikací.
+    \item \textbf{Serverless} - Bezserverové výpočetní modely umožňují nasazení mikroslužeb jako funkcí (Function as a Service, dále FaaS), které se spouštějí v reakci na události. Poskytovatel cloudu spravuje prostředí, v němž jsou nasazeny a dodává rozhraní pro jejich konfiguraci. Tento model je prezentován jako vysoce škálovatelný a nákladově efektivní, protože zdroje jsou spotřebovávány pouze během provádění funkcí.
 \end{itemize}
