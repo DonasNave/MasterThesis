@@ -7,16 +7,6 @@
 
 Testování scénářů je klíčovou součástí testování výkonu mikroslužeb. Scénáře jsou definovány jako soubor kroků, které mají být provedeny, a jsou použity k simulaci zátěže na mikroslužby. Scénáře jsou vytvořeny pomocí testovacích nástrojů, které umožňují vytvářet a spouštět testy, které simuluji reálné uživatelské scénáře.
 
-\n{2}{Předpoklad scénářů}
-
-Scénáře musí být vytvořeny tak, aby simulovali reálné uživatelské scénáře. To znamená, že musí být vytvořeny tak, aby obsahovaly kroky, které mají být provedeny, a musí být vytvořeny tak, aby obsahovaly data, která mají být použita.
-
-\n{3}{Očekávání výkonnosti služeb}
-
-Pro výsledné obrazy služeb kompilovaných AOT do nativního kódu je očekáváno, že budou zabírat výrazně menší paměť, než je tomu u ekvivalentních obrazů služeb kompilovaných pro JIT. Předpoklad zakládá na požadavku běhového prostředí, kdy nativní služby vyžadují pouze malou množinu knihoven nad OS Alpine. Oproti tomu služby kompilované do JIT vyžadují nad OS Alpine běžící .NET runtime, i když zredukovaný o nepoužívané knihovny. Samotná velikost výstupních souborů služeb je předpokládaná větší u nativního výstupu, než u ekvivalentního JIT výstupu. To je dáno tím, že nativní výstup obsahuje dodatečné třídy, konstrukce a funkce, které substituují běhové prostředí .NET.
-
-Další očekávání se týká rychlosti odezvy služeb po spuštění. Předpokládá se, že služby kompilované do nativního kódu budou mít rychlejší odezvu než služby kompilované do JIT. To je dáno tím, že nativní kód je přímo spustitelný na cílovém systému, zatímco JIT kód vyžaduje dodatečný čas na kompilaci a optimalizaci.
-
 \n{2}{Metodika testování}
 
 Cílem práce je prouzkomat dopady kompilace AOT a JIT na výkon. Pokouší se určit, která strategie kompilace nabízí lepší výkon při různémé zatížení a podmínkách. Metriky výkonu jsou shromážděny z dat o výkonu systému, doby odezvy služeb a využití zdrojů během standardizovaných testů.
@@ -44,7 +34,7 @@ Na základě předběžného přehledu literatury a teoretických výhod každé
 \begin{itemize}
     \item \textbf{Hypotéza 1}: Vývoj služeb bude možný za pomocí obou kompilačních režimů, s minimálními rozdíly v použitém API a systémových knihovnách. Při použití knihoven 3. stran bude dostatečně jasná kompatibilita mezi oběma režimy.
     \item \textbf{Hypotéza 2}: Kompilace AOT má za následek rychlejší spouštění, ale může vést k větším binárním velikostem ve srovnání s kompilací JIT. Výsledný virtualizovaný obraz bude ovšem mít výrazně nižší velikost kvůli absenci .NET runtime.
-    \item \textbf{Hypotéza 3}: Kompilace AOT poskytuje lepší optimalizaci výkonu díky generování typů a funkcí, jež by museli být dodatečně tvořeny za běhu. Tím pádem je očekáváno, že služby kompilované do nativního kódu budou mít nižší využití CPU, paměti a diskových operací.
+    \item \textbf{Hypotéza 3}: Kompilace AOT poskytuje lepší optimalizaci výkonu díky generování typů a funkcí, jež by museli být dodatečně tvořeny za běhu. Tím pádem je očekáváno, že služby kompilované do nativního kódu budou mít nižší řežii procesoru. Přítomnost staticky generovaných typů a funkcí však může způsobit vyšší paměťovou zátěž. Vytížení I/0 operací bude srovnatelné.
 \end{itemize}
 
 \n{2}{Definice scénářů}

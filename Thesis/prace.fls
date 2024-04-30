@@ -1429,6 +1429,11 @@ INPUT ./tex/chapters/analytics.tex
 INPUT tex/chapters/analytics.tex
 INPUT ./tex/chapters/analytics.tex
 INPUT tex/chapters/analytics.tex
+INPUT ./graphics/images/code-visual-sample.png
+INPUT ./graphics/images/code-visual-sample.png
+INPUT graphics/images/code-visual-sample.png
+INPUT ./graphics/images/code-visual-sample.png
+INPUT ./graphics/images/code-visual-sample.png
 INPUT ./tex/chapters/conclusion.tex
 INPUT tex/chapters/conclusion.tex
 INPUT ./tex/chapters/conclusion.tex

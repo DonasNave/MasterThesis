@@ -345,48 +345,19 @@ Služba poskytuje následující rozhraní
 
 \n{3}{Přehled řešení}
 
-Řešení aplikace sestává z následujících sekcí a jednotlivých obrazů služeb a verzí, definovaných v rámci Docker Compose souboru. Obrazy jsou zapsány ve formátu \emph{repository:tag}.
+Řešení aplikace sestává z následujících sekcí a jednotlivých obrazů služeb a verzí, definovaných v rámci Docker Compose souboru.
 
 \begin{itemize}
-    \item \textbf{Testovací služby - JIT}
-    \begin{itemize}
-        \item \textbf{dta-srs:jit-latest}
-        \item \textbf{dta-fus:jit-latest}
-        \item \textbf{dta-bps:jit-latest}
-        \item \textbf{dta-eps:jit-latest}
-    \end{itemize}
-    \item \textbf{Testovací služby - AOT}
-    \begin{itemize}
-        \item \textbf{dta-srs:aot-latest}
-        \item \textbf{dta-fus:aot-latest}
-        \item \textbf{dta-bps:aot-latest}
-        \item \textbf{dta-eps:aot-latest}
-    \end{itemize}
-    \item \textbf{Komunikace}
-    \begin{itemize}
-        \item \textbf{rabbitmq:3-management-alpine}
-    \end{itemize}
-    \item \textbf{Monitorovací nástroje}
-    \begin{itemize}
-        \item \textbf{dta-lgtm:latest}
-        \item \textbf{node-exporter:latest}
-        \item \textbf{cadvisor-arm64:v0.49.1}
-    \end{itemize}
-    \item \textbf{Persistence}
-    \begin{itemize}
-        \item \textbf{postgres:latest}
-        \item \textbf{influxdb:1.8.10}
-    \end{itemize}
-    \item \textbf{Směrování}
-    \begin{itemize}
-        \item \textbf{nginx:alpine}
-    \end{itemize}
-
+    \item \textbf{Testovací služby} - Aplikace obsahuje testovací služby FUS, SRS, BPS a EPS. Tyto služby jsou vytvořeny ve dvou kompilačních verzích - AOT a JIT. Každá služba je vytvořena jako obraz s názvem \emph{dta-\{service-name\}:\{compilatioinMode\}-latest}.
+    \item \textbf{Komunikace} - Komunikační kanál mezi službami je zajištěn pomocí RabbitMQ. Pro RabbitMQ je využit obraz \emph{rabbitmq:3-management-alpine}.
+    \item \textbf{Monitorovací nástroje} - Monitorování zajišťuje Grafana Observability stack implementovaný v rámci obrazu \emph{dta-lgtm:latest}, jenž obsahuje OpenTelemetry, Prometheus, Loki, Tempo a Grafanu. Pro měření výkonu hostitelského systému a export těchto dat jsou využity obrazy \emph{node-exporter:latest} a \emph{cadvisor-arm64:v0.49.1}.
+    \item \textbf{Persistence} - Pro persistenci dat je využita PostgreSQL databáze. Pro PostgreSQL je využit obraz \emph{postgres:latest}. Ukládání metrik je zajištěno pomocí InfluxDB a obrazu \emph{influxdb:1.8.10}.
+    \item \textbf{Směrování} - Funkci reverzní proxy zajišťuje Nginx ve verzi obrazu \emph{nginx:latest}.
 \end{itemize}
 
-\obr{Diagram .NET služeb a závislých služeb}{fig:logo}{0.9}{graphics/diagrams/services-architecture.png}
+Následující diagram znázorňuje přímé závislosti testovacích služeb na další nástroje.
 
-Následující diagram znázorňuje vztahy mezi jednotlivými službami.
+\obr{Diagram .NET služeb a závislých služeb}{fig:logo}{0.9}{graphics/diagrams/services-architecture.png}
 
 \n{2}{Konfigurace aplikace}
 

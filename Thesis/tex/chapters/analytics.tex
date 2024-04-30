@@ -11,6 +11,8 @@ Výsledná architektura aplikace je založena na mikroslužbách. Splňuje před
 
 Následující sekce popisuje vývojový proces, tak jak se týkal testovaných služeb. Vývojový proces byl založen na experimentaci a snaze využít co nejvíc dostupných knihoven a nástrojů, za cenu nutnosti řešení problémů, případně změny implementace.
 
+\obr{Ukázka kódu s vyzualizací direktiv dle konfigurace}{fig:codesample}{1}{graphics/images/code-visual-sample.png}
+
 \n{3}{JIT}
 
 Vývojový proces pro kompilaci služeb JIT se zacílením na .NET runtime probíhal standarntím způsobem. Veškeré dostupné knihovny a nástroje byly plně kompatibilní s JIT kompilací. Nedošlo k žádným nepředpokládaným problémům.
@@ -132,7 +134,7 @@ První scénář se zabíral jednoduchou funkcionalitou dotazu na healthcheck en
 
 \tab{Průměrné využití zdrojů a doba odpovědi healthcheck služeb}{tab:service_metrics}{1.0}{|l|r|r|r|r|}{
   \hline
-    Služba - Kompilace & CPU (ms) & IO (ns) & Paměť (MB) & Doba požadavku (ms) \\ \hline \hline
+    Služba - Režim & CPU (ms) & IO (ns) & Paměť (MB) & Doba požadavku (ms) \\ \hline \hline
   \emph{SRS-AOT} & 3.41 & 0.550 & 41.1 & 1.61 \\ \hline
   \emph{SRS-JIT} & 9.69 & 0.453 & 41.3 & 3.84 \\ \hline
   \emph{FUS-AOT} & 1.99 & 0.825 & 52.5 & 1.27 \\ \hline
@@ -145,14 +147,26 @@ První scénář se zabíral jednoduchou funkcionalitou dotazu na healthcheck en
 
 \n{3}{Scénář 2 - Přístup k perzistenci}
 
-Scénář se zabýval výkonností přístupu k persistenci, respektive zachystením reálného scénáře, kdy jsou data získávána a ukládána do databáze. Faktorem byla jak samotná rychlost služby v ohledu komunikace a serializace dat, tak rychlost zpracování požadavku databází. Ve výsledku je znatelný rozdíl rychlosti odpovědi v porovnání s prvním scénářem. Databáze vnesla další režii a zmenšila procentuální rozdíl mezi AOT a JIT.
+Scénář se zabýval výkonností přístupu k persistenci, respektive zachystením reálného scénáře, kdy jsou data získávána a ukládána do databáze. Faktorem byla jak samotná rychlost služby v ohledu komunikace a serializace dat, tak rychlost zpracování požadavku databází. Ve výsledku je vidět výrazný rozdíl ve využití zdrojů mezi AOT a JIT verzi služby, kdy první jmenovaná je výrazně efektivnější.
 
 \tab{Průměrné využití zdrojů službou FUS a doba odpovědi stažení a nahrání souboru}{tab:service_metrics}{1.0}{|l|r|r|r|r|}{
   \hline
-  Služba - Kompilace & CPU (ms) & IO (ns) & Paměť (MB) & Doba požadavku (ms) \\ \hline \hline
-  \emph{FUS-AOT} & 1.845 & 2.208 & 29.3 & - \\ \hline
-  \emph{FUS-JIT} & 16.7 & 2.000 & 60.9 & - \\ \hline
+  Služba - Režim & CPU (ms) & IO (ns) & Paměť (MB) & Doba požadavku (ms) \\ \hline \hline
+  \emph{FUS-AOT} & 1.9 & 2.208 & 29.3 & 4.18 \\ \hline
+  \emph{FUS-JIT} & 16.7 & 2.000 & 60.9 & 8.05 \\ \hline
 }
+
+V případě doby odpovědi služby je velmi znatelný rozdíl služby kompilované JIT kdy její hodnota činila 93.6 ms. Následkem JIT kompilace potřebného kódu při prvním volání byla tato doba výrazně vyšší než v dalších voláních. Oproti tomu AOT varianta služby měla i při prvním volání odpoveď srovnatelnou s průměrným voláním a to 11.8 ms.
+
+
+\tab{Průměrné využití GC službou FUS}{tab:service_metrics}{1.0}{|l|r|r|r|}{
+  \hline
+  Služba - Režim & Alokovaná paměť (MB) & Doba běhu (ms) & Velikost objektů (MB) \\ \hline \hline
+  \emph{FUS-AOT} & 25.8 & 25.9 & 15.2 \\ \hline
+  \emph{FUS-JIT} & 14.0 & 5.3 & 12.9  \\ \hline
+}
+
+Přítomnost vygenerovaných typů a funkcionality v nativní AOT verzi služby má za výsledek větší alokace paměti, jenž jsou následně uvolněny, a větší doba běhu GC.
 
 \n{3}{Scénář 3 - Výpočetní zátěž}
 
