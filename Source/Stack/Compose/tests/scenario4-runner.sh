@@ -44,6 +44,7 @@ jq -c '.services[] | select((.protocol == "http") and (.name == "EPS"))' config.
 
     # Start the service
     $COMPOSE_CMD up -d $bps_service_name
+    $COMPOSE_CMD up -d $fus_service_name
     $COMPOSE_CMD up -d $standardized_name
 
     # Wait for the service to be fully up by checking health endpoint

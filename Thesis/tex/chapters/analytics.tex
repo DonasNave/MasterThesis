@@ -50,24 +50,21 @@ Kompilace do nativního kódu probíhala s průběžnými problémy. Podpora ze 
 Mezi hlavní výhody se řadí zprostředkování následujícího:
 
 \begin{itemize}
-    \item  \textbf{Výkonnost} - CLR umožňuje využívat reflexi, která umožňuje získat informace o kódu za běhu aplikace. Tímto je umožněno vytvářet aplikace, které jsou schopny měnit své chování za běhu.
-    \item \textbf{Paměťová zátěž} - CLR umožňuje dynamicky načítat knihovny za běhu aplikace. Tímto je umožněno vytvářet aplikace, které jsou schopny měnit své chování za běhu.
+    \item  \textbf{Nezávislost na CLR} - AOT kompilace umožňuje vytvořit aplikaci, která je schopna běžet bez nutnosti běhového prostředí. Tímto je zajištěno, že aplikace je schopna běžet na jakémkoliv operačním systému, na kterém je dostupný běhové prostředí.
+    \item \textbf{Efektivní využití zdrojů} - Aplikace využívající nativní AOT kompilaci efektivněji využívají zdroje jako CPU a operační paměť.
+    \item \textbf{Rychlejší start aplikace} - Aplikace zkompilované do nativního kódu cílové architektury se spouští daleko rychleji než aplikace využívající běhové prostředí.
+    \item \textbf{Rychlá odpověď aplikace} - Díky tomu, že aplikace musí mít všechny typy a funkcionality vygenerovány ve chvíli kompilace, je rychlost první odpovědi aplikace vyšší než v případě aplikace využívající běhové prostředí.
 \end{itemize}
 
 \n{4}{Nevýhody}
 
-Zatímco za nevýhody CLR se dá považovat:
+Následující představují hlavní nevýhody AOT kompilace:
 
 \begin{itemize}
-    \item  \textbf{Absence nástrojů z CLR} - Mnoho nástrojů, které jsou dostupné v CLR, nejsou dostupné v AOT kompilaci. Mezi tyto nástroje patří například reflexe, dynamické načítání knihoven a další.
-    \item \textbf{Absence dynamického načítání} - například Assembly.LoadFile.
-    \item \textbf{Bez generování kódu za běhu} - například System.Reflection.Emit.
-    \item \textbf{Žádné C++/CLI} - např. System.Runtime.InteropServices.WindowsRuntime
-    \item \textbf{Windows: absence COM} - např. System.Runtime.InteropServices.ComTypes
-    \item \textbf{Vyžaduje trimming (ořezávání)} - má určitá omezení, je však klíčový pro rozumnou velikost výsledného programu
-    \item \textbf{Kompilace do jediného souboru} 
-    \item \textbf{Připojení běhových knihoven} - požadované běhové knihovny jsou součástí výsledného aplikačního souboru. To zvyšuje velikost samoteného programu ve srovnání s aplikacemi závislými na frameworku.
-    \item \textbf{System.Linq.Expressions} - výsledný kód používá svou interpretovanou podobu, která je pomalejší než run-time generovaný kompilovaný kód.
+    \item \textbf{Absence dynamického načítání} - Například funkce Assembly.LoadFile, jenž umožňuje dynamicky načítat knihovny za běhu aplikace, není dostupná v AOT kompilaci.
+    \item \textbf{Bez generování kódu za běhu} - Není možno použít knihovnu System.Reflection.Emit pro generování kódu za běhu aplikace.
+    \item \textbf{Vyžaduje trimming (ořezávání)} - Trimming vyžaduje, aby veškeré nepřímo používané části byly explicitně deklarovány, jinak budou vyřazeny z výsledného kódu.
+    \item \textbf{Připojení běhových knihoven} - Veškeré potřebné knihovny jsou součástí výsledného aplikačního souboru. To zvyšuje velikost samoteného programu ve srovnání s aplikacemi závislými na runtime protředí.
     \item \textbf{Kompatibilita knihoven s AOT} - né všechny knihovny runtime jsou plně anotovány tak, aby byly kompatibilní s Native AOT. To znamená, že některá varování v knihovnách runtime nejsou pro koncové vývojáře použitelná.
 \end{itemize}
 
@@ -170,21 +167,46 @@ Přítomnost vygenerovaných typů a funkcionality v nativní AOT verzi služby 
 
 \n{3}{Scénář 3 - Výpočetní zátěž}
 
-Za účelem zjištění výkonnosti služeb, jejich potencionálně odlišné využití systémového API byl otestován scénář výpočetní zátěže. Na jednotlivé služby byly vysílány požadavky na výpočet 40-tého Fibonacciho čísla rekurzivní metodou. Výsledky testování ukázaly konsistnetně vyšší počet zpracovaných požadavků v případě AOT kompilace. 
+Za účelem zjištění výkonnosti služeb, jejich potencionálně odlišné využití systémového API byl otestován scénář výpočetní zátěže. Na jednotlivé služby byly vysílány požadavky na výpočet 40-tého Fibonacciho čísla rekurzivní metodou. Výsledky testování ukázaly že při náročné výpočetní zátěži žádná z kompilací nebyla výrazně výkonnější.
 
-TODO: Foto dashboard + tabulka výsledků + stručné vysvětlení
+\tab{Průměrné využití zdrojů službou BPS a doba odpovědi výpočtu Fibonacciho čísla}{tab:service_metrics}{1.0}{|l|r|r|r|r|}{
+  \hline
+  Služba - Režim & CPU (ms) & IO (ns) & Paměť (MB) & Doba požadavku (s) \\ \hline \hline
+  \emph{BPS-AOT} & 58.4 & 2.940 & 46.1 & 5.80 \\ \hline
+  \emph{BPS-JIT} & 48.8 & 1.164 & 44.8 & 6.07  \\ \hline
+}
+
+Dle očekávání z předchozích výsledků i zde AOT varianta služby si vyžádala více běhu GC a alokované paměti. Na výsledek to však nemělo vliv.
+
+
+\tab{Průměrné využití GC službou BPS}{tab:service_metrics}{1.0}{|l|r|r|r|}{
+  \hline
+  Služba - Režim & Alokovaná paměť (MB) & Doba běhu (ms) & Velikost objektů (MB) \\ \hline \hline
+  \emph{BPS-AOT} & 19.0 & 18.3 & 9.6 \\ \hline
+  \emph{BPS-JIT} & 9.1 & 3.1 & 8.5  \\ \hline
+}
 
 \n{3}{Scénář 4 - Vzájemná komunikace služeb}
 
-Komplexnější situace pro aplikaci byla simulována ve čtvrtém scénáři. Zde na základě požadavku na EPS byla vyvolána událost do RabbitMQ, načež byla zpracována službou BPS. Ta na jejím základě stáhla patřičný záznam pomocí RPC z FUS a provedla simulaci zpracování dat výpočtem Fibonacciho čísla. Situace simulovala kombinaci synchronní a asynchronní komunikace mezi službami doplněnou o výpočetní zátěž. Výsledky přiblížily služby v obou kompilačních režimech a ukázaly pohled bližší reálnému nasazení, kdy čistě výkkonostní rozdíly kompilací nehrají tak zásadní roli. 
+Komplexnější situace pro aplikaci byla simulována ve čtvrtém scénáři. Zde na základě požadavku na EPS byla vyvolána událost do RabbitMQ, načež byla zpracována službou BPS. Ta na jejím základě stáhla patřičný záznam pomocí RPC z FUS a provedla simulaci zpracování dat výpočtem Fibonacciho čísla. Situace simulovala kombinaci synchronní a asynchronní komunikace mezi službami doplněnou o výpočetní zátěž. Výsledky přiblížily služby v obou kompilačních režimech, vyjma využití CPU. Bylo náhlednuto na situaci bližší reálnému nasazení, kdy čistě provozní výkonnostní rozdíly služeb v kompilacích AOT a JIT nehrají zásadní roli. 
 
-TODO: Foto dashboard + tabulka výsledků
+\tab{Průměrné využití zdrojů službami dle nasazení v kompilačních režimu}{tab:service_metrics}{1.0}{|l|r|r|r|}{
+  \hline
+  Režim & CPU (ms) & IO (ns) & Paměť (MB) \\ \hline \hline
+  \emph{AOT} & 8.1 & 0.683 & 30.4 \\ \hline
+  \emph{JIT} & 24.3 & 1.634 & 36.7 \\ \hline
+}
 
 \n{3}{Scénář 5 - Rychlost odpovědi služby po startu}
 
-Simulaci serveless nasazení byla vyvolána v tomto scénáři. Jednotlivé varianty služby SRS byly v rámci testu zpuštěny, kontrolovány než se dostaly do stavu \emph{healthy} a následně nad nimi zavolán dotaz na generovaná data. Výsledky ukázaly, že služba kompilované nativním AOT způsobem byly mnohem rychleji dostupné a odpovídaly na požadavky dříve, než služba kompilované do .NET runtime.
+Simulaci serveless nasazení byla vyvolána v tomto scénáři. Jednotlivé varianty služby SRS byly v rámci testu zpuštěny, kontrolovány než se dostaly do stavu \emph{healthy} a následně nad nimi zavolán dotaz pro získání generovaných dat. Výsledky ukázaly, že služba kompilovaná nativním AOT způsobem je mnohem rychleji dostupná a odpovídá na požadavky dříve, než služba kompilovaná pro .NET runtime. Oproti propagovaným zrychlení v dokumentaci .NET však nebylo dosaženo tak výrazného zrychlení s ohledem na režii kontejneru.
 
-TODO: Foto dashboard + tabulka výsledků
+\tab{Průměrné využití zdrojů službou SRS a doba odpovědi včetně startu služby}{tab:service_metrics}{1.0}{|l|r|r|r|r|}{
+  \hline
+  Služba - Režim & Doba startu + požadavku (s) & Paměť (MB) \\ \hline \hline
+  \emph{SRS-AOT} & 0.91 & 9.59 \\ \hline
+  \emph{SRS-JIT} & 1.40 & 8.46 \\ \hline
+}
 
 \n{2}{Závěr analýzy}
 

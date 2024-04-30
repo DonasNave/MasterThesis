@@ -55,15 +55,15 @@ jq -c '.services[] | select((.protocol == "http") and (.name == "SRS"))' config.
         REAL_TIME=$( { time run_http_request $standardized_name $url $compilation; } 2>&1 | awk '/real/ {print $2}' )
         REAL_TIME_MS=$(echo $REAL_TIME | awk -F'[ms]' '{ print ($1 * 60 * 1000) + ($2 * 1000) }')
 
+        echo "Stopping service $standardized_name"
+        $COMPOSE_CMD down $standardized_name
+
         echo "Test completed in $REAL_TIME_MS ms"
 
         # Log to InfluxDB
         curl -i -XPOST "$INFLUXDB_WRITE_URL" \
             --data-binary "${MEASUREMENT},dta_service=SRS-${compilation},test_scenario=scenario5,test_id=${TEST_ID} value=${REAL_TIME_MS} ${current_time_ns}"
     done
-
-    echo "Stopping service $standardized_name"
-    $COMPOSE_CMD down $standardized_name
 done
 
 echo "All tests completed."
