@@ -388,8 +388,6 @@ Služba poskytuje následující rozhraní
 
 Následující diagram znázorňuje vztahy mezi jednotlivými službami.
 
-\obr{Telemetrie ve stacku}{fig:logo}{0.85}{graphics/diagrams/stack-data-flow.png}
-
 \n{2}{Konfigurace aplikace}
 
 Za účelem běhu aplikace je klíčové správné nastavení konfigurace. Konfigurace je řešena na různých úrovních. Základní úroveň představuje soubor \emph{compose.yaml}, který inforumje Docker orchestrátor jaká infrastrukura má být vytvořena a jak má být nastavena, které služby mají být vytvořeny a jaké zdroje jim mají být přiděleny. Dále jsou v tomto souboru nastaveny základní parametry jako je jméno sítě, názvy volume (persistentní úložiště orchestrátoru), závislosti mezi službami a další. V neposlední řadě je dílčí konfigurace jednotlivých služeb řešena v rámci konfiguračních souborů a proměnných prostředí.
