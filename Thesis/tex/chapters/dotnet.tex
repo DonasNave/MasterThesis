@@ -17,7 +17,7 @@ Microsoft v reakci na JVM vydal v roce 2000 první .NET Framework, který umož�
 
 \n{2}{Architektura}
 
-Platforma .NET je postavena na několika klíčových komponentách, které zajišťují běh aplikací a poskytují nástroje pro vývoj aplikací. \cite{netdocs} Mezi nejdůležitější komponenty patří:
+Platforma .NET je postavena na několika klíčových komponentách, které zajišťují běh aplikací a poskytují nástroje pro vývoj aplikací. Mezi nejdůležitější komponenty patří:
 
 \begin{itemize}
     \item \textbf{Common Language Runtime} - CLR je základním kamenem .NET a poskytuje běhové prostředí pro spouštění aplikací na platformě. Překládá IL do nativního kódu, spravuje alokaci paměti a garbage collection (dále GC), zajišťuje zpracování výjimek (exceptions). CLR také kontroluje datové typy, interoperabilitu a zprostředkovává služby nezbytné pro spouštění nejrůznějších aplikací .NET.
@@ -25,7 +25,7 @@ Platforma .NET je postavena na několika klíčových komponentách, které zaji
     \item \textbf{Microsoft Build} - Microsoft Build (dále MSBuild) je engine používaný v platformě .NET, který umožňuje sestavovat aplikace a vytvářet balíčky pro nasazení. Tento nástroj používá k organizaci a řízení procesu sestavení projektový soubor \emph{csproj} na bázi Extensible Markup Language (dále XML). Tím je zajištěna kontrola nad kompilací a průběhem sestavení. V rámci procesu sestavení lze doplnit vlastní úlohy a cíle kompilace, což poskytuje flexibilitu sestavení pro komplexní procesy ve velkých projektech.
     \item \textbf{nástroje .NET Software Development Kit} (dále SDK) - Soubor nástrojů a knihoven podporujících vývoj, debugging a testování aplikací .NET. Zahrnují různé CLI a GUI nástroje, které pomáhají vývojářům spravovat práci s kódem, optimalizovat výkon a zajistit kvalitní výstup programu v platformě .NET.
     \item \textbf{Roslyn} - Roslyn je sada kompilátorů platformy .NET, která poskytuje bohaté Application Programming Interface (dále API) pro analýzu kódu. Umožňuje vývojářům používat implementace kompilátorů jazyka C\# a VB.NET jako služby. Roslyn zlepšuje výkonnost vývojářů poskytnutím funkcí jako je refaktoring, generování kódu a sémantická analýza.
-    \item \textbf{NuGet} - Správce balíčků pro platformu .NET. dodává standardizovanou metodu správy externích knihoven, na nichž závisí aplikace v .NET. Zjednodušuje proces inkorporace knihoven, systémových i třetích stran, do projektu. Rovněž spravuje závislosti, čímž zajišťuje, že projekty zůstávají aktuální a kompatibilní. Tento nástroj je téměř nezbytný pro vývoj na platformě .NET, neboť umožňuje modulární vývoj softwaru.
+    \item \textbf{NuGet} - Správce balíčků pro platformu .NET. dodává standardizovanou metodu správy externích knihoven, na nichž závisí aplikace v .NET. Zjednodušuje proces inkorporace knihoven, systémových i třetích stran, do projektu. Rovněž spravuje závislosti, čímž zajišťuje, že projekty zůstávají aktuální a kompatibilní. Tento nástroj je téměř nezbytný pro vývoj na platformě .NET, neboť umožňuje modulární vývoj softwaru. \cite{netdocs}
 \end{itemize}
 
 
@@ -44,7 +44,7 @@ Platforma .NET poskytuje mnoho frameworků a technologií pro vývoj aplikací. 
 
 Knihovny představují soubor funkcí a tříd, které mohou být použity při vývoji ve více aplikacích. Typicky představují logicky oddělenou a obecnou část funkcionality aplikace. Umožňují distribuovat běžnou funkcionalitu napříč různými projekty. Knihovny v .NET mohou být tvořeny binárnimi Dynamic Link Library (DLL) soubory nebo organizované jako samostatný projekt v rámci kontejneru projektů zvaném solution. K distribuci knihoven obecně dochází pomocí balíčků NuGet. Pomocí stejnojmenného nástroje jsou knihovny zabaleny a sdíleny přes internetová úložiště. 
 
-Běžnou praxí tvůrce platformy, programovacího jazyka nebo frameworku je poskytnutí sad knihoven, které usnadňují vývoj aplikací. Zároveň tyto knihovny zpravidla implementují nejběžnější funkcionality, které mohou programátoři vyžadovat. Typicky se jedná o přístup k souborovému systému, síti, databázím, grafickému rozhraní a další. \cite{Price2023} \cite{netdocs}
+Běžnou praxí tvůrce platformy, programovacího jazyka nebo frameworku je poskytnutí sad knihoven, které usnadňují vývoj aplikací. Zároveň tyto knihovny zpravidla implementují nejběžnější funkcionality, které mohou programátoři vyžadovat. Typicky se jedná o přístup k souborovému systému, síti, databázím, grafickému rozhraní a další. \cite{netdocs} \cite{Price2023} 
 
 Následující seznam obsahuje některé z nejběžněji používaných knihoven v .NET:
 
@@ -126,13 +126,13 @@ Cílem kompilace je převést zdrojový kód do podoby, kterou je možné spusti
 
 \n{3}{Obecné postupy kompilace}
 
-Proces kompilace zahrnuje několik charakteristických postupů, které jsou přizpůsobeny optimalizaci výkonu aplikací při vývoji i za běhu. Jejich cílem je zvýšení výkonu a zabezpečení aplikací, ale také zajištění větší kompatibility a efektivity programu napříč platformami. \cite{netdocs} Mezi tyto postupy kompilace patří:
+Proces kompilace zahrnuje několik charakteristických postupů, které jsou přizpůsobeny optimalizaci výkonu aplikací při vývoji i za běhu. Jejich cílem je zvýšení výkonu a zabezpečení aplikací, ale také zajištění větší kompatibility a efektivity programu napříč platformami. Mezi tyto postupy kompilace patří:
 
 \begin{itemize}
     \item \textbf{Linkování} - Kompilátor během procesu sestavení aplikace propojuje množství zdrojových souborů a dll, aby vytvořily jeden spustitelný soubor nebo knihovnu. To zahrnuje řešení odkazů mezi různými dll a integraci všech požadovaných zdrojů.
     \item \textbf{Optimalizace} - Různé optimalizace IL a nativního kódu pro zlepšení výkonu. Tyto optimalizace probíhají jak během kompilace IL, tak během kompilace JIT nebo AOT do nativního kódu.
     \item \textbf{Tree shaking a trimming} - V moderních aplikacích .NET odstraňují nástroje, jako je IL Linker, během procesu sestavování nepoužívaný kód z konečné sestavy. Toto \emph{protřepávání stromu} snižuje velikost aplikace tím, že vylučuje nepotřebné knihovny a cesty ke kódu.
-    \item \textbf{Vytváření metadat a manifestů} - Překladače .NET také vytvářejí metadata a soubory manifestů, které popisují obsah a závislosti sestav, což má zásadní význam pro verzování, zabezpečení a rozlišení sestav za běhu.
+    \item \textbf{Vytváření metadat a manifestů} - Překladače .NET také vytvářejí metadata a soubory manifestů, které popisují obsah a závislosti sestav, což má zásadní význam pro verzování, zabezpečení a rozlišení sestav za běhu. \cite{netdocs} 
 \end{itemize}
 
 \n{3}{Kompilace pro CLR}
