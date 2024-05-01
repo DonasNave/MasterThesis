@@ -13,8 +13,7 @@ Využití runtime prostředí, respektive v originální podobě virtuálního s
 V průběhu 90. let 20. století představila společnost Sun-Microsystems virtuální stroj Java Virtual Machine (dále JVM). Jedná se o komponentu runtime prostředí Javy, která zprostředkovává spuštění specifického kódu, správu paměti, vytváření tříd a typů a další. Kompilací Javy do tzv. bytecode (Intermediate Language, dále IL), tedy provedením mezikroku v procesu transformace zdrojového kódu do strojového kódu, je získána reprezentace programu, jenž běží na každém zařízení s implementovaným JVM. V rámci JVM dochází k finálním krokům mezi které patří interpretace (JIT kompilace) bytecode do nativního kódu pro cílovou architekturu systému. 
 
 Microsoft v reakci na JVM vydal v roce 2000 první .NET Framework, který umožňoval spouštět kód v jazyce C\# na operačním systému Windows. Cílem prvních verzí .NET Framework nebylo primárně umožnit vývoj pro různé zařízení a operační systémy, ale zprostředkovat lepší nástroje pro vývoj aplikací. V roce 2014 byla vydána první multiplatformní verze platformy .NET. Ta nese název .NET Core a umožňovala spouštět kód v jazyce C\# na operačních systémech Windows, Linux a macOS. 
-
-TODO: Cite
+\cite{Richter2012}
 
 \n{2}{Architektura}
 
@@ -36,7 +35,7 @@ Platforma .NET poskytuje mnoho frameworků a technologií pro vývoj aplikací. 
 
 \begin{itemize}
     \item \textbf{.NET} - Hlavní framework platformy. .NET je robustní framework pro vývoj softwaru. Podporuje tvorbu a provoz moderních aplikací a služeb. Původně známý jako .NET Framework a primárně zaměřen na prostředí Windows, s příchodem .NET Core a novějších verzí se vyvinul v modulární platformu s open-source zdrojovým kódem známou jednoduše jako .NET. Umožňuje vývojářům vytvářet aplikace, které jsou škálovatelné, výkonné a multiplatformní.
-    \item \textbf{ASP.NET} - Robustní framework pro vytváření webových aplikací a služeb. Je součástí ekosystému .NET navržený tak, aby umožňoval vývoj vysoce výkonných, dynamických webových stránek, API a webových aplikací v reálném čase. ASP.NET podporuje jak webové formuláře, tak architekturu Model-View-Controller (dále MVC). S uvedením ASP.NET Core byl framework přepracován pro cloudovou nasazením škálevatolnost, vývoj napříč platformami a vysoký výkon. Poskytuje komplexní základ pro vývoj moderních webových aplikací, které lze spustit jak na Linuxu, Windows tak macOS. ASP.NET Core také představuje Blazor, který umožňuje vývojářům používat C\# při vývoji webu, což dále zvyšuje všestrannost ekosystému. Vývojářům, kteří chtějí využít .NET pro vývoj webu, poskytuje ASP.NET komplexní a flexibilní sadu nástrojů pro vytváření všech řešení, od malých webů až po složité webové platformy.
+    \item \textbf{ASP.NET} - Robustní framework pro vytváření webových aplikací a služeb. Je součástí ekosystému .NET navržený tak, aby umožňoval vývoj vysoce výkonných, dynamických webových stránek, API a webových aplikací v reálném čase. ASP.NET podporuje jak webové formuláře, tak architekturu Model-View-Controller (dále MVC). S uvedením ASP.NET Core byl framework přepracován pro cloudovou nasazením škálevatolnost, vývoj napříč platformami a vysoký výkon. Poskytuje komplexní základ pro vývoj moderních webových aplikací, které lze spustit jak na Linuxu, Windows tak macOS. ASP.NET Core také představuje Blazor, který umožňuje vývojářům používat C\# při vývoji webu, což dále zvyšuje všestrannost ekosystému. Vývojářům, kteří chtějí využít .NET pro vývoj webu, poskytuje ASP.NET komplexní a flexibilní sadu nástrojů pro vytváření všech řešení, od malých webů až po složité webové platformy. \cite{Danylko2023}
     \item \textbf{MAUI} - Moderní specializovaný framework pro vývoj aplikací napříč platformami v rámci ekosystému .NET. Umožňuje vývojářům vytvářet aplikace pro Android, iOS, macOS a Windows z jedné kódové základny. Zakládá na populárních konceptech z Xamarin.Forms a zároveň rozšiřuje jeho možnosti na desktopové aplikace. .NET MAUI zjednodušuje vývojový proces tím, že poskytuje jednotnou sadu nástrojů pro vývoj uživatelského rozhraní na všech platformách s možností přístupu k funkcím specifickým pro platformu v případě potřeby. Podporuje moderní vývojové vzory a nástroje, včetně MVVM, datové vazby a asynchronního programování, což usnadňuje vytváření sofistikovaných a citlivých aplikací. Předchůdcem MAUI je platforma Xamarin, která sloužila pro vytváření mobilních aplikací na platformě .NET. \cite{Libery2023}
     \item \textbf{Blazor} - Specializovaný framework v rámci ekosystému .NET, který zprostředkovává vývojářům tvorbu interaktivních webových uživatelských rozhraní pomocí C\# namísto JavaScriptu. Blazor může běžet na serveru (Blazor Server), kde zpracovává požadavky a komunikuje s uživatelským rozhraním pomocí knihovny SignalR, která zabezpečuje websocket komunikaci. Nebo také v prohlížeči skrz WASM, kdy dochází k přeložení C\# kódu do nativního kódu WASM a je spouštěn přímo ve webovém prohlížeči vedle tradičních webových technologií, jako jsou HTML a CSS. Umožňuje vývojářům využít znalosti .NET pro komplexní vývoj webových aplikací a vytvářet bohaté webové aplikace běžící na straně klienta v prohlížeči. Architektura Blazor je založená na komponentách a usnadňuje jejich opětovné použití pro tvorbu uživatelského rozhraní. Zároveň Blazor podporuje modulární vývojový přístup a poskytuje možnost vyvíjet webové aplikace v ekosystému .NET.
 \end{itemize}
@@ -45,7 +44,7 @@ Platforma .NET poskytuje mnoho frameworků a technologií pro vývoj aplikací. 
 
 Knihovny představují soubor funkcí a tříd, které mohou být použity při vývoji ve více aplikacích. Typicky představují logicky oddělenou a obecnou část funkcionality aplikace. Umožňují distribuovat běžnou funkcionalitu napříč různými projekty. Knihovny v .NET mohou být tvořeny binárnimi Dynamic Link Library (DLL) soubory nebo organizované jako samostatný projekt v rámci kontejneru projektů zvaném solution. K distribuci knihoven obecně dochází pomocí balíčků NuGet. Pomocí stejnojmenného nástroje jsou knihovny zabaleny a sdíleny přes internetová úložiště. 
 
-Běžnou praxí tvůrce platformy, programovacího jazyka nebo frameworku je poskytnutí sad knihoven, které usnadňují vývoj aplikací. Zároveň tyto knihovny zpravidla implementují nejběžnější funkcionality, které mohou programátoři vyžadovat. Typicky se jedná o přístup k souborovému systému, síti, databázím, grafickému rozhraní a další. \cite{Price2023}
+Běžnou praxí tvůrce platformy, programovacího jazyka nebo frameworku je poskytnutí sad knihoven, které usnadňují vývoj aplikací. Zároveň tyto knihovny zpravidla implementují nejběžnější funkcionality, které mohou programátoři vyžadovat. Typicky se jedná o přístup k souborovému systému, síti, databázím, grafickému rozhraní a další. \cite{Price2023} \cite{netdocs}
 
 Následující seznam obsahuje některé z nejběžněji používaných knihoven v .NET:
 
@@ -58,7 +57,7 @@ Následující seznam obsahuje některé z nejběžněji používaných knihoven
     \item \textbf{System.Linq} - Zaštiťuje dotazování nad kolekcemi objektů pomocí Language Integrated Query (dále LINQ).
     \item \textbf{System.Threading} - Umožňuje správu vláken, synchronizační primitiva nebo například thread pool. Podporuje vývoj paralelizovaných aplikacích.
     \item \textbf{System.Security} - Spravuje ověřování, autorizaci a šifrování, a je základem pro vývoj bezpečných aplikací.
-    \item \textbf{Entity Framework} - Object-Relational Mapping (dále ORM) framework, který umožňuje vývojářům pracovat s databázemi pomocí objektově orientovaného přístupu. Poskytuje abstrakci nad databázovými systémy a umožňuje vývojářům pracovat s daty pomocí objektů a tříd. \cite{netdocs}
+    \item \textbf{Entity Framework} - Object-Relational Mapping (dále ORM) framework, který umožňuje vývojářům pracovat s databázemi pomocí objektově orientovaného přístupu. Poskytuje abstrakci nad databázovými systémy a umožňuje vývojářům pracovat s daty pomocí objektů a tříd.
 \end{itemize}
 
 Kromě knihoven poskytovaných společností Microsoft existuje mnoho knihoven třetích stran. Za vývojem těchto knihoven mohou stát vývojařské komunity nebo být vydány velkými společnostmi. Běžně tyto knihovny navazují na sadu funkcí poskytovaných Microsoftem a rozšiřují je o další novou funkcionalitu, nebo portují známé existující projekty do platformy .NET. Mezi příklady nejznámějších knihovny třetích stran v .NET patří Dapper, AutoMapper, Newtonsoft.Json a další.
@@ -98,7 +97,7 @@ Základem aplikace je zdrojový kód, který je v případě platformy .NET repr
 
 Základním stavebním prvkem aplikace v .NET je soubor projektu. Jedná se o soubor na bázi XML disponující příponou \emph{.csproj}. V rámci něj dochází ke konfiguraci a deklaraci, jak bude .NET CLI, respektive nástroje sestavení, s projektem pracovat. Zároveň jsou zde definované závislosti na další projekty a knihovny. Mezi základní charakteristiky běžně určené v projektovém souboru patří verze .NET, verze projektu/assembly, seznam závislostí, konfigurace pro buildování, testování a publikaci.
 
-Pro tvorbu složitějších aplikací je možné využít více projektových souborů. Tyto souboury jsou seskupeny pomocí speciálního solution souboru. Jedná se o soubor sloužící ke kontejnerizaci a provázání veškerých projektových a pomocných souborů, jako jsou konfigurace setavení, pomocné skripty a další. Disponuje příponou \emph{.sln}. \cite{Price2023}
+Pro tvorbu složitějších aplikací je možné využít více projektových souborů. Tyto souboury jsou seskupeny pomocí speciálního solution souboru. Jedná se o soubor sloužící ke kontejnerizaci a provázání veškerých projektových a pomocných souborů, jako jsou konfigurace setavení, pomocné skripty a další. Disponuje příponou \emph{.sln}. \cite{Alls2023}
 
 Mezi další běžně používané známé konfigurační soubory patří následující:
 
@@ -127,7 +126,7 @@ Cílem kompilace je převést zdrojový kód do podoby, kterou je možné spusti
 
 \n{3}{Obecné postupy kompilace}
 
-Proces kompilace zahrnuje několik charakteristických postupů, které jsou přizpůsobeny optimalizaci výkonu aplikací při vývoji i za běhu. Jejich cílem je zvýšení výkonu a zabezpečení aplikací, ale také zajištění větší kompatibility a efektivity programu napříč platformami. Mezi tyto postupy kompilace patří:
+Proces kompilace zahrnuje několik charakteristických postupů, které jsou přizpůsobeny optimalizaci výkonu aplikací při vývoji i za běhu. Jejich cílem je zvýšení výkonu a zabezpečení aplikací, ale také zajištění větší kompatibility a efektivity programu napříč platformami. \cite{netdocs} Mezi tyto postupy kompilace patří:
 
 \begin{itemize}
     \item \textbf{Linkování} - Kompilátor během procesu sestavení aplikace propojuje množství zdrojových souborů a dll, aby vytvořily jeden spustitelný soubor nebo knihovnu. To zahrnuje řešení odkazů mezi různými dll a integraci všech požadovaných zdrojů.
