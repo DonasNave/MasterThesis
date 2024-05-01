@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.8)  1 MAY 2024 08:08
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.8)  1 MAY 2024 08:13
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1379,7 +1379,7 @@ Overfull \hbox (7.77519pt too wide) in paragraph at lines 108--109
 
 
 ] [43] [44] [45] [46] [47] [48]
-<graphics/images/folder-structure-app.png, id=902, 244.915pt x 628.3475pt>
+<graphics/images/folder-structure-app.png, id=904, 244.915pt x 628.3475pt>
 File: graphics/images/folder-structure-app.png Graphic file (type png)
 <use graphics/images/folder-structure-app.png>
 Package pdftex.def Info: graphics/images/folder-structure-app.png  used on input line 155.
@@ -1388,7 +1388,7 @@ Package pdftex.def Info: graphics/images/folder-structure-app.png  used on input
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<graphics/images/folder-structure-service.png, id=904, 287.0725pt x 602.25pt>
+<graphics/images/folder-structure-service.png, id=906, 287.0725pt x 602.25pt>
 File: graphics/images/folder-structure-service.png Graphic file (type png)
 <use graphics/images/folder-structure-service.png>
 Package pdftex.def Info: graphics/images/folder-structure-service.png  used on input line 161.
@@ -1412,7 +1412,7 @@ Overfull \hbox (11.87991pt too wide) in paragraph at lines 261--262
  []
 
 [54]
-<graphics/diagrams/services-architecture.png, id=934, 768.8725pt x 733.74126pt>
+<graphics/diagrams/services-architecture.png, id=936, 768.8725pt x 733.74126pt>
 File: graphics/diagrams/services-architecture.png Graphic file (type png)
 <use graphics/diagrams/services-architecture.png>
 Package pdftex.def Info: graphics/diagrams/services-architecture.png  used on input line 268.
@@ -1420,7 +1420,7 @@ Package pdftex.def Info: graphics/diagrams/services-architecture.png  used on in
  [55 <./graphics/diagrams/services-architecture.png>] [56] [57]) (./tex/chapters/testing.tex [58] [59
 
 ] [60]
-<graphics/diagrams/stack-scenario1.png, id=962, 793.96625pt x 972.63374pt>
+<graphics/diagrams/stack-scenario1.png, id=964, 793.96625pt x 972.63374pt>
 File: graphics/diagrams/stack-scenario1.png Graphic file (type png)
 <use graphics/diagrams/stack-scenario1.png>
 Package pdftex.def Info: graphics/diagrams/stack-scenario1.png  used on input line 67.
@@ -1430,7 +1430,7 @@ Package pdftex.def Info: graphics/diagrams/stack-scenario1.png  used on input li
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [61]
-<graphics/diagrams/stack-scenario2.png, id=971, 874.26625pt x 654.445pt>
+<graphics/diagrams/stack-scenario2.png, id=973, 874.26625pt x 654.445pt>
 File: graphics/diagrams/stack-scenario2.png Graphic file (type png)
 <use graphics/diagrams/stack-scenario2.png>
 Package pdftex.def Info: graphics/diagrams/stack-scenario2.png  used on input line 87.
@@ -1440,7 +1440,7 @@ Package pdftex.def Info: graphics/diagrams/stack-scenario2.png  used on input li
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [62 <./graphics/diagrams/stack-scenario1.png>]
-<graphics/diagrams/stack-scenario3.png, id=979, 908.39375pt x 471.7625pt>
+<graphics/diagrams/stack-scenario3.png, id=981, 908.39375pt x 471.7625pt>
 File: graphics/diagrams/stack-scenario3.png Graphic file (type png)
 <use graphics/diagrams/stack-scenario3.png>
 Package pdftex.def Info: graphics/diagrams/stack-scenario3.png  used on input line 109.
@@ -1450,7 +1450,7 @@ Package pdftex.def Info: graphics/diagrams/stack-scenario3.png  used on input li
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [63 <./graphics/diagrams/stack-scenario2.png>]
-<graphics/diagrams/stack-scenario4.png, id=987, 1485.55pt x 720.6925pt>
+<graphics/diagrams/stack-scenario4.png, id=989, 1485.55pt x 720.6925pt>
 File: graphics/diagrams/stack-scenario4.png Graphic file (type png)
 <use graphics/diagrams/stack-scenario4.png>
 Package pdftex.def Info: graphics/diagrams/stack-scenario4.png  used on input line 130.
@@ -1460,7 +1460,7 @@ Package pdftex.def Info: graphics/diagrams/stack-scenario4.png  used on input li
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [64 <./graphics/diagrams/stack-scenario3.png>] [65 <./graphics/diagrams/stack-scenario4.png>]
-<graphics/diagrams/stack-scenario5.png, id=1004, 855.195pt x 714.67pt>
+<graphics/diagrams/stack-scenario5.png, id=1006, 855.195pt x 714.67pt>
 File: graphics/diagrams/stack-scenario5.png Graphic file (type png)
 <use graphics/diagrams/stack-scenario5.png>
 Package pdftex.def Info: graphics/diagrams/stack-scenario5.png  used on input line 158.
@@ -1469,7 +1469,7 @@ Package pdftex.def Info: graphics/diagrams/stack-scenario5.png  used on input li
 
 
 ] (./tex/chapters/analytics.tex
-<graphics/images/code-visual-sample.png, id=1026, 643.40375pt x 360.34625pt>
+<graphics/images/code-visual-sample.png, id=1028, 643.40375pt x 360.34625pt>
 File: graphics/images/code-visual-sample.png Graphic file (type png)
 <use graphics/images/code-visual-sample.png>
 Package pdftex.def Info: graphics/images/code-visual-sample.png  used on input line 14.
@@ -1572,12 +1572,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 9--10
 
  []
 
-<graphics/diagrams/stack-data-flow.png, id=1181, 1222.5675pt x 1469.49pt>
+<graphics/diagrams/stack-data-flow.png, id=1182, 1222.5675pt x 1469.49pt>
 File: graphics/diagrams/stack-data-flow.png Graphic file (type png)
 <use graphics/diagrams/stack-data-flow.png>
 Package pdftex.def Info: graphics/diagrams/stack-data-flow.png  used on input line 11.
 (pdftex.def)             Requested size: 374.86774pt x 450.55939pt.
-<graphics/images/scenario1-dashboard.png, id=1182, 1143.27126pt x 800.9925pt>
+<graphics/images/scenario1-dashboard.png, id=1183, 1143.27126pt x 800.9925pt>
 File: graphics/images/scenario1-dashboard.png Graphic file (type png)
 <use graphics/images/scenario1-dashboard.png>
 Package pdftex.def Info: graphics/images/scenario1-dashboard.png  used on input line 13.
@@ -1585,7 +1585,7 @@ Package pdftex.def Info: graphics/images/scenario1-dashboard.png  used on input 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<graphics/images/scenario2-dashboard.png, id=1183, 1411.2725pt x 723.70375pt>
+<graphics/images/scenario2-dashboard.png, id=1184, 1411.2725pt x 723.70375pt>
 File: graphics/images/scenario2-dashboard.png Graphic file (type png)
 <use graphics/images/scenario2-dashboard.png>
 Package pdftex.def Info: graphics/images/scenario2-dashboard.png  used on input line 15.
@@ -1593,7 +1593,7 @@ Package pdftex.def Info: graphics/images/scenario2-dashboard.png  used on input 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<graphics/images/scenario3-dashboard.png, id=1184, 1671.24374pt x 810.02625pt>
+<graphics/images/scenario3-dashboard.png, id=1185, 1671.24374pt x 810.02625pt>
 File: graphics/images/scenario3-dashboard.png Graphic file (type png)
 <use graphics/images/scenario3-dashboard.png>
 Package pdftex.def Info: graphics/images/scenario3-dashboard.png  used on input line 17.
@@ -1601,7 +1601,7 @@ Package pdftex.def Info: graphics/images/scenario3-dashboard.png  used on input 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<graphics/images/scenario4-dashboard.png, id=1185, 1665.22125pt x 881.2925pt>
+<graphics/images/scenario4-dashboard.png, id=1186, 1665.22125pt x 881.2925pt>
 File: graphics/images/scenario4-dashboard.png Graphic file (type png)
 <use graphics/images/scenario4-dashboard.png>
 Package pdftex.def Info: graphics/images/scenario4-dashboard.png  used on input line 19.
@@ -1609,7 +1609,7 @@ Package pdftex.def Info: graphics/images/scenario4-dashboard.png  used on input 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<graphics/images/scenario5-dashboard.png, id=1186, 915.42pt x 354.32375pt>
+<graphics/images/scenario5-dashboard.png, id=1187, 915.42pt x 354.32375pt>
 File: graphics/images/scenario5-dashboard.png Graphic file (type png)
 <use graphics/images/scenario5-dashboard.png>
 Package pdftex.def Info: graphics/images/scenario5-dashboard.png  used on input line 21.
@@ -1639,9 +1639,9 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  103i,17n,106p,1633b,607s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbi1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
-Output written on prace.pdf (93 pages, 3310955 bytes).
+Output written on prace.pdf (93 pages, 3311167 bytes).
 PDF statistics:
- 1330 PDF objects out of 1440 (max. 8388607)
+ 1331 PDF objects out of 1440 (max. 8388607)
  306 named destinations out of 1000 (max. 500000)
  1114 words of extra memory for PDF output out of 10000 (max. 10000000)
 

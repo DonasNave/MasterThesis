@@ -20,7 +20,7 @@ Cílem monitorování v kontextu mikroslužeb je poskytnout využitelné informa
 
 \n{2}{Druhy dat}
 
-Monitorovací data hrají zásadní roli při údržbě a optimalizaci moderních softwarových systémů. Sběrem, analýzou a interpretací různých typů dat lze získat cenné informace o výkonu, stavu a celkovém chování aplikací. Následující část kategorizuje tři základní typy monitorovacích dat: metriky, logy a traces. Jednolitvé druhy slouží různým účelům a poskytují pohled na výkon a stav systému z určitěného úhlu. \cite{Blanco2023}
+Monitorovací data hrají zásadní roli při údržbě a optimalizaci moderních softwarových systémů. Sběrem, analýzou a interpretací různých typů dat lze získat cenné informace o výkonu, stavu a celkovém chování aplikací. Následující část kategorizuje tři základní typy monitorovacích dat: metriky, logy a traces. Jednolitvé druhy slouží různým účelům a poskytují pohled na výkon a stav systému z určitěného úhlu. 
 
 \n{3}{Logy}
 
@@ -28,7 +28,7 @@ Logy jsou chronologické záznamy o událostech, ke kterým dochází v rámci a
 
 \n{3}{Traces}
 
-Traces trasují cestu požadavku, při průchodu různými součástmi distribuovaného systému. Každá trace se skládá z jednoho nebo více segmentů, které zaznamenávají cestu a latenci požadavku napříč různými službami a zdroji. Sledování je zvláště důležité v architekturách mikroslužeb, kde jedna transakce může zahrnovat více, volně propojených služeb. Poskytuje přehled o výkonu a chování jednotlivých služeb a systému jako celku a pomáhá identifikovat jeho úzká místa na problémy s latencí. Traces pomáhají pochopit vztahy a závislosti mezi službami, což umožňuje efektivnější ladění a optimalizaci. Mezi populární nástroje pro správu trace patří Jaeger, Zipkin anebo Tempo.
+Traces trasují cestu požadavku, při průchodu různými součástmi distribuovaného systému. Každá trace se skládá z jednoho nebo více segmentů, které zaznamenávají cestu a latenci požadavku napříč různými službami a zdroji. Sledování je zvláště důležité v architekturách mikroslužeb, kde jedna transakce může zahrnovat více, volně propojených služeb. Poskytuje přehled o výkonu a chování jednotlivých služeb a systému jako celku a pomáhá identifikovat jeho úzká místa na problémy s latencí. Traces pomáhají pochopit vztahy a závislosti mezi službami, což umožňuje efektivnější ladění a optimalizaci. Mezi populární nástroje pro správu trace patří Jaeger, Zipkin anebo Tempo. \cite{Molkova2023}
 
 \n{3}{Metriky}
 
@@ -36,7 +36,7 @@ Metriky jsou kvantitativní údaje, které poskytují přehled o výkonu a stavu
 
 \n{2}{Sběr dat}
 
-Efektivita monitorování aplikací do značné míry závisí na schopnosti efektivně shromažďovat relevantní data z různých zdrojů a schopnosti zprostředkování těchto dat do monitorovacích nástrojů. Kolektory jsou nástroje nebo agenti, kteří shromažďují data z různých zdrojů v rámci aplikace a jejího prostředí. Mohou být nasazeny jako součást infrastruktury aplikace nebo mohou být provozovány jako externí služby. Kolektory jsou zodpovědné za shromažďování logů, traces a metrik. Dále za předávání těchto dat do monitorovacích řešení, kde je lze analyzovat a vizualizovat. Efektivní sběr dat je nezbytný pro monitorování v reálném čase a pro zajištění toho, aby shromážděná data přesně odrážela stav a výkon aplikace. Nejpopulárnější univerzální kolektor představuje nástroj OpenTelemetry.
+Efektivita monitorování aplikací do značné míry závisí na schopnosti efektivně shromažďovat relevantní data z různých zdrojů a schopnosti zprostředkování těchto dat do monitorovacích nástrojů. Kolektory jsou nástroje nebo agenti, kteří shromažďují data z různých zdrojů v rámci aplikace a jejího prostředí. Mohou být nasazeny jako součást infrastruktury aplikace nebo mohou být provozovány jako externí služby. Kolektory jsou zodpovědné za shromažďování logů, traces a metrik. Dále za předávání těchto dat do monitorovacích řešení, kde je lze analyzovat a vizualizovat. Efektivní sběr dat je nezbytný pro monitorování v reálném čase a pro zajištění toho, aby shromážděná data přesně odrážela stav a výkon aplikace. Nejpopulárnější univerzální kolektor představuje nástroj OpenTelemetry. \cite{Blanco2023}
 
 \n{2}{Analýza a interpretace}
 
