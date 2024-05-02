@@ -19,54 +19,9 @@ Vývojový proces pro kompilaci služeb JIT se zacílením na .NET runtime prob�
 
 Znatelný rozdíl oproti běžnému vývoji byl výběr technologií, který přihlížel k potencionální kompatibilitě s AOT a tedy řešení, které inherntně vyžadovala funkce rezervované pro využití .NET runtime, byly ihned zavrženy.
 
-\n{4}{Výhody}
-
-Mezi hlavní výhody se řadí zprostředkování následujícího:
-
-\begin{itemize}
-    \item  \textbf{Reflexe} - CLR umožňuje využívat reflexi, která umožňuje získat informace o kódu za běhu aplikace. Tímto je umožněno vytvářet aplikace, které jsou schopny měnit své chování za běhu.
-    \item \textbf{Dynamické načítání} - CLR umožňuje dynamicky načítat knihovny za běhu aplikace. Tímto je umožněno vytvářet aplikace, které jsou schopny měnit své chování za běhu.
-    \item \textbf{Větší bezpečnost} - CLR zajišťuje, že aplikace nemůže přistupovat k paměti, která jí nebyla přidělena. Tímto je zajištěna bezpečnost aplikace a zabráněno chybám, které by mohly vést k pádu aplikace.
-    \item \textbf{Správa paměti} - CLR zajišťuje správu paměti pomocí GC. Tímto je zajištěno, že paměť je uvolněna vždy, když ji aplikace již nepotřebuje. Tímto je zabráněno tzv. memory leakům, které by mohly vést k pádu aplikace.
-    \item \textbf{Větší přenositelnost} - CLR zajišťuje, že aplikace je spustitelná na všech operačních systémech, na kterých je dostupné běhové prostředí CLR.
-\end{itemize}
-
-\n{4}{Nevýhody}
-
-Zatímco za nevýhody CLR se dá považovat:
-
-\begin{itemize}
-    \item  \textbf{Výkonnost} - I když určité optimalizace jsou prováděny pro konkrétní systém a architekturu, výkon CLR je nižší než výkon nativního kódu. Dalším výkonnostním měřítkem je rychlost startu aplikace, která je pro CLR vyšší než v případě nativního kódu.
-    \item \textbf{Operační paměť} - CLR využívá více operační paměti, jak pro aplikaci, tak i pro běhové prostředí.
-    \item \textbf{Velikost aplikace} - Přítomnost CLR nehraje zásádní roli v případě monolitických aplikací, ale v případě mikroslužeb je nutné CLR přidat ke každé službě. Tímto se zvyšuje velikost jedné aplikační instance.
-\end{itemize}
-
 \n{3}{AOT}
 
 Kompilace do nativního kódu probíhala s průběžnými problémy. Podpora ze strany knihoven 3. stran ve spoustě případů neodopvídala deklarovaným možnostem. Vývojový proces byl značně zpomalován nutností řešení problémů, které byly způsobeny nedostatečnou podporou. Experimentace s řešeními často vyústila v nutnost změny implementace, případě v implementaci zcela vlastní.
-
-\n{4}{Výhody}
-
-Mezi hlavní výhody se řadí zprostředkování následujícího:
-
-\begin{itemize}
-    \item  \textbf{Nezávislost na CLR} - AOT kompilace umožňuje vytvořit aplikaci, která je schopna běžet bez nutnosti běhového prostředí. Tímto je zajištěno, že aplikace je schopna běžet na jakémkoliv operačním systému, na kterém je dostupný běhové prostředí.
-    \item \textbf{Efektivní využití zdrojů} - Aplikace využívající nativní AOT kompilaci efektivněji využívají zdroje jako CPU a operační paměť.
-    \item \textbf{Rychlejší start aplikace} - Aplikace zkompilované do nativního kódu cílové architektury se spouští daleko rychleji než aplikace využívající běhové prostředí.
-    \item \textbf{Rychlá odpověď aplikace} - Díky tomu, že aplikace musí mít všechny typy a funkcionality vygenerovány ve chvíli kompilace, je rychlost první odpovědi aplikace vyšší než v případě aplikace využívající běhové prostředí.
-\end{itemize}
-
-\n{4}{Nevýhody}
-
-Následující představují hlavní nevýhody AOT kompilace:
-
-\begin{itemize}
-    \item \textbf{Absence dynamického načítání} - Například funkce Assembly.LoadFile, jenž umožňuje dynamicky načítat knihovny za běhu aplikace, není dostupná v AOT kompilaci.
-    \item \textbf{Bez generování kódu za běhu} - Není možno použít knihovnu System.Reflection.Emit pro generování kódu za běhu aplikace.
-    \item \textbf{Vyžaduje trimming (ořezávání)} - Trimming vyžaduje, aby veškeré nepřímo používané části byly explicitně deklarovány, jinak budou vyřazeny z výsledného kódu.
-    \item \textbf{Připojení běhových knihoven} - Veškeré potřebné knihovny jsou součástí výsledného aplikačního souboru. To zvyšuje velikost samoteného programu ve srovnání s aplikacemi závislými na runtime protředí.
-    \item \textbf{Kompatibilita knihoven s AOT} - né všechny knihovny runtime jsou plně anotovány tak, aby byly kompatibilní s Native AOT. To znamená, že některá varování v knihovnách runtime nejsou pro koncové vývojáře použitelná.
-\end{itemize}
 
 \n{2}{Výstup služeb}
 
