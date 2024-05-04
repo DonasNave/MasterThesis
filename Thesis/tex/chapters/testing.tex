@@ -11,7 +11,7 @@ Testování scénářů je klíčovou součástí testování výkonu mikrosluž
 
 Cílem práce je prouzkomat dopady kompilace AOT a JIT na výkon. Pokouší se určit, která strategie kompilace nabízí lepší výkon při různémé zatížení a podmínkách. Metriky výkonu jsou shromážděny z dat o výkonu systému, doby odezvy služeb a využití zdrojů během standardizovaných testů.
 
-Experimentální nastavení zahruje dvě hlavní součásti řízení testovací prostředí a testovací služby. Tyto služby jsou sestaveny ze stejné (až na vybranné nekompatibilní API) kódové báze v kompilačních režimech AOT i JIT. Testovací prostředí bylo standardizováno ve všech experimentech, aby bylo zajištěno, že jakékoli pozorované rozdíly ve výkonu lze připsat výhradně metodám kompilace a nikoli variantách hardwaru nebo softwaru.
+Experimentální nastavení zahruje dvě hlavní součásti, řízení testovacího prostředí a testovací služby. Tyto služby jsou sestaveny ze stejné (až na vybranné nekompatibilní API) kódové báze v kompilačních režimech AOT i JIT. Testovací prostředí bylo standardizováno ve všech experimentech, aby bylo zajištěno, že jakékoli pozorované rozdíly ve výkonu lze připsat výhradně metodám kompilace a nikoli variantách hardwaru nebo softwaru.
 
 Testy budou prováděny na identických hardwarových nastaveních s následujícími specifikacemi:
 
@@ -23,7 +23,7 @@ Testy budou prováděny na identických hardwarových nastaveních s následují
 
 Operační systém a všechny služby na pozadí budou udržovány konzistentní, aby se minimalizovaly vnější vlivy na výsledky výkonu. Testovaným službám budou omezeny zdroje v orchestraci, aby se zabránilo nespravedlivé výhodě služby v jedné kompilaci před druhou. Služby budou připraveny do obrazů a použity v rámci orchestrace pomocí kontejnerů. Jednotlivé obrazy jsou založeny na architektuře Arm64 a Linuxových distribucích Alpine.
 
-Sběr dat je automatizován pomocí kombinace nástrojů pro monitorování systému a skriptů. K sběru dat hostitelského systému byl použit Cadvisor a Node Explorer. Telemetrie jednotlivých služeb je sbírána implementovanými metry a exportována do kolektoru OpenTelemetry. Testovací data jsou získán Statické informace o průběhu a výstupech kopilace jsou získány kombinací nástroj .NET CLI, Docker a souborového systému.
+Sběr dat je automatizován pomocí kombinace nástrojů pro monitorování systému a skriptů. K sběru dat hostitelského systému byl použit Cadvisor a Node Explorer. Telemetrie jednotlivých služeb je sbírána implementovanými metry a exportována do kolektoru OpenTelemetry. Testovací data jsou získána exportem výsledků testů do InfluxDB. Statické informace o průběhu a výstupech kopilace jsou získány kombinací nástroje .NET CLI, Docker a souborového systému.
 
 K porovnání strategií kompilace při různých podmínkách využívají testovací služby vybrané scénáře testující propustnost a vytížení zdrojů. Úlohy prováděné ve scénářích vystavují služby datovým transakcím, přístupů k externím zdrojům, komunikací pomocí různých metodik anebo samotné spuštění v rámci orchestrace. Údaje o výkonnosti budou analyzovány pomocí statistických metod, aby se určily významné rozdíly mezi službami kompilovanými v režimu AOT a JIT. 
 
@@ -36,6 +36,18 @@ Na základě předběžného přehledu literatury a teoretických výhod každé
     \item \textbf{Hypotéza 2}: Kompilace AOT má za následek rychlejší spouštění, ale může vést k větším binárním velikostem ve srovnání s kompilací JIT. Výsledný virtualizovaný obraz bude ovšem mít výrazně nižší velikost kvůli absenci .NET runtime.
     \item \textbf{Hypotéza 3}: Kompilace AOT poskytuje lepší optimalizaci výkonu díky generování typů a funkcí, jež by museli být dodatečně tvořeny za běhu. Tím pádem je očekáváno, že služby kompilované do nativního kódu budou mít nižší řežii procesoru. Přítomnost staticky generovaných typů a funkcí však může způsobit vyšší paměťovou zátěž. Vytížení I/0 operací bude srovnatelné.
 \end{itemize}
+
+\n{2}{Cíle srovnání}
+
+Za účelem dosažení cílů této práce a srovnání .NET služeb v kompilačních režimech JIT a AOT jsou definovány cíle srovnání. Identifikují oblasti zájmu, které budou zkoumány a analyzovány v rámci vývoje, výstypu a experimentálního testování. Cíle srovnání zahrnují:  
+
+\begin{itemize}
+  \item \textbf{Zkušenosti s vývojem} - Jedním z klíčových cílů je zachytit a analyzovat dopad různých kompilačních strategií na proces vývoje. To zahrnuje sledování doby sestavení, cyklů nasazení a celkové komplexity integrace a nasazení služeb v rámci architektury microservice. Posouzením těchto faktorů lze poskytnout subjektivní i objektivní náhled na to, jak jednotlivé metody kompilace ovlivňují každodenní fungování vývojářů, včetně potenciálních problémů nebo efektivity, které přinášejí kompilační režimy JIT nebo AOT.
+  \item \textbf{Srovnání výstupů} - Tento cíl se zaměřuje na přímé porovnání programových výstupů metod kompilace JIT a AOT. Konkrétně se bude sledovat velikost vytvořených spustitelných souborů, inicializační časy (jak rychle jsou služby po nasazení funkční) a využití zdrojů během běhu (využití procesoru a paměti). Pochopení těchto aspektů pomůže vymezit provozní efektivitu nebo režijní náklady spojené s každou kompilační strategií.
+  \item \textbf{Výkonnostní metriky} - Pro tuto práci je rozhodující porovnání výkonnostních ukazatelů za podobných provozních podmínek. Mezi sledované metriky patří doba odezvy, propustnost (počet požadavků, které je služba schopna zpracovat za jednotku času), chybovost a stabilita systému při zatížení. Tyto ukazatele poskytnou kvantitativní základ pro porovnání účinnosti kompilací JIT a AOT při zvládání reálné provozní zátěže.
+\end{itemize}
+
+Dosažení těchto cílů stojí na dodržení metodiky a úspěšné implementaci monitorování. Je klíčové získat dostatečné poznatky, zkušenosti, výstupy a monitorovací data. Na jejich základě budou podpořena informovaná rozhodnutí týkající se optimálního využití kompilací JIT a AOT při vývoji mikroslužeb.
 
 \n{2}{Definice scénářů}
 

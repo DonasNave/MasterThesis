@@ -1,10 +1,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%                             Tvorba tech stacku                                %
+%                   Testovací aplikace .NET služeb                              %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\n{1}{Tvorba aplikačního stacku}
+\n{1}{Testovací aplikace}
 
-Za účelem důkladného testování výkonu a škálovatelnosti mikroslužeb byl vytvořen tech stack, který zahrnuje technologie pro kontejnerizaci, orchestraci, persistenci, komunikaci, monitorování a testování. 
+Praktická část této práce se zaměřuje na vytvoření testovací aplikace postavené na microservice architektuře. Cílem je otestovat a analyzovat výkonost služeb ve dvou typech kompilace, JIT a nativní AOT. Rozsah funkcionality a chování aplikace je definován množinou funkčních a nefunkčních požadavků. Dále jsou vybrány konkrétní technologie a nástroje, jenž v aplikaci doplní .NET služby. Jejich účelem je zprostředkování ekosystému monitorování, dodání persistence, hostování webového rozhraní a automatizace testování. Samotný postup testování je definován metodikou, která zahrnuje také definici hypotéz. Tyto hypotézy jsou následně ověřeny v rámci experimentů, které jsou provedeny na testovací aplikaci. Výsledky testů včetně kompletních monitorovacích dat jsou uloženy a zprostředkovány pro analýzu a vyhodnocení. Aplikace je nasazena v kontejnerizovaném prostředí a vytvořena s ohledem na rozšiřitelnost.
 
 \n{2}{Požadavky na SW}
 
@@ -36,23 +36,7 @@ Nefunkční požadavky specifikují celkové vlastnosti systému. Definují atri
 
 Hardware, na kterém bude aplikace provozována, musí výkonnostně dostačovat pro provozování testovacích scénářů a sběr a vizualizaci dat. Týká se to primárně počtu jader, velikosti paměti a rychlosti diskového I/O. Provozované služby mají určitou základní režii, která se musí brát v potaz.
 
-\n{2}{Cíle monitorování}
-
-Efektivní monitorování hraje klíčovou roli při vyhodnocení a porovnání výkonnosti a technických vlastností kompilace JIT a nativní AOT. Hlavní cíle tohoto monitorování jsou následující:
-
-\begin{itemize}
-  \item \textbf{Zkušenosti s vývojem} - Jedním z klíčových cílů je zachytit a analyzovat dopad různých kompilačních strategií na proces vývoje. To zahrnuje sledování doby sestavení, cyklů nasazení a celkové snadnosti integrace a nasazení v rámci architektury mikroslužeb. Posouzením těchto faktorů můžeme poskytnout subjektivní i objektivní náhled na to, jak jednotlivé metody kompilace ovlivňují každodenní zkušenosti vývojářů, včetně potenciálních problémů nebo efektivity, které přinášejí přístupy JIT nebo AOT.
-  \item \textbf{Srovnání výstupů} - Tento cíl se zaměřuje na přímé porovnání hmatatelných výstupů metod kompilace JIT a AOT. Konkrétně se bude sledovat velikost vytvořených spustitelných souborů, inicializační časy (jak rychle jsou služby po nasazení funkční) a využití zdrojů během běhu (využití procesoru a paměti). Pochopení těchto aspektů pomůže vymezit provozní efektivitu nebo režijní náklady spojené s každou kompilační strategií.
-  \item \textbf{Výkonnostní metriky} - Pro tuto studii je rozhodující porovnání výkonnostních ukazatelů za podobných provozních podmínek. Mezi sledované metriky patří doba odezvy, propustnost (počet požadavků, které je služba schopna zpracovat za jednotku času), chybovost a stabilita systému při zatížení. Tyto ukazatele poskytnou kvantitativní základ pro porovnání účinnosti kompilací JIT a AOT při zvládání reálné provozní zátěže.
-\end{itemize}
-
-K dosažení těchto cílů bude zavedena komplexní monitorovací sestava zahrnující nástroje a postupy, které poskytují údaje a poznatky v reálném čase. Tento přístup zajistí, že shromážděná data budou robustní, spolehlivá a vhodná pro provedení důkladné srovnávací analýzy, a podpoří tak informovaná rozhodnutí týkající se optimálního využití kompilace JIT a AOT při nasazení mikroslužeb.
-
-\n{2}{Výběr technlogií}
-
-Součástí tvorby tech stacku je výběr technologií, které budou použity pro implementaci aplikace. Výběr technologií je závislý na požadavcích na aplikaci a HW, na kterém bude aplikace provozována.
-
-\n{3}{Organizace a správa zdrojů}
+\n{2}{Organizace a správa zdrojů}
 
 Pro správu souborů práce byl zvolen SCM Git. Git je open-source verzovací, který umožňuje vytvářet, spravovat a sdílet soubory. Git je schopný pracovat s větvemi, které umožňují vytvářet paralelní vývojové větve.
 
@@ -66,65 +50,9 @@ Za účelem jednoduché organizace souborů bylo zvoleno řešení monorepozitá
 
 Pro zaručení dostupnosti a sdílení veškerých prostředků souvisejících s prací byl vybrán GitHub, jakožto server pro hostování repozitáře. GitHub je open-source platforma pro verzování souborů a projektů. Navíc poskytuje rozšířující možnosti jako je CI/CD, správa dokumentace a další. Repozitář projektu je veden jako veřejný s licencí MIT.
 
-\n{3}{Kontejnerizace a orchestrace}
-
-Základním prvkem nasazení aplikace je kontejnerizace a orchestrace. Kontejnerizace zajišťuje, že aplikace bude spouštěna v izolovaném prostředí, které je nezávislé na hostitelském systému. Orchestrace zajišťuje, že aplikace bude spouštěna na dostupných zdrojích a bude schopna zvládnout zátěž, která je na ni kladena.
-
-Pro kontejnerizaci byla zvolena technologie Docker. Docker je open-source platforma pro kontejnerizaci aplikací, která umožňuje vytvářet, spouštět a spravovat kontejnery.
-
-Pro orchestraci byla vybrána technologie Kubernetes. Kubernetes je open-source platforma pro orchestraci kontejnerů, která umožňuje automatizovat nasazování, škálování a správu aplikací. Kubernetes je schopný pracovat s kontejnery, které jsou vytvořeny pomocí Dockeru.
-
-\n{3}{Konfigurace nasazení}
-
-Pro konfiguraci nasazení byla zvolena technologie Helm. Helm je open-source platforma pro správu balíčků, která umožňuje vytvářet, spravovat a nasazovat balíčky. Helm je schopný pracovat s balíčky, které jsou vytvořeny pomocí Kubernetes.
-
-Definice balíčků je řešena pomocí konfiguračních souborů, které jsou použity již při tvorbě obecného obrazu. V rámci Helm je základním prvkem chart, který obsahuje definici balíčku a šablonu, která je použita pro generování konfigurace.
-
-\n{3}{Persistenční vrstva}
-
-Jako relační databáze byla vybrána Postgres. Je schopná pracovat s relačními daty, které jsou uloženy v tabulkách. Poskytuje základní klientský balíček pro .NET, jenž umožňuje komunikaci s databází. Tento balíček je kompatibilní s nativní AOT kompilací.
-
-Za účelem persistence a zprostředkování dat z testování je použita InfluxDB. Tato timeseries databáze umožňuje ukládat a spravovat časové řady. Využití InfluxDb je pragramtické z důvodu nativní podpory napojení InfluxDB v1 z nástroje K6 pro export testovacích dat.
-
-\n{3}{Komunikační metody}
-
-Za účelem analýzy možností komunikace klienta se službami, ale i interní komunikace, bylo vybráno k implementaci hned několik protokolů. 
-
-\begin{itemize}
-  \item \textbf{REST API} - V rámci Kestrel serveru každé služby je využit protokol HTTP/1 a komunikace pomocí REST API. Toto rozhraní slouží pro komunikaci klienta se službou a poskytuje data ve formátu JSON.
-  \item \textbf{gRPC} - Vybrané služby implementují komunikaci pomocí protokolu HTTP/2 a gRPC. Za tímto účelem mají zmíněné služby otevřené rozhraní na dodatečném portu. gRPC protokol je využit přístupem model first, tedy rozhraní je definováno pomocí protobuf souboru a následně je vygenerován kód pro komunikaci.
-  \item \textbf{RabbitMQ} - Pro implementaci komunikace prodle vzoru Publish - Subscribe byl vybrán message broker RabbitMQ. Umožňuje službám odebírat data z jiných služeb a zároveň poskytovat data jiným službám. Tím je zajištěna asynchronní messaging mezi službami.
-\end{itemize}
-
-\n{3}{Monitorovací nástroje}
-
-Pro monitorování aplikace byl zvolen Grafana observability stack pro jeho pokrytí komplexní škály monitorovacích dat. Grafana observability stack zahrnuje nástroje pro sběr, vizualizaci a analýzu dat. Následující nástroje byly vybrány pro implementaci monitorovacího stacku:
-
-\begin{itemize}
-  \item \textbf{Grafana} - Grafana je open source webová aplikace pro analýzu a interaktivní vizualizaci dat. Poskytuje možnost sestavit dashboard z komponent jako jsou grafy, tabulky a další. Jedná se o velmi populární technologii v doménách serverové infrastruktury a monitorování. Grafana umožňuje sjednotit monitorovací služby a zobrazit data v reálném čase. Podporuje širokou škálu datových zdrojů, jako jsou Prometheus, InfluxDB, Tempo, Loki nebo Elasticsearch, což umožňuje jednoduchou konfiguraci a připojení cílových dat. Kombinací dat z různých zdrojů umožňuje vytvářet komplexní pohled na celý systém. To je obzlvášť cenné pro analýzu systému pomocí kombinací metrických dat.
-  \item \textbf{Prometheus} - Open-source monitorovací systém. Shromažďuje a ukládá metriky jako time-series data a umožňuje se na ně dotazovat pomocí vlastního výkonného jazyka PromQL. Prometheus je zvláště vhodný pro monitorování microservice architektur díky své schopnosti automaticky objevovat cíle. Jeho architektura podporuje více modelů získávání dat, stahování metrik z cílových služeb nebo collectorů, odesílání metrik přes gateway a zprostředkování notifikací.
-  \item \textbf{Loki} - Škálovatelný agregátor logů. Na rozdíl od obdobných systémů pro agregaci logů, jenž indexují všechna data, Loki indexuje pouze metadata, přičemž ukládá celá data logu efektivním způsobem. Loki je navržen tak, aby jednoduše spolupracoval s Grafanou a umožňuje rychle vyhledávat a vizualizovat logy.
-  \item \textbf{Tempo} - Je snadno ovladatelný open-source backend pro distribuované sledování požadavků. Tempo podporuje ukládání a načítání traces, které jsou přijímány ze zdrojů jako Jaeger, Zipkin a OpenTelemetry. Na rozdíl od mnoha jiných systémů pro traces nevyžaduje Tempo žadné předem definované schéma. Je navržen tak, aby se bezproblémově integroval s Prometheus a Loki.
-  \item \textbf{OpenTelemetry} - Open source kolektor telemetrických dat. Poskytuje jednotný, vendor-agnostic způsob sběru, zpracování a exportu telemetrických dat  Je konfigurovatelný a podporuje více pipeline, které mohou upravovat telemetrická data při jejich průchodu. Výrazně zjednodušuje instrumentaci služeb, protože umožňuje agregovat a exportovat metriky, taces a logy do různých analytických a monitorovacích nástrojů. Poskytuje podporu pro export dat do Prometheus, Tempo i Loki.
-  \item \textbf{Cadvisor} - Open-source monitorovací nástroj pro kontejnery. Poskytuje informace o využití zdrojů a výkonu. Cadvisor je schopen monitorovat kontejnery běžící na Dockeru, Kubernetes nebo jiných kontejnerových platformách. Poskytuje informace o využití procesoru, paměti, sítě a diskového I/O.
-  \item \textbf{NodeExporter} - Nástroj pro sběr metrik z hostitelského systému. Poskytuje informace o využití procesoru, paměti, sítě a diskového I/O.
-\end{itemize}
-
-\n{3}{Testovací nástroje}
-
-Za účelem testování monitorovacího stacku byl vybrán nástroj K6. Jedná se o moderní open-source nástroj pro testování zátěže. Slouží k vytváření, provádění a analýze výkonnostních testů softwarových aplikací. Nabízí čisté skriptovací rozhraní s jazykem JavaScript, které umožňuje psát, jak komplexní testovací scénáře napodobující reálný provoz systému, tak i vytvářet nereálné nebo hraniční situace. K6 podporuje různé systémové metriky, jako je doba odezvy, propustnost a chybovost. Nabízí šiřoké možnosti rozšíření skrze API, což umožňuje přizpůsobení a integraci s dalšími nástroji pro komplexní sledování výkonu.
-
-\n{3}{Testovací služby}
-
-Pro implementaci testovacích služeb z podstaty práce zvolena technologie .NET, konkrétně jazyk C\#. Služby budou implementovány jako mikroslužby a budou podporovat kontejnerizované nasazení v microservice architektuře. Služby budou vytvořeny tak, že každou dílčí službu reprezentuje projektový soubor s doménových kódem. Celé řešení spolu s dílčími knihovnami bude součástí jednoho solution souboru.
-
-Pro řešení byla vybrána nejnovější verze .NET SDK 8.0, která poskytuje nejrozsáhlejší impelmentaci a podporu pro nativní AOT kompilaci. Jakožto nástroj pro vývoj a správu projektů byl zvolen JetBrains Rider. Rider je IDE, které poskytuje širokou škálu funkcí pro vývoj aplikací v .NET.
-
-Konkrétní knihovny použité v rámci implementace budou záviset na konkrétních požadavcích na služby a popsány v následující sekci.
-
 \n{2}{Návrh a implementace testovacích služeb}
 
-Následující pasáž se zabírá návrhem a implementací testovacích služeb, které budou využity pro analýzu vývoje a výkonu jednotlivých kompilací AOT a JIT v rámci .NET.
+Následující pasáž se zabírá návrhem a implementací testovacích služeb, které budou využity pro analýzu vývoje a výkonu jednotlivých kompilací AOT a JIT v rámci .NET. Služby jsou implementovány jako mikroslužby a podporují kontejnerizované nasazení v microservice architektuře. Každá služba reprezentuje jednu dílčí funkcionalitu a má definované rozhraní pro komunikaci s ostatními službami. Pro implementaci služeb byla vybrána z podstaty práce technologie .NET, konkrétně jazyk C\#. Verze frameworku byla zvola .NET 8.0 jakožto jediná verze oficiálně podporující nativní AOT kompilaci.
 
 \n{3}{Architektura}
 
@@ -137,7 +65,7 @@ Pro implementaci požadované funkcionality bylo zvoleno následující rozděle
     \item \textbf{EPS - Event Publishing Service} - slouží k vyvolání události, která je následně zpracována jinými službami. Poskytuje REST API rozhraní. Je přihlášena do RabbitMQ jako publisher.
 \end{itemize}
 
-obrázek architektury
+TODO: obrázek architektury
 
 Kompilaci do nativního AOT kódu je deklarována použitím atributu PublishAoT v projektovém souboru. Za účelem zajištění co největší podobnosti služeb zacílených na AOT a JIT kompilaci, bude využito zadefinování konstantních hodnot v rámci projektu. Konstanty \emph{JIT} a \emph{AOT} budou využity pro rozlišení chování služeb v rámci obou kompilačních verzí. S použitím direktiv kompilátoru a zmíněných konstant bude v nutných případech docíleno rozdílného volání API při snaze zachovat totožnou funkcionalitu.
 
@@ -145,16 +73,12 @@ Kompilaci do nativního AOT kódu je deklarována použitím atributu PublishAoT
 
 Na základě podporované funkcionality, tak jak je definována týmem .NET a popsána v rámci rešerše, je očekáváno, že vývojový proces bude probíhat bez výrazných problémů a bude možné vytvořit služby, které budou schopny zvládnout definované funkční a nefunkční požadavky. Podpora 3. stran byla předem prozkoumána v rámci dostupných dokumentací vybraných knihoven .NET. Konkrétní podoba a rozsah této podpory bude plně ověřitelná až v rámci implementace a testování služeb.
 
-foto využití konstant v kódu
-
-\n{3}{Organizace zdrojových souborů služeb}
+\n{3}{Organizace souborů}
 
 Organizace zdrojových souborů služeb, knihoven a pomocných souborů je řešena v rámci hlavního adresáře obsahujícího .NET solution soubor, pomocné soubory a solution složky s konkrétními projekty služeb a knihoven. Následující
 stromový graf představuje adresářovou strukturu projektu.
 
 \obr{Stromová struktura projektu}{fig:projectstructure}{0.3}{graphics/images/folder-structure-app.png}
-
-\n{3}{Společná struktura služeb}
 
 Každá z vyvinutých služeb využívá konkrétní .NET SDK \emph{Microsoft.NET.Sdk.Web}, které umožňuje využít WebApplication pro registraci a konfiguraci funkcionality služby a zároveň poskytuje konfigurovatelný Kestrel server. Pro zajištění jednotného přístupu k logování, metrikám a konfiguraci byly vytvořeny společné knihovny, které jsou využity ve všech službách.
 
@@ -172,7 +96,7 @@ Každá z vyvinutých služeb využívá konkrétní .NET SDK \emph{Microsoft.NE
   \item \textbf{Dockerfile-JIT} - soubor pro tvorbu Docker obrazu pro JIT kompilaci
 \end{itemize}
 
-Specifické služby obsahují dodatečné adresáře a soubory nutné pro implementaci jejich doménové funkce.
+Součástí řešení je společná konfigurace, která je využita ve všech službách. Ta je řešena jedna na úrovni solution souboru, tak i Directory.Build.props souboru. Týká se jednotné distribuce projektových atributů pro verzi, kompatibilitu s AOT, vynucení konkrétních pravidel pro kód a analyzéry.
 
 \n{3}{Knihovny 3. stran}
 
@@ -199,10 +123,6 @@ V rámci zjednodušení tvorby služeb, jednotné implementaci a konfiguraci, al
   \item \textbf{Obecná funkcionalita} - Za účelem sjednocení funkcionality využité napříč všemi službami jsou implementovány extension metody v knihovně \emph{DTA.Extensions.Common}. Zde je poskytnuta funkcionalita pro sestavení názvů pro službu.
 \end{itemize}
 
-\n{3}{Společná konfigurace}
-
-Součástí řešení je společná konfigurace, která je využita ve všech službách. Ta je řešena jedna na úrovni solution souboru, tak i Directory.Build.props souboru. Týká se jednotné distribuce projektových atributů pro verzi, kompatibilitu s AOT, vynucení konkrétních pravidel pro kód a analyzéry.
-
 \n{3}{SRS - Signal reading service}
 
 Za účelem simulace funkce čtecího zařízení byla vytvořena služba SRS. Tato služba poskytuje základní rozhraní pro získání dat signálu včetně jednotek a značek formou REST API. Pro zjednodušení implementace není využito čtení dat ze skutečného zdroje, ale jsou generována náhodná data. Načež data jsou následně poskytována se zdržením simulujícím čtení dat ze vzdáleného zdroje.
@@ -215,9 +135,9 @@ Služba poskytuje následující rozhraní
 
 \n{3}{FUS - File Upload Service}
 
-Služba v systému hraje roli zapisovacího zařízení, které zapisuje a čte data z perzistentního úložiště. Jakožto úložiště je využito PostgreSQL databáze. Služba využívá vlastní databázovou instanci, spravuje vlastní tabulky pomocí migrací.
+Služba v systému hraje roli zapisovacího zařízení, které zapisuje a čte data z perzistentního úložiště. Jakožto úložiště je využito PostgreSQL databáze. Služba využívá vlastní databázovou instanci a spravuje vlastní tabulky pomocí migrací definovaných SQL skripty. Pro přístup k persistence dat je využito knihovny knihovny Dapper, která umožňuje mapování databázových struktur na C\# objekty a vytváření a provádění dotazů na databázi.
 
-Poskytuje rozhraní formou REST API pro zápis a čtení dat. Daty je myšlen libovolný soubor v libovolném formátu. Samotná podstata nahraných dat není pro službu důležitá, ale je zpracována a uložena do databáze. Za účelem sehrání testovacích scénářů poskytuje SRS také gRPC rozhraní, které je zajištěno na dedikovaném portu. V rámci gRPC komunikace slouží služba jako server, který splňuje volání vzdálené procudery.
+SRS poskytuje rozhraní formou REST API pro zápis a čtení dat. Daty je myšlen libovolný soubor v libovolném formátu. Samotná podstata nahraných dat není pro službu důležitá, ale je zpracována a uložena do databáze. Za účelem sehrání testovacích scénářů poskytuje služba také gRPC rozhraní, které je zajištěno na dedikovaném portu. V rámci gRPC komunikace slouží služba jako server, který splňuje volání vzdálené procudery.
 
 Služba poskytuje následující rozhraní
 
@@ -251,29 +171,71 @@ Služba poskytuje následující rozhraní
     \item \textbf{Event published: \{queue-name\}\_simulated} - Vyvolá údalost se zprávou obsahující identifikator na konfigurovaném kanálu do služby RabbitMQ.
 \end{itemize}
 
+Následující diagram znázorňuje přímé závislosti testovacích služeb na další nástroje.
+
+\obr{Diagram .NET služeb a závislých služeb}{fig:logo}{0.9}{graphics/diagrams/services-architecture.png}
+
+\n{2}{Monitorování aplikace}
+
+Za účelem monitorování systému byla vybraná množina nástrojů. Tyto nástroje umožňují sběr, uchování a vizualizaci metrik a logů. Klíčové bylo zajistit možnost sledovat dění uvnitř aplikace, ale i v rámci hostitelského systému. 
+
+\n{3}{Grafana observability stack}
+
+Pro monitorování aplikace byl zvolen Grafana Observability stack pro jeho pokrytí komplexní škály monitorovacích dat. Zahrnuje nástroje pro sběr, vizualizaci a analýzu dat. Následující nástroje jsou součástí Grafana stacku:
+
+\begin{itemize}
+  \item \textbf{Grafana} - Grafana je open source webová aplikace pro analýzu a interaktivní vizualizaci dat. Poskytuje možnost sestavit dashboard z komponent jako jsou grafy, tabulky a další. Jedná se o velmi populární technologii v doménách serverové infrastruktury a monitorování. Grafana umožňuje sjednotit monitorovací služby a zobrazit data v reálném čase. Podporuje širokou škálu datových zdrojů, jako jsou Prometheus, InfluxDB, Tempo, Loki nebo Elasticsearch, což umožňuje jednoduchou konfiguraci a připojení cílových dat. Kombinací dat z různých zdrojů umožňuje vytvářet komplexní pohled na celý systém. To je obzlvášť cenné pro analýzu systému pomocí kombinací metrických dat.
+  \item \textbf{Prometheus} - Open-source monitorovací systém. Shromažďuje a ukládá metriky jako time-series data a umožňuje se na ně dotazovat pomocí vlastního výkonného jazyka PromQL. Prometheus je zvláště vhodný pro monitorování microservice architektur díky své schopnosti automaticky objevovat cíle. Jeho architektura podporuje více modelů získávání dat, stahování metrik z cílových služeb nebo collectorů, odesílání metrik přes gateway a zprostředkování notifikací.
+  \item \textbf{Loki} - Škálovatelný agregátor logů. Na rozdíl od obdobných systémů pro agregaci logů, jenž indexují všechna data, Loki indexuje pouze metadata, přičemž ukládá celá data logu efektivním způsobem. Loki je navržen tak, aby jednoduše spolupracoval s Grafanou a umožňuje rychle vyhledávat a vizualizovat logy.
+  \item \textbf{Tempo} - Je snadno ovladatelný open-source backend pro distribuované sledování požadavků. Tempo podporuje ukládání a načítání traces, které jsou přijímány ze zdrojů jako Jaeger, Zipkin a OpenTelemetry. Na rozdíl od mnoha jiných systémů pro traces nevyžaduje Tempo žadné předem definované schéma. Je navržen tak, aby se bezproblémově integroval s Prometheus a Loki.
+  \item \textbf{OpenTelemetry} - Open source kolektor telemetrických dat. Poskytuje jednotný, vendor-agnostic způsob sběru, zpracování a exportu telemetrických dat  Je konfigurovatelný a podporuje více pipeline, které mohou upravovat telemetrická data při jejich průchodu. Výrazně zjednodušuje instrumentaci služeb, protože umožňuje agregovat a exportovat metriky, taces a logy do různých analytických a monitorovacích nástrojů. Poskytuje podporu pro export dat do Prometheus, Tempo i Loki.
+\end{itemize}
+
+Implementace Grafana Observability stacku je zajištěna pomocí obrazu nazvaného dta-lgtm a sestrojeného po vzoru Grafana LGTM (Loki, Grafana, Tempo a Mimir). Grafana LGTM kombinuje množinu monitorovacích nástrojů v rámci jediného obrazu s předchystanou konfigurací. Tím je odstíněna část konfigurace monitorovacího stacku a zjednodušen proces nasazení. Obraz použitý v rámci práce využívá kombinaci dříve zmíněných technologií (Loki, Tempo, Grafana, Prometheus a OpenTelemetry) zabalených a předkonfigurovaných v rámci Docker obrazu. Tím je v aplikaci zajištěno, že potřebná konfigurace pro vzájemné propojení nástrojů a datových zdrojů je předpřipravena. Stejně tak jsou součástí vytvořeného obrazu vlastní monitorovací dashboardy a vizualizace.
+
+V rámci aplikace mají jednotlivé služby nastaven export svých logů, traces a metrik do OpenTelemetry, respektive na adekvátní rozhraní dta-lgtm. Služby využívají existujících metrů a logů, ale také vytváří vlastní metriky a logy. Konkrétně je využito existující instrumentace pro následující metriky:
+
+\begin{itemize}
+  \item \textbf{System.Runtime} - Metriky běhového prostředí .NET.
+  \item \textbf{System.Net.Http} - Metriky HTTP dotazů.
+  \item \textbf{Microsoft.AspNetCore.Hosting} - Metriky hostovacího prostředí ASP.NET Core.
+  \item \textbf{Microsoft.AspNetCore.Server.Kestrel} - Metriky serveru Kestrel.
+  \item \textbf{Npgsql} - Metriky klientské knihovny PostgreSQL.
+\end{itemize}
+
+\n{3}{Monitorování hostitelského systému}
+
+Monitorování hostitelského systému poskytuje pro aplikaci klíčové informace o využití zdrojů a výkonu, jak ze samotnéhé systému, tak i z jednotlivých kontejnerů. Pro monitorování Docker kontejnerů je využit nástroj CAdvisor. CAdvisor je schopen monitorovat kontejnery běžící na Dockeru, Kubernetes nebo jiných kontejnerových platformách. Poskytuje informace o využití procesoru, paměti, sítě a diskového I/O z pohledu hostitelského systému.
+
+NodeExporter Nástroj pro sběr metrik z hostitelského systému. Poskytuje informace o využití procesoru, paměti, sítě a diskového I/O. Dalším využitím nástrojem je NodeExporter. NodeExporter je nástroj pro sběr metrik z hostitelského systému. Obdobně jako CAdvisor poskytuje informace o využití procesoru, paměti, sítě a diskového I/O.
+
+\n{2}{Testovací nástroje}
+
+Za účelem testování monitorovacího stacku byl vybrán nástroj K6. Jedná se o moderní open-source nástroj pro zátěžové testování. Slouží k vytváření, provádění a analýze výkonnostních testů softwarových aplikací. Nabízí jednoduché skriptovací rozhraní v jazyce JavaScript. Umožňuje psát komplexní testovací scénáře napodobující reálný provoz systému, nebo simulovat hraniční situace. K6 podporuje různé systémové metriky, jako je doba odezvy, propustnost a chybovost. Nabízí šiřoké možnosti rozšíření skrze API, což umožňuje přizpůsobení a integraci s dalšími nástroji pro komplexní sledování výkonu.
+
+Za účelem zjednodušení procesu testování a zajištění opakovatelnosti testovacích scénářů byly vytvořeny skripty pro spuštění testů. Tyto skripty zajišťují opakovatelné spouštění testů v rámci Docker kontejneru s nastavitelnými parametry. Skripty jsou vytvořeny v jazyce Bash a využívají nástroje K6 pro spuštění testů a zpracování výsledků.
+
+\n{2}{Nasazení aplikace}
+
+Následující pasáž popisuje náležitosti nasazení aplikace, včetně obecného popisu finální struktury nasazení, využitých nástrojů kontejnerizace a orchestrace, konkrétních verzí obrazů a použitou konfiguraci.
+
 \n{3}{Přehled řešení}
 
 Řešení aplikace sestává z následujících sekcí a jednotlivých obrazů služeb a verzí, definovaných v rámci Docker Compose souboru.
 
 \begin{itemize}
-    \item \textbf{Testovací služby} - Aplikace obsahuje testovací služby FUS, SRS, BPS a EPS. Tyto služby jsou vytvořeny ve dvou kompilačních verzích - AOT a JIT. Každá služba je vytvořena jako obraz s názvem \emph{dta-\{service-name\}:\{compilatioinMode\}-latest}.
+    \item \textbf{Testovací služby} - Aplikace obsahuje testovací .NET služby FUS, SRS, BPS a EPS. Tyto služby jsou vytvořeny ve dvou kompilačních verzích - AOT a JIT. Každá služba je vytvořena jako obraz s názvem \emph{dta-\{service-name\}:\{compilatioinMode\}-latest}.
     \item \textbf{Komunikace} - Komunikační kanál mezi službami je zajištěn pomocí RabbitMQ. Pro RabbitMQ je využit obraz \emph{rabbitmq:3-management-alpine}.
-    \item \textbf{Monitorovací nástroje} - Monitorování zajišťuje Grafana Observability stack implementovaný v rámci obrazu \emph{dta-lgtm:latest}, jenž obsahuje OpenTelemetry, Prometheus, Loki, Tempo a Grafanu. Pro měření výkonu hostitelského systému a export těchto dat jsou využity obrazy \emph{node-exporter:latest} a \emph{cadvisor-arm64:v0.49.1}.
+    \item \textbf{Monitorovací nástroje} - Monitorování zajišťuje Grafana Observability stack implementovaný v rámci obrazu \emph{dta-lgtm:latest}, jenž obsahuje OpenTelemetry, Prometheus, Loki, Tempo a Grafanu. Pro měření výkonu hostitelského systému a export těchto dat jsou využity služby NodeExporter a CAdvisor s obrazy \emph{node-exporter:latest} a \emph{cadvisor-arm64:v0.49.1}.
     \item \textbf{Persistence} - Pro persistenci dat je využita PostgreSQL databáze. Pro PostgreSQL je využit obraz \emph{postgres:latest}. Ukládání metrik je zajištěno pomocí InfluxDB a obrazu \emph{influxdb:1.8.10}.
     \item \textbf{Směrování} - Funkci reverzní proxy zajišťuje Nginx ve verzi obrazu \emph{nginx:latest}.
 \end{itemize}
 
-Následující diagram znázorňuje přímé závislosti testovacích služeb na další nástroje.
+\n{3}{Kontejnerizace a orchestrace}
 
-\obr{Diagram .NET služeb a závislých služeb}{fig:logo}{0.9}{graphics/diagrams/services-architecture.png}
+Kontejnerizace služeb je zajištěna pomocí nástroje Docker. Docker je open-source platforma poskytující ekosystém pro správu kontejnerů. Jednotlivé služby jsou vytvořeny jako obrazy podle definicí Dockerfile. 
 
-\n{2}{Konfigurace aplikace}
-
-Za účelem běhu aplikace je klíčové správné nastavení konfigurace. Konfigurace je řešena na různých úrovních. Základní úroveň představuje soubor \emph{compose.yaml}, který inforumje Docker orchestrátor jaká infrastrukura má být vytvořena a jak má být nastavena, které služby mají být vytvořeny a jaké zdroje jim mají být přiděleny. Dále jsou v tomto souboru nastaveny základní parametry jako je jméno sítě, názvy volume (persistentní úložiště orchestrátoru), závislosti mezi službami a další. V neposlední řadě je dílčí konfigurace jednotlivých služeb řešena v rámci konfiguračních souborů a proměnných prostředí.
-
-\n{3}{Konfigurace infrastruktury}
-
-Jak již bylo zmíněno, základní konfigurace je řešena v souboru \emph{compose.yaml} a je rozdělena do následujících částí:
+Orchestrace aplikace je zprostředkována rovněž nástrojem Docker, konkrétně formou \emph{compose} utility. Ta umožňuje jednoduše nasadit a spravovat větší množství služeb. Definice nasazení aplikace je sepsána v souboru \emph{compose.yaml}. V něm lze nalézt následující části:
 
 \begin{itemize}
   \item \textbf{volumes} - V této sekci jsou definovány všechny volume, které jsou využity v rámci stacku. Volume jsou definovány názvem a využity pro ukládání dat služeb. Konkrétně jsou využity úložiště pro data Grafany, OpenTelemetry, Prometheus a InfluxDB.
@@ -281,18 +243,17 @@ Jak již bylo zmíněno, základní konfigurace je řešena v souboru \emph{comp
   \item \textbf{services} - Definuji sekci pro jednotlivé služby, které jsou součástí stacku. Každá služba je definována názvem služby - \emph{container\_name}, názvem obrazu - \emph{image}, v případě lokálně sestavených služeb také definicí sestavení - \emph{build}. Dále je definováno, jaké porty jsou mapovány z kontejneru do hostitelského systému - \emph{ports}, jaké volume jsou připojeny k kontejneru - \emph{volumes}, použité síťové rozhraní - \emph{networks}, závislosti služby - \emph{depends\_on} a proměnné prostředí - \emph{environment}. V případech testovaných služeb je uvedena dodatečná konfigurační sekce nasazení - \emph{deploy}, jenž limituje dostupné zdroje paměti a procesoru.
 \end{itemize}
 
-\n{3}{Konfigurace směrování}
+\n{3}{Konfigurace nasazení}
 
-Nastavení směrování v rámci stacku je řešeno konfigurací proxy služby Nginx. To je řešeno odděleně dodatečným konfiguračním souborem nginx.conf jenž je připojen do kontejneru služby. Soubor obsahuje následující směrovací pravidla:
+Za účelem běhu aplikace je klíčové správné nastavení konfigurace. Konfigurace je řešena na různých úrovních. Základní úroveň představuje soubor \emph{compose.yaml}.  Dále jsou v tomto souboru nastaveny základní parametry jako je jméno sítě, názvy volume (persistentní úložiště orchestrátoru), závislosti mezi službami a další. V neposlední řadě je dílčí konfigurace jednotlivých služeb řešena v rámci konfiguračních souborů a proměnných prostředí. 
+
+Nastavení směrování v rámci stacku je řešeno konfigurací proxy služby Nginx. 
+Za tímto účelem obsahuje dva klíčové soubory, rozcestník v podobně statického index.html souboru a konfigurační nginx.conf soubor se směrovacími pravidly. Oba zmíněné soubory jsou do služby připojeny formou mapování virualizovaného repozitáře kontejneru. Směrovací pravidla jsou následující:
 
 \begin{itemize}
     \item / - cesta na statickou hlavní stránku-rozcestník aplikace
     \item /grafana - směrování na Grafanu
 \end{itemize}
-
-Rozcestník představuje soubor html.index a je připojen do virualizovaného repozitáře kontejneru obdobným způsobem jako konfigurační soubor. 
-
-\n{3}{Konfigurace telemetrie}
 
 Nastavení telemetrie spočívá v definici rozhraní, nastavení chování služeb a systémů z niž se telemetrická data sbírají, jejich cíl pro zpracování, správu a vizualizaci. Značnou část konfigurace představuje propojení nástrojů stacku LGTM, k čemuž slouží konfigurační soubory. Ty obsahují výchozí minimalistickou konfiguraci pro jednotlivé nástroje. Výstupem LGTM je individuální kontejner a zmíněná konfigurace je náturou interní a není potřeba s ní manipulovat s ohledem na požadavky práce uživateli. Mezi dodatečné konfigurace telemetrie napříč službami patří:
 
@@ -302,8 +263,6 @@ Nastavení telemetrie spočívá v definici rozhraní, nastavení chování slu�
     \item \textbf{Cadvisor} - Nastavení služby představuje dodatečné nastavení volumes, které jsou připojeny k kontejneru. Připojením systémových souborů je zajištěno sběr dat o využití systémových zdrojů. Toto nastavení je závislé na operačním systému.
 \end{itemize}
 
-\n{3}{Konfigurace testovacích služeb}
-
 Jednotlivé služby mají vlastní dodatečné konfigurace, které jsou řešeny pomocí kombinace dle standardizovaného postupu pro konfiguraci .NET aplikací, a to konfiguračního souboru \emph{appsettings.json} a proměnných prostředí. V první řadě řadě je použita konfigurace ze souboru, načež je přepsána odpovídajícími hodnotami proměnných prostředí. Každá služba má definovaný specifický prefix pro identifikaci proměnných prostředí. Následující seznam popisuje dodatečné konfigurace jednotlivých služeb.
 
 \begin{itemize}
@@ -312,16 +271,12 @@ Jednotlivé služby mají vlastní dodatečné konfigurace, které jsou řešeny
   \item \textbf{EPS - Event Publishing Service} - Drží informaci o rozhraní RabbitMQ, konkrétní frontě a gRPC rozhraní služby FUS.
 \end{itemize}
 
-\n{3}{Konfigurace persistence}
-
 Služby využité pro perzistentní ukládání dat jsou konfigurovány pomocí proměnných prostředí. Jedná se o následující služby:
 
 \begin{itemize}
   \item \textbf{PostgreSQL} - Jsou definovány údaje pro uživatele databáze a název databáze.
   \item \textbf{InfluxDB} - Proměnné prostředí definují název databáze, uživatelské údaje a povolení přihlášení pomocí http.
 \end{itemize}
-
-\n{3}{Nastavení uživatelského rozhraní}
 
 Definice uživatelského rozhraní, respektive dostupných dashboardů, je dána při sestavení obrazu LGTM. V rámci něj jsou předdefinovány hodnoty pro připojení zdrojů dat, tj. Prometheus, Loki, Tempo a InfluxDb. Patřičné dashboardy zobrazující relevantní data pro různé scénáře systému byly předem připraveny a jsou k dispozici po otevření Grafany anonymním uživatelem. Následující seznam popisuje klíčové soubory konfigurace uživatelského rozhraní.
 
