@@ -28,18 +28,18 @@ Samotný proces nativní AOT a JIT kompilace je různě výkonnostně náročný
 
 \tab{Čas kompilace služeb}{tab:priklad}{0.65}{|l|c|c|r|}{
   \hline
-    & JIT (s) & AOT (s) & AOT \% nárůst \\ \hline
+    Služba & JIT (s) & AOT (s) & AOT \% nárůst \\ \hline
   \emph{SRS} & 01.99 & 19.49 & 979.3 \\ \hline
   \emph{FUS} & 03.85 & 30.36 & 788.5 \\ \hline
   \emph{BPS} & 02.02 & 20.74 & 1026.7 \\ \hline
   \emph{EPS} & 01.85 & 20.05 & 1083.7 \\ \hline
 }
 
-Velikost samotného výstupního programu je dle očekávání výrazně menší v případě JIT kompilace. To je dáno tím, že výstupní program je závislý na .NET runtime, který poskytuje dodatečnou obecnou funkcionalitu a vytváří nativní kód včetně generování typů až za běhu aplikace. Následující tabulka zobrazuje velikost služeb pro oba kompilační cíle. Pro vytvoření výstupů na základě JIT byl použit příkaz \emph{dotnet publish -c Release-JIT -r osx-x64 /p:PublishSingleFile=true --self-contained false}, pro vytvoření výstupů AOT byl použit příkaz \emph{dotnet publish -c Release-JIT -r osx-x64 /p:PublishSingleFile=true --self-contained false}.
+Velikost samotného výstupního programu je dle očekávání výrazně menší v případě JIT kompilace. To je dáno tím, že výstupní program je závislý na .NET runtime, který poskytuje dodatečnou obecnou funkcionalitu a vytváří nativní kód včetně generování typů až za běhu aplikace. Následující tabulka zobrazuje velikost služeb pro oba kompilační cíle. Pro vytvoření výstupů na základě JIT byl použit příkaz \emph{dotnet publish -c Release-JIT -r osx-x64 /p:PublishSingleFile=true --self-contained false}, pro vytvoření výstupů AOT byl použit příkaz \emph{dotnet publish -c Release-AOT -r osx-x64}.
 
 \tab{Velikost programu služeb}{tab:priklad}{0.65}{|l|c|c|r|}{
   \hline
-    & JIT (MB) & AOT (MB) & AOT \% nárůst \\ \hline
+    Služba & JIT (MB) & AOT (MB) & AOT \% nárůst \\ \hline
   \emph{SRS} & 05.70 & 21.40 & 375.4 \\ \hline
   \emph{FUS} & 12.40 & 28.40 & 229.0 \\ \hline
   \emph{BPS} & 06.00 & 21.80 & 363.3 \\ \hline
@@ -156,7 +156,7 @@ Simulaci serveless nasazení byla vyvolána v tomto scénáři. Jednotlivé vari
 
 \tab{Průměrné využití zdrojů službou SRS a doba odpovědi včetně startu služby}{tab:service_metrics}{1.0}{|l|r|r|r|r|}{
   \hline
-  Služba - Režim & Doba startu + požadavku (s) & Paměť (MB) \\ \hline \hline
+  Služba - Režim & Doba startu služby a požadavku (s) & Paměť (MB) \\ \hline \hline
   \emph{SRS-AOT} & 0.91 & 9.59 \\ \hline
   \emph{SRS-JIT} & 1.40 & 8.46 \\ \hline
 }
