@@ -23,7 +23,9 @@ Kompilace do nativního kódu probíhala s průběžnými problémy. Podpora ze 
 
 \n{2}{Výstup služeb}
 
-Samotný proces nativní AOT a JIT kompilace je různě výkonnostně náročný. Při tvorbě obrazu službeb, ale i kompilace je hlavní náročná operace \emph{restore}, která stahuje potřebné závislosti a balíčky pro projekt. Proces kompilace je vysoce závislý na specifickém HW, SW a přítomnosti závislostí. Pro účely testování byly potřebné NuGet balíčky nacachovány v systému. Následující tabulka zobrazuje přehled časové náročnosti kompilace služeb pro oba kompilační cíle. K získání času výstupu bylo využity diagnostického režimu příkazu \emph{dotnet}. Pro AOT byl použit příkaz \emph{dotnet publish -v d -c Release-AOT -r osx-x64}, pro získání výstupu JIT byl použit příkaz \emph{dotnet publish -v d -c Release-JIT -r osx-x64 --self-contained false}.
+Samotný proces nativní AOT a JIT kompilace je různě výkonnostně náročný. Při tvorbě obrazu službeb, ale i kompilace je hlavní náročná operace \emph{restore}, která stahuje potřebné závislosti a balíčky pro projekt. Proces kompilace je vysoce závislý na specifickém HW, SW a přítomnosti závislostí. Pro účely testování byly potřebné NuGet balíčky nacachovány v systému. Následující tabulka zobrazuje přehled časové náročnosti kompilace služeb pro oba kompilační cíle. Data byla získána na základě průměru z 6 pokusů. Nejdelší a nejkratší hodnota kompilace byla zahozena pro omezení vlivu cachování. Jelikož je hodnota ovlivněna externím zatížením systému, má výsledek pouze orientační charakter.
+
+K získání času výstupu bylo využity diagnostického režimu příkazu \emph{dotnet}. Pro AOT byl použit příkaz \emph{dotnet publish -v d -c Release-AOT -r osx-x64}, pro získání výstupu JIT byl použit příkaz \emph{dotnet publish -v d -c Release-JIT -r osx-x64 --self-contained false}.
 
 
 \tab{Čas kompilace služeb}{tab:priklad}{0.65}{|l|c|c|r|}{
@@ -35,7 +37,7 @@ Samotný proces nativní AOT a JIT kompilace je různě výkonnostně náročný
   \emph{EPS} & 01.85 & 20.05 & 1083.7 \\ \hline
 }
 
-Velikost samotného výstupního programu je dle očekávání výrazně menší v případě JIT kompilace. To je dáno tím, že výstupní program je závislý na .NET runtime, který poskytuje dodatečnou obecnou funkcionalitu a vytváří nativní kód včetně generování typů až za běhu aplikace. Následující tabulka zobrazuje velikost služeb pro oba kompilační cíle. Pro vytvoření výstupů na základě JIT byl použit příkaz \emph{dotnet publish -c Release-JIT -r osx-x64 /p:PublishSingleFile=true --self-contained false}, pro vytvoření výstupů AOT byl použit příkaz \emph{dotnet publish -c Release-AOT -r osx-x64}.
+Velikost samotného výstupního programu vyšla dle očekávání definovaného v hypotéze 2. Program má výrazně menší velikost v případě JIT kompilace. To je dáno tím, že výstupní program je závislý na .NET runtime, který poskytuje dodatečnou obecnou funkcionalitu a vytváří nativní kód včetně generování typů až za běhu aplikace. Následující tabulka zobrazuje velikost služeb pro oba kompilační cíle. Pro vytvoření výstupů na základě JIT byl použit příkaz \emph{dotnet publish -c Release-JIT -r osx-x64 /p:PublishSingleFile=true --self-contained false}, pro vytvoření výstupů AOT byl použit příkaz \emph{dotnet publish -c Release-AOT -r osx-x64}.
 
 \tab{Velikost programu služeb}{tab:priklad}{0.65}{|l|c|c|r|}{
   \hline
@@ -62,6 +64,10 @@ Sestavení obrazu je závislé na přípravu prostředí, vyhodnocení a stažen
 K vývoji byl použit IDE Rider od společnosti JetBrains. Vyzkoušena byla rovněž i práce ve Visual Studio 2022 Community Edition a Visual Studio Code s doporučenými rozšířeními od Microsoft. Všechna vývojová prostředí jsou kompatibilní, co se týče procesu kompilace respektive sestavení, jelikož to se odehrává pomocí CLI .NET.
 
 Samotný vývoj s ohledem na práci s direktivami pro různé kompilace byl značně zjednodušen vizualicemi, jenž poskytovala vývojová prostředí Rider a Visual Studio. Obdobně byla v těchto IDE zjednodušena i analýza a hledání chyb díky integraci referencí na kód generovaný na pozadí pro kompatibilitu s AOT. V tomto ohledu Visual Studio Code zaostávalo. S ohledem na aktivní vývoj a podporu, jenž je ze strany Microsoft poskytována podpoře vývoje .NET ve Visual Studio Code (po diskontuaci produktu Visual Studio pro Mac), lze očekávat, že se tato situace v budoucnu změní.
+
+\obr{Vizualizace zachycení metody interceptorem v Rider IDE}{fig:codemethodintercept}{0.8}{graphics/images/code-method-interception.png}
+
+\obr{Ukázka kódu nové implementace metody vygenerované na pozadí v Rider IDE}{fig:codegeneratedmethod}{1}{graphics/images/code-generated-method.png}
 
 \n{3}{Knihovny třetích stran}
 

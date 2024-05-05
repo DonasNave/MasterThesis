@@ -33,7 +33,7 @@ Na základě předběžného přehledu literatury a teoretických výhod každé
 
 \begin{itemize}
     \item \textbf{Hypotéza 1}: Vývoj služeb bude možný za pomocí obou kompilačních režimů, s minimálními rozdíly v použitém API a systémových knihovnách. Při použití knihoven 3. stran bude dostatečně jasná kompatibilita mezi oběma režimy.
-    \item \textbf{Hypotéza 2}: Kompilace AOT má za následek rychlejší spouštění, ale může vést k větším binárním velikostem ve srovnání s kompilací JIT. Výsledný virtualizovaný obraz bude ovšem mít výrazně nižší velikost kvůli absenci .NET runtime.
+    \item \textbf{Hypotéza 2}: Kompilace AOT má za následek rychlejší spouštění, ale bude vést k větším binárním velikostem aplikace ve srovnání s kompilací JIT. Výsledný virtualizovaný obraz aplikace bude ovšem mít výrazně nižší velikost kvůli absenci .NET runtime.
     \item \textbf{Hypotéza 3}: Kompilace AOT poskytuje lepší optimalizaci výkonu díky generování typů a funkcí, jež by museli být dodatečně tvořeny za běhu. Tím pádem je očekáváno, že služby kompilované do nativního kódu budou mít nižší řežii procesoru. Přítomnost staticky generovaných typů a funkcí však může způsobit vyšší paměťovou zátěž. Vytížení I/0 operací bude srovnatelné.
 \end{itemize}
 
@@ -153,12 +153,12 @@ Tento scénář je zaměřen na rychlost a zátěž celkového systému při spl
 
 \begin{itemize}
     \item \textbf{Krok 1} - Služby jsou spuštěny v rámci stacku ve specifické kompilaci dle konfigurace testu.
-    \item \textbf{Krok 2} - Do služby FUS je nahrán TODO: soubor o velikosti 1MB pomocí REST API. Z odpovědi je získán identifikátor souboru.
+    \item \textbf{Krok 2} - Do služby FUS je nahrán textový soubor o velikosti 1MB pomocí REST API. Z odpovědi je získán identifikátor souboru.
     \item \textbf{Krok 3} - Do služby EPS jsou zasílány požadavy na zpracování dat pomocí REST API. Vykonává je jediny VU, který zasílá požadavky po dobu 1 minuty v intervalu co 5s.
     \item \textbf{Krok 4} - Služba EPS zprávu zasílá do fronty v RabbitMQ, na které naslouchá služba BPS. 
     \item \textbf{Krok 5} - Služba BPS zprávu zpracovává z RabbitMQ fronty a získává data ze vzdáleného volání na službu FUS pomocí rozhraní gRPC. 
     \item \textbf{Krok 6} - Služba FUS získává data z perzistence a zasílá je zpět službě BPS. 
-    \item \textbf{Krok 7} - Služba BPS provádí TODO: výpočet 40tého čísla Fibonacciho posloupnosti.
+    \item \textbf{Krok 7} - Služba BPS provádí výpočet 40tého čísla Fibonacciho posloupnosti.
     \item \textbf{Krok 8} - Služby jsou ukončeny a v rámci K6 dojde k zaslání dat o provedeném testu do InfluxDB.
 \end{itemize}
 

@@ -6,13 +6,13 @@
 
 Při vývoji softwaru je možné aplikovat různé architektury a návrhové vzory. Za základní a vysoce rozšířenou architekturu lze považovat monolitickou architekturu. Aplikace využívající monolitickou architekturu sestávají z jedné kódové báze v níž se spojuje řešení veškeré doménové problematiky. Jsou založeny na principu, že celá aplikace je spuštěna jako jeden proces. Obecně obsahují určitou formu logického členění, například na jednotlivé doménové moduly nebo služby, které seskupují související části aplikace. \cite{Richardson2018} 
 
-TODO: Obrázek monolitické architektury
+\obr{Monolith architektura}{fig:monolitharch}{0.6}{graphics/images/monolith.drawio.png}
 
 Monolitická architektura je jednoduchá na vývoj, nasazení a testování. Při správném návrhu může poskytovat i jednoduchou možnost škálování, kdy aplikace funguje ve více identických instancích. \cite{Richardson2018} Jelikož i při logickém oddělení funkcionality je celá aplikace spjata pevnými vazbami, jakýkoliv zásah do jedné části aplikace může mít nepředvídatelné důsledky na ostatní části. Jednotná kódová báze zase může představovat limitující faktor pro rychlost vývoje, automatizace testovaní a nasazování. Samotné škálování může být vysoce neefiktivní a limitující, pokud je potřeba škálovat pouze určité části aplikace. \cite{Richardson2018}
 
 Fundamentálně opačná je architektura microservice. Ta je založena na principu rozdělení aplikace do samostatných služeb. Každá z těchto služeb je zodpovědná za určitou část funkcionality aplikace. Služby jsou navzájem nezávislé a komunikují mezi sebou pomocí definovaných rozhraní. Tím je zajištěno, že každá služba může být vyvíjena, testována, nasazována a škálována nezávisle na ostatních. Tato architektura umožňuje vývojářům pracovat na menších a jednodušších částech aplikace, což zvyšuje produktivitu a umožňuje rychlejší iterace. Díky nezávislosti služeb je také možné dosáhnout vyšší odolnosti a škálovatelnosti aplikace. \cite{Richardson2018}
 
-TODO: Obrázek microservice architektury
+\obr{Microservice architektura}{fig:microservicearch}{0.8}{graphics/images/microservices.drawio.png}
 
 \n{2}{Historie}
 
@@ -27,7 +27,7 @@ Microservice ahitektura stojí na několika základních principech. Tyto princi
 \begin{itemize}
     \item \textbf{Decentralizace} - Definuje, že každá služba zodpovídá za určitou část funkcionality aplikace. Služby jsou navzájem nezávislé a komunikují mezi sebou pomocí po síti pomocí deklarovaných rozhraní. Každá služba je samostatně nasaditelná a zodpovídá za svá data. \cite{Gammelgaard2021} Tím je zajištěno, že každá služba může být vyvíjena, nasazována a škálována nezávisle na ostatních.
     \item \textbf{Odolnost} - Odolnost nebo také robustnost microservice architektury je definována schopností systému zůstat v provozu i přes výskyt chyb v jeho dílčích částech. To znamená, že pokud jedna služba selže, zbytek systému může pokračovat v provozu. Toho je dosaženo použitím specifických vzorů. \emph{Circuit Breaker} představuje jeden z těchto vzorů. Zajišťuje aby služby mimo provoz nebyly zbytečně zatíženy požadavky. Komunikace v tomto vzoru probíhá za pomocí stavového automatu, jenž za splnění určitých kritérií (například konkrétního počtu neúspěšných požadavků) se sepne a na určitou dobu přestane zasílat další požadavky. \cite{Gammelgaard2021}
-    TODO: Obrázek Circuit Breaker
+    \obr{Circuit Breaker vzor}{fig:circuitbreaker}{0.65}{graphics/images/circuitbreaker.drawio.png}
     \item \textbf{Kontejnerizace} - Kontejnerizace představuje proces zabalení služby spolu s veškerými závislostmi jako je OS, prostředí a konfigurace. Kontejner tvoří základní spustitelnou jednotku microservice architektury. Je založen na minimalistickém obrazu OS k němuž jsou dodány potřebné nástroje, knihovny a samotná služba. Takto vytvořený kontejner je virtualizován, tedy spuštěn jako samostatný virtuální OS v rámci hostitelského OS. \cite{dockerdocs} Moderní metody kontejnerizace zakládájí na technologii Docker, jenž poskytuje ekosystém pro kompletní proces tvorby, sdílení a nasazení kontejnerů. Hlavní výhodou kontejnerizace je umožňění běhu aplikace ve vybraném prostředí s vybranou konfigurací při co nejmenší režii.
     \item \textbf{Orchestrace} - Rozšířováním počtu služeb respektive kontejnerů se jejich správa stává složitou. Nástroje pro orchestraci pomáhají automatizovat nasazení, škálování a správu kontejnerů. Mezi oblíbené orchestrační nástroje patří Kubernetes, Docker Swarm a Mesos. Mezi jejich úlohy patří řešit problémy jako vyhledávání služeb, vyvažování zátěže, přidělování prostředků a škálování na základě zátěže.
     \item \textbf{Škálování} - Architektura microservice zvyšuje škálovatelnost aplikace a umožňuje ji provádět jen v rámci konkrétní části, na úrovni dílčích služeb. Škálování probíhá typicky vytvoření množství několika instancí stejné služby a nastavením služby v roli tzv. \emph{Load Balancer}, jenž distribuuje požadavky na jednotlivé služby podle definovaných. Typicky se cíl požadavku určuje dle hashe IP adresy požadavku nebo na základě váhy či doby odpovědi instance. Pomocí těchto technik je v aplikaci dosaženo zlepšení schopnosti zvládat velké objemy požadavků za využití co nejmenšího množství dodatečných prostředků. \cite{Gammelgaard2021}
@@ -59,11 +59,11 @@ Mikroslužby spolu komunikují skrze rozhraní prostřednictvím vybraných prot
 
 V microservice architektuře si každá služba obvykle spravuje vlastní databázi podle vzoru \emph{Database per Service}. Tato izolace umožňuje službám být volně provázané a nezávisle nasaditelné, přičemž každé databázové schéma je přizpůsobeno konkrétním potřebám služby. V závislosti na případu použití mohou služby používat různé typy databází. Structured Query Language (dále SQL) pro transakční data vyžadující silnou konzistenci a vlastnosti Atomocity Consistency Isolation Duratibility (dále ACID). Nebo Not only SQL (dále NoSQL) pro flexibilnější možnosti ukládání dat, které nabývají velkých objemů, nejsou definovány schématy nebo mají specifickou vazbu například na čas. 
 
-Různorodost databázových technologií přináší výzvy, jako je jednotný přístup k datovým zdrojům. Ten je řešen pomocí vzoru \emph{Repository}. Tento vzor využívá vytvoření obecného rozhraní, které definuje standartní operace pro přístup k datům. Pro každou databázovou technologii a její specifické rozhraní je vytvořena implementace tohoto rozhraní. Díky tomu služby mohou pracovat stejným způsobem nezávisle na využitou databázovou technologii.
-TODO: Obrázek Repository
+Různorodost databázových technologií přináší výzvy, jako je jednotný přístup k datovým zdrojům. Ten je řešen pomocí vzoru \emph{Repository}. Tento vzor využívá vytvoření obecného rozhraní, které definuje standartní operace pro přístup k datům. Pro každou databázovou technologii a její specifické rozhraní je vytvořena implementace tohoto rozhraní. Služby následně pracují objekty, jako by byly součástí kolekce v paměti služby, tedy nezávisle na využitou databázovou technologii.
+
+\obr{Repository vzor}{fig:repository}{0.55}{graphics/images/repository.drawio.png}
 
 Další častou problematikou je udržování konzistence dat v transakcích probíhajících napříč více službami. K řešení se využívájí specifické vzory, jako je například \emph{Saga}. Saga je vzor, který řeší distribuované transakce formou lokálních transakcí v jednotlivých službách. Pokud při některé z dílčích transakcí dojde k chybě, je vyvolaná série kompenzačních transakcí, jenž vrátí systém do původního stavu. Řízení událostí může být vedeno formou choreografie, kdy jednotlivé služby zodpovídají za publikování událostí spouštějících následující transakci. Alternativně může být využitý orchestrátor, který distribuovanou transakci řídí. \cite{richardsonsaga}
-TODO: Obrázek Saga
 
 \n{3}{Bezpečnost}
 

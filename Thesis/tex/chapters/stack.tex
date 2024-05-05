@@ -4,7 +4,7 @@
 
 \n{1}{Testovací aplikace}
 
-Praktická část této práce se zaměřuje na vytvoření testovací aplikace postavené na microservice architektuře. Cílem je otestovat a analyzovat výkonost služeb ve dvou typech kompilace, JIT a nativní AOT. Rozsah funkcionality a chování aplikace je definován množinou funkčních a nefunkčních požadavků. Dále jsou vybrány konkrétní technologie a nástroje, jenž v aplikaci doplní .NET služby. Jejich účelem je zprostředkování ekosystému monitorování, dodání persistence, hostování webového rozhraní a automatizace testování. Samotný postup testování je definován metodikou, která zahrnuje také definici hypotéz. Tyto hypotézy jsou následně ověřeny v rámci experimentů, které jsou provedeny na testovací aplikaci. Výsledky testů včetně kompletních monitorovacích dat jsou uloženy a zprostředkovány pro analýzu a vyhodnocení. Aplikace je nasazena v kontejnerizovaném prostředí a vytvořena s ohledem na rozšiřitelnost.
+Praktická část této práce se zaměřuje na vytvoření testovací aplikace postavené na microservice architektuře. Cílem je otestovat a analyzovat výkonost služeb ve dvou typech kompilace, JIT a nativní AOT. Rozsah funkcionality a chování aplikace je definován množinou funkčních a nefunkčních požadavků. Dále jsou vybrány konkrétní technologie a nástroje, jenž v aplikaci doplní .NET služby. Jejich účelem je zprostředkování ekosystému monitorování, dodání persistence, hostování webového rozhraní a automatizace testování. Samotný postup testování je definován metodikou, která zahrnuje také definici hypotéz a je podrobně popsána v následující kapitole. Tyto hypotézy jsou následně ověřeny v rámci experimentů, které jsou provedeny na testovací aplikaci. Výsledky testů včetně kompletních monitorovacích dat jsou uloženy a zprostředkovány pro analýzu a vyhodnocení. Aplikace je nasazena v kontejnerizovaném prostředí a vytvořena s ohledem na rozšiřitelnost.
 
 \n{2}{Požadavky na SW}
 
@@ -12,7 +12,7 @@ Na aplikaci jsou pro splnění účelu analýzy vývoje, výstupu a výkonu slu�
 
 \n{3}{Funkční požadavky}
 
-Funkční požadavky definují chování, funkce a vlastnosti, které musí systém poskytovat. Přímo souvisejí s doménovými požadavky a zahrnují specifikace, jako je zpracování dat, provádění výpočtů nebo podpora konkrétních procesů. Funkční požadavky v podstatě popisují očekávané operace systému, včetně vstupů, chování a výstupů, a jsou tak klíčové pro vývoj a testování.
+Funkční požadavky definují chování, funkce a vlastnosti, které musí systém poskytovat. Přímo souvisejí s doménovými požadavky a zahrnují specifikace, jako je zpracování dat, provádění výpočtů nebo podpora konkrétních procesů. Funkční požadavky popisují očekávané operace systému, včetně vstupů, chování a výstupů. Jsou tak klíčové pro vývoj a testování. Následující seznam funkčních požadavků byl definován pro testovací aplikaci.
 
 \begin{itemize}
   \item \textbf{Healthchecks} - Služby musí implementovat na REST API healtcheck endpoint, který bude poskytovat informace o stavu služby. Endpoint musí být dostupný na standardní adrese \emph{/health}. Návratová hodnota bude triviálně formou řetězce \emph{Healthy} a vracet HTTP Code 200 v případě, že je služba dostupná. Dostupnost je definována schopností služby přijímat požadavky.
@@ -31,13 +31,12 @@ Funkční požadavky definují chování, funkce a vlastnosti, které musí syst
 
 \n{3}{Nefunkční požadavky}
 
-Nefunkční požadavky specifikují celkové vlastnosti systému. Definují atributy kvality, které musí systém splňovat. Nefunkční požadavky mohou zahrnovat omezení týkající se návrhu a implementace systému, jako jsou bezpečnostní standardy, soulad s právními a regulačními směrnicemi, doba odezvy při zpracování dat, kapacita pro souběžné uživatele, integrita dat a mechanismy převzetí služeb při selhání. Mají zásadní význam pro zajištění životaschopnosti a efektivity systému v jeho provozním prostředí a často ovlivňují celkovou uživatelskou zkušenost, výkonnost systému a splnění regulačních podmínek.
+Nefunkční požadavky specifikují celkové vlastnosti systému. Definují atributy kvality, které musí systém splňovat. Nefunkční požadavky mohou zahrnovat omezení týkající se návrhu a implementace systému, jako jsou bezpečnostní standardy, soulad s právními a regulačními směrnicemi, doba odezvy při zpracování dat, kapacita pro souběžné uživatele, integrita dat a mechanismy převzetí služeb při selhání. Mají zásadní význam pro zajištění životaschopnosti a efektivity systému v provozním prostředí. Ovlivňují celkovou uživatelskou zkušenost, výkonnost systému a splnění regulačních podmínek.
 
 \begin{itemize}
-  \item \textbf{Použitelnost} - Aplikace musí být snadno použitelná a přístupná pro uživatele. To zahrnuje snadnou konfiguraci a nasazení aplikace na specifickém hadware a OS. Aplikace musí být snadno spustitelná s webovým rozhraním na standardních portech.
-  \item \textbf{Udržitelnost} - Aplikace musí být udržitelná a snadno rozšiřitelná. To zahrnuje dodržení praktik čistého kódu a vhodných návrhových vzorů. Implementace služeb musí být založena na principu SOLID a DRY. Vytvořený kód, konfigurace a skripty musí být řádně dokumentovány.
+  \item \textbf{Použitelnost} - Aplikace musí být snadno použitelná a přístupná pro uživatele. To zahrnuje snadnou konfiguraci a nasazení aplikace na specifickém HW a OS. Aplikace musí být snadno dostupná na webovém rozhraní a standardních portech.
+  \item \textbf{Udržitelnost} - Aplikace musí být udržitelná a snadno rozšiřitelná. To zahrnuje dodržení praktik čistého kódu a vhodných návrhových vzorů. Implementace služeb musí být založena na principu SOLID a Don't Repeat Yourself (dále DRY). Dodržování SOLID principu zajišťuje testovatelnost, rozšiřitelnost a dlouhodobou udržitelnost aplikace. Zatímco použitím DRY principu zabráňuje duplicitě kódu. Vytvořený kód, konfigurace a skripty musí být řádně dokumentovány.
   \item \textbf{Testovatelnost} - Aplikace musí být snadno testovatelná. To zahrnuje zprostředkování nástrojů a API pro možnost definice a konfigurace vlastních testovacích scénářů. Testování musí být automatizovatelné s výstupem persistentně ukládaným a zprostředkovaným do monitorovacíh nástrojů.
-  \item \textbf{Výkon} - Implementace aplikace, respektive jejich služeb, musí být schopna zvládnout zátěž, která je na ně kladena. To zahrnuje schopnost zvládnout požadavky na výkon a škálovatelnost.
   \item \textbf{Přívětivost} - Aplikace musí být přívětivá pro uživatele. To zahrnuje snadnou navigaci, přehlednost a intuitivní ovládání. Vizuální stránka aplikace musí být jasná a přehledná.
 \end{itemize}
 
@@ -74,13 +73,11 @@ Pro implementaci požadované funkcionality bylo zvoleno následující rozděle
     \item \textbf{EPS - Event Publishing Service} - slouží k vyvolání události, která je následně zpracována jinými službami. Poskytuje REST API rozhraní. Je přihlášena do RabbitMQ jako publisher.
 \end{itemize}
 
-TODO: obrázek architektury
-
 Kompilaci do nativního AOT kódu je deklarována použitím atributu PublishAoT v projektovém souboru. Za účelem zajištění co největší podobnosti služeb zacílených na AOT a JIT kompilaci, bude využito zadefinování konstantních hodnot v rámci projektu. Konstanty \emph{JIT} a \emph{AOT} budou využity pro rozlišení chování služeb v rámci obou kompilačních verzí. S použitím direktiv kompilátoru a zmíněných konstant bude v nutných případech docíleno rozdílného volání API při snaze zachovat totožnou funkcionalitu.
 
 \n{3}{Očekávání vývojového procesu}
 
-Na základě podporované funkcionality, tak jak je definována týmem .NET a popsána v rámci rešerše, je očekáváno, že vývojový proces bude probíhat bez výrazných problémů a bude možné vytvořit služby, které budou schopny zvládnout definované funkční a nefunkční požadavky. Podpora 3. stran byla předem prozkoumána v rámci dostupných dokumentací vybraných knihoven .NET. Konkrétní podoba a rozsah této podpory bude plně ověřitelná až v rámci implementace a testování služeb.
+Na základě podporované funkcionality, tak jak je definována týmem .NET a popsána v rámci rešerše, je očekáváno, že vývojový proces bude probíhat bez výrazných problémů a bude možné vytvořit služby, které budou schopny zvládnout definované funkční a nefunkční požadavky. Podpora třetích stran byla předem prozkoumána v rámci dostupných dokumentací vybraných knihoven .NET. Konkrétní podoba a rozsah této podpory bude plně ověřitelná až v rámci implementace a testování služeb.
 
 \n{3}{Organizace souborů}
 
@@ -107,7 +104,7 @@ Každá z vyvinutých služeb využívá konkrétní .NET SDK \emph{Microsoft.NE
 
 Součástí řešení je společná konfigurace, která je využita ve všech službách. Ta je řešena jedna na úrovni solution souboru, tak i Directory.Build.props souboru. Týká se jednotné distribuce projektových atributů pro verzi, kompatibilitu s AOT, vynucení konkrétních pravidel pro kód a analyzéry.
 
-\n{3}{Knihovny 3. stran}
+\n{3}{Knihovny třetích stran}
 
 Pro implementaci funkcionality aplikace byly využity následující knihovny třetích stran:
 

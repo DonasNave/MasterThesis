@@ -28,8 +28,9 @@ Platforma .NET je postavena na několika klíčových komponentách, které zaji
     \item \textbf{NuGet} - Správce balíčků pro platformu .NET. dodává standardizovanou metodu správy externích knihoven, na nichž závisí aplikace v .NET. Zjednodušuje proces inkorporace knihoven, systémových i třetích stran, do projektu. Rovněž spravuje závislosti, čímž zajišťuje, že projekty zůstávají aktuální a kompatibilní. Tento nástroj je téměř nezbytný pro vývoj na platformě .NET, neboť umožňuje modulární vývoj softwaru. \cite{netdocs}
 \end{itemize}
 
+\obr{.NET platforma}{fig:dotnetplatform}{0.45}{graphics/images/dotnet-platform.drawio.png}
 
-\n{2}{Frameworky a technologie}
+\n{2}{Frameworky}
 
 Platforma .NET poskytuje mnoho frameworků a technologií pro vývoj aplikací. Jednotlivé frameworky plní různé role a poskytují různé úrovně funkcionality pro vývoj aplikací. Z hlediska struktury a účelu je lze kategorizovat následujícím způsobem. \cite{netdocs}
 
@@ -39,6 +40,10 @@ Platforma .NET poskytuje mnoho frameworků a technologií pro vývoj aplikací. 
     \item \textbf{MAUI} - Moderní specializovaný framework pro vývoj aplikací napříč platformami v rámci ekosystému .NET. Umožňuje vývojářům vytvářet aplikace pro Android, iOS, macOS a Windows z jedné kódové základny. Zakládá na populárních konceptech z Xamarin.Forms a zároveň rozšiřuje jeho možnosti na desktopové aplikace. .NET MAUI zjednodušuje vývojový proces tím, že poskytuje jednotnou sadu nástrojů pro vývoj uživatelského rozhraní na všech platformách s možností přístupu k funkcím specifickým pro platformu v případě potřeby. Podporuje moderní vývojové vzory a nástroje, včetně MVVM, datové vazby a asynchronního programování, což usnadňuje vytváření sofistikovaných a citlivých aplikací. Předchůdcem MAUI je platforma Xamarin, která sloužila pro vytváření mobilních aplikací na platformě .NET. \cite{Libery2023}
     \item \textbf{Blazor} - Specializovaný framework v rámci ekosystému .NET, který zprostředkovává vývojářům tvorbu interaktivních webových uživatelských rozhraní pomocí C\# namísto JavaScriptu. Blazor může běžet na serveru (Blazor Server), kde zpracovává požadavky a komunikuje s uživatelským rozhraním pomocí knihovny SignalR, která zabezpečuje websocket komunikaci. Nebo také v prohlížeči skrz WASM, kdy dochází k přeložení C\# kódu do nativního kódu WASM a je spouštěn přímo ve webovém prohlížeči vedle tradičních webových technologií, jako jsou HTML a CSS. Umožňuje vývojářům využít znalosti .NET pro komplexní vývoj webových aplikací a vytvářet bohaté webové aplikace běžící na straně klienta v prohlížeči. Architektura Blazor je založená na komponentách a usnadňuje jejich opětovné použití pro tvorbu uživatelského rozhraní. Zároveň Blazor podporuje modulární vývojový přístup a poskytuje možnost vyvíjet webové aplikace v ekosystému .NET.
 \end{itemize}
+
+\n{2}{Nástroje}
+
+Platforma .NET zprostředkovává širokou sadu nástrojů za účelem tvorby, sestavení a spuštění aplikace. Mezi nejdůležitější lze zařadit následující:
 
 \n{3}{Knihovny}
 
@@ -62,11 +67,7 @@ Následující seznam obsahuje některé z nejběžněji používaných knihoven
 
 Kromě knihoven poskytovaných společností Microsoft existuje mnoho knihoven třetích stran. Za vývojem těchto knihoven mohou stát vývojařské komunity nebo být vydány velkými společnostmi. Běžně tyto knihovny navazují na sadu funkcí poskytovaných Microsoftem a rozšiřují je o další novou funkcionalitu, nebo portují známé existující projekty do platformy .NET. Mezi příklady nejznámějších knihovny třetích stran v .NET patří Dapper, AutoMapper, Newtonsoft.Json a další.
 
-\n{2}{Nástroje .NET}
-
-Platforma .NET zprostředkovává širokou sadu nástrojů za účelem tvorby, sestavení a spuštění aplikace. Mezi nejdůležitější lze zařadit následující:
-
-\n{3}{IDE}
+\n{3}{Integrované vývojové prostředí}
 
 Neméně důležitým prvkem vývoje aplikací je integrované vývojové prostředí (dále IDE). I když není povinné, pro spoustu vývojářů je jeho použití neodmyslitené. IDE je nástroj, který zprostředkovává vývoj aplikací, správu projektů, debuggování a další. IDE poskytuje uživatelské rozhraní, které umožňuje vývojářům vytvářet, upravovat a testovat kód. Zprostředkovává nástroje pro správu projektů, jako jsou sestavení, testování a publikace. Umožňuje provádět různorodé operace nad aplikací, jako je refaktorování kódu, hledání chyb a ladění.
 
@@ -74,9 +75,7 @@ Jedním z nejpoužívanějších IDE je Visual Studio, vyvíjené společností 
 
 \n{3}{Balíčky}
 
-Pro jednoduchou distribuci knihoven, jak systémových tak třetích stran, je využíván nástroj pro správu balíčků NuGet. Projekt, jenž má být distribuován je buďto opatřen atributem \emph{<PackageOnBuild>} a sestaven nebo je využito příkazu \emph{dotnet pack}.
-
-Takto vytvořené balíčky lze distribuovat např. přes NuGet.org, což je veřejný repozitář knihoven, který je dostupný pro všechny vývojáře. Možná je také implementace vlastních řešení. Distribuované knihovny jsou jednoduše importovatelné do projektu a umožňují snadnou správu závislostí.
+Pro jednoduchou distribuci knihoven, jak systémových tak třetích stran, je využíván nástroj pro správu balíčků NuGet. Projekt, jenž má být distribuován je buďto opatřen atributem \emph{<PackageOnBuild>} a sestaven nebo je využito příkazu \emph{dotnet pack}. Takto vytvořené balíčky lze distribuovat např. přes NuGet.org, což je veřejný repozitář knihoven, který je dostupný pro všechny vývojáře. Možná je také implementace vlastních řešení. Distribuované knihovny jsou jednoduše importovatelné do projektu a umožňují snadnou správu závislostí.
 
 \n{3}{Dokumentace}
 
