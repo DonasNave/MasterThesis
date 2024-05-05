@@ -15,7 +15,7 @@
 \contentsline {subsection}{\numberline {1.6}Kompilace zdrojového kódu}{19}{subsection.1.6}%
 \contentsline {subsubsection}{\numberline {1.6.1}Cíle kompilace}{20}{subsubsection.1.6.1}%
 \contentsline {subsubsection}{\numberline {1.6.2}Obecné postupy kompilace}{20}{subsubsection.1.6.2}%
-\contentsline {subsubsection}{\numberline {1.6.3}Kompilace pro CLR}{21}{subsubsection.1.6.3}%
+\contentsline {subsubsection}{\numberline {1.6.3}Kompilace pro CLR}{20}{subsubsection.1.6.3}%
 \contentsline {subsubsection}{\numberline {1.6.4}Kompilace do nativního kódu}{22}{subsubsection.1.6.4}%
 \contentsline {subsection}{\numberline {1.7}Běh kódu}{23}{subsection.1.7}%
 \contentsline {subsubsection}{\numberline {1.7.1}CLR}{24}{subsubsection.1.7.1}%
