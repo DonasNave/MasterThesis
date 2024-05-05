@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.8)  5 MAY 2024 22:49
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.8)  5 MAY 2024 23:04
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1627,11 +1627,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 9--10
 
  []
 
-<graphics/diagrams/stack-data-flow.png, id=1174, 1222.5675pt x 1469.49pt>
+<graphics/diagrams/stack-data-flow.png, id=1174, 997.7275pt x 1585.925pt>
 File: graphics/diagrams/stack-data-flow.png Graphic file (type png)
 <use graphics/diagrams/stack-data-flow.png>
 Package pdftex.def Info: graphics/diagrams/stack-data-flow.png  used on input line 11.
-(pdftex.def)             Requested size: 374.86774pt x 450.55939pt.
+(pdftex.def)             Requested size: 374.86774pt x 595.85779pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
 <graphics/images/scenario1-dashboard.png, id=1175, 1143.27126pt x 800.9925pt>
 File: graphics/images/scenario1-dashboard.png Graphic file (type png)
 <use graphics/images/scenario1-dashboard.png>
@@ -1674,11 +1677,11 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 ) [91
 
- <./graphics/diagrams/stack-data-flow.png>] [92 <./graphics/images/scenario1-dashboard.png> <./graphics/images/scenario2-dashboard.png>] [93 <./graphics/images/scenario3-dashboard.png> <./graphics/images/scenario4-dashboard.png>] (/usr/local/texlive/2023/texmf-dist/tex/generic/stringenc/se-pdfdoc.def
+] [92 <./graphics/diagrams/stack-data-flow.png>] [93 <./graphics/images/scenario1-dashboard.png> <./graphics/images/scenario2-dashboard.png>] [94 <./graphics/images/scenario3-dashboard.png> <./graphics/images/scenario4-dashboard.png>] (/usr/local/texlive/2023/texmf-dist/tex/generic/stringenc/se-pdfdoc.def
 File: se-pdfdoc.def 2019/11/29 v1.12 stringenc: PDFDocEncoding
 ) (/usr/local/texlive/2023/texmf-dist/tex/generic/stringenc/se-utf8.def
 File: se-utf8.def 2019/11/29 v1.12 stringenc: UTF-8
-) [94 <./graphics/images/scenario5-dashboard.png>] (./prace.aux)
+) [95 <./graphics/images/scenario5-dashboard.png>] (./prace.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
@@ -1686,17 +1689,17 @@ Package rerunfilecheck Info: File `prace.out' has not changed.
 (rerunfilecheck)             Checksum: FE8E50BE4D977267CFC1AAA54149293E;18784.
  ) 
 Here is how much of TeX's memory you used:
- 36114 strings out of 476025
- 783446 string characters out of 5790017
+ 36115 strings out of 476025
+ 783453 string characters out of 5790017
  1868388 words of memory out of 5000000
  55627 multiletter control sequences out of 15000+600000
  531050 words of font info for 65 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  103i,17n,106p,1633b,607s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbi1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
-Output written on prace.pdf (94 pages, 3778285 bytes).
+Output written on prace.pdf (95 pages, 3764502 bytes).
 PDF statistics:
- 1322 PDF objects out of 1440 (max. 8388607)
- 297 named destinations out of 1000 (max. 500000)
+ 1326 PDF objects out of 1440 (max. 8388607)
+ 298 named destinations out of 1000 (max. 500000)
  1069 words of extra memory for PDF output out of 10000 (max. 10000000)
 
