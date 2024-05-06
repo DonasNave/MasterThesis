@@ -1430,6 +1430,11 @@ INPUT ./graphics/diagrams/services-architecture.png
 INPUT graphics/diagrams/services-architecture.png
 INPUT ./graphics/diagrams/services-architecture.png
 INPUT ./graphics/diagrams/services-architecture.png
+INPUT ./graphics/images/dta.drawio.png
+INPUT ./graphics/images/dta.drawio.png
+INPUT graphics/images/dta.drawio.png
+INPUT ./graphics/images/dta.drawio.png
+INPUT ./graphics/images/dta.drawio.png
 INPUT ./tex/chapters/testing.tex
 INPUT tex/chapters/testing.tex
 INPUT ./tex/chapters/testing.tex
