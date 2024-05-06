@@ -11,7 +11,7 @@ Výsledná architektura aplikace je založena na mikroslužbách. Splňuje před
 
 Následující sekce popisuje vývojový proces, tak jak se týkal testovaných služeb. Vývojový proces byl založen na experimentaci a snaze využít co nejvíc dostupných knihoven a nástrojů, za cenu nutnosti řešení problémů, případně změny implementace.
 
-\obr{Ukázka kódu s vyzualizací direktiv dle konfigurace}{fig:codesample}{1}{graphics/images/code-visual-sample.png}
+\obr{Ukázka kódu s vyzualizací direktiv dle konfigurace}{fig:codesample}{0.7}{graphics/images/code-visual-sample.png}
 
 \n{3}{Vývojové prostředí}
 
@@ -74,7 +74,7 @@ Velikost samotného výstupního programu vyšla dle očekávání definovaného
 
 Z pohledu velikosti výstupního programu nativní AOT kompilace má smysl porovnat výstup napříč architekturami a OS. Následující tabulka ukazuje velikost výstupu pro Windows v architektuře x64, macOS v architektuře ARM (označení arch64) a Linux v architekturách x64 a ARM. Pro vytvoření výstupů na základě JIT byl použit příkaz \emph{dotnet publish -c Release-AOT -r <target\_OS>-<target\_architecture>}. V příkazu \emph{<target\_OS>} a \emph{<target\_architecture>} představuje vybraný operační systém a architekturu.
 
-\tab{Velikost výstupu programu AOT služeb pro různé OS}{tab:priklad}{1}{|l|c|c|c|r|}{
+\tab{Velikost výstupu programu AOT služeb pro různé OS}{tab:priklad}{1}{|l|c|c|c|c|}{
   \hline
     Služba & win-x64 (MB) & osx-arch64 (MB) & linux-x64 (MB) & linux-arch64 (MB) \\ \hline \hline
   \emph{SRS} & 17.2 & 21.4 & 19.4 & 20.2 \\ \hline
@@ -89,7 +89,7 @@ Sestavení obrazu je závislé na přípravu prostředí, vyhodnocení a stažen
 
 \tab{Velikost obrazu služeb}{tab:priklad}{0.65}{|l|c|c|r|}{
   \hline
-    & JIT (MB) & AOT (MB) & AOT \% zmenšení \\ \hline
+   Služba & JIT (MB) & AOT (MB) & AOT \% zmenšení \\ \hline
   \emph{SRS} & 121.97 & 31.41 & 74.3 \\ \hline
   \emph{FUS} & 134.36 & 38.32 & 71.5 \\ \hline
   \emph{BPS} & 122.39 & 31.40 & 74.3 \\ \hline
@@ -119,11 +119,11 @@ První scénář se zabíral jednoduchou funkcionalitou dotazu na healthcheck en
   \emph{EPS-JIT} & 6.63 & 0.686 & 35.3 & 3.09 \\ \hline
 }
 
-Testování přineslo rozdílné výkonostní výsledky mezi JIT a AOT kompilací. Dle předpokladu AOT služby využívaly méně času CPU. Paměťová stopa však u nich byla větší. Konečně, AOT služby byly schopné v průměru rychleji odpovídat. Výsledek poukazuje na dodatečnou režii od CLR na CPU a IO v případě JIT služeb. Větší využití paměti u AOT služeb poukazuje na režii vygenerovaných typů a přítomnost dalších závislotí v programu načteného v paměti. Čistá rychlost zpracování požadavku a odpovědi není v mnoha případech kritickým faktorem. Avšak v případě velkého množství požadavků, může být rozdíl v řádech milisekund zásadní.
+Testování přineslo rozdílné výkonostní výsledky mezi JIT a AOT kompilací. Dle předpokladu AOT služby využívaly méně času CPU. Paměťová stopa však u nich byla větší. Konečně, AOT služby byly schopné v průměru rychleji odpovídat. Výsledek poukazuje na dodatečnou režii od CLR na CPU v případě JIT služeb. Větší využití paměti u AOT služeb poukazuje na režii vygenerovaných typů a přítomnost dalších závislotí v programu načteného v paměti. Rozdíl využití IO je s ohledem na dobu využití a počet požadavků zanedbatelný. Čistá rychlost zpracování požadavku ukázala na rychlejší zpracování AOT službami. I když tato hodnota není v mnoha případech kritickým faktorem. Avšak v případě velkého množství využitých služeb pro splnění požadavku, může být rozdíl v řádech milisekund znatelný.
 
 \n{3}{Scénář 2 - Přístup k perzistenci}
 
-Scénář se zabýval výkonností přístupu k persistenci, respektive zachystením reálného scénáře, kdy jsou data získávána a ukládána do databáze. Faktorem byla jak samotná rychlost služby v ohledu komunikace a serializace dat, tak rychlost zpracování požadavku databází. Ve výsledku je vidět výrazný rozdíl ve využití zdrojů mezi AOT a JIT verzi služby, kdy první jmenovaná je výrazně efektivnější.
+Scénář se zabýval výkonností přístupu k persistenci, respektive zachystením reálného scénáře, kdy jsou data získávána a ukládána do databáze. Faktorem byla jak samotná rychlost služby v ohledu komunikace a serializace dat, tak rychlost zpracování požadavku databází. Následující tabulka zobrazuje průměrné využití zdrojů a dobu odpovědi služby FUS v testovacím scénáři 2 pro oba kompilační režimy.
 
 \tab{Průměrné využití zdrojů službou FUS a doba odpovědi stažení a nahrání souboru}{tab:service_metrics}{1.0}{|l|r|r|r|r|}{
   \hline
@@ -132,8 +132,7 @@ Scénář se zabýval výkonností přístupu k persistenci, respektive zachyste
   \emph{FUS-JIT} & 16.7 & 2.000 & 60.9 & 8.05 \\ \hline
 }
 
-V případě doby odpovědi služby je velmi znatelný rozdíl služby kompilované JIT kdy její hodnota činila 93.6 ms. Následkem JIT kompilace potřebného kódu při prvním volání byla tato doba výrazně vyšší než v dalších voláních. Oproti tomu AOT varianta služby měla i při prvním volání odpoveď srovnatelnou s průměrným voláním a to 11.8 ms.
-
+Ve výsledku je vidět výrazný rozdíl ve využití zdrojů mezi AOT a JIT verzi služby. Doba zpracování a vý TODO THIS FIX, kdy první jmenovaná je výrazně efektivnější. V případě doby odpovědi služby je velmi znatelný rozdíl služby kompilované JIT kdy její hodnota činila 93.6 ms. Následkem JIT kompilace potřebného kódu při prvním volání byla tato doba výrazně vyšší než v dalších voláních. Oproti tomu AOT varianta služby měla i při prvním volání odpoveď srovnatelnou s průměrným voláním a to 11.8 ms.
 
 \tab{Průměrné využití GC službou FUS}{tab:service_metrics}{1.0}{|l|r|r|r|}{
   \hline
@@ -146,7 +145,7 @@ Přítomnost vygenerovaných typů a funkcionality v nativní AOT verzi služby 
 
 \n{3}{Scénář 3 - Výpočetní zátěž}
 
-Za účelem zjištění výkonnosti služeb, jejich potencionálně odlišné využití systémového API byl otestován scénář výpočetní zátěže. Na jednotlivé služby byly vysílány požadavky na výpočet 40-tého Fibonacciho čísla rekurzivní metodou. Výsledky testování ukázaly že při náročné výpočetní zátěži žádná z kompilací nebyla výrazně výkonnější.
+Za účelem zjištění výkonnosti služeb, jejich potencionálně odlišné využití systémového API byl otestován scénář výpočetní zátěže. Na jednotlivé služby byly vysílány požadavky na výpočet 40-tého Fibonacciho čísla rekurzivní metodou. Následující tabulka zobrazuje průměrné využití zdrojů a dobu odpovědi služeb v testovacím scénáři 3 pro oba kompilační režimy.
 
 \tab{Průměrné využití zdrojů službou BPS a doba odpovědi výpočtu Fibonacciho čísla}{tab:service_metrics}{1.0}{|l|r|r|r|r|}{
   \hline
@@ -155,8 +154,7 @@ Za účelem zjištění výkonnosti služeb, jejich potencionálně odlišné vy
   \emph{BPS-JIT} & 48.8 & 1.164 & 44.8 & 6.07  \\ \hline
 }
 
-Dle očekávání z předchozích výsledků i zde AOT varianta služby si vyžádala více běhu GC a alokované paměti. Na výsledek to však nemělo vliv.
-
+Výsledky testování ukázaly že při náročné výpočetní zátěži žádná z kompilací nebyla výrazně výkonnější. Oproti dřívějším situacím využila AOT kompilovaná služba více času CPU než JIT kompilovaná. Tato skutečnost naznačuje, že výkonnostní výhody AOT služeb jsou při větší zátěži srovnány. V ostatních měřených hodnotách byly rozdíly zanedbatelné. 
 
 \tab{Průměrné využití GC službou BPS}{tab:service_metrics}{1.0}{|l|r|r|r|}{
   \hline
@@ -165,9 +163,11 @@ Dle očekávání z předchozích výsledků i zde AOT varianta služby si vyž�
   \emph{BPS-JIT} & 9.1 & 3.1 & 8.5  \\ \hline
 }
 
+Dle očekávání z dřívejších výsledků i zde AOT varianta služby si vyžádala více běhu GC a alokované paměti. Na výslednou rychlost odpovědi služby to však nemělo vliv.
+
 \n{3}{Scénář 4 - Vzájemná komunikace služeb}
 
-Komplexnější situace pro aplikaci byla simulována ve čtvrtém scénáři. Zde na základě požadavku na EPS byla vyvolána událost do RabbitMQ, načež byla zpracována službou BPS. Ta na jejím základě stáhla patřičný záznam pomocí RPC z FUS a provedla simulaci zpracování dat výpočtem Fibonacciho čísla. Situace simulovala kombinaci synchronní a asynchronní komunikace mezi službami doplněnou o výpočetní zátěž. Výsledky přiblížily služby v obou kompilačních režimech, vyjma využití CPU. Bylo náhlednuto na situaci bližší reálnému nasazení, kdy čistě provozní výkonnostní rozdíly služeb v kompilacích AOT a JIT nehrají zásadní roli. 
+Komplexnější situace pro aplikaci byla simulována ve čtvrtém scénáři. Situace simulovala kombinaci synchronní a asynchronní komunikace mezi službami, přístup k perzistenci a výpočetní zátěž. 
 
 \tab{Průměrné využití zdrojů službami dle nasazení v kompilačních režimu}{tab:service_metrics}{1.0}{|l|r|r|r|}{
   \hline
@@ -176,9 +176,11 @@ Komplexnější situace pro aplikaci byla simulována ve čtvrtém scénáři. Z
   \emph{JIT} & 24.3 & 1.634 & 36.7 \\ \hline
 }
 
+Výsledky ukázaly očekávané chování dle předchozích výsledků a hypotéz.
+
 \n{3}{Scénář 5 - Rychlost odpovědi služby po startu}
 
-Simulaci serveless nasazení byla vyvolána v tomto scénáři. Jednotlivé varianty služby SRS byly v rámci testu zpuštěny, kontrolovány než se dostaly do stavu \emph{healthy} a následně nad nimi zavolán dotaz pro získání generovaných dat. Výsledky ukázaly, že služba kompilovaná nativním AOT způsobem je mnohem rychleji dostupná a odpovídá na požadavky dříve, než služba kompilovaná pro .NET runtime. Oproti propagovaným zrychlení v dokumentaci .NET však nebylo dosaženo tak výrazného zrychlení s ohledem na režii kontejneru.
+V tomto scénáři byla vyvolána simulace serveless nasazení. Jednotlivé varianty služby SRS byly v rámci testu spuštěny, kontrolovány než se dostaly do stavu \emph{healthy} a následně nad nimi zavolán dotaz pro získání generovaných dat. Tabulka níže zobrazuje průměrné využití paměti a dobu odpovědi služby SRS v testovacím scénáři 5 pro oba kompilační režimy. 
 
 \tab{Průměrné využití zdrojů službou SRS a doba odpovědi včetně startu služby}{tab:service_metrics}{1.0}{|l|r|r|r|r|}{
   \hline
@@ -187,9 +189,11 @@ Simulaci serveless nasazení byla vyvolána v tomto scénáři. Jednotlivé vari
   \emph{SRS-JIT} & 1.40 & 8.46 \\ \hline
 }
 
+Výsledky ukázaly, že služba kompilovaná nativním AOT způsobem je rychleji dostupná a odpovídá na požadavky dříve, než služba kompilovaná pro .NET runtime. Oproti propagovaným zrychlení v dokumentaci .NET však nebylo dosaženo tak výrazného rozdílu. To je dáno režií kontejneru, tedy jeho OS. Výsledek je tedy závislý na konkrétním prostředí, ve kterém je služba spuštěna.
+
 \n{2}{Závěr analýzy}
 
-Na základě výsledků vývoje, výstupu a testování služeb lze odpovědět na definované hypotézy následujícím způsobem:
+Na základě výsledků vývoje, výstupu a testování služeb lze zhodnoti definované hypotézy následujícím způsobem:
 
 \begin{itemize}
   \item \textbf{Hypotéza 1} - Hypotéza, že vývoj služeb s jak AOT, tak JIT kompilací je v rámci podporované funkcionality systémových knihoven a ASP.NET možný s podobným API se ukázal jako ne zcela pravdivý. Při vývoji nastaly komplikace se serializací konfigurace, na které bylo nutné reagovat využitím odlišného API. Zároveň tento způsob serializace nebyl kompilátorem označen jako potencionálně problematický. Další problémy nastaly s využitím Entity Framework. Tento ORM využívá pro provádění operací nad databází tzv. tracking, který zaznamená změny nad aplikačními objekty a podle nich tvoří výsledné databázové operace. Vypnutím trackingu bylo umožněno se na datové entity dotázat a aktualizovat je. Operace vložení nové entity však bez trackingu nebyla možná. Pro knihovny 3. stran lze obecně říci, že podpora AOT kompilace není vždy úplně zřejmá a i v situacích kdy AOT varování jsou implementovány, lze očekávat chybné chování.

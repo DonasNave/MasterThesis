@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.8)  6 MAY 2024 20:31
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.8)  6 MAY 2024 21:50
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1524,7 +1524,7 @@ Package pdftex.def Info: graphics/diagrams/stack-scenario5.png  used on input li
 File: graphics/images/code-visual-sample.png Graphic file (type png)
 <use graphics/images/code-visual-sample.png>
 Package pdftex.def Info: graphics/images/code-visual-sample.png  used on input line 14.
-(pdftex.def)             Requested size: 441.01772pt x 247.00613pt.
+(pdftex.def)             Requested size: 308.71104pt x 172.90375pt.
  [72
 
 
@@ -1544,12 +1544,12 @@ Overfull \hbox (1.48775pt too wide) in paragraph at lines 38--39
 \T1/cmr/m/n/12 Pro zjed-no-du-²ení pro-cesu vý-voje a vy-u-ºití exis-tu-jící funk-ci-o-na-lity byly vy-u-ºity knihovny
  []
 
-[74]
+[74] [75] [76]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[75] [76] [77]
-Overfull \hbox (5.18494pt too wide) in paragraph at lines 143--143
+[77]
+Overfull \hbox (5.18494pt too wide) in paragraph at lines 142--142
  [][] 
  []
 
@@ -1557,7 +1557,7 @@ Overfull \hbox (5.18494pt too wide) in paragraph at lines 143--143
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [78]
-Overfull \hbox (5.18494pt too wide) in paragraph at lines 166--166
+Overfull \hbox (5.18494pt too wide) in paragraph at lines 164--164
  [][] 
  []
 
@@ -1733,13 +1733,13 @@ Package rerunfilecheck Info: File `prace.out' has not changed.
 Here is how much of TeX's memory you used:
  36137 strings out of 476025
  783855 string characters out of 5790017
- 1869388 words of memory out of 5000000
+ 1868388 words of memory out of 5000000
  55639 multiletter control sequences out of 15000+600000
  531050 words of font info for 65 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  103i,17n,106p,1633b,607s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbi1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
-Output written on prace.pdf (97 pages, 3838793 bytes).
+Output written on prace.pdf (97 pages, 3839710 bytes).
 PDF statistics:
  1372 PDF objects out of 1440 (max. 8388607)
  307 named destinations out of 1000 (max. 500000)

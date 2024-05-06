@@ -102,7 +102,7 @@
 \contentsline {section}{\numberline {6}Analýza aplikace}{72}{section.6}%
 \contentsline {subsection}{\numberline {6.1}Architektura}{72}{subsection.6.1}%
 \contentsline {subsection}{\numberline {6.2}Analýza vývojového proces}{72}{subsection.6.2}%
-\contentsline {subsubsection}{\numberline {6.2.1}Vývojové prostředí}{73}{subsubsection.6.2.1}%
+\contentsline {subsubsection}{\numberline {6.2.1}Vývojové prostředí}{72}{subsubsection.6.2.1}%
 \contentsline {subsubsection}{\numberline {6.2.2}JIT}{74}{subsubsection.6.2.2}%
 \contentsline {subsubsection}{\numberline {6.2.3}AOT}{74}{subsubsection.6.2.3}%
 \contentsline {subsubsection}{\numberline {6.2.4}Knihovny třetích stran}{74}{subsubsection.6.2.4}%
