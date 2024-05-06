@@ -116,7 +116,7 @@
 \contentsline {subsection}{\numberline {6.5}Závěr analýzy}{79}{subsection.6.5}%
 \contentsline {section}{Závěr}{81}{section*.41}%
 \contentsline {section}{Seznam použité literatury}{83}{section*.43}%
-\contentsline {section}{Seznam použitých symbolů a zkratek}{86}{section*.45}%
-\contentsline {section}{Seznam obrázků}{88}{section*.47}%
-\contentsline {section}{Seznam tabulek}{89}{section*.48}%
-\contentsline {section}{Seznam příloh}{90}{section*.49}%
+\contentsline {section}{Seznam použitých symbolů a zkratek}{87}{section*.45}%
+\contentsline {section}{Seznam obrázků}{89}{section*.47}%
+\contentsline {section}{Seznam tabulek}{90}{section*.48}%
+\contentsline {section}{Seznam příloh}{91}{section*.49}%
