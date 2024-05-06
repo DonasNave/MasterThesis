@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.8)  7 MAY 2024 00:34
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.8)  7 MAY 2024 00:47
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1392,7 +1392,7 @@ Overfull \hbox (5.85838pt too wide) in paragraph at lines 135--136
  []
 
 [21] [22]
-Overfull \hbox (30.93066pt too wide) in paragraph at lines 169--170
+Overfull \hbox (30.93066pt too wide) in paragraph at lines 168--169
 []\T1/cmr/bx/n/12 Bez ge-ne-ro-vání kódu za b¥hu \T1/cmr/m/n/12 - Není moºno po-u-ºít kni-hovnu Sys-tem.Reflection.Emit
  []
 
@@ -1448,32 +1448,19 @@ Package pdftex.def Info: graphics/images/folder-structure-service.png  used on i
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[48 <./graphics/images/folder-structure-app.png>] [49 <./graphics/images/folder-structure-service.png>]
-Overfull \hbox (11.99777pt too wide) in paragraph at lines 115--116
-\T1/cmr/m/n/12 gRPC. Kon-krétn¥ jsou vy-u-ºity \T1/cmr/m/it/12 Grpc.AspNetCore \T1/cmr/m/n/12 v p°í-pad¥ ser-veru, \T1/cmr/m/it/12 Grpc.Net.Client
- []
-
-[50]
-Overfull \hbox (62.79654pt too wide) in paragraph at lines 129--130
-\T1/cmr/m/n/12 v²emi sluº-bami jsou im-ple-men-to-vány ex-tension me-tody v knihovn¥ \T1/cmr/m/it/12 DTA.Extensions.Common\T1/cmr/m/n/12 .
- []
-
-[51] [52]
+[48 <./graphics/images/folder-structure-app.png>] [49 <./graphics/images/folder-structure-service.png>] [50] [51] [52]
 <graphics/diagrams/services-architecture.png, id=921, 768.8725pt x 733.74126pt>
 File: graphics/diagrams/services-architecture.png Graphic file (type png)
 <use graphics/diagrams/services-architecture.png>
 Package pdftex.def Info: graphics/diagrams/services-architecture.png  used on input line 182.
 (pdftex.def)             Requested size: 330.76328pt x 315.65933pt.
  [53 <./graphics/diagrams/services-architecture.png>] [54] [55]
-Overfull \hbox (34.05782pt too wide) in paragraph at lines 234--235
-\T1/cmr/m/n/12 Kaºdá sluºba je vy-tvo-°ena jako ob-raz s ná-zvem \T1/cmr/m/it/12 dta-{service-name}:{compilatioinMode}-
- []
-
 <graphics/images/dta.drawio.png, id=937, 892.33376pt x 582.175pt>
 File: graphics/images/dta.drawio.png Graphic file (type png)
 <use graphics/images/dta.drawio.png>
 Package pdftex.def Info: graphics/images/dta.drawio.png  used on input line 241.
 (pdftex.def)             Requested size: 374.86774pt x 244.57402pt.
+
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
@@ -1484,7 +1471,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 File: graphics/diagrams/stack-scenario1.png Graphic file (type png)
 <use graphics/diagrams/stack-scenario1.png>
 Package pdftex.def Info: graphics/diagrams/stack-scenario1.png  used on input line 79.
-(pdftex.def)             Requested size: 352.8155pt x 432.21959pt.
+(pdftex.def)             Requested size: 330.76328pt x 405.20865pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -1494,7 +1481,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 File: graphics/diagrams/stack-scenario2.png Graphic file (type png)
 <use graphics/diagrams/stack-scenario2.png>
 Package pdftex.def Info: graphics/diagrams/stack-scenario2.png  used on input line 99.
-(pdftex.def)             Requested size: 396.91324pt x 297.11386pt.
+(pdftex.def)             Requested size: 374.86774pt x 280.61697pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -1505,7 +1492,11 @@ File: graphics/diagrams/stack-scenario3.png Graphic file (type png)
 <use graphics/diagrams/stack-scenario3.png>
 Package pdftex.def Info: graphics/diagrams/stack-scenario3.png  used on input line 121.
 (pdftex.def)             Requested size: 396.91324pt x 206.12923pt.
- [65 <./graphics/diagrams/stack-scenario2.png>]
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[65 <./graphics/diagrams/stack-scenario2.png>]
 <graphics/diagrams/stack-scenario4.png, id=993, 1485.55pt x 720.6925pt>
 File: graphics/diagrams/stack-scenario4.png Graphic file (type png)
 <use graphics/diagrams/stack-scenario4.png>
@@ -1520,7 +1511,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 File: graphics/diagrams/stack-scenario5.png Graphic file (type png)
 <use graphics/diagrams/stack-scenario5.png>
 Package pdftex.def Info: graphics/diagrams/stack-scenario5.png  used on input line 170.
-(pdftex.def)             Requested size: 396.91324pt x 331.68562pt.
+(pdftex.def)             Requested size: 352.8155pt x 294.83772pt.
  [68 <./graphics/diagrams/stack-scenario5.png>] [69]) [70] [71
 
 
@@ -1733,7 +1724,7 @@ File: se-utf8.def 2019/11/29 v1.12 stringenc: UTF-8
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `prace.out' has not changed.
-(rerunfilecheck)             Checksum: ABF4A5638EE92A89F6518AC9D96CE87A;18010.
+(rerunfilecheck)             Checksum: DB45051ECCA8A3C4D7728EE34A3DECE3;18015.
  ) 
 Here is how much of TeX's memory you used:
  36131 strings out of 476025
@@ -1744,7 +1735,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  103i,17n,106p,1633b,607s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbi1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
-Output written on prace.pdf (97 pages, 3837694 bytes).
+Output written on prace.pdf (97 pages, 3837052 bytes).
 PDF statistics:
  1357 PDF objects out of 1440 (max. 8388607)
  304 named destinations out of 1000 (max. 500000)
