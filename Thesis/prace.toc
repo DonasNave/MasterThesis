@@ -44,8 +44,6 @@
 \contentsline {subsection}{\numberline {3.3}Monitorovací nástroje}{38}{subsection.3.3}%
 \contentsline {subsection}{\numberline {3.4}Sběr dat}{38}{subsection.3.4}%
 \contentsline {subsection}{\numberline {3.5}Analýza a interpretace}{39}{subsection.3.5}%
-\contentsline {subsubsection}{\numberline {3.5.1}Vizualizace dat}{39}{subsubsection.3.5.1}%
-\contentsline {subsubsection}{\numberline {3.5.2}Využití dat pro informované rozhodování}{39}{subsubsection.3.5.2}%
 \contentsline {subsection}{\numberline {3.6}Implementace monitorování}{40}{subsection.3.6}%
 \contentsline {section}{\texorpdfstring {\makebox [0.85cm]{II\hfill } Praktická část}{II\ Praktická část}}{42}{part.2}%
 \contentsline {section}{\numberline {4}Testovací aplikace}{43}{section.4}%
