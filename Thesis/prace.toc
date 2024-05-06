@@ -18,10 +18,8 @@
 \contentsline {subsubsection}{\numberline {1.6.3}Kompilace pro CLR}{20}{subsubsection.1.6.3}%
 \contentsline {subsubsection}{\numberline {1.6.4}Kompilace do nativního kódu}{22}{subsubsection.1.6.4}%
 \contentsline {subsection}{\numberline {1.7}Běh kódu}{23}{subsection.1.7}%
-\contentsline {subsubsection}{\numberline {1.7.1}CLR}{24}{subsubsection.1.7.1}%
-\contentsline {subsubsection}{\numberline {1.7.2}Nativní kód}{24}{subsubsection.1.7.2}%
-\contentsline {subsection}{\numberline {1.8}Tvorba programu v .NET}{25}{subsection.1.8}%
-\contentsline {subsubsection}{\numberline {1.8.1}Obecný postup}{25}{subsubsection.1.8.1}%
+\contentsline {subsection}{\numberline {1.8}Tvorba programu v .NET}{24}{subsection.1.8}%
+\contentsline {subsubsection}{\numberline {1.8.1}Obecný postup}{24}{subsubsection.1.8.1}%
 \contentsline {subsubsection}{\numberline {1.8.2}Tvorba nativního programu}{25}{subsubsection.1.8.2}%
 \contentsline {subsubsection}{\numberline {1.8.3}Přehled podpory}{26}{subsubsection.1.8.3}%
 \contentsline {section}{\numberline {2}Microservice architektura}{27}{section.2}%
