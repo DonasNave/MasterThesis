@@ -132,7 +132,7 @@ Scénář se zabýval výkonností přístupu k persistenci, respektive zachyste
   \emph{FUS-JIT} & 16.7 & 2.000 & 60.9 & 8.05 \\ \hline
 }
 
-Ve výsledku je vidět výrazný rozdíl ve využití zdrojů mezi AOT a JIT verzi služby. Doba zpracování a vý TODO THIS FIX, kdy první jmenovaná je výrazně efektivnější. V případě doby odpovědi služby je velmi znatelný rozdíl služby kompilované JIT kdy její hodnota činila 93.6 ms. Následkem JIT kompilace potřebného kódu při prvním volání byla tato doba výrazně vyšší než v dalších voláních. Oproti tomu AOT varianta služby měla i při prvním volání odpoveď srovnatelnou s průměrným voláním a to 11.8 ms.
+Ve výsledku je vidět výrazný rozdíl ve využití zdrojů mezi AOT a JIT verzi služby. Oproti předchozímu měření je AOT paměťově efektivnější. Poukazuje na méně efektivní datovou manipulaci při serializaci v přístupu k persistenci, ale také při serializaci a kompresi souboru na rozhrání REST API. V případě doby odpovědi služby je velmi znatelný rozdíl služby kompilované JIT kdy její hodnota činila 93.6 ms. Následkem JIT kompilace potřebného kódu při prvním volání byla tato doba výrazně vyšší než v dalších voláních. Oproti tomu AOT varianta služby měla i při prvním volání odpoveď srovnatelnou s průměrným voláním a to 11.8 ms.
 
 \tab{Průměrné využití GC službou FUS}{tab:service_metrics}{1.0}{|l|r|r|r|}{
   \hline
@@ -176,7 +176,7 @@ Komplexnější situace pro aplikaci byla simulována ve čtvrtém scénáři. S
   \emph{JIT} & 24.3 & 1.634 & 36.7 \\ \hline
 }
 
-Výsledky ukázaly očekávané chování dle předchozích výsledků a hypotéz.
+Výsledky ukázaly očekávané chování dle předchozích výsledků a hypotéz. Zpracování požadavku skrze více služeb je obdobně náročné pro oba kompilační režimy. Samotné využití zdrojů neposkytuje opověď pro vhodnější kompilační režim pro množinu minimalistkých služeb zpracovávajících požadavek v rámci aplikace.
 
 \n{3}{Scénář 5 - Rychlost odpovědi služby po startu}
 
@@ -189,7 +189,7 @@ V tomto scénáři byla vyvolána simulace serveless nasazení. Jednotlivé vari
   \emph{SRS-JIT} & 1.40 & 8.46 \\ \hline
 }
 
-Výsledky ukázaly, že služba kompilovaná nativním AOT způsobem je rychleji dostupná a odpovídá na požadavky dříve, než služba kompilovaná pro .NET runtime. Oproti propagovaným zrychlení v dokumentaci .NET však nebylo dosaženo tak výrazného rozdílu. To je dáno režií kontejneru, tedy jeho OS. Výsledek je tedy závislý na konkrétním prostředí, ve kterém je služba spuštěna.
+Výsledky ukázaly, že služba kompilovaná nativním AOT způsobem je rychleji dostupná a odpovídá na požadavky dříve, než služba kompilovaná pro .NET runtime. Oproti propagovaným zrychlení v dokumentaci .NET však nebylo dosaženo tak výrazného rozdílu. To je dáno režií kontejneru, tedy jeho OS. Rychlost odpovědi je tedy velkým poměřem závislá na konkrétním prostředí, ve kterém je služba spuštěna a scénáři nasazení.
 
 \n{2}{Závěr analýzy}
 

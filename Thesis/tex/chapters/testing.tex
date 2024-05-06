@@ -9,7 +9,7 @@ Testování scénářů je klíčovou součástí testování výkonu mikrosluž
 
 \n{2}{Metodika testování}
 
-Cílem práce je prouzkomat dopady kompilace AOT a JIT na výkon. Pokouší se určit, která strategie kompilace nabízí lepší výkon při různémé zatížení a podmínkách. Metriky výkonu jsou shromážděny z dat o výkonu systému, doby odezvy služeb a využití zdrojů během standardizovaných testů.
+Jedním z cílů práce je prouzkomat dopady kompilace AOT a JIT na výkon. Pokouší se určit, která strategie kompilace nabízí lepší výkon při různém zatížení a podmínkách. Metriky výkonu jsou shromážděny z dat o výkonu systému, doby odezvy služeb a využití zdrojů během standardizovaných testů.
 
 Experimentální nastavení zahruje dvě hlavní součásti, řízení testovacího prostředí a testovací služby. Tyto služby jsou sestaveny ze stejné (až na vybranné nekompatibilní API) kódové báze v kompilačních režimech AOT i JIT. Testovací prostředí bylo standardizováno ve všech experimentech, aby bylo zajištěno, že jakékoli pozorované rozdíly ve výkonu lze připsat výhradně metodám kompilace a nikoli variantách hardwaru nebo softwaru.
 
@@ -17,7 +17,7 @@ Testy budou prováděny na identických hardwarových nastaveních s následují
 
 \begin{itemize}
     \item \textbf{Operační systém}: macOS Sonoma 14.4.1
-    \item \textbf{Procesor}: Apple M1 8-core CPU (Arm64)
+    \item \textbf{Procesor}: Apple M1 8-core CPU (ARM 64bit)
     \item \textbf{Paměť}: 8 GB LPDDR4X
 \end{itemize}
 
@@ -116,8 +116,7 @@ Cílem tohoto scénáře je otestovat schopnost poradit si s vysokým množství
 
 Cílem tohoto scénáře je otestovat schopnost mikroslužeb v jednotlivých kompilacích zpracovat náročnější operace. Scénář se zaměřuje na samotnou podstatu přístupu k vnitřnímu systémového API, efektivitě jeho využití a další režii, která by mohla být odlišná mezi JIT a AOT kompilací.
 
-
-Předmětem scénář je výpočet 40-tého čísla Fibonacciho posloupnosti rekurzivní metodou. Algoritmus je implementován v rámci služby a volán zvenčí pomocí Rest API. Scénář je vytvořen tak, aby simuloval zátěž na službu a prozkoumal tak potencionální výkonnostní rozdíly v rámci přístupu k systémovému API a vyžížení zdrojů.
+Předmětem scénáře je výpočet 40-tého čísla Fibonacciho posloupnosti rekurzivní metodou. Algoritmus je implementován v rámci služby a volán zvenčí pomocí Rest API. Scénář je vytvořen tak, aby simuloval zátěž na službu a prozkoumal tak potencionální výkonnostní rozdíly v rámci přístupu k systémovému API a vyžížení zdrojů.
 
 \obr{Diagram scénáře 3}{fig:logo}{0.9}{graphics/diagrams/stack-scenario3.png}
 
@@ -145,7 +144,7 @@ Tento scénář je zaměřen na rychlost a zátěž celkového systému při spl
 
 \begin{itemize}
     \item \textbf{FUS} - Služba hraje roli serveru, na něž se dotáže klient gRPC voláním. Následně přistupuje k perzistenci pro získání dat k splnění volání.
-    \item \textbf{BPS} - Poslouchá nad předem definovanou frontou a vyčkává na zprávu pro zpracování. V momentu přijetí zprávy, zpracovává vyvolanou událost a získává data ze vzdáleného volání z FUS.
+    \item \textbf{BPS} - Poslouchá nad předem definovanou frontou a vyčkává na zprávu pro zpracování. V momentu přijetí zprávy, zpracovává vyvolanou událost a získává data pomocí vzdáleného volání procedury z FUS.
     \item \textbf{EPS} - Na základě přijatého volání přes REST API, zasílá služba EPS zprávu do předem definované fronty, na niž naslouchá BPS.
 \end{itemize}
 

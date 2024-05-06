@@ -10,7 +10,7 @@ Při vývoji softwaru je možné aplikovat různé architektury a návrhové vzo
 
 Monolitická architektura je jednoduchá na vývoj, nasazení a testování. Při správném návrhu může poskytovat i jednoduchou možnost škálování, kdy aplikace funguje ve více identických instancích. \cite{Richardson2018} Jelikož i při logickém oddělení funkcionality je celá aplikace spjata pevnými vazbami, jakýkoliv zásah do jedné části aplikace může mít nepředvídatelné důsledky na ostatní části. Jednotná kódová báze zase může představovat limitující faktor pro rychlost vývoje, automatizace testovaní a nasazování. Samotné škálování může být vysoce neefiktivní a limitující, pokud je potřeba škálovat pouze určité části aplikace. \cite{Richardson2018}
 
-Fundamentálně opačná je architektura microservice. Ta je založena na principu rozdělení aplikace do samostatných služeb. Každá z těchto služeb je zodpovědná za určitou část funkcionality aplikace. Služby jsou navzájem nezávislé a komunikují mezi sebou pomocí definovaných rozhraní. \cite{Richardson2018} Tím je zajištěno, že každá služba může být vyvíjena, testována, nasazována a škálována nezávisle na ostatních. Tato architektura umožňuje vývojářům pracovat na menších a jednodušších částech aplikace, což zvyšuje produktivitu a umožňuje rychlejší iterace. Díky nezávislosti služeb je také možné dosáhnout vyšší odolnosti a škálovatelnosti aplikace. 
+Naproti tomu stojí architektura microservice. Ta je založena na principu rozdělení aplikace do samostatných služeb. Každá z těchto služeb je zodpovědná za určitou část funkcionality aplikace. Služby jsou navzájem nezávislé a komunikují mezi sebou pomocí definovaných rozhraní. \cite{Richardson2018} Tím je zajištěno, že každá služba může být vyvíjena, testována, nasazována a škálována nezávisle na ostatních. Tato architektura umožňuje vývojářům pracovat na menších a jednodušších částech aplikace, což zvyšuje produktivitu a umožňuje rychlejší iterace. Díky nezávislosti služeb je také možné dosáhnout vyšší odolnosti a škálovatelnosti aplikace. 
 
 \obr{Microservice architektura}{fig:microservicearch}{0.8}{graphics/images/microservices.drawio.png}
 
@@ -18,7 +18,7 @@ Fundamentálně opačná je architektura microservice. Ta je založena na princi
 
 Původ microservice architektury nelze přesně definovat, důležitý moment však nastal v roce 2011, kdy Martin Fowler publikoval článek \textit{Microservices} na svém blogu spolu s Jamesem Lewisem. Článek je k nalezení na adrese \url{https://martinfowler.com/articles/microservices.html}. V tomto článku je popsán způsob jakým lze tuto architekturu využít, její výhody a nevýhody. Dalším momentem, kdy microservice architektura nabyla popularity, bylo vydání knihy \textit{Building Microservices} od Sama Newmana v roce 2015. Tato kniha popisuje způsob, jakým je možné využít microservice architekturu v praxi.
 
-Opravdový přelom přišel postupně, nástupem a popularizací virtualizace a kontejnerizace v průběhu let 2013 až 2015. Tímto bylo umožněno vytvářet a spouštět mikroslužby v izolovaných prostředích. Tímto bylo umožněno vytvářet mikroslužby, které jsou nezávislé na operačním systému a hardwaru, na kterém jsou spouštěny. Nejdůležitější v tomto ohledu je nepochybně projekt Docker, který byl vydán v roce 2013. Díky Dockeru bylo možno jednoduše definovat, vytvářet a spouštět kontejnerizované aplikace. 
+Opravdový přelom přišel postupně, nástupem a popularizací virtualizace a kontejnerizace v průběhu let 2013 až 2015. Tímto bylo umožněno vytvářet a spouštět mikroslužby v izolovaných prostředích. Tímto bylo umožněno vytvářet mikroslužby, které jsou nezávislé na operačním systému a hardwaru, na kterém jsou spouštěny. Nejdůležitější v tomto ohledu je nepochybně projekt Docker, který byl vydán v roce 2013. \cite{dockerdocs} Díky Dockeru bylo možno jednoduše definovat, vytvářet a spouštět kontejnerizované aplikace. 
 
 \n{2}{Základní principy}
 
@@ -35,7 +35,7 @@ Microservice ahitektura stojí na několika základních principech. Tyto princi
 
 \n{2}{Komponenty}
 
-Architektura mikroslužeb rozkládá aplikace do menších, oddělených služeb, z nichž každá plní samostatnou funkci. Pro efektivní správu těchto služeb, zejména v distribuovaném prostředí, se používá několik základních komponent. Tato část se zabývá klíčovými architektonickými komponentami, které usnadňují robustní provoz, komunikaci a škálovatelnost mikroslužeb. \cite{Williams2023}
+Architektura mikroslužeb rozkládá aplikace do menších, oddělených služeb, z nichž každá plní samostatnou funkci. \cite{Williams2023} Pro efektivní správu těchto služeb, zejména v distribuovaném prostředí, se používá několik základních komponent. Tato část se zabývá klíčovými architektonickými komponentami, které usnadňují robustní provoz, komunikaci a škálovatelnost mikroslužeb. 
 
 \n{3}{Obecné komponenty}
 

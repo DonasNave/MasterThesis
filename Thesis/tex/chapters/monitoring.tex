@@ -5,7 +5,7 @@
 
 \n{1}{Monitorování aplikace}
 
-Monitorování aplikace je proces získávání zpětné vazby. Je klíčovým aspektem vývoje a provozu software. Umožňuje sledovat stav, výkon a celkové chování aplikace. Zahrnuje shromažďování, analýzu a interpretaci různých typů dat a informací, které zajišťují hladký a efektivní chod aplikací. Umožňuje rychle identifikovat a řešit problémy vzniklé za provozu. \cite{Riedesel2021}
+Monitorování aplikace je proces získávání zpětné vazby. Představuje klíčový aspekt vývoje a provozu software. \cite{Riedesel2021} Umožňuje sledovat stav, výkon a celkové chování aplikace. Zahrnuje shromažďování, analýzu a interpretaci různých typů dat a informací, které zajišťují hladký a efektivní chod aplikací. Umožňuje rychle identifikovat a řešit problémy vzniklé za provozu. 
 
 \n{2}{Cíle monitorování}
 
@@ -21,11 +21,11 @@ Logy jsou chronologické záznamy o událostech, ke kterým dochází v rámci a
 
 \n{3}{Traces}
 
-Traces trasují cestu požadavku, při průchodu různými součástmi distribuovaného systému. Každá trace se skládá z jednoho nebo více segmentů, které zaznamenávají cestu a latenci požadavku napříč různými službami a zdroji. Sledování je zvláště důležité v architekturách mikroslužeb, kde jedna transakce může zahrnovat více, volně propojených služeb. Poskytuje přehled o výkonu a chování jednotlivých služeb a systému jako celku a pomáhá identifikovat jeho úzká místa na problémy s latencí. Traces pomáhají pochopit vztahy a závislosti mezi službami, což umožňuje efektivnější ladění a optimalizaci. \cite{Molkova2023}
+Traces trasují cestu požadavku, při průchodu různými součástmi distribuovaného systému. Každá trace se skládá z jednoho nebo více segmentů, které zaznamenávají cestu a latenci požadavku napříč různými službami a zdroji. Sledování je zvláště důležité v architekturách mikroslužeb, kde jedna transakce může zahrnovat více, volně propojených služeb. Poskytuje přehled o výkonu a chování jednotlivých služeb a systému jako celku a pomáhá identifikovat jeho úzká místa na problémy s latencí. \cite{Molkova2023} Traces pomáhají pochopit vztahy a závislosti mezi službami, což umožňuje efektivnější ladění a optimalizaci.
 
 \n{3}{Metriky}
 
-Metrika představuje konkrétní číslo volitelně doplněné o značky (tagy) sloužící k identifikaci a seskupování. \cite{Majors2022} Jedná se o kvantitativní údaje, které obvykle reprezentují informace o výkonu a stavu aplikace. Typickou jsou shromažďovány v pravidelných intervalech v reálném čase. Typické data pro metriky jsou například doba odezvy, využití systémových prostředků (procesor, paměť, I/O, ...), chybovost a propustnost. Sledování těchto metrik pomáhá při ladění výkonu a plánování kapacity.
+Metrika představuje konkrétní číslo volitelně doplněné o značky (tagy) sloužící k identifikaci a seskupování. \cite{Majors2022} Jedná se o kvantitativní údaje, které obvykle reprezentují informace o výkonu a stavu aplikace. Typickou jsou shromažďovány v pravidelných intervalech v reálném čase. Typické data pro metriky jsou například doba odezvy, využití systémových prostředků (CPU, paměť, I/O, ...), chybovost a propustnost. Sledování těchto metrik pomáhá při ladění výkonu a plánování kapacity.
 
 \n{2}{Monitorovací nástroje}
 
