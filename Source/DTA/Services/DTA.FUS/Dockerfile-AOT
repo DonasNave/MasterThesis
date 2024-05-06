@@ -5,10 +5,7 @@ EXPOSE 8081
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG TARGETARCH
-RUN <<EOF
-apt-get update
-apt-get install -y clang zlib1g-dev
-EOF
+RUN apt-get update && apt-get install -y clang zlib1g-dev
 WORKDIR /src
 
 COPY ["Services/DTA.FUS/DTA.FUS.csproj", "Services/DTA.FUS/"]

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.8)  6 MAY 2024 16:18
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.8)  6 MAY 2024 20:31
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1191,6 +1191,9 @@ LaTeX Warning: Label `tab:priklad' multiply defined.
 LaTeX Warning: Label `tab:priklad' multiply defined.
 
 
+LaTeX Warning: Label `tab:priklad' multiply defined.
+
+
 LaTeX Warning: Label `tab:service_metrics' multiply defined.
 
 
@@ -1351,20 +1354,20 @@ Package pdftex.def Info: zadani.pdf , page2 used on input line 75.
 ] [12
 
 
-] (./tex/chapters/dotnet.tex [13
-
-
-]
-<graphics/images/dotnet-platform.drawio.png, id=648, 510.90875pt x 511.9125pt>
+] (./tex/chapters/dotnet.tex
+<graphics/images/dotnet-platform.drawio.png, id=635, 510.90875pt x 511.9125pt>
 File: graphics/images/dotnet-platform.drawio.png Graphic file (type png)
 <use graphics/images/dotnet-platform.drawio.png>
-Package pdftex.def Info: graphics/images/dotnet-platform.drawio.png  used on input line 30.
+Package pdftex.def Info: graphics/images/dotnet-platform.drawio.png  used on input line 19.
 (pdftex.def)             Requested size: 198.45662pt x 198.84052pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[14] [15 <./graphics/images/dotnet-platform.drawio.png>]
+[13
+
+
+] [14 <./graphics/images/dotnet-platform.drawio.png>] [15]
 Overfull \hbox (2.83502pt too wide) in paragraph at lines 49--50
 \T1/cmr/m/n/12 kace. Umoº-¬ují dis-tri-bu-o-vat b¥º-nou funk-ci-o-na-litu na-p°í£ r·z-nými pro-jekty. [[]] Knihovny
  []
@@ -1455,22 +1458,24 @@ Overfull \hbox (62.79654pt too wide) in paragraph at lines 129--130
 File: graphics/diagrams/services-architecture.png Graphic file (type png)
 <use graphics/diagrams/services-architecture.png>
 Package pdftex.def Info: graphics/diagrams/services-architecture.png  used on input line 182.
-(pdftex.def)             Requested size: 396.91324pt x 378.78224pt.
+(pdftex.def)             Requested size: 352.8155pt x 336.69658pt.
  [53 <./graphics/diagrams/services-architecture.png>] [54] [55]
 Overfull \hbox (34.05782pt too wide) in paragraph at lines 234--235
 \T1/cmr/m/n/12 Kaºdá sluºba je vy-tvo-°ena jako ob-raz s ná-zvem \T1/cmr/m/it/12 dta-{service-name}:{compilatioinMode}-
  []
 
-[56]
-<graphics/images/dta.drawio.png, id=955, 892.33376pt x 582.175pt>
+<graphics/images/dta.drawio.png, id=951, 892.33376pt x 582.175pt>
 File: graphics/images/dta.drawio.png Graphic file (type png)
 <use graphics/images/dta.drawio.png>
 Package pdftex.def Info: graphics/images/dta.drawio.png  used on input line 241.
 (pdftex.def)             Requested size: 374.86774pt x 244.57402pt.
- [57 <./graphics/images/dta.drawio.png>] [58] [59]) (./tex/chapters/testing.tex [60] [61
 
-] [62] [63]
-<graphics/diagrams/stack-scenario1.png, id=987, 793.96625pt x 972.63374pt>
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[56] [57 <./graphics/images/dta.drawio.png>] [58]) (./tex/chapters/testing.tex [59] [60
+
+] [61] [62]
+<graphics/diagrams/stack-scenario1.png, id=983, 793.96625pt x 972.63374pt>
 File: graphics/diagrams/stack-scenario1.png Graphic file (type png)
 <use graphics/diagrams/stack-scenario1.png>
 Package pdftex.def Info: graphics/diagrams/stack-scenario1.png  used on input line 79.
@@ -1479,8 +1484,8 @@ Package pdftex.def Info: graphics/diagrams/stack-scenario1.png  used on input li
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[64]
-<graphics/diagrams/stack-scenario2.png, id=995, 874.26625pt x 654.445pt>
+[63]
+<graphics/diagrams/stack-scenario2.png, id=991, 874.26625pt x 654.445pt>
 File: graphics/diagrams/stack-scenario2.png Graphic file (type png)
 <use graphics/diagrams/stack-scenario2.png>
 Package pdftex.def Info: graphics/diagrams/stack-scenario2.png  used on input line 99.
@@ -1489,14 +1494,14 @@ Package pdftex.def Info: graphics/diagrams/stack-scenario2.png  used on input li
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[65 <./graphics/diagrams/stack-scenario1.png>]
-<graphics/diagrams/stack-scenario3.png, id=1003, 908.39375pt x 471.7625pt>
+[64 <./graphics/diagrams/stack-scenario1.png>]
+<graphics/diagrams/stack-scenario3.png, id=999, 908.39375pt x 471.7625pt>
 File: graphics/diagrams/stack-scenario3.png Graphic file (type png)
 <use graphics/diagrams/stack-scenario3.png>
 Package pdftex.def Info: graphics/diagrams/stack-scenario3.png  used on input line 122.
 (pdftex.def)             Requested size: 396.91324pt x 206.12923pt.
- [66 <./graphics/diagrams/stack-scenario2.png>]
-<graphics/diagrams/stack-scenario4.png, id=1011, 1485.55pt x 720.6925pt>
+ [65 <./graphics/diagrams/stack-scenario2.png>]
+<graphics/diagrams/stack-scenario4.png, id=1007, 1485.55pt x 720.6925pt>
 File: graphics/diagrams/stack-scenario4.png Graphic file (type png)
 <use graphics/diagrams/stack-scenario4.png>
 Package pdftex.def Info: graphics/diagrams/stack-scenario4.png  used on input line 142.
@@ -1505,53 +1510,59 @@ Package pdftex.def Info: graphics/diagrams/stack-scenario4.png  used on input li
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[67 <./graphics/diagrams/stack-scenario3.png>] [68 <./graphics/diagrams/stack-scenario4.png>]
-<graphics/diagrams/stack-scenario5.png, id=1029, 855.195pt x 714.67pt>
+[66 <./graphics/diagrams/stack-scenario3.png>] [67 <./graphics/diagrams/stack-scenario4.png>]
+<graphics/diagrams/stack-scenario5.png, id=1025, 855.195pt x 714.67pt>
 File: graphics/diagrams/stack-scenario5.png Graphic file (type png)
 <use graphics/diagrams/stack-scenario5.png>
 Package pdftex.def Info: graphics/diagrams/stack-scenario5.png  used on input line 171.
 (pdftex.def)             Requested size: 396.91324pt x 331.68562pt.
- [69 <./graphics/diagrams/stack-scenario5.png>] [70]) [71] [72
+ [68 <./graphics/diagrams/stack-scenario5.png>] [69]) [70] [71
 
 
 ] (./tex/chapters/analytics.tex
-<graphics/images/code-visual-sample.png, id=1050, 643.40375pt x 360.34625pt>
+<graphics/images/code-visual-sample.png, id=1046, 643.40375pt x 360.34625pt>
 File: graphics/images/code-visual-sample.png Graphic file (type png)
 <use graphics/images/code-visual-sample.png>
 Package pdftex.def Info: graphics/images/code-visual-sample.png  used on input line 14.
 (pdftex.def)             Requested size: 441.01772pt x 247.00613pt.
- [73
+ [72
 
 
- <./graphics/images/code-visual-sample.png>] [74] [75]
-<graphics/images/code-method-interception.png, id=1069, 536.0025pt x 26.0975pt>
+ <./graphics/images/code-visual-sample.png>]
+<graphics/images/code-method-interception.png, id=1053, 536.0025pt x 26.0975pt>
 File: graphics/images/code-method-interception.png Graphic file (type png)
 <use graphics/images/code-method-interception.png>
-Package pdftex.def Info: graphics/images/code-method-interception.png  used on input line 68.
+Package pdftex.def Info: graphics/images/code-method-interception.png  used on input line 22.
 (pdftex.def)             Requested size: 352.8155pt x 17.17819pt.
-<graphics/images/code-generated-method.png, id=1070, 614.295pt x 316.18124pt>
+<graphics/images/code-generated-method.png, id=1054, 614.295pt x 316.18124pt>
 File: graphics/images/code-generated-method.png Graphic file (type png)
 <use graphics/images/code-generated-method.png>
-Package pdftex.def Info: graphics/images/code-generated-method.png  used on input line 70.
+Package pdftex.def Info: graphics/images/code-generated-method.png  used on input line 24.
 (pdftex.def)             Requested size: 441.01772pt x 226.99417pt.
-
-Overfull \hbox (1.48775pt too wide) in paragraph at lines 74--75
+ [73 <./graphics/images/code-method-interception.png> <./graphics/images/code-generated-method.png>]
+Overfull \hbox (1.48775pt too wide) in paragraph at lines 38--39
 \T1/cmr/m/n/12 Pro zjed-no-du-²ení pro-cesu vý-voje a vy-u-ºití exis-tu-jící funk-ci-o-na-lity byly vy-u-ºity knihovny
  []
 
-[76 <./graphics/images/code-method-interception.png> <./graphics/images/code-generated-method.png>]
+[74]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[77]
-Overfull \hbox (5.18494pt too wide) in paragraph at lines 123--123
+[75] [76] [77]
+Overfull \hbox (5.18494pt too wide) in paragraph at lines 143--143
  [][] 
  []
 
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
 [78]
-Overfull \hbox (5.18494pt too wide) in paragraph at lines 146--146
+Overfull \hbox (5.18494pt too wide) in paragraph at lines 166--166
  [][] 
  []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
 
 [79] [80]) (./tex/chapters/conclusion.tex [81] [82
 
@@ -1658,7 +1669,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 9--10
 
  []
 
-<graphics/diagrams/stack-data-flow.png, id=1216, 997.7275pt x 1585.925pt>
+<graphics/diagrams/stack-data-flow.png, id=1218, 997.7275pt x 1585.925pt>
 File: graphics/diagrams/stack-data-flow.png Graphic file (type png)
 <use graphics/diagrams/stack-data-flow.png>
 Package pdftex.def Info: graphics/diagrams/stack-data-flow.png  used on input line 11.
@@ -1666,7 +1677,7 @@ Package pdftex.def Info: graphics/diagrams/stack-data-flow.png  used on input li
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<graphics/images/scenario1-dashboard.png, id=1217, 1143.27126pt x 800.9925pt>
+<graphics/images/scenario1-dashboard.png, id=1219, 1143.27126pt x 800.9925pt>
 File: graphics/images/scenario1-dashboard.png Graphic file (type png)
 <use graphics/images/scenario1-dashboard.png>
 Package pdftex.def Info: graphics/images/scenario1-dashboard.png  used on input line 13.
@@ -1674,7 +1685,7 @@ Package pdftex.def Info: graphics/images/scenario1-dashboard.png  used on input 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<graphics/images/scenario2-dashboard.png, id=1218, 1411.2725pt x 723.70375pt>
+<graphics/images/scenario2-dashboard.png, id=1220, 1411.2725pt x 723.70375pt>
 File: graphics/images/scenario2-dashboard.png Graphic file (type png)
 <use graphics/images/scenario2-dashboard.png>
 Package pdftex.def Info: graphics/images/scenario2-dashboard.png  used on input line 15.
@@ -1682,7 +1693,7 @@ Package pdftex.def Info: graphics/images/scenario2-dashboard.png  used on input 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<graphics/images/scenario3-dashboard.png, id=1219, 1671.24374pt x 810.02625pt>
+<graphics/images/scenario3-dashboard.png, id=1221, 1671.24374pt x 810.02625pt>
 File: graphics/images/scenario3-dashboard.png Graphic file (type png)
 <use graphics/images/scenario3-dashboard.png>
 Package pdftex.def Info: graphics/images/scenario3-dashboard.png  used on input line 17.
@@ -1690,7 +1701,7 @@ Package pdftex.def Info: graphics/images/scenario3-dashboard.png  used on input 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<graphics/images/scenario4-dashboard.png, id=1220, 1665.22125pt x 881.2925pt>
+<graphics/images/scenario4-dashboard.png, id=1222, 1665.22125pt x 881.2925pt>
 File: graphics/images/scenario4-dashboard.png Graphic file (type png)
 <use graphics/images/scenario4-dashboard.png>
 Package pdftex.def Info: graphics/images/scenario4-dashboard.png  used on input line 19.
@@ -1698,7 +1709,7 @@ Package pdftex.def Info: graphics/images/scenario4-dashboard.png  used on input 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<graphics/images/scenario5-dashboard.png, id=1221, 915.42pt x 354.32375pt>
+<graphics/images/scenario5-dashboard.png, id=1223, 915.42pt x 354.32375pt>
 File: graphics/images/scenario5-dashboard.png Graphic file (type png)
 <use graphics/images/scenario5-dashboard.png>
 Package pdftex.def Info: graphics/images/scenario5-dashboard.png  used on input line 21.
@@ -1717,20 +1728,20 @@ File: se-utf8.def 2019/11/29 v1.12 stringenc: UTF-8
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `prace.out' has not changed.
-(rerunfilecheck)             Checksum: F9B6449CFF2DA53A9F166D30DB44AE2E;18567.
+(rerunfilecheck)             Checksum: 82CED1016947C52FE29E0193713D638C;18567.
  ) 
 Here is how much of TeX's memory you used:
- 36136 strings out of 476025
- 783839 string characters out of 5790017
+ 36137 strings out of 476025
+ 783855 string characters out of 5790017
  1869388 words of memory out of 5000000
  55639 multiletter control sequences out of 15000+600000
  531050 words of font info for 65 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  103i,17n,106p,1633b,607s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbi1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
-Output written on prace.pdf (97 pages, 3834728 bytes).
+Output written on prace.pdf (97 pages, 3838793 bytes).
 PDF statistics:
- 1369 PDF objects out of 1440 (max. 8388607)
- 306 named destinations out of 1000 (max. 500000)
+ 1372 PDF objects out of 1440 (max. 8388607)
+ 307 named destinations out of 1000 (max. 500000)
  1058 words of extra memory for PDF output out of 10000 (max. 10000000)
 

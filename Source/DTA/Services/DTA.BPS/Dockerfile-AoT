@@ -4,10 +4,7 @@ EXPOSE 8080
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG TARGETARCH
-RUN <<EOF
-apt-get update
-apt-get install -y clang zlib1g-dev
-EOF
+RUN apt-get update && apt-get install -y clang zlib1g-dev
 WORKDIR /src
 
 COPY ["Services/DTA.BPS/DTA.BPS.csproj", "Services/DTA.BPS/"]

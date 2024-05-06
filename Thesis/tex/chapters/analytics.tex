@@ -13,52 +13,6 @@ Následující sekce popisuje vývojový proces, tak jak se týkal testovaných 
 
 \obr{Ukázka kódu s vyzualizací direktiv dle konfigurace}{fig:codesample}{1}{graphics/images/code-visual-sample.png}
 
-\n{3}{JIT}
-
-Vývojový proces pro kompilaci služeb JIT se zacílením na .NET runtime probíhal standarntím způsobem. Veškeré dostupné knihovny a nástroje byly plně kompatibilní s JIT kompilací. Nedošlo k žádným nepředpokládaným problémům. Znatelný rozdíl oproti běžnému vývoji byl výběr technologií, který přihlížel k potencionální kompatibilitě s AOT a tedy řešení, které inherntně vyžadovala funkce rezervované pro využití .NET runtime, byly ihned zavrženy.
-
-\n{3}{AOT}
-
-Kompilace do nativního kódu probíhala s průběžnými problémy. Podpora ze strany knihoven 3. stran ve spoustě případů neodopvídala deklarovaným možnostem. Vývojový proces byl značně zpomalován nutností řešení problémů, které byly způsobeny nedostatečnou podporou. Experimentace s řešeními často vyústila v nutnost změny implementace, případě v implementaci zcela vlastní.
-
-\n{2}{Výstup služeb}
-
-Samotný proces nativní AOT a JIT kompilace je různě výkonnostně náročný. Při tvorbě obrazu službeb, ale i kompilace je hlavní náročná operace \emph{restore}, která stahuje potřebné závislosti a balíčky pro projekt. Proces kompilace je vysoce závislý na specifickém HW, SW a přítomnosti závislostí. Pro účely testování byly potřebné NuGet balíčky nacachovány v systému. Následující tabulka zobrazuje přehled časové náročnosti kompilace služeb pro oba kompilační cíle. Data byla získána na základě průměru z 6 pokusů. Nejdelší a nejkratší hodnota kompilace byla zahozena pro omezení vlivu cachování. Jelikož je hodnota ovlivněna externím zatížením systému, má výsledek pouze orientační charakter.
-
-K získání času výstupu bylo využity diagnostického režimu příkazu \emph{dotnet}. Pro AOT byl použit příkaz \emph{dotnet publish -v d -c Release-AOT -r osx-x64}, pro získání výstupu JIT byl použit příkaz \emph{dotnet publish -v d -c Release-JIT -r osx-x64 --self-contained false}.
-
-
-\tab{Čas kompilace služeb}{tab:priklad}{0.65}{|l|c|c|r|}{
-  \hline
-    Služba & JIT (s) & AOT (s) & AOT \% nárůst \\ \hline
-  \emph{SRS} & 01.99 & 19.49 & 979.3 \\ \hline
-  \emph{FUS} & 03.85 & 30.36 & 788.5 \\ \hline
-  \emph{BPS} & 02.02 & 20.74 & 1026.7 \\ \hline
-  \emph{EPS} & 01.85 & 20.05 & 1083.7 \\ \hline
-}
-
-Velikost samotného výstupního programu vyšla dle očekávání definovaného v hypotéze 2. Program má výrazně menší velikost v případě JIT kompilace. To je dáno tím, že výstupní program je závislý na .NET runtime, který poskytuje dodatečnou obecnou funkcionalitu a vytváří nativní kód včetně generování typů až za běhu aplikace. Následující tabulka zobrazuje velikost služeb pro oba kompilační cíle. Pro vytvoření výstupů na základě JIT byl použit příkaz \emph{dotnet publish -c Release-JIT -r osx-x64 /p:PublishSingleFile=true --self-contained false}, pro vytvoření výstupů AOT byl použit příkaz \emph{dotnet publish -c Release-AOT -r osx-x64}.
-
-\tab{Velikost programu služeb}{tab:priklad}{0.65}{|l|c|c|r|}{
-  \hline
-    Služba & JIT (MB) & AOT (MB) & AOT \% nárůst \\ \hline
-  \emph{SRS} & 05.70 & 21.40 & 375.4 \\ \hline
-  \emph{FUS} & 12.40 & 28.40 & 229.0 \\ \hline
-  \emph{BPS} & 06.00 & 21.80 & 363.3 \\ \hline
-  \emph{EPS} & 06.00 & 21.70 & 361.6 \\ \hline
-}
-
-Sestavení obrazu je závislé na přípravu prostředí, vyhodnocení a stažení závislostí, kompilaci a publikování aplikace. Výstupné obrazy jsou založené na linuxovém systému, Alpine s .NET runtime v případě JIT výstupu služby, zredukované Ubuntu v případě nativního AOT výstupu. Z pohledu použitelnosti výsledného obrazu služeb má smysl měřit velikost výstupního obrazu. Následující tabulka zobrazuje velikost obrazu služeb pro oba kompilační cíle. Použitý příkaz je \emph{docker build -t <service>:<tag> -f Dockerfile-<target> .}, kdy \emph{<target>} představuje vybranou kompilační metodu AOT nebo JIT. Před každým sestavením byl obraz a cache smazány. I přes toto opatření není zaručena konzistentní časová náročnost sestavení obrazu.
-
-\tab{Velikost obrazu služeb}{tab:priklad}{0.65}{|l|c|c|r|}{
-  \hline
-    & JIT (MB) & AOT (MB) & AOT \% zmenšení \\ \hline
-  \emph{SRS} & 121.97 & 31.41 & 74.3 \\ \hline
-  \emph{FUS} & 134.36 & 38.32 & 71.5 \\ \hline
-  \emph{BPS} & 122.39 & 31.40 & 74.3 \\ \hline
-  \emph{EPS} & 122.26 & 31.74 & 74.0 \\ \hline
-}
-
 \n{3}{Vývojové prostředí}
 
 K vývoji byl použit IDE Rider od společnosti JetBrains. Vyzkoušena byla rovněž i práce ve Visual Studio 2022 Community Edition a Visual Studio Code s doporučenými rozšířeními od Microsoft. Všechna vývojová prostředí jsou kompatibilní, co se týče procesu kompilace respektive sestavení, jelikož to se odehrává pomocí CLI .NET.
@@ -68,6 +22,16 @@ Samotný vývoj s ohledem na práci s direktivami pro různé kompilace byl zna�
 \obr{Vizualizace zachycení metody interceptorem v Rider IDE}{fig:codemethodintercept}{0.8}{graphics/images/code-method-interception.png}
 
 \obr{Ukázka kódu nové implementace metody vygenerované na pozadí v Rider IDE}{fig:codegeneratedmethod}{1}{graphics/images/code-generated-method.png}
+
+Příprava nástrojů a sestavení projektů bylo vyzkoušeno jak na platformě macOS, tak na Windows 10. Návod uvedený v dokumentaci pro platformu macOS úspěšně umožnil připravit vývojové prostředí a sestavit aplikace. V případě Windows a návodu z dokumentace nastala chyba, která vyžadovala zásah. Pro sestavení projektů je nutné mít nainstalován nástroj pro vývoj C++ z dostupných komponent Visual Studio. Tento nástroj je nutný pro linkování knihoven a vytváření nativních kódů. Bohužel pro jeho správné fungování se musí nacházet na adrese v rámci souborového systému, jenž neobsahuje mezery nebo speciální znaky. Bohužel výchozí instalační cesta k nástroji Visual Studio obsahuje mezeru, což způsobuje chybu při sestavení aplikací v režimu nativní AOT. Tomuto problému lze předejít instalací nástroje na jiné místo, než je výchozí cesta a dohlédnout na validní adresu bez mezer a speciálních znaků. V případě již nainstalováného nástroje je potom potřeba jak reinstalace Visual Studio, tak i zmíněné komponenty pro vývoj C++ a vybrat validní cestu. Celý problém je zvýrazněn výchozím nastavením OS Windows instalovat programy do složky \emph{Program Files}, která sama o sobě obsahuje mezeru a způsobuje problém.
+
+\n{3}{JIT}
+
+Vývojový proces pro kompilaci služeb JIT se zacílením na .NET runtime probíhal standarntím způsobem. Veškeré dostupné knihovny a nástroje byly plně kompatibilní s JIT kompilací. Nedošlo k žádným nepředpokládaným problémům. Znatelný rozdíl oproti běžnému vývoji byl výběr technologií, který přihlížel k potencionální kompatibilitě s AOT a tedy řešení, které inherntně vyžadovala funkce rezervované pro využití .NET runtime, byly ihned zavrženy.
+
+\n{3}{AOT}
+
+Kompilace do nativního kódu probíhala s průběžnými problémy. Podpora ze strany knihoven 3. stran ve spoustě případů neodopvídala deklarovaným možnostem. Vývojový proces byl značně zpomalován nutností řešení problémů, které byly způsobeny nedostatečnou podporou. Experimentace s řešeními často vyústila v nutnost změny implementace, případně v implementaci zcela vlastní.
 
 \n{3}{Knihovny třetích stran}
 
@@ -80,13 +44,67 @@ Pro zjednodušení procesu vývoje a využití existující funkcionality byly v
   \item \textbf{Párování konfigurace} - V rámci systémové .NET knihovny je umožněno volání API, jenž načte data ze sjednocení stavu proměnných prostředi a konfiguračního souboru. Součástí API je volání metody mapující tuto konfiguraci na předem definovaný objekt. Toto chování dle dostupných informací není v rozporu s AOT kompilací a volání relevantního kódu neprodukuje AOT warning. Z testování však vyplynulo, že mapování konfigurace ne objekt bylo problematické a neprobíhalo správně. Z toho důvodu je v případě AOT kompilace za pomocí deriktivy použité přímé načtení jednotlivých hodnot z konfigurace, dle stromomvého klíče.
 \end{itemize}
 
+\n{2}{Výstup služeb}
+
+Samotný proces nativní AOT a JIT kompilace je různě výkonnostně náročný. Při tvorbě obrazu službeb, ale i kompilace je hlavní náročná operace \emph{restore}, která stahuje potřebné závislosti a balíčky pro projekt. Proces kompilace je vysoce závislý na specifickém HW, SW a přítomnosti závislostí. Pro účely testování byly potřebné NuGet balíčky nacachovány v systému. Následující tabulka zobrazuje přehled časové náročnosti kompilace služeb pro oba kompilační cíle. Data byla získána na základě průměru z 6 pokusů. Nejdelší a nejkratší hodnota kompilace byla zahozena pro omezení vlivu cachování. Jelikož je hodnota ovlivněna externím zatížením systému, má výsledek pouze orientační charakter.
+
+K získání času výstupu bylo využity diagnostického režimu příkazu \emph{dotnet}. Pro AOT byl použit příkaz \emph{dotnet publish -v d -c Release-AOT -r osx-x64}, pro získání výstupu JIT byl použit příkaz \emph{dotnet publish -v d -c Release-JIT -r osx-x64 --self-contained false}.
+
+\tab{Čas kompilace služeb}{tab:priklad}{0.65}{|l|c|c|r|}{
+  \hline
+    Služba & JIT (s) & AOT (s) & AOT \% nárůst \\ \hline \hline
+  \emph{SRS} & 01.99 & 19.49 & 979.3 \\ \hline
+  \emph{FUS} & 03.85 & 30.36 & 788.5 \\ \hline
+  \emph{BPS} & 02.02 & 20.74 & 1026.7 \\ \hline
+  \emph{EPS} & 01.85 & 20.05 & 1083.7 \\ \hline
+}
+
+Výstup poukazuje na dodatečnou režii intercepterů, generátorů, nástroje pro generování nativního kódu a linkeru. Výsledek se shoduje s předpoklady větší náročnosti AOT kompilace. Pohled na velikost výstupního souboru služeb v kompilačních režimech AOT a JIT je zobrazen v následující tabulce. Služby cílí na architekturu ARM a OS macOS. Pro vytvoření výstupů na základě JIT byl použit příkaz \emph{dotnet publish -c Release-JIT -r osx-x64 /p:PublishSingleFile=true --self-contained false}, pro vytvoření výstupů AOT byl použit příkaz \emph{dotnet publish -c Release-AOT -r osx-x64}.
+
+\tab{Velikost programu služeb pro architekturu osx-arch64}{tab:priklad}{0.65}{|l|c|c|r|}{
+  \hline
+    Služba & JIT (MB) & AOT (MB) & AOT \% nárůst \\ \hline \hline
+  \emph{SRS} & 5.7 & 21.4 & 375.4 \\ \hline
+  \emph{FUS} & 12.4 & 28.4 & 229.0 \\ \hline
+  \emph{BPS} & 6.0 & 21.8 & 363.3 \\ \hline
+  \emph{EPS} & 6.0 & 21.7 & 361.6 \\ \hline
+}
+
+Velikost samotného výstupního programu vyšla dle očekávání definovaného v hypotéze 2. Program má výrazně menší velikost v případě JIT kompilace. To je dáno tím, že výstupní program této kompilace je závislý na .NET runtime, který poskytuje dodatečnou obecnou funkcionalitu a vytváří nativní kód včetně generování typů až za běhu aplikace. Rovněž proces sestavení obsahuje méně kroků.
+
+Z pohledu velikosti výstupního programu nativní AOT kompilace má smysl porovnat výstup napříč architekturami a OS. Následující tabulka ukazuje velikost výstupu pro Windows v architektuře x64, macOS v architektuře ARM (označení arch64) a Linux v architekturách x64 a ARM. Pro vytvoření výstupů na základě JIT byl použit příkaz \emph{dotnet publish -c Release-AOT -r <target\_OS>-<target\_architecture>}. V příkazu \emph{<target\_OS>} a \emph{<target\_architecture>} představuje vybraný operační systém a architekturu.
+
+\tab{Velikost výstupu programu AOT služeb pro různé OS}{tab:priklad}{1}{|l|c|c|c|r|}{
+  \hline
+    Služba & win-x64 (MB) & osx-arch64 (MB) & linux-x64 (MB) & linux-arch64 (MB) \\ \hline \hline
+  \emph{SRS} & 17.2 & 21.4 & 19.4 & 20.2 \\ \hline
+  \emph{FUS} & 22.9 & 28.4 & 25.8 & 26.8 \\ \hline
+  \emph{BPS} & 17.5 & 21.8 & 19.8 & 20.6 \\ \hline
+  \emph{EPS} & 17.4 & 21.7 & 19.7 & 20.5 \\ \hline
+}
+
+Velikost výstupního programu naznačuje větší optimalizovanost výstupu pro Windows. Tato skutečnost může být způsobena dostupností specifických knihoven ve Windows, respektive API. Následkem toho je menší množství závislostí v rámci výstupního programu. Obecně výsledek vychází lépe pro architekturu x64 než ARM. Cílové využití nativních AOT služeb je vhodné pro cloudové nasazení, které ve většině případů běží na Linux server, kdy architektura ARM vykazuje efektivnější provoz k poměru nakládu. Lze tedy předpokládat, že tato architektura byla optimalizována. Z tohoto předpokladu plyne že výsledek Linux x64 a Linux ARM ukazuje na roli architektury na velikost výstupu programu, kdy instrukční sada x64 architektury umožňuje menší výstupní program.
+
+Sestavení obrazu je závislé na přípravu prostředí, vyhodnocení a stažení závislostí, kompilaci a publikování aplikace. Výstupné obrazy jsou založené na linuxovém systému, Alpine s .NET runtime v případě JIT výstupu služby, zredukované Ubuntu v případě nativního AOT výstupu. Z pohledu použitelnosti výsledného obrazu služeb má smysl měřit velikost výstupního obrazu. Následující tabulka zobrazuje velikost obrazu služeb pro oba kompilační cíle. Použitý příkaz je \emph{docker build -t <service>:<tag> -f Dockerfile-<target> .}. V příkazu \emph{<target>} představuje vybranou kompilační metodu AOT nebo JIT a \emph{<service>} jméno služby.
+
+\tab{Velikost obrazu služeb}{tab:priklad}{0.65}{|l|c|c|r|}{
+  \hline
+    & JIT (MB) & AOT (MB) & AOT \% zmenšení \\ \hline
+  \emph{SRS} & 121.97 & 31.41 & 74.3 \\ \hline
+  \emph{FUS} & 134.36 & 38.32 & 71.5 \\ \hline
+  \emph{BPS} & 122.39 & 31.40 & 74.3 \\ \hline
+  \emph{EPS} & 122.26 & 31.74 & 74.0 \\ \hline
+}
+
+Výsledek potvrzuje hypotézu 2, tedy že větší výstupní velikost programu nativní AOT kompilace bude kompenzována menší velikostí výstupního obrazu.
+
 \n{2}{Analýza testování}
 
 Následující sekce se zabývá analýzou testovacích scénářů a výsledků testování. Testování bylo provedeno na základě předem definované metodiky. Podkladem testů byly definované scénáře, které byly vytvořeny s ohledem na funkční a nefunkční požadavky. Při testování byl nezávisle na spuštěný test zaznaménáván stav hostitelského systému s ohledem na spuštěné kontejnery a využití systémových prostředků. Samotné služby využívaly předem definované metry ve frameworku ASP.NET pro dodatečnou diagnostiku a monitorování. Výsledky testování byly zaznamenány a analyzovány.
 
 \n{3}{Scénář 1 - Výkonnost komunikace}
 
-První scénář se zabíral jednoduchou funkcionalitou dotazu na healthcheck endpoint a meřením výkonu kestrel serveru u odpovědí na požadavky skrze REST API. Testování přineslo rozdílné výkonostní výsledky mezi JIT a AOT kompilací. Dle předpokladu služby s nativním kódem využívaly méně času procesoru. Paměťová stopa však u nich byla větší. Konečně, AOT služby byly schopné v průměru rychleji odpovídat. Čistá rychlost zpracování požadavku a odpovědi není v mnoha případech kritickým faktorem. Avšak v případě velkého množství požadavků, může být rozdíl v řádech milisekund zásadní.
+První scénář se zabíral jednoduchou funkcionalitou dotazu na healthcheck endpoint a meřením výkonu kestrel serveru u odpovědí na požadavky skrze REST API. Následující tabulka zobrazuje průměrné využití zdrojů a dobu odpovědi služeb v testovacím scénaři 1 pro oba kompilační režimy.
 
 \tab{Průměrné využití zdrojů a doba odpovědi healthcheck služeb}{tab:service_metrics}{1.0}{|l|r|r|r|r|}{
   \hline
@@ -100,6 +118,8 @@ První scénář se zabíral jednoduchou funkcionalitou dotazu na healthcheck en
   \emph{EPS-AOT} & 2.47 & 0.451 & 36.5 & 2.07 \\ \hline
   \emph{EPS-JIT} & 6.63 & 0.686 & 35.3 & 3.09 \\ \hline
 }
+
+Testování přineslo rozdílné výkonostní výsledky mezi JIT a AOT kompilací. Dle předpokladu AOT služby využívaly méně času CPU. Paměťová stopa však u nich byla větší. Konečně, AOT služby byly schopné v průměru rychleji odpovídat. Výsledek poukazuje na dodatečnou režii od CLR na CPU a IO v případě JIT služeb. Větší využití paměti u AOT služeb poukazuje na režii vygenerovaných typů a přítomnost dalších závislotí v programu načteného v paměti. Čistá rychlost zpracování požadavku a odpovědi není v mnoha případech kritickým faktorem. Avšak v případě velkého množství požadavků, může být rozdíl v řádech milisekund zásadní.
 
 \n{3}{Scénář 2 - Přístup k perzistenci}
 
