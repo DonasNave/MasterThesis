@@ -1444,7 +1444,6 @@ INPUT ./graphics/diagrams/stack-scenario1.png
 INPUT graphics/diagrams/stack-scenario1.png
 INPUT ./graphics/diagrams/stack-scenario1.png
 INPUT ./graphics/diagrams/stack-scenario1.png
-INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/jknappen/ec/ecbi1095.tfm
 INPUT ./graphics/diagrams/stack-scenario2.png
 INPUT ./graphics/diagrams/stack-scenario2.png
 INPUT graphics/diagrams/stack-scenario2.png
@@ -1460,6 +1459,7 @@ INPUT ./graphics/diagrams/stack-scenario4.png
 INPUT graphics/diagrams/stack-scenario4.png
 INPUT ./graphics/diagrams/stack-scenario4.png
 INPUT ./graphics/diagrams/stack-scenario4.png
+INPUT /usr/local/texlive/2023/texmf-dist/fonts/tfm/jknappen/ec/ecbi1095.tfm
 INPUT ./graphics/diagrams/stack-scenario5.png
 INPUT ./graphics/diagrams/stack-scenario5.png
 INPUT graphics/diagrams/stack-scenario5.png
