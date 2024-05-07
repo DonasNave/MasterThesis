@@ -7,16 +7,15 @@
 \contentsline {subsection}{\numberline {1.3}Frameworky}{15}{subsection.1.3}%
 \contentsline {subsection}{\numberline {1.4}Nástroje}{16}{subsection.1.4}%
 \contentsline {subsubsection}{\numberline {1.4.1}Knihovny}{16}{subsubsection.1.4.1}%
-\contentsline {subsubsection}{\numberline {1.4.2}Integrované vývojové prostředí}{17}{subsubsection.1.4.2}%
+\contentsline {subsubsection}{\numberline {1.4.2}Integrované vývojové prostředí}{18}{subsubsection.1.4.2}%
 \contentsline {subsubsection}{\numberline {1.4.3}Balíčky}{18}{subsubsection.1.4.3}%
 \contentsline {subsubsection}{\numberline {1.4.4}Dokumentace}{18}{subsubsection.1.4.4}%
 \contentsline {subsubsection}{\numberline {1.4.5}Jazyky}{18}{subsubsection.1.4.5}%
 \contentsline {subsection}{\numberline {1.5}Aplikační struktura}{19}{subsection.1.5}%
-\contentsline {subsection}{\numberline {1.6}Kompilace zdrojového kódu}{19}{subsection.1.6}%
-\contentsline {subsubsection}{\numberline {1.6.1}Cíle kompilace}{20}{subsubsection.1.6.1}%
-\contentsline {subsubsection}{\numberline {1.6.2}Obecné postupy kompilace}{20}{subsubsection.1.6.2}%
-\contentsline {subsubsection}{\numberline {1.6.3}Kompilace pro CLR}{20}{subsubsection.1.6.3}%
-\contentsline {subsubsection}{\numberline {1.6.4}Kompilace do nativního kódu}{22}{subsubsection.1.6.4}%
+\contentsline {subsection}{\numberline {1.6}Kompilace zdrojového kódu}{20}{subsection.1.6}%
+\contentsline {subsubsection}{\numberline {1.6.1}Obecné postupy kompilace}{20}{subsubsection.1.6.1}%
+\contentsline {subsubsection}{\numberline {1.6.2}Kompilace pro CLR}{21}{subsubsection.1.6.2}%
+\contentsline {subsubsection}{\numberline {1.6.3}Kompilace do nativního kódu}{22}{subsubsection.1.6.3}%
 \contentsline {subsection}{\numberline {1.7}Běh kódu}{23}{subsection.1.7}%
 \contentsline {subsection}{\numberline {1.8}Tvorba programu v .NET}{24}{subsection.1.8}%
 \contentsline {subsubsection}{\numberline {1.8.1}Obecný postup}{24}{subsubsection.1.8.1}%
