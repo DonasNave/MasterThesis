@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.8)  7 MAY 2024 23:57
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.8)  8 MAY 2024 00:50
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1427,28 +1427,32 @@ Package pdftex.def Info: graphics/images/repository.drawio.png  used on input li
 <graphics/images/folder-structure-app.png, id=888, 244.915pt x 628.3475pt>
 File: graphics/images/folder-structure-app.png Graphic file (type png)
 <use graphics/images/folder-structure-app.png>
-Package pdftex.def Info: graphics/images/folder-structure-app.png  used on input line 87.
+Package pdftex.def Info: graphics/images/folder-structure-app.png  used on input line 84.
 (pdftex.def)             Requested size: 132.30666pt x 339.44641pt.
 <graphics/images/folder-structure-service.png, id=889, 287.0725pt x 602.25pt>
 File: graphics/images/folder-structure-service.png Graphic file (type png)
 <use graphics/images/folder-structure-service.png>
-Package pdftex.def Info: graphics/images/folder-structure-service.png  used on input line 91.
+Package pdftex.def Info: graphics/images/folder-structure-service.png  used on input line 88.
 (pdftex.def)             Requested size: 132.30666pt x 277.57135pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[48 <./graphics/images/folder-structure-app.png>] [49 <./graphics/images/folder-structure-service.png>] [50] [51] [52]
-<graphics/diagrams/services-architecture.png, id=915, 768.8725pt x 733.74126pt>
+[48 <./graphics/images/folder-structure-app.png>] [49 <./graphics/images/folder-structure-service.png>] [50] [51]
+<graphics/diagrams/services-architecture.png, id=911, 768.8725pt x 733.74126pt>
 File: graphics/diagrams/services-architecture.png Graphic file (type png)
 <use graphics/diagrams/services-architecture.png>
-Package pdftex.def Info: graphics/diagrams/services-architecture.png  used on input line 182.
+Package pdftex.def Info: graphics/diagrams/services-architecture.png  used on input line 169.
 (pdftex.def)             Requested size: 330.76328pt x 315.65933pt.
- [53 <./graphics/diagrams/services-architecture.png>] [54] [55]
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[52] [53 <./graphics/diagrams/services-architecture.png>] [54] [55]
 <graphics/images/dta.drawio.png, id=931, 892.33376pt x 582.175pt>
 File: graphics/images/dta.drawio.png Graphic file (type png)
 <use graphics/images/dta.drawio.png>
-Package pdftex.def Info: graphics/images/dta.drawio.png  used on input line 241.
+Package pdftex.def Info: graphics/images/dta.drawio.png  used on input line 223.
 (pdftex.def)             Requested size: 374.86774pt x 244.57402pt.
 
 
@@ -1725,7 +1729,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  103i,17n,106p,2288b,599s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbi1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
-Output written on prace.pdf (97 pages, 3835102 bytes).
+Output written on prace.pdf (97 pages, 3835166 bytes).
 PDF statistics:
  1351 PDF objects out of 1440 (max. 8388607)
  303 named destinations out of 1000 (max. 500000)

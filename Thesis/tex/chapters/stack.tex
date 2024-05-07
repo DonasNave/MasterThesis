@@ -1,14 +1,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%                   Testovací aplikace .NET služeb                              %
+%                   Testovací aplikace                              %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \n{1}{Testovací aplikace}
 
-Praktická část této práce se zaměřuje na vytvoření testovací aplikace postavené na microservice architektuře. Cílem je otestovat a analyzovat výkonost služeb ve dvou typech kompilace, JIT a nativní AOT. Rozsah funkcionality a chování aplikace je definován množinou funkčních a nefunkčních požadavků. Dále jsou vybrány konkrétní technologie a nástroje, jenž v aplikaci doplní .NET služby. Jejich účelem je zprostředkování ekosystému monitorování, dodání persistence, hostování webového rozhraní a automatizace testování. Samotný postup testování je definován metodikou, která zahrnuje také definici hypotéz a je podrobně popsána v následující kapitole. Tyto hypotézy jsou následně ověřeny v rámci experimentů, které jsou provedeny na testovací aplikaci. Výsledky testů včetně kompletních monitorovacích dat jsou uloženy a zprostředkovány pro analýzu a vyhodnocení. Aplikace je nasazena v kontejnerizovaném prostředí a vytvořena s ohledem na rozšiřitelnost.
+Praktická část této práce se zaměřuje na vytvoření testovací aplikace postavené na microservice architektuře. Cílem je vytvořit, otestovat a analyzovat služby využívající JIT a nativní AOT kompilace. Rozsah funkcionality a chování aplikace je definován množinou funkčních a nefunkčních požadavků. Dále jsou vybrány konkrétní technologie a nástroje, jenž v aplikaci doplní .NET služby. Jejich účelem je zprostředkování platformy monitorování, dodání persistence, hostování webového rozhraní a automatizace testování. Samotný postup testování je definován metodikou, která zahrnuje také definici hypotéz a je podrobně popsána v následující kapitole. Tyto hypotézy jsou v analytické sekci práce ověřeny. Ověření probíhá rámci experimentů, které jsou provedeny na testovací aplikaci. Data z testů jsou zprostředkovány pro analýzu a vyhodnocení. Aplikace je nasazena v kontejnerizovaném prostředí a vytvořena s ohledem na rozšiřitelnost pro otestování konkrétní doménové problematiky.
 
 \n{2}{Požadavky na SW}
 
-Na aplikaci jsou pro splnění účelu analýzy vývoje, výstupu a výkonu služeb kladeny přímé i nepřímé požadavky. Je klíčové navrhnout řešení, vybrat technologie a provést implementaci a konfiguraci s ohledem na tyto požadavky, jenž rozděleny na funkční a nefunkční.
+Na aplikaci jsou pro splnění účelu analýzy vývoje, výstupu a výkonu služeb kladeny přímé i nepřímé požadavky. Je klíčové navrhnout řešení, vybrat technologie a provést implementaci včetně konfigurace s ohledem na tyto požadavky. Následující sekce je kategorizována do funkčních a nefunkčních požadavků.
 
 \n{3}{Funkční požadavky}
 
@@ -17,21 +17,21 @@ Funkční požadavky definují chování, funkce a vlastnosti, které musí syst
 \begin{itemize}
   \item \textbf{Healthchecks} - Služby musí implementovat na REST API healtcheck endpoint, který bude poskytovat informace o stavu služby. Endpoint musí být dostupný na standardní adrese \emph{/health}. Návratová hodnota bude triviálně formou řetězce \emph{Healthy} a vracet HTTP Code 200 v případě, že je služba dostupná. Dostupnost je definována schopností služby přijímat požadavky.
   \item \textbf{SwaggerUI} - Pro vizualizaci a testování REST API služeb musí být implementováno grafické rozhraní SwaggerUI. SwaggerUI musí být dostupné na standardní adrese \emph{/swagger} a musí zobrazovat dostupné endpointy a umožňovat jejich testování. Konfigurace implementující SwaggerUI je pouze JIT kompilace a režim Debug.
-  \item \textbf{Persistence souborů} - Aplikace musí umožňovat ukládání libovolného souboru do persistentního úložiště. Soubor musí být uložen do PostgreSQL databáze a musí být možné ho následně stáhnout. Pro ukládání a čtení souborů musí být implementováno REST API rozhraní. Specificky pro čtení souborů musí být implementováno i gRPC rozhraní.
-  \item \textbf{Generování signálů} - Aplikace musí být schopna generovat náhodné signály. Signál musí obsahovat název, jednotku a hodnotu. Pro získání generovaných signálů musí být implementováno REST API rozhraní.
-  \item \textbf{Výpočet n-tého Fibonacciho čísla} - Je požadováno, aby aplikace poskytovala funkcionalitu výpočtu Fibonacciho čísla rekurzivní metodou. Tato neefektivní metoda má za účel vytvořit zátěž na systém.Pro volání výpoču a získání výsledku musí být implementováno REST API rozhraní.
-  \item \textbf{Asynchronní komunikace} - Aplikace musí být schopna asynchronně zpracovávat data z jiných služeb. To zahrnuje vyvolání události a její následnou konzumaci vzorem publish - subscribe. Pro implementaci asynchronní komunikace bude využito RabbitMQ. Samotné vyvolání události musí být k dispozici pomocí požadavku na REST API rozhraní.
+  \item \textbf{Persistence souborů} - Aplikace musí umožňovat ukládání libovolného souboru do persistentního úložiště. Soubor musí být uložen do PostgreSQL databáze a musí být možné ho následně stáhnout. Pro ukládání a čtení souborů musí být implementováno skrz REST API. Specificky pro čtení souborů musí být implementováno i gRPC rozhraní.
+  \item \textbf{Generování signálů} - Aplikace musí být schopna generovat náhodné signály. Signál musí obsahovat název, jednotku a hodnotu. Pro získání generovaných signálů musí být implementováno přes REST API.
+  \item \textbf{Výpočet n-tého Fibonacciho čísla} - Je požadováno, aby aplikace poskytovala funkcionalitu výpočtu Fibonacciho čísla rekurzivní metodou. Tato neefektivní metoda má za účel vytvořit zátěž na systém. Pro volání výpoču a získání výsledku musí být implementováno pomocí REST API.
+  \item \textbf{Asynchronní komunikace} - Aplikace musí být schopna asynchronně zpracovávat data z jiných služeb. To zahrnuje vyvolání události a její následnou konzumaci vzorem publish - subscribe. Pro implementaci asynchronní komunikace bude využito RabbitMQ. Samotné vyvolání události musí být k dispozici pomocí požadavku na REST API.
   \item \textbf{Sběr telemetrických dat z .NET služeb} - Aplikace musí být schopna sbírat a ukládat telemetrická data z .NET služeb. To zahrnuje metriky, logy a traces. Data musí být dostupná v reálném čase. Veškerá data budou strukturována dle zásad OpenTelemetry a sbírány na gRPC rozhraní této služby. Sbíraná data budou určena podstatou funkcionality služby a doplněna o množinu dostupných a relevantních metrik zprostředkovaných implementacemi knihoven OpenTelemetry.
   \item \textbf{Monitorování kontejnerů a systému} - Aplikace musí být schopna sbírat a vizualizovat data o výkonu, škálovatelnosti kontejnerů a hostitelského systému. To zahrnuje sběr a vizualizaci výkonnostních metrik. Data musí být dostupná v reálném čase a musí být persistentně ukládána.
-  \item \textbf{Testování scénářů} - Aplikace musí být schopna provádět testování scénářů, které simulují fungování systému a zátěž na mikroslužby. Testovací scénáře musí jednoduše vytvořitelné pomocí skriptů. Spouštění scénářů nad aplikací musí být možno více způsobu, napřímo pomocí nástroje nativně běžícího na hostitelském sytému, ale také kontejnerizovaným nasazením nástroje. Testovací scénáře musí být konfigurovatelné a spustitelné v manuálním a automatizovaném režimu. 
-  \item \textbf{Vizualizace dat} - V rámci aplikace musí být dostupné grafické rozhraní pro vizualizaci metrik a testovacích dat. Vizualizace musí být dostupná v reálném čase a musí být možné zobrazit historická data. Je nutné, aby nástroj aplikace umožnila data seskupovat a filtrovat podle druhu, značek a času. Zároveň je požadováno, aby uživatelé mohli jednoduše připojit různé zdroje dat do nástroj a vytvářet vizualizace po vlastní ose. Přístup k nástroji musí být řešen přes webové rozhraní.
-  \item \textbf{Směrování} - Přístup k aplikaci bude řešen pomocí reverzní proxy. Ta bude mít vystavené rozhraní z orchestračního nástroj a její indexovací stránka bude odkazovat na vizualizační nástroj monitorovacích dat.
-  \item \textbf{Konfigurace aplikace} - V rámci aplikace musí být možnost konfigurovat chování nasazených služeb. To se týká jak konfigurace komunikace mezi službami, tak i konfigurace monitorovacích nástrojů. Konfigurace musí být uložena v konfiguračních souborech ve standardním formátu dle konvencí dané služby.
+  \item \textbf{Testování scénářů} - Aplikace musí být schopna provádět testování scénářů, které simulují fungování systému a zátěž na mikroslužby. Testovací scénáře musí jednoduše vytvořitelné pomocí skriptů. Spouštění scénářů nad aplikací musí být možno více způsoby, napřímo pomocí nástroje nativně běžícího na hostitelském sytému, ale také kontejnerizovaným nasazením nástroje. Testovací scénáře musí být konfigurovatelné a spustitelné v manuálním a automatizovaném režimu. 
+  \item \textbf{Vizualizace dat} - V rámci aplikace musí být dostupné grafické rozhraní pro vizualizaci metrik a testovacích dat. Vizualizace musí být dostupná v reálném čase a musí být možné zobrazit historická data. Je nutné, aby aplikace umožnila data seskupovat a filtrovat podle druhu, značek a času. Zároveň je požadováno, aby uživatelé mohli jednoduše připojit různé zdroje dat a vytvářet vizualizace ve vlastní režii. Přístup k nástroji musí být řešen přes webové rozhraní.
+  \item \textbf{Směrování} - Přístup k aplikaci bude řešen pomocí reverzní proxy. Ta bude mít vystavené rozhraní z orchestračního nástroje a její indexovací stránka bude odkazovat na vizualizační nástroj monitorovacích dat.
+  \item \textbf{Konfigurace aplikace} - V rámci aplikace musí být možnost konfigurovat chování nasazených služeb. To se týká jak konfigurace komunikace mezi službami, tak i konfigurace monitorovacích nástrojů. Konfigurace musí být uložena v konfiguračních souborech ve standardním formátu dle konvencí dané služby nebo nástroje.
 \end{itemize}
 
 \n{3}{Nefunkční požadavky}
 
-Nefunkční požadavky specifikují celkové vlastnosti systému. Definují atributy kvality, které musí systém splňovat. Nefunkční požadavky mohou zahrnovat omezení týkající se návrhu a implementace systému, jako jsou bezpečnostní standardy, soulad s právními a regulačními směrnicemi, doba odezvy při zpracování dat, kapacita pro souběžné uživatele, integrita dat a mechanismy převzetí služeb při selhání. Mají zásadní význam pro zajištění životaschopnosti a efektivity systému v provozním prostředí. Ovlivňují celkovou uživatelskou zkušenost, výkonnost systému a splnění regulačních podmínek.
+Nefunkční požadavky specifikují celkové vlastnosti systému. Definují atributy kvality, které musí systém splňovat. Nefunkční požadavky mohou zahrnovat omezení týkající se návrhu a implementace aplikace, jako jsou bezpečnostní standardy, soulad s právními a regulačními směrnicemi, doba odezvy při zpracování dat, kapacita pro souběžné uživatele, integrita dat a mechanismy převzetí služeb při selhání. Mají zásadní význam pro zajištění životaschopnosti a efektivity aplikace v provozním prostředí. Ovlivňují celkový uživatelský dojem, výkonnost systému a splnění regulačních podmínek.
 
 \begin{itemize}
   \item \textbf{Použitelnost} - Aplikace musí být snadno použitelná a přístupná pro uživatele. To zahrnuje snadnou konfiguraci a nasazení aplikace na specifickém HW a OS. Aplikace musí být snadno dostupná na webovém rozhraní a standardních portech.
@@ -46,9 +46,7 @@ Hardware, na kterém bude aplikace provozována, musí výkonnostně dostačovat
 
 \n{2}{Organizace a správa zdrojů}
 
-Pro správu souborů práce byl zvolen SCM Git. Git je open-source verzovací, který umožňuje vytvářet, spravovat a sdílet soubory. Git je schopný pracovat s větvemi, které umožňují vytvářet paralelní vývojové větve.
-
-Za účelem jednoduché organizace souborů bylo zvoleno řešení monorepozitáře. Monorepozitář je repozitář, který obsahuje veškeré soubory projektu, ale také relevantní dokumentaci, obrázky, podpůrné nástroj a zdrojové soubory diplomové práce. Následující struktura adresářů byla zvolena pro organizaci souborů.
+Pro správu souborů práce byl zvolen verzovací systém (Source Control Management, dále SCM) Git. Git je open-source nástroj, který umožňuje spravovat a sdílet soubory. Git byl zvolen pro svou schopnost pracovat s větvemi a s ohledem na dostupná úložiště. Za účelem jednoduché organizace souborů bylo zvoleno řešení monorepozitáře. Monorepozitář je repozitář, který obsahuje veškeré soubory projektu, ale také relevantní dokumentaci, obrázky, podpůrné nástroj a zdrojové soubory diplomové práce. Následující struktura adresářů byla zvolena pro organizaci souborů.
 
 \begin{itemize}
     \item \textbf{Documentation} - adresář obsahující dokumentaci aplikace.
@@ -60,7 +58,7 @@ Pro zaručení dostupnosti a sdílení veškerých prostředků souvisejících 
 
 \n{2}{Návrh a implementace testovacích služeb}
 
-Následující pasáž se zabírá návrhem a implementací testovacích služeb, které budou využity pro analýzu vývoje a výkonu jednotlivých kompilací AOT a JIT v rámci .NET. Služby jsou implementovány jako mikroslužby a podporují kontejnerizované nasazení v microservice architektuře. Každá služba reprezentuje jednu dílčí funkcionalitu a má definované rozhraní pro komunikaci s ostatními službami. Pro implementaci služeb byla vybrána z podstaty práce technologie .NET, konkrétně jazyk C\#. Verze frameworku byla zvola .NET 8.0 jakožto jediná verze oficiálně podporující nativní AOT kompilaci.
+Následující pasáž se zabírá návrhem a implementací testovacích služeb, které budou využity pro analýzu vývoje a výkonu jednotlivých kompilací AOT a JIT v rámci .NET. Služby jsou implementovány jako mikroslužby a podporují kontejnerizované nasazení v microservice architektuře. Každá služba reprezentuje jednu dílčí funkcionalitu a má definované rozhraní pro komunikaci s ostatními službami. Pro implementaci služeb byla vybrána z podstaty práce technologie .NET, konkrétně jazyk C\#. Verze frameworku byla zvola .NET 8.0 jakožto jediná verze oficiálně podporující nativní AOT kompilaci pro framework ASP.NET.
 
 \n{3}{Architektura}
 
@@ -69,11 +67,11 @@ Pro implementaci požadované funkcionality bylo zvoleno následující rozděle
 \begin{itemize}
     \item \textbf{SRS - Signal reading service} - Služba simuluje roli čtecího zařízení. Generuje data a poskytuje je ostatním službám. Poskytuje REST API rozhraní.
     \item \textbf{FUS - File Upload Service} - Zprostředkovává datové persistentní zapisovací zařízení. Čte nebo zapisuje data do PostgreSQL databáze. Poskytuje REST API a gRPC rozhraní.
-    \item \textbf{BPS - Batch Processing Service} - služba, která zpracovává data z jiných služeb. Reaguje na požadavek o hromadném zpracování při předem definovaném splnění podmínek. Poskytuje REST API a gRPC rozhraní. Je přihlášena do RabbitMQ jako subscriber.
-    \item \textbf{EPS - Event Publishing Service} - slouží k vyvolání události, která je následně zpracována jinými službami. Poskytuje REST API rozhraní. Je přihlášena do RabbitMQ jako publisher.
+    \item \textbf{BPS - Batch Processing Service} - Služba, která zpracovává data z jiných služeb. Reaguje na požadavek o hromadném zpracování při předem definovaném splnění podmínek. Poskytuje REST API a gRPC rozhraní. Je přihlášena do RabbitMQ jako subscriber.
+    \item \textbf{EPS - Event Publishing Service} - Slouží k vyvolání události, která je následně zpracována jinými službami. Poskytuje REST API rozhraní. Je přihlášena do RabbitMQ jako publisher.
 \end{itemize}
 
-Kompilaci do nativního AOT kódu je deklarována použitím atributu PublishAoT v projektovém souboru. Za účelem zajištění co největší podobnosti služeb zacílených na AOT a JIT kompilaci, bude využito zadefinování konstantních hodnot v rámci projektu. Konstanty \emph{JIT} a \emph{AOT} budou využity pro rozlišení chování služeb v rámci obou kompilačních verzí. S použitím direktiv kompilátoru a zmíněných konstant bude v nutných případech docíleno rozdílného volání API při snaze zachovat totožnou funkcionalitu.
+Kompilace do nativního AOT kódu je deklarována použitím atributu PublishAoT v projektovém souboru. Za účelem zajištění co největší podobnosti služeb zacílených na AOT a JIT kompilaci, bude využito zadefinování konstantních hodnot v rámci projektu. Konstanty \emph{JIT} a \emph{AOT} budou využity pro rozlišení chování služeb v rámci obou kompilačních verzí. S použitím direktiv kompilátoru a zmíněných konstant bude v nutných případech docíleno rozdílného volání API při snaze zachovat totožnou funkcionalitu.
 
 \n{3}{Očekávání vývojového procesu}
 
@@ -81,25 +79,24 @@ Na základě podporované funkcionality, tak jak je definována týmem .NET a po
 
 \n{3}{Organizace souborů}
 
-Organizace zdrojových souborů služeb, knihoven a pomocných souborů je řešena v rámci hlavního adresáře obsahujícího .NET solution soubor, pomocné soubory a solution složky s konkrétními projekty služeb a knihoven. Následující
-stromový graf představuje adresářovou strukturu projektu.
+Organizace zdrojových souborů služeb, knihoven a pomocných souborů je řešena v rámci hlavního adresáře \emph{DTA} obsahujícího .NET solution soubor, pomocné soubory a solution složky s konkrétními projekty služeb a knihoven. Následující stromový graf představuje adresářovou strukturu projektu.
 
 \obr{Stromová struktura projektu}{fig:projectstructure}{0.3}{graphics/images/folder-structure-app.png}
 
-Každá z vyvinutých služeb využívá konkrétní .NET SDK \emph{Microsoft.NET.Sdk.Web}, které umožňuje využít WebApplication pro registraci a konfiguraci funkcionality služby a zároveň poskytuje konfigurovatelný Kestrel server. Pro zajištění jednotného přístupu k logování, metrikám a konfiguraci byly vytvořeny společné knihovny, které jsou využity ve všech službách.
+Každá z vyvinutých služeb využívá konkrétní .NET SDK \emph{Microsoft.NET.Sdk.Web}, které umožňuje využít třídu \emph{WebApplication} pro registraci a konfiguraci funkcionality služby a zároveň poskytuje konfigurovatelný Kestrel server pro běh programu. Za účelem zajištění jednotného přístupu k logování, metrikám a konfiguraci byly vytvořeny společné knihovny, které jsou využity ve všech službách.
 
 \obr{Stromová struktura služby}{fig:servicestructure}{0.3}{graphics/images/folder-structure-service.png}
 
 \begin{itemize}
-  \item \textbf{Api} - obsahuje implementaci rozhraní služby
-  \item \textbf{Extensions} - implementuje extension metody specifické pro doménu služby
-  \item \textbf{Monitoring} - obsahuje statickou třídu, která drží reference na počítadla metrik
-  \item \textbf{Service} - ve složce jsou implementovány služby, které provádějí doménovou logiku služby
-  \item \textbf{Properties} - drží konfiguraci pro spuštění služby
-  \item \textbf{Program.cs} - vstupní bod služby
-  \item \textbf{appsettings.json} - konfigurace služby
-  \item \textbf{Dockerfile-AOT} - soubor pro tvorbu Docker obrazu pro AOT kompilaci
-  \item \textbf{Dockerfile-JIT} - soubor pro tvorbu Docker obrazu pro JIT kompilaci
+  \item \textbf{Api} - Obsahuje implementaci rozhraní služby.
+  \item \textbf{Extensions} - Implementuje extension metody specifické pro doménu služby.
+  \item \textbf{Monitoring} - Obsahuje statickou třídu, která drží reference na počítadla metrik.
+  \item \textbf{Service} - Ve složce jsou implementovány služby, které provádějí doménovou logiku služby.
+  \item \textbf{Properties} - Drží konfiguraci pro spuštění služby.
+  \item \textbf{Program.cs} - Obsahuje definici a konfiguraci služby, včetně jejího vstupního bodu.
+  \item \textbf{appsettings.json} - konfigurace služby.
+  \item \textbf{Dockerfile-AOT} - Soubor pro tvorbu Docker obrazu pro AOT kompilaci.
+  \item \textbf{Dockerfile-JIT} - Soubor pro tvorbu Docker obrazu pro JIT kompilaci.
 \end{itemize}
 
 Součástí řešení je společná konfigurace, která je využita ve všech službách. Ta je řešena jedna na úrovni solution souboru, tak i Directory.Build.props souboru. Týká se jednotné distribuce projektových atributů pro verzi, kompatibilitu s AOT, vynucení konkrétních pravidel pro kód a analyzéry.
@@ -119,7 +116,7 @@ Pro implementaci funkcionality aplikace byly využity následující knihovny t�
 
 \n{3}{Společné knihovny}
 
-V rámci zjednodušení tvorby služeb, jednotné implementaci a konfiguraci, ale také z důvodu zajištění některé základní ale klíčové funkcionality, byly vytvořeny společné knihovny. Tyto knihovny obsahují společné třídy, rozhraní a konfigurace, které jsou použity ve všech službách.
+V rámci zjednodušení tvorby služeb, jednotné implementace a konfigurace, ale také z důvodu zajištění některé základní klíčové funkcionality, byly vytvořeny společné knihovny. Tyto knihovny obsahují společné třídy, rozhraní a konfigurace, které jsou použity ve všech službách.
 
 \begin{itemize}
   \item \textbf{Persistence} - Pro implementaci persistence byla vytvořena pomocná knihovna \\ \emph{DTA.Extensions.Postgres}, která poskytuje pomocnou funkcionalitu pro zajištění existence databáze pro službu, dle konfigurace v řetězci pro připojení.
@@ -141,11 +138,7 @@ Služba poskytuje následující rozhraní
 
 \n{3}{FUS - File Upload Service}
 
-Služba v systému hraje roli zapisovacího zařízení, které zapisuje a čte data z perzistentního úložiště. Jakožto úložiště je využito PostgreSQL databáze. Služba využívá vlastní databázovou instanci a spravuje vlastní tabulky pomocí migrací definovaných SQL skripty. Pro přístup k persistence dat je využito knihovny knihovny Dapper, která umožňuje mapování databázových struktur na C\# objekty a vytváření a provádění dotazů na databázi.
-
-SRS poskytuje rozhraní formou REST API pro zápis a čtení dat. Daty je myšlen libovolný soubor v libovolném formátu. Samotná podstata nahraných dat není pro službu důležitá, ale je zpracována a uložena do databáze. Za účelem sehrání testovacích scénářů poskytuje služba také gRPC rozhraní, které je zajištěno na dedikovaném portu. V rámci gRPC komunikace slouží služba jako server, který splňuje volání vzdálené procudery.
-
-Služba poskytuje následující rozhraní
+Služba v systému hraje roli zapisovacího zařízení, které zapisuje a čte data z perzistentního úložiště. Jakožto úložiště je využito PostgreSQL databáze. Služba využívá vlastní databázovou instanci a spravuje vlastní tabulky pomocí migrací definovaných SQL skripty. Pro přístup k persistence dat je využito knihovny knihovny Dapper, která umožňuje mapování databázových struktur na C\# objekty a vytváření a provádění dotazů na databázi. SRS poskytuje rozhraní formou REST API pro zápis a čtení dat. Daty je myšlen libovolný soubor v libovolném formátu. Samotná podstata nahraných dat není pro službu důležitá, ale to že jsou uložena do databáze. Za účelem sehrání testovacích scénářů poskytuje služba také gRPC rozhraní, které je zajištěno na dedikovaném portu. V rámci gRPC komunikace slouží služba jako server, který splňuje volání vzdálené procudery. Služba poskytuje následující rozhraní:
 
 \begin{itemize}
     \item \textbf{GET /api/file/download/\{int:id\}} - Stáhne soubor podle zadaného ID.
@@ -155,11 +148,7 @@ Služba poskytuje následující rozhraní
 
 \n{3}{BPS - Business Processing Service}
 
-Pro splnění role a požadavků na zpracování dat z jiných služeb byla vytvořena služba BPS. Tato služba získává data, provádí náročné výpočetní operace, sloužící k simulaci obtížných doménových operací. Konkrétně implementaváno je neefiktivní rekurzivní výpočet Fibonacciho posloupnosti a faktoriálu.
-
-Služba se po spuštění přihlašuje k odběru zpráv na předem definovaný kanál \emph{simulated} na službe \emph{RabbitMQ}. Po získání zprávy získává data ze služby FUS pomocí volání vzdálené procedury. Po získání dat provádí náročné výpočetní operace, které jsou simulovány náhodným čekáním.
-
-Služba poskytuje následující rozhraní
+Pro splnění role a požadavků na zpracování dat z jiných služeb byla vytvořena služba BPS. Tato služba získává data, provádí náročné výpočetní operace, sloužící k simulaci obtížných doménových operací. Konkrétně implementaváno je neefiktivní rekurzivní výpočet Fibonacciho posloupnosti. Služba se po spuštění přihlašuje k odběru zpráv na předem definovaný kanál \emph{simulated} na službe \emph{RabbitMQ}. Po získání zprávy získává data ze služby FUS pomocí volání vzdálené procedury. Po získání dat provádí náročné výpočetní operace, které jsou simulovány náhodným čekáním. Služba poskytuje následující rozhraní:
 
 \begin{itemize}
     \item \textbf{GET /api/processFibonacci/\{int:degree\}} - Vypočítá číslo z Fibonacciho posloupnosti na zadané pozici náročným rekurzivním způsobem.
@@ -168,9 +157,7 @@ Služba poskytuje následující rozhraní
 
 \n{3}{EPS - Event Publishing Service}
 
-Jednoduchá službami umožňující vyvolat událost v systému a docílit spuštění dodatečných operací v systému. V systému simuluje roli vydavatele událostí Poskytuje REST API rozhraní pro vyvolání události. Po vyvolání události je zpráva publikována do RabbitMQ kanálu, kde je zpracována jinými službami.
-
-Služba poskytuje následující rozhraní
+Jednoduchá službami umožňující vyvolat událost v systému a docílit spuštění dodatečných operací v systému. V systému simuluje roli vydavatele událostí Poskytuje REST API rozhraní pro vyvolání události. Po vyvolání události je zpráva publikována do RabbitMQ kanálu, kde je zpracována jinými službami. Služba poskytuje následující rozhraní:
 
 \begin{itemize}
     \item \textbf{GET api/simulateEvent/\{int:id\}} - Vyvolá simulovanou událost s daným ID.
@@ -197,10 +184,9 @@ Pro monitorování aplikace byl zvolen Grafana Observability stack pro jeho pokr
   \item \textbf{OpenTelemetry} - Open source kolektor telemetrických dat. Poskytuje jednotný, vendor-agnostic způsob sběru, zpracování a exportu telemetrických dat  Je konfigurovatelný a podporuje více pipeline, které mohou upravovat telemetrická data při jejich průchodu. Výrazně zjednodušuje instrumentaci služeb, protože umožňuje agregovat a exportovat metriky, traces a logy do různých analytických a monitorovacích nástrojů. Poskytuje podporu pro export dat do Prometheus, Tempo i Loki.
 \end{itemize}
 
-Implementace Grafana Observability stacku je zajištěna pomocí obrazu nazvaného dta-lgtm a sestrojeného po vzoru Grafana LGTM (Loki, Grafana, Tempo a Mimir). Grafana LGTM kombinuje množinu monitorovacích nástrojů v rámci jediného obrazu s předchystanou konfigurací. Tím je odstíněna část konfigurace monitorovacího stacku a zjednodušen proces nasazení. Obraz použitý v rámci práce využívá kombinaci dříve zmíněných technologií (Loki, Tempo, Grafana, Prometheus a OpenTelemetry) zabalených a předkonfigurovaných v rámci Docker obrazu. Tím je v aplikaci zajištěno, že potřebná konfigurace pro vzájemné propojení nástrojů a datových zdrojů je předpřipravena. Stejně tak jsou součástí vytvořeného obrazu vlastní monitorovací dashboardy a vizualizace.
+Implementace Grafana Observability stacku je zajištěna pomocí obrazu nazvaného dta-lgtm a sestrojeného po vzoru Grafana LGTM (Loki, Grafana, Tempo a Mimir). Grafana LGTM kombinuje množinu monitorovacích nástrojů v rámci jediného obrazu s předchystanou konfigurací. Tím je odstíněna část konfigurace monitorovacího stacku a zjednodušen proces nasazení. Obraz použitý v rámci práce využívá kombinaci dříve zmíněných technologií (Loki, Tempo, Grafana, Prometheus a OpenTelemetry) zabalených a předkonfigurovaných v rámci Docker obrazu. Tím je v aplikaci zajištěno, že potřebná konfigurace pro vzájemné propojení nástrojů a datových zdrojů je předpřipravena. Stejně tak jsou součástí vytvořeného obrazu vlastní monitorovací dashboardy pro vizualizace.
 
-V rámci aplikace mají jednotlivé služby nastaven export svých logů, traces a metrik do OpenTelemetry, respektive na adekvátní rozhraní dta-lgtm. Služby využívají existujících metrů a logů, ale také vytváří vlastní metriky a logy. 
-Vlastní metriky zahrnují informace o počtu a druhu provedených operací.Z předpřipravených metrik, ať systémových nebo třetích strán jsou využity následující instrumentace:
+V rámci aplikace mají jednotlivé služby nastaven export svých logů, traces a metrik do OpenTelemetry, respektive na adekvátní rozhraní dta-lgtm. Služby využívají existujících metrů a logů, ale také vytváří vlastní metriky a logy. Vlastní metriky zahrnují informace o počtu a druhu provedených operací. Z předpřipravených metrik, ať systémových nebo třetích strán jsou využity následující instrumentace:
 
 \begin{itemize}
   \item \textbf{System.Runtime} - Metriky běhového prostředí .NET.
@@ -212,15 +198,11 @@ Vlastní metriky zahrnují informace o počtu a druhu provedených operací.Z p�
 
 \n{3}{Monitorování hostitelského systému}
 
-Monitorování hostitelského systému poskytuje pro aplikaci klíčové informace o využití zdrojů a výkonu, jak ze samotnéhé systému, tak i z jednotlivých kontejnerů. Pro monitorování Docker kontejnerů je využit nástroj CAdvisor. CAdvisor je schopen monitorovat kontejnery běžící na Dockeru, Kubernetes nebo jiných kontejnerových platformách. Poskytuje informace o využití procesoru, paměti, sítě a diskového I/O z pohledu hostitelského systému.
-
-NodeExporter Nástroj pro sběr metrik z hostitelského systému. Poskytuje informace o využití procesoru, paměti, sítě a diskového I/O. Dalším využitím nástrojem je NodeExporter. NodeExporter je nástroj pro sběr metrik z hostitelského systému. Obdobně jako CAdvisor poskytuje informace o využití procesoru, paměti, sítě a diskového I/O.
+Monitorování hostitelského systému poskytuje pro aplikaci klíčové informace o využití zdrojů a výkonu, jak ze samotnéhé systému, tak i z jednotlivých kontejnerů. Pro monitorování Docker kontejnerů je využit nástroj CAdvisor. CAdvisor je schopen monitorovat kontejnery běžící na Dockeru, Kubernetes nebo jiných kontejnerových platformách. Poskytuje informace o využití procesoru, paměti, sítě a diskového I/O z pohledu hostitelského systému. Dalším využitým nástrojem je NodeExporter. NodeExporter je nástroj pro sběr metrik z hostitelského systému. Obdobně jako CAdvisor poskytuje informace o využití procesoru, paměti, sítě a diskového I/O.
 
 \n{2}{Testovací nástroje}
 
-Za účelem testování monitorovacího stacku byl vybrán nástroj K6. Jedná se o moderní open-source nástroj pro zátěžové testování. Slouží k vytváření, provádění a analýze výkonnostních testů softwarových aplikací. Nabízí jednoduché skriptovací rozhraní v jazyce JavaScript. Umožňuje psát komplexní testovací scénáře napodobující reálný provoz systému, nebo simulovat hraniční situace. K6 podporuje různé systémové metriky, jako je doba odezvy, propustnost a chybovost. Nabízí šiřoké možnosti rozšíření skrze API, což umožňuje přizpůsobení a integraci s dalšími nástroji pro komplexní sledování výkonu.
-
-Za účelem zjednodušení procesu testování a zajištění opakovatelnosti testovacích scénářů byly vytvořeny skripty pro spuštění testů. Tyto skripty zajišťují opakovatelné spouštění testů v rámci Docker kontejneru s nastavitelnými parametry. Skripty jsou vytvořeny v jazyce Bash a využívají nástroje K6 pro spuštění testů a zpracování výsledků.
+Za účelem testování monitorovacího stacku byl vybrán nástroj K6. Jedná se o moderní open-source nástroj pro zátěžové testování. Slouží k vytváření, provádění a analýze výkonnostních testů softwarových aplikací. Nabízí jednoduché skriptovací rozhraní v jazyce JavaScript. Umožňuje psát komplexní testovací scénáře napodobující reálný provoz systému, nebo simulovat hraniční situace. K6 podporuje různé systémové metriky, jako je doba odezvy, propustnost a chybovost. Nabízí šiřoké možnosti rozšíření skrze API, což umožňuje přizpůsobení a integraci s dalšími nástroji pro komplexní sledování výkonu. Pro zjednodušení procesu testování a zajištění opakovatelnosti testovacích scénářů byly vytvořeny skripty pro spuštění testů. Tyto skripty zajišťují opakovatelné spouštění testů v rámci Docker kontejneru s nastavitelnými parametry. Skripty jsou vytvořeny v jazyce Bash a využívají nástroje K6 pro spuštění testů a zpracování výsledků.
 
 \n{2}{Nasazení aplikace}
 
@@ -256,8 +238,7 @@ Orchestrace aplikace je zprostředkována rovněž nástrojem Docker, konkrétn�
 
 Za účelem běhu aplikace je klíčové správné nastavení konfigurace. Konfigurace je řešena na různých úrovních. Základní úroveň představuje soubor \emph{compose.yaml}.  Dále jsou v tomto souboru nastaveny základní parametry jako je jméno sítě, názvy volume (persistentní úložiště orchestrátoru), závislosti mezi službami a další. V neposlední řadě je dílčí konfigurace jednotlivých služeb řešena v rámci konfiguračních souborů a proměnných prostředí. 
 
-Nastavení směrování v rámci stacku je řešeno konfigurací proxy služby Nginx. 
-Za tímto účelem obsahuje dva klíčové soubory, rozcestník v podobně statického index.html souboru a konfigurační nginx.conf soubor se směrovacími pravidly. Oba zmíněné soubory jsou do služby připojeny formou mapování virualizovaného repozitáře kontejneru. Směrovací pravidla jsou následující:
+Nastavení směrování v rámci stacku je řešeno konfigurací proxy služby Nginx. Za tímto účelem obsahuje dva klíčové soubory, rozcestník v podobně statického index.html souboru a konfigurační nginx.conf soubor se směrovacími pravidly. Oba zmíněné soubory jsou do služby připojeny formou mapování virualizovaného repozitáře kontejneru. Směrovací pravidla jsou následující:
 
 \begin{itemize}
     \item / - cesta na statickou hlavní stránku-rozcestník aplikace
