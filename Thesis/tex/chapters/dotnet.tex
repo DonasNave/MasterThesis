@@ -94,7 +94,7 @@ Dalším příkladem projektového souboru je \emph{.fsproj} pro F\# projekty, \
 
 \n{2}{Kompilace zdrojového kódu}
 
-Kompilace je proces transformace zdrojového kódu do jiné podoby. Kód je zpravidla kompilován do podoby bližší cílové architektuře, ať je touto architekturou OS, případně konkrétní HW, nebo runtime prostředí (virtuální stroj). \cite{Richter2012} V rámci .NET jsou k dispozici dva hlavní režimy kompilace zdrojového kódu pro PC platformy: kompilace pro běhové prostředí (CLR) a kompilace do nativního kódu přímo pro cílovou architekturu (native AOT).
+Kompilace je proces transformace zdrojového kódu do jiné podoby. Kód je zpravidla kompilován do podoby bližší cílové architektuře, ať je touto architekturou OS, případně konkrétní hardware (dále HW), nebo runtime prostředí (virtuální stroj). \cite{Richter2012} V rámci .NET jsou k dispozici dva hlavní režimy kompilace zdrojového kódu pro PC platformy: kompilace pro běhové prostředí (CLR) a kompilace do nativního kódu přímo pro cílovou architekturu (native AOT).
 
 Cílem kompilace je převést zdrojový kód do podoby, kterou je možné spustit na cílovém zařízení. Platforma .NET podporuje zacílit na různá zařízení. Typickým cílem kompilace jsou platformy PC. Proces probíhá následujícím způsobem. V případě aplikace běžící v CLR, je kód kompilován do jazyka IL a poté spouštěn prostřednictvím běhového prostředí, přičemž je za běhu převeden na nativní kód. \cite{Richter2012} Pro situace, kdy CLR není k dispozici nebo nemůže být využito, lze použít kompilace AOT pro vygenerování nativního kódu. \cite{Pflug2023} Pro zacílení na mobilní platformy je využito frameworku .NET MAUI ke kompilaci nativní aplikace pro speciální běhové prostředí v Android nebo iOS. \cite{Libery2023}
 

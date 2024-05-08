@@ -5,11 +5,11 @@
 
 \n{1}{Testování scénářů}
 
-Testování scénářů je klíčovou součástí testování výkonu mikroslužeb. Scénáře jsou definovány jako soubor kroků, které mají být provedeny, a jsou použity k simulaci zátěže na mikroslužby. Scénáře jsou vytvořeny pomocí testovacích nástrojů, které umožňují vytvářet a spouštět testy, které simuluji reálné uživatelské scénáře.
+Cílem práce je prouzkomat dopady kompilace AOT a JIT na výkon. Pokouší se určit, která strategie kompilace nabízí lepší výkon při různém zatížení a podmínkách. Za tímto účelem jsou využity testovací scénáře. Obsahem této kapitoly je definování metodiky a náležitostí testování aplikace vytvořené v předešlé kapitole. Jsou zde vyřčeny hypotézy a očekávání na chování aplikace. Následně jsou popsány jednotlivé scénáře, které jsou vytvořeny pro testování .NET služeb za specifických podmínek.
 
 \n{2}{Metodika testování}
 
-Jedním z cílů práce je prouzkomat dopady kompilace AOT a JIT na výkon. Pokouší se určit, která strategie kompilace nabízí lepší výkon při různém zatížení a podmínkách. Metriky výkonu jsou shromážděny z dat o výkonu systému, doby odezvy služeb a využití zdrojů během standardizovaných testů. Experimentální nastavení zahruje dvě hlavní součásti, řízení testovacího prostředí a testovací služby. Tyto služby jsou sestaveny ze stejné (až na vybranné nekompatibilní API) kódové báze v kompilačních režimech AOT i JIT. Testovací prostředí bylo standardizováno ve všech experimentech, aby bylo zajištěno, že jakékoli pozorované rozdíly ve výkonu lze připsat výhradně metodám kompilace a nikoli variantách hardwaru nebo softwaru. Testy budou prováděny na identických hardwarových nastaveních s následujícími specifikacemi:
+Testování je prováděno za účelem získání kvantitativních dat o výkonu služeb. Metriky výkonu jsou shromážděny z dat aplikace, doby odezvy služeb a využití zdrojů během standardizovaných testů. Experimentální nastavení zahruje dvě hlavní součásti, řízení testovacího prostředí a testovacích služeb. Tyto služby jsou sestaveny ze stejné (až na vybrané nekompatibilní API) kódové báze v kompilačních režimech AOT i JIT. Testovací prostředí bylo standardizováno ve všech experimentech, aby bylo zajištěno, že jakékoli pozorované rozdíly ve výkonu lze připsat výhradně metodám kompilace a nikoli variantách HW nebo SW. Testy budou prováděny při identických nastaveních HW s následujícími specifikacemi:
 
 \begin{itemize}
     \item \textbf{Operační systém}: macOS Sonoma 14.4.1
@@ -17,7 +17,7 @@ Jedním z cílů práce je prouzkomat dopady kompilace AOT a JIT na výkon. Poko
     \item \textbf{Paměť}: 8 GB LPDDR4X
 \end{itemize}
 
-Operační systém a všechny služby na pozadí budou udržovány konzistentní, aby se minimalizovaly vnější vlivy na výsledky výkonu. Testovaným službám budou omezeny zdroje v orchestraci, aby se zabránilo nespravedlivé výhodě služby v jedné kompilaci před druhou. Služby budou připraveny do obrazů a použity v rámci orchestrace pomocí kontejnerů. Jednotlivé obrazy jsou založeny na architektuře Arm64 a Linuxových distribucích Alpine. Sběr dat je automatizován pomocí kombinace nástrojů pro monitorování systému a skriptů. K sběru dat hostitelského systému byl použit Cadvisor a Node Explorer. Telemetrie jednotlivých služeb je sbírána implementovanými metry a exportována do kolektoru OpenTelemetry. Testovací data jsou získána exportem výsledků testů do InfluxDB. Statické informace o průběhu a výstupech kopilace jsou získány kombinací nástroje .NET CLI, Docker a souborového systému. K porovnání strategií kompilace při různých podmínkách využívají testovací služby vybrané scénáře testující propustnost a vytížení zdrojů. Úlohy prováděné ve scénářích vystavují služby datovým transakcím, přístupů k externím zdrojům, komunikací pomocí různých metodik anebo samotné spuštění v rámci orchestrace. Údaje o výkonnosti budou analyzovány pomocí statistických metod, aby se určily významné rozdíly mezi službami kompilovanými v režimu AOT a JIT. 
+Operační systém a všechny služby na pozadí budou udržovány konzistentní, aby se minimalizovaly vnější vlivy na výsledky výkonu. Testovaným službám budou omezeny zdroje v orchestraci, aby se zabránilo nespravedlivé výhodě služby v jedné kompilaci před druhou. Služby budou připraveny do obrazů a použity v rámci orchestrace pomocí kontejnerů. Jednotlivé obrazy jsou založeny na architektuře ARM 64bit a Linuxových distribucích Alpine. Sběr dat je automatizován pomocí kombinace nástrojů pro monitorování systému a skriptů. K sběru dat hostitelského systému byl použit Cadvisor a Node Explorer. Telemetrie jednotlivých služeb je sbírána implementovanými metry a exportována do kolektoru OpenTelemetry. Testovací data jsou získána exportem výsledků testů do InfluxDB. Statické informace o průběhu a výstupech kopilace jsou získány kombinací nástroje .NET CLI, Docker a souborového systému. K porovnání strategií kompilace při různých podmínkách využívají testovací služby vybrané scénáře testující propustnost a vytížení zdrojů. Úlohy prováděné ve scénářích vystavují služby datovým transakcím, přístupů k externím zdrojům, komunikací pomocí různých metodik anebo samotné spuštění v rámci orchestrace. Údaje o výkonnosti budou analyzovány pomocí statistických metod, aby se určily významné rozdíly mezi službami kompilovanými v režimu AOT a JIT. 
 
 \n{3}{Hypotézy}
 
@@ -26,7 +26,7 @@ Na základě předběžného přehledu literatury a teoretických výhod každé
 \begin{itemize}
     \item \textbf{Hypotéza 1}: Vývoj služeb bude možný za pomocí obou kompilačních režimů, s minimálními rozdíly v použitém API a systémových knihovnách. Při použití knihoven 3. stran bude dostatečně jasná kompatibilita mezi oběma režimy.
     \item \textbf{Hypotéza 2}: Kompilace AOT má za následek rychlejší spouštění, ale bude vést k větším binárním velikostem aplikace ve srovnání s kompilací JIT. Výsledný virtualizovaný obraz aplikace bude ovšem mít výrazně nižší velikost kvůli absenci .NET runtime.
-    \item \textbf{Hypotéza 3}: Kompilace AOT poskytuje lepší optimalizaci výkonu díky generování typů a funkcí, jež by museli být dodatečně tvořeny za běhu. Tím pádem je očekáváno, že služby kompilované do nativního kódu budou mít nižší řežii procesoru. Přítomnost staticky generovaných typů a funkcí však může způsobit vyšší paměťovou zátěž. Vytížení I/0 operací bude srovnatelné.
+    \item \textbf{Hypotéza 3}: Kompilace AOT poskytuje lepší optimalizaci výkonu díky generování typů a funkcí, jež by museli být dodatečně tvořeny za běhu. Tím pádem je očekáváno, že služby kompilované do nativního kódu budou mít nižší řežii procesoru. Přítomnost staticky generovaných typů a funkcí však může způsobit vyšší paměťovou zátěž. Vytížení I/O operací bude srovnatelné.
 \end{itemize}
 
 \n{2}{Cíle porovnání služeb}
@@ -34,9 +34,9 @@ Na základě předběžného přehledu literatury a teoretických výhod každé
 Za účelem dosažení cílů této práce a porovnání .NET služeb v kompilačních režimech JIT a AOT jsou definovány cíle porovnání. Identifikují oblasti zájmu, které budou zkoumány a analyzovány v rámci vývoje, výstupu a experimentálního testování. Tyto cíle zahrnují:  
 
 \begin{itemize}
-  \item \textbf{Zkušenosti s vývojem} - Jedním z klíčových cílů je zachytit a analyzovat dopad různých kompilačních strategií na proces vývoje. To zahrnuje sledování doby sestavení, cyklů nasazení a celkové komplexity integrace a nasazení služeb v rámci architektury microservice. Posouzením těchto faktorů lze poskytnout subjektivní i objektivní náhled na to, jak jednotlivé metody kompilace ovlivňují každodenní fungování vývojářů, včetně potenciálních problémů nebo efektivity, které přinášejí kompilační režimy JIT nebo AOT.
-  \item \textbf{Srovnání výstupů} - Tento cíl se zaměřuje na přímé porovnání programových výstupů metod kompilace JIT a AOT. Konkrétně se bude sledovat velikost vytvořených spustitelných souborů, inicializační časy (jak rychle jsou služby po nasazení funkční) a využití zdrojů během běhu (využití procesoru a paměti). Pochopení těchto aspektů pomůže vymezit provozní efektivitu nebo režijní náklady spojené s každou kompilační strategií.
-  \item \textbf{Výkonnostní metriky} - Pro tuto práci je rozhodující porovnání výkonnostních ukazatelů za podobných provozních podmínek. Mezi sledované metriky patří doba odezvy, propustnost (počet požadavků, které je služba schopna zpracovat za jednotku času), chybovost a stabilita systému při zatížení. Tyto ukazatele poskytnou kvantitativní základ pro porovnání účinnosti kompilací JIT a AOT při zvládání reálné provozní zátěže.
+  \item \textbf{Zkušenosti s vývojem} - Jedním z klíčových cílů je zachytit a analyzovat dopad různých kompilačních strategií na proces vývoje. To zahrnuje přípravu prostředí, sledování doby sestavení, celkové komplexity integrace a nasazení služeb v rámci architektury microservice. Posouzením těchto faktorů lze poskytnout subjektivní i objektivní náhled na to, jak jednotlivé metody kompilace ovlivňují každodenní fungování vývojářů, včetně potenciálních problémů nebo ztráty efektivity, které přinášejí kompilační režimy JIT nebo AOT.
+  \item \textbf{Srovnání výstupů} - Tento cíl se zaměřuje na přímé porovnání programových výstupů metod kompilace JIT a AOT. Konkrétně se bude sledovat velikost vytvořených spustitelných souborů napříč platformami a architekturou. S tím je spojena analýza velikosti obrazů služeb, které hrají primární roli v kontejnerizovaném nasazení. Pochopení těchto výstupů pomůže pochopit vliv platformy a architektury na výsledné binární soubory. Zároveň bude ověřena úspora velikosti obrazů v rámci AOT kompilace.
+  \item \textbf{Výkonnostní metriky} - Pro tuto práci je rozhodující porovnání výkonnostních ukazatelů za podobných provozních podmínek. Mezi sledované metriky patří doba odezvy, propustnost (počet požadavků, které je služba schopna zpracovat za vybrané scénáře) a chybovost. Hodnota doby odezvy bude ve specifických případech měřena včetně startu kontejneru. Tyto ukazatele poskytnou kvantitativní základ pro porovnání výkonu kompilací JIT a AOT při zvládání reálné provozní zátěže.
 \end{itemize}
 
 Dosažení těchto cílů stojí na dodržení metodiky a korektním analyzování aplikace. Je klíčové získat dostatečné poznatky, zkušenosti, výstupy a monitorovací data. Na jejich základě budou podpořena informovaná rozhodnutí týkající se optimálního využití kompilací JIT a AOT při vývoji mikroslužeb.
@@ -45,16 +45,14 @@ Dosažení těchto cílů stojí na dodržení metodiky a korektním analyzován
 
 Scénáře jsou vytvořeny jako množina JavaScript souborů splňujících požadavky API nástroje K6. Každý scénář je definován přes jeden nebo více scriptových souborů. Tyto soubory obsahují kroky, které mají být provedeny, a data, která mají být použita. Pro sjednocení obecných nastavení jsou vytvořený konfigurační soubory, které jsou využity ve více scénářích. V rámci scénářů jsou využíváni Virtual Users (dále VUs), což jsou virtuální uživatelé nástroje K6, jenž vykonávají funkci definovanou v testovém skriptu. Konfigurace VUs je specifická pro každý scénář a je součástí skriptu. Pro zjednodušené a automatizované spuštění testovacích scénářů jsou definovány runner skripty, které zajišťují spuštění testů spolu se správou orchestrace.
 
-Pro dodatečnou identifikaci dat jednotlivých scénářů je užito InfluxDB tagů, které jsou přidány k jednotlivým voláním v testech. Tím je zajištěno, že data z jednotlivých scénářů jsou jednoznačně identifikována a lze je následně zpracovat. 
+Pro dodatečnou identifikaci dat jednotlivých scénářů je užito InfluxDB tagů, které jsou přidány k jednotlivým voláním v testech. Tím je zajištěno, že data z jednotlivých scénářů jsou jednoznačně identifikována a lze je následně zpracovat. Tagy jsou definovány následovně:
 
 \begin{itemize}
     \item \textbf{dta\_service} - Značka pro identifikaci služby, která je testována. Má standardní formát hodnot \emph{Služba-Kompilační režim}, kdy služba může nabývat hodnot \emph{SRS, FUS, BPS, EPS} a kompilační režim nabývá hodnot \emph{JIT, AOT}.
     \item \textbf{test\_scenario} - Značka pro identifikaci scénáře, který je testován. Má standardní formát hodnot \emph{scenario 
     + číslo}.
-    \item \textbf{test\_id} - Identifikátor konkrétního testovacího scénáře. Nabývá libovolné hodnoty a slouží pro identifikaci konkrétních instancí, tedy spuštění testovacího scénáře.
+    \item \textbf{test\_id} - Identifikátor konkrétního testovacího scénáře. Nabývá libovolné hodnoty a slouží pro identifikaci konkrétních instancí, tedy spuštění testovacího scénáře. Výchozí hodnota je časová značka UNIX timestamp ve formátu vteřin.
 \end{itemize}
-
-Každý scénař má definován vlastní dashboard v Grafaně, který je využit pro sledování výsledků testů v reálném čase. Zároveň je součástní každého scénáře readme soubor, jenž podrobněji popisuje jednotlivé kroky a data, která jsou využita.
 
 \n{2}{Popis scénářů}
 
@@ -62,7 +60,7 @@ Následující sekce obsahuje popis scénářů, které byly vytvořeny pro test
 
 \n{3}{Scénář 1 - Výkonnost komunikace}
 
-Scénář 1 je zaměřen na schopnost mikroslužeb odpovídat na požadavky. K tomuto účelu je využit základní endpoint \emph{/health}, který informuje o stavu služby. Scénář je vytvořen tak, aby simuloval zátěž na mikroslužby a zjišťoval, zda jsou schopny odpovídat na požadavky. Jelikož healthcheck endpoint je triviální ve své implementaci, nehraje roli další režie spojená se zpracováním logiky požadavku. Tímto je zajištěno, že se otestuje maximální vliv jednotlivých nasazení na výkon a škálovatelnost mikroslužeb. Scénář se dělí na více kroků, aby při každém byl zjištěn dostatek zdrojů pro v systému pro testovanou službu. Krok je proveden vždy po určitém časovém intervalu, který je definován v konfiguračním souboru testu.
+Scénář 1 je zaměřen na schopnost mikroslužeb odpovídat na požadavky. K tomuto účelu je využit základní endpoint \emph{/health}, který informuje o stavu služby. Scénář je vytvořen tak, aby simuloval vysoký počet požadavků na mikroslužby a zjišťoval, jak výkonné jsou jednotlivé služby při odpovídání. Jelikož healthcheck endpoint je triviální ve své implementaci, nehraje roli další režie spojená se zpracováním logiky požadavku. Tímto je zajištěno, že se otestuje maximální vliv jednotlivých nasazení na výkon mikroslužeb. Scénář se dělí na více kroků. Jednotlivé služby jsou rovněž otestovány individuálně, aby byl zajištěn dostatek zdrojů pro testovanou službu.
 
 \obr{Diagram scénáře 1}{fig:logo}{0.75}{graphics/diagrams/stack-scenario1.png}
 
@@ -76,7 +74,7 @@ Relevantní služby pro tento scénář jsou všechny služby, které mají defi
 
 \n{3}{Scénář 2 - Přístup k perzistenci}
 
-Cílem tohoto scénáře je otestovat schopnost poradit si s vysokým množství asynchroních operací přístupu k datům. Scénář se pokouší identifikovat dodatečné režie spojené s přístupem k perzistenci a zjišťuje, zda jsou služby schopny zpracovat vysoký počet požadavků na databázi. Zejména je cílem pozorovat potencionál rozdíl v přístupu AOT a JIT zkompilované služby k systémovému API.
+Cílem tohoto scénáře je otestovat výkonnost při zpracování množství požadavků na přístup k datům v perzistenci. Scénář se pokouší identifikovat dodatečné režie spojené s přístupem k databázi a zjišťuje, jak se služby při něm chovají. Zejména je cílem pozorovat potencionál rozdíl ve využití paměti jednotlivých služeb kompliovaných AOT a JIT.
 
 \obr{Diagram scénáře 2}{fig:logo}{0.85}{graphics/diagrams/stack-scenario2.png}
 
@@ -90,7 +88,7 @@ Pro scénář je relevantní pouze služba FUS, která poskytuje rozhraní pro z
 
 \n{3}{Scénář 3 - Výpočetní zátěž}
 
-Cílem tohoto scénáře je otestovat schopnost mikroslužeb v jednotlivých kompilacích zpracovat náročnější operace. Scénář se zaměřuje na samotnou podstatu přístupu k vnitřnímu systémového API, efektivitě jeho využití a další režii, která by mohla být odlišná mezi JIT a AOT kompilací. Předmětem scénáře je výpočet 40-tého čísla Fibonacciho posloupnosti rekurzivní metodou. Algoritmus je implementován v rámci služby a volán zvenčí pomocí Rest API. Scénář je vytvořen tak, aby simuloval zátěž na službu a prozkoumal tak potencionální výkonnostní rozdíly v rámci přístupu k systémovému API a vyžížení zdrojů.
+Cílem tohoto scénáře je otestovat schopnost mikroslužeb v jednotlivých kompilacích zpracovat náročnější operace. Scénář se zaměřuje na samotnou podstatu přístupu k vnitřnímu systémového API, efektivitě jeho využití a další režii, která by mohla být odlišná mezi JIT a AOT kompilací. Předmětem scénáře je výpočet 40-tého čísla Fibonacciho posloupnosti rekurzivní metodou. Algoritmus je implementován v rámci služby a volán zvenčí pomocí Rest API. Scénář je vytvořen tak, aby simuloval zátěž na službu a prozkoumal tak potencionální výkonnostní rozdíly v rámci přístupu k systémovému API a vyžížení zdrojů. Vyšší počet požadavků rovněž testuje schopnosti paralelního zpracování.
 
 \obr{Diagram scénáře 3}{fig:logo}{0.9}{graphics/diagrams/stack-scenario3.png}
 
@@ -104,10 +102,9 @@ Ve scénáři má význam pouze BPS služba, která poskytuje rozhraní a logiku
 
 \n{3}{Scénář 4 - Vzájemná komunikace služeb}
 
-Tento scénář je zaměřen na rychlost a zátěž celkového systému při splnění požadavků vyžadující komunikaci mezi službami. Scénář je vytvořen tak, aby vyvolal událost z jedné služby, která je zpracována jinou službou. Pro splnění události je potřeba dat z perzistentního úložiště, která jsou získána ze třetí služby.
+Tento scénář je zaměřen na rychlost a zátěž celkového systému při splnění požadavků vyžadující komunikaci mezi službami. Scénář je vytvořen tak, aby vyvolal událost a vynutil přenos dat a zpracování v jiných službách. Snaží se identifikovat rozdílnou režii mezi kompilacemi JIT a AOT při složitější operaci u množiny služeb jako celku.
 
 \obr{Diagram scénáře 4}{fig:logo}{1}{graphics/diagrams/stack-scenario4.png}
-
 
 Pro tento scénář jsou relevantní tři služby, které spolu komunikují. FUS hraje roli serveru, na něž se dotáže klient gRPC voláním. Následně přistupuje k perzistenci pro získání dat k splnění volání. BPS poslouchá nad předem definovanou frontou a vyčkává na zprávu pro zpracování. V momentu přijetí zprávy, zpracovává vyvolanou událost a získává data pomocí vzdáleného volání procedury z FUS. EPS na základě přijatého volání přes REST API, zasílá služba EPS zprávu do předem definované fronty, na niž naslouchá BPS. Průběh scénáře je následující:
 
@@ -126,11 +123,11 @@ Pro tento scénář jsou relevantní tři služby, které spolu komunikují. FUS
 
 \n{3}{Scénář 5 - Rychlost odpovědi po startu služby}
 
-Cílem tohoto scénáře je otestovat rychlost spuštění služby. Scénář testuje, jak rychle je služba schopna odpovědět na požadavek po spuštění. V rámci testu jsou testovány různé endpointy, které jsou volány po spuštění služby. Základem scénáře je pomocí CLI příkazů vyvolat spuštění služby a ihned po jejím spuštění zaslat požadavek na získání dat. Tímto je zjištěno, že měření rychlosti odpovědi je závislé na rychlosti spuštění služby a její připravenosti k zpracování požadavku. 
+Cílem tohoto scénáře je otestovat rychlost spuštění služby. Scénář testuje, jak rychle je služba schopna odpovědět na požadavek po spuštění. V rámci testu je testován pouze healthcheck endpoint pro oddělení potencionální doménové režie od výsledného času. Základem scénáře je pomocí CLI příkazů vyvolat spuštění služby a ihned po jejím spuštění zaslat požadavek na získání dat. Tímto je zjištěno, že měření rychlosti odpovědi je závislé na rychlosti spuštění služby a její připravenosti k zpracování požadavku. 
 
 \obr{Diagram scénáře 5}{fig:logo}{0.8}{graphics/diagrams/stack-scenario5.png}
 
-Pro scénář je využita pouze SRS. Služba je testována pro svoji jednoduchost a nízkou režii odpovědi za účelem zvýšení vlivu samotného načtení služby z celkové doby požadavku. Průběh scénáře je následující:
+Pro scénář je využita pouze SRS. Průběh scénáře je následující:
 
 \begin{itemize}
     \item \textbf{Krok 1} - Dochází k zahájení časového měření a spuštění služby v rámci stacku dle konfigurace.
@@ -144,20 +141,10 @@ Pro scénář je využita pouze SRS. Služba je testována pro svoji jednoduchos
 
 \n{2}{Spouštění scénářů}
 
-Jednotlivé scénáře jsou spouštěny formou pomocných runner skriptů v jazyce Bash. Tyto scripty představují zjednodušenný způsob spuštění testů a zajišťují správu orchestrace testů, včetně spouštění a ukončování služeb, označení a exportování výsledků testů. Runner skripty mají jeden obecný parametr, kterým je identifikátor testu. Tento identifikátor je následně použit pro identifikaci výsledků testu a pro zobrazení výsledků v Grafaně.
+Jednotlivé scénáře jsou spouštěny formou pomocných runner skriptů v jazyce Bash. Tyto scripty představují zjednodušenný způsob spuštění testů a zajišťují správu orchestrace testů, včetně spouštění a ukončování služeb, označení a exportování výsledků testů. Runner skripty mají jeden obecný parametr, kterým je identifikátor testu. Tento identifikátor je následně použit pro identifikaci výsledků testu a pro zobrazení výsledků v Grafaně. Jednotlivé skripty jsou pojmenovány dle čísla scénáře, který spouští. Pro spuštění testů je nutné mít buď nastavené prostředí s nainstalovanými nástroji K6 a Docker, nebo upravit konfiguraci skriptu pro spuštění testů v rámci kontejneru.
 
 \n{2}{Zpracování a vizualizace dat}
 
-Po provedení testování scénářů je nutné zpracovat a vizualizovat data, která byla získána. To zahrnuje jejich získání z patřičných zdrojů, zpracování, uložení a následné zprostředkování.
+Po provedení testování scénářů je nutné zpracovat a vizualizovat data, která byla získána. Data z průběhu testů jednotlivých scénářů jsou zpracována pomocí InfluxDB a zobrazena prostřednictvím Grafany. Týkající se výstupu nástroje K6 a v případě scénáře 5 pouze konkrétní metriky napřímo vložené po vzoru exportu K6 do jeho databáze v InfluxDB. Data o výkonu kontejnerů jsou získávána pomocí OpenTelemetry metrů z testovaných služeb a pomocí NodeExporteru a Cadvisor z hostitelského systému. Tato data jsou zaslána a spravována ve službě Prometheus a zprostředkována Grafaně formou data source. Jednotlivé .NET služby zprostředkovávají monitorovací data exportem metrik do OpenTelemetry kolektoru, který je následně dle druhu propaguje do jednotlivých služeb Loki, Tempo a Prometheus.
 
-\n{3}{Zpracování dat}
-
-Data z průběhu testů jednotlivých scénářů jsou zpracována pomocí InfluxDB a zobrazena prostřednictvím Grafany. Týkající se výstupu nástroje K6 a v případě scénáře 5 pouze konkrétní metriky napřímo vložené po vzoru exportu K6 do jeho databáze v InfluxDB. Data o výkonu kontejnerů jsou získávána pomocí OpenTelemetry metrů z testovaných služeb a pomocí NodeExporteru a Cadvisor z hostitelského systému. Tato data jsou zaslána a spravována ve službě Prometheus a zprostředkována Grafaně formou data source.
-
-\n{3}{Monitorování v reálném čase}
-
-Monitorování v reálném čase je klíčovou součástí testování výkonu a škálovatelnosti mikroslužeb. Umožňuje sledovat výkon a škálovatelnost mikroslužeb při běhu testů. Toho je docíleno využitím dashboardů v Grafaně, důkladnou konfigurací a zobrazením metrik, kterých sběr je implementován v rámci mikroslužeb. Dalším aspektem monitorování v reálném čase je zobrazení výsledků testů v reálném čase. Toho je rovněž docíleno pomocí specifických dashboardů v Grafaně, které integrují data z K6 testovacího nástroje a zaslané do InfluxDb. Díky propojení Grafany s InfluxDb je možné sledovat výsledky testů taktéž v reálném čase.
-
-\n{3}{Sběr historických dat}
-
-Historická data jsou automaticky ukládána do jednotlivých databází při sběru. Po propagaci telemetrických dat do jednotného collectoru OpenTelemetry jsou data dále poskytována službám Loki, Tempo a Prometheus. Ty jedna jednotlivá telemetrická data zpracují, zároveň ale slouží jako jejich perzistence. Data z výsledků testů K6 jsou ukládána do InfluxDb. Výkonnostní data z hostitelského systému jsou sbírana ze služby NodeExporter přimo do Prometheus v pravidelných intervalech.
+Vizualizace dat je zajištěna pomocí Grafany, respektive dahboardů pro jednotlivé scénáře. Ty mají nastaveny panely s relevantními daty pro daný scénář. Všechny scénáře jsou doplněny o společné panely, jenž slouží k zobrazení režie kontejnerů. Mimo to jsou vytvořeny dashboardy s obecnými daty o výkonu a zátěži služeb.
