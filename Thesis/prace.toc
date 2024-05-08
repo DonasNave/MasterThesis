@@ -55,7 +55,7 @@
 \contentsline {subsubsection}{\numberline {4.4.1}Architektura}{47}{subsubsection.4.4.1}%
 \contentsline {subsubsection}{\numberline {4.4.2}Očekávání vývojového procesu}{47}{subsubsection.4.4.2}%
 \contentsline {subsubsection}{\numberline {4.4.3}Organizace souborů}{48}{subsubsection.4.4.3}%
-\contentsline {subsubsection}{\numberline {4.4.4}Knihovny třetích stran}{50}{subsubsection.4.4.4}%
+\contentsline {subsubsection}{\numberline {4.4.4}Knihovny třetích stran}{49}{subsubsection.4.4.4}%
 \contentsline {subsubsection}{\numberline {4.4.5}Společné knihovny}{50}{subsubsection.4.4.5}%
 \contentsline {subsubsection}{\numberline {4.4.6}SRS - Signal reading service}{51}{subsubsection.4.4.6}%
 \contentsline {subsubsection}{\numberline {4.4.7}FUS - File Upload Service}{51}{subsubsection.4.4.7}%
@@ -68,7 +68,7 @@
 \contentsline {subsection}{\numberline {4.7}Nasazení aplikace}{56}{subsection.4.7}%
 \contentsline {subsubsection}{\numberline {4.7.1}Přehled řešení}{56}{subsubsection.4.7.1}%
 \contentsline {subsubsection}{\numberline {4.7.2}Kontejnerizace a orchestrace}{56}{subsubsection.4.7.2}%
-\contentsline {subsubsection}{\numberline {4.7.3}Konfigurace nasazení}{57}{subsubsection.4.7.3}%
+\contentsline {subsubsection}{\numberline {4.7.3}Konfigurace nasazení}{58}{subsubsection.4.7.3}%
 \contentsline {section}{\numberline {5}Testování scénářů}{60}{section.5}%
 \contentsline {subsection}{\numberline {5.1}Metodika testování}{60}{subsection.5.1}%
 \contentsline {subsubsection}{\numberline {5.1.1}Hypotézy}{61}{subsubsection.5.1.1}%

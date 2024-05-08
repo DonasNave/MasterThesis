@@ -4,8 +4,8 @@
 \contentsline {figure}{\numberline {2.2}{\ignorespaces Microservice architektura\relax }}{28}{figure.caption.7}%
 \contentsline {figure}{\numberline {2.3}{\ignorespaces Circuit Breaker vzor\relax }}{29}{figure.caption.8}%
 \contentsline {figure}{\numberline {2.4}{\ignorespaces Repository vzor\relax }}{32}{figure.caption.9}%
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Stromová struktura projektu\relax }}{48}{figure.caption.10}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Stromová struktura služby\relax }}{49}{figure.caption.11}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Struktura adresáře projektu\relax }}{48}{figure.caption.10}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Struktura adresáře služby\relax }}{49}{figure.caption.11}%
 \contentsline {figure}{\numberline {4.3}{\ignorespaces Diagram .NET služeb a závislých služeb\relax }}{53}{figure.caption.12}%
 \contentsline {figure}{\numberline {4.4}{\ignorespaces Diagram nasazení aplikace\relax }}{57}{figure.caption.13}%
 \contentsline {figure}{\numberline {5.1}{\ignorespaces Diagram scénáře 1\relax }}{64}{figure.caption.14}%

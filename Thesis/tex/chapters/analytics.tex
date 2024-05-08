@@ -116,7 +116,7 @@ Testování přineslo rozdílné výkonostní výsledky mezi JIT a AOT kompilac�
 
 \n{3}{Scénář 2 - Přístup k perzistenci}
 
-Scénář se zabýval výkonností přístupu k persistenci, respektive zachystením reálného scénáře, kdy jsou data získávána a ukládána do databáze. Faktorem byla jak samotná rychlost služby v ohledu komunikace a serializace dat, tak rychlost zpracování požadavku databází. Následující tabulka zobrazuje průměrné využití zdrojů a dobu odpovědi služby FUS v testovacím scénáři 2 pro oba kompilační režimy.
+Scénář se zabýval výkonností přístupu k perzistenci, respektive zachystením reálného scénáře, kdy jsou data získávána a ukládána do databáze. Faktorem byla jak samotná rychlost služby v ohledu komunikace a serializace dat, tak rychlost zpracování požadavku databází. Následující tabulka zobrazuje průměrné využití zdrojů a dobu odpovědi služby FUS v testovacím scénáři 2 pro oba kompilační režimy.
 
 \tab{Průměrné využití zdrojů službou FUS a doba odpovědi stažení a nahrání souboru}{tab:service_metrics}{1.0}{|l|r|r|r|r|}{
   \hline
@@ -125,7 +125,7 @@ Scénář se zabýval výkonností přístupu k persistenci, respektive zachyste
   \emph{FUS-JIT} & 16.7 & 2.000 & 60.9 & 8.05 \\ \hline
 }
 
-Ve výsledku je vidět výrazný rozdíl ve využití zdrojů mezi AOT a JIT verzi služby. Oproti předchozímu měření je AOT paměťově efektivnější. Poukazuje na méně efektivní datovou manipulaci při serializaci v přístupu k persistenci, ale také při serializaci a kompresi souboru na rozhrání REST API. V případě doby odpovědi služby je velmi znatelný rozdíl služby kompilované JIT kdy její hodnota činila 93.6 ms. Následkem JIT kompilace potřebného kódu při prvním volání byla tato doba výrazně vyšší než v dalších voláních. Oproti tomu AOT varianta služby měla i při prvním volání odpoveď srovnatelnou s průměrným voláním a to 11.8 ms.
+Ve výsledku je vidět výrazný rozdíl ve využití zdrojů mezi AOT a JIT verzi služby. Oproti předchozímu měření je AOT paměťově efektivnější. Poukazuje na méně efektivní datovou manipulaci při serializaci v přístupu k perzistenci, ale také při serializaci a kompresi souboru na rozhrání REST API. V případě doby odpovědi služby je velmi znatelný rozdíl služby kompilované JIT kdy její hodnota činila 93.6 ms. Následkem JIT kompilace potřebného kódu při prvním volání byla tato doba výrazně vyšší než v dalších voláních. Oproti tomu AOT varianta služby měla i při prvním volání odpoveď srovnatelnou s průměrným voláním a to 11.8 ms.
 
 \tab{Průměrné využití GC službou FUS}{tab:service_metrics}{1.0}{|l|r|r|r|}{
   \hline
