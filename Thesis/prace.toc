@@ -87,20 +87,20 @@
 \contentsline {section}{\numberline {6}Analýza aplikace}{70}{section.6}%
 \contentsline {subsection}{\numberline {6.1}Analýza vývojového procesu}{70}{subsection.6.1}%
 \contentsline {subsubsection}{\numberline {6.1.1}Vývojové prostředí}{70}{subsubsection.6.1.1}%
-\contentsline {subsubsection}{\numberline {6.1.2}JIT}{71}{subsubsection.6.1.2}%
+\contentsline {subsubsection}{\numberline {6.1.2}JIT}{72}{subsubsection.6.1.2}%
 \contentsline {subsubsection}{\numberline {6.1.3}AOT}{72}{subsubsection.6.1.3}%
 \contentsline {subsubsection}{\numberline {6.1.4}Knihovny třetích stran}{72}{subsubsection.6.1.4}%
 \contentsline {subsection}{\numberline {6.2}Výstup služeb}{73}{subsection.6.2}%
 \contentsline {subsection}{\numberline {6.3}Analýza testování}{75}{subsection.6.3}%
-\contentsline {subsubsection}{\numberline {6.3.1}Scénář 1 - Výkonnost komunikace}{75}{subsubsection.6.3.1}%
+\contentsline {subsubsection}{\numberline {6.3.1}Scénář 1 - Výkonnost komunikace}{76}{subsubsection.6.3.1}%
 \contentsline {subsubsection}{\numberline {6.3.2}Scénář 2 - Přístup k perzistenci}{76}{subsubsection.6.3.2}%
 \contentsline {subsubsection}{\numberline {6.3.3}Scénář 3 - Výpočetní zátěž}{77}{subsubsection.6.3.3}%
-\contentsline {subsubsection}{\numberline {6.3.4}Scénář 4 - Vzájemná komunikace služeb}{77}{subsubsection.6.3.4}%
+\contentsline {subsubsection}{\numberline {6.3.4}Scénář 4 - Vzájemná komunikace služeb}{78}{subsubsection.6.3.4}%
 \contentsline {subsubsection}{\numberline {6.3.5}Scénář 5 - Rychlost odpovědi služby po startu}{78}{subsubsection.6.3.5}%
-\contentsline {subsection}{\numberline {6.4}Závěr analýzy}{78}{subsection.6.4}%
-\contentsline {section}{Závěr}{80}{section*.34}%
-\contentsline {section}{Seznam použité literatury}{82}{section*.36}%
-\contentsline {section}{Seznam použitých symbolů a zkratek}{86}{section*.38}%
-\contentsline {section}{Seznam obrázků}{88}{section*.40}%
-\contentsline {section}{Seznam tabulek}{89}{section*.41}%
-\contentsline {section}{Seznam příloh}{90}{section*.42}%
+\contentsline {subsection}{\numberline {6.4}Závěr analýzy}{79}{subsection.6.4}%
+\contentsline {section}{Závěr}{81}{section*.34}%
+\contentsline {section}{Seznam použité literatury}{84}{section*.36}%
+\contentsline {section}{Seznam použitých symbolů a zkratek}{88}{section*.38}%
+\contentsline {section}{Seznam obrázků}{90}{section*.40}%
+\contentsline {section}{Seznam tabulek}{91}{section*.41}%
+\contentsline {section}{Seznam příloh}{92}{section*.42}%
