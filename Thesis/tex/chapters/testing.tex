@@ -5,11 +5,11 @@
 
 \n{1}{Testování scénářů}
 
-Cílem práce je prouzkomat dopady kompilace AOT a JIT na výkon. Pokouší se určit, která strategie kompilace nabízí lepší výkon při různém zatížení a podmínkách. Za účelem získat tyto informace jsou navrženy testovací scénáře. Obsahem kapitoly je definování metodiky a náležitostí testovací aplikace vytvořené v předešlé kapitole. Jsou zde vyřčeny hypotézy a očekávání na chování aplikace. Následně jsou popsány jednotlivé scénáře, které jsou vytvořeny pro testování .NET služeb. Každý scénář je popsán svým účelem a průběhem.
+Cílem práce je prozkoumat dopady kompilace AOT a JIT na výkon. Pokouší se určit, která strategie kompilace nabízí lepší výkon při různém zatížení a podmínkách. Za účelem získat tyto informace jsou navrženy testovací scénáře. Obsahem kapitoly je definování metodiky a náležitostí testovací aplikace vytvořené v předešlé kapitole. Jsou zde vyřčeny hypotézy a očekávání na chování aplikace. Následně jsou popsány jednotlivé scénáře, které jsou vytvořeny pro testování .NET služeb. Každý scénář je popsán svým účelem a průběhem.
 
 \n{2}{Metodika testování}
 
-Testování je prováděno za účelem získání kvantitativních dat o výkonu služeb. Metriky výkonu jsou shromážděny z dat aplikace, doby odezvy služeb a využití zdrojů během standardizovaných testů. Experimentální nastavení zahruje dvě hlavní součásti, řízení testovacího prostředí a testovacích služeb. Tyto služby jsou sestaveny ze stejné (až na vybrané nekompatibilní API) kódové báze v kompilačních režimech AOT i JIT. Testovací prostředí bylo standardizováno ve všech experimentech, aby bylo zajištěno, že jakékoli pozorované rozdíly ve výkonu lze připsat výhradně metodám kompilace a nikoli variantách HW nebo SW. Testy budou prováděny při identických nastaveních HW s následujícími specifikacemi:
+Testování je prováděno za účelem získání kvantitativních dat o výkonu služeb. Metriky výkonu jsou shromážděny z dat aplikace, doby odezvy služeb a využití zdrojů během standardizovaných testů. Experimentální nastavení zahrnuje dvě hlavní součásti, řízení testovacího prostředí a testovacích služeb. Tyto služby jsou sestaveny ze stejné (až na vybrané nekompatibilní API) kódové báze v kompilačních režimech AOT i JIT. Testovací prostředí bylo standardizováno ve všech experimentech, aby bylo zajištěno, že jakékoli pozorované rozdíly ve výkonu lze připsat výhradně metodám kompilace a nikoli variantách HW nebo SW. Testy budou prováděny při identických nastaveních HW s následujícími specifikacemi:
 
 \begin{itemize}
     \item \textbf{Operační systém}: macOS Sonoma 14.4.1
@@ -17,7 +17,7 @@ Testování je prováděno za účelem získání kvantitativních dat o výkonu
     \item \textbf{Paměť}: 8 GB LPDDR4X
 \end{itemize}
 
-Operační systém a všechny služby na pozadí budou udržovány konzistentní, aby se minimalizovaly vnější vlivy na výsledky výkonu. Testovaným službám budou omezeny zdroje v orchestraci, aby se zabránilo nespravedlivé výhodě služby v jedné kompilaci před druhou. Služby budou připraveny do obrazů a použity v rámci orchestrace pomocí kontejnerů. Jednotlivé obrazy jsou založeny na architektuře ARM 64bit a Linuxových distribucích Alpine. Sběr dat je automatizován pomocí kombinace nástrojů pro monitorování systému a skriptů. K sběru dat hostitelského systému byl použit Cadvisor a Node Explorer. Telemetrie jednotlivých služeb je sbírána implementovanými metry a exportována do kolektoru OpenTelemetry. Testovací data jsou získána exportem výsledků testů do InfluxDB. Statické informace o průběhu a výstupech kopilace jsou získány kombinací nástroje .NET CLI, Docker a souborového systému. K porovnání strategií kompilace při různých podmínkách využívají testovací služby vybrané scénáře testující propustnost a vytížení zdrojů. Úlohy prováděné ve scénářích vystavují služby datovým transakcím, přístupů k externím zdrojům, komunikací pomocí různých metodik anebo samotné spuštění v rámci orchestrace. Údaje o výkonnosti budou analyzovány pomocí statistických metod, aby se určily významné rozdíly mezi službami kompilovanými v režimu AOT a JIT. 
+Operační systém a všechny služby na pozadí budou udržovány konzistentní, aby se minimalizovaly vnější vlivy na výsledky výkonu. Testovaným službám budou omezeny zdroje v orchestraci, aby se zabránilo nespravedlivé výhodě služby v jedné kompilaci před druhou. Služby budou připraveny do obrazů a použity v rámci orchestrace pomocí kontejnerů. Jednotlivé obrazy jsou založeny na architektuře ARM 64bit a Linuxových distribucích Alpine. Sběr dat je automatizován pomocí kombinace nástrojů pro monitorování systému a skriptů. K sběru dat hostitelského systému byl použit Cadvisor a Node Explorer. Telemetrie jednotlivých služeb je sbírána implementovanými metry a exportována do kolektoru OpenTelemetry. Testovací data jsou získána exportem výsledků testů do InfluxDB. Statické informace o průběhu a výstupech kompilace jsou získány kombinací nástroje .NET CLI, Docker a souborového systému. K porovnání strategií kompilace při různých podmínkách využívají testovací služby vybrané scénáře testující propustnost a vytížení zdrojů. Úlohy prováděné ve scénářích vystavují služby datovým transakcím, přístupů k externím zdrojům, komunikací pomocí různých metodik anebo samotné spuštění v rámci orchestrace. Údaje o výkonnosti budou analyzovány pomocí statistických metod, aby se určily významné rozdíly mezi službami kompilovanými v režimu AOT a JIT. 
 
 \n{3}{Hypotézy}
 
@@ -26,7 +26,7 @@ Na základě předběžného přehledu literatury a teoretických výhod každé
 \begin{itemize}
     \item \textbf{Hypotéza 1}: Vývoj služeb bude možný za pomocí obou kompilačních režimů, s minimálními rozdíly v použitém API a systémových knihovnách. Při použití knihoven 3. stran bude dostatečně jasná kompatibilita mezi oběma režimy.
     \item \textbf{Hypotéza 2}: Kompilace AOT má za následek rychlejší spouštění, ale bude vést k větším binárním velikostem aplikace ve srovnání s kompilací JIT. Výsledný virtualizovaný obraz aplikace bude ovšem mít výrazně nižší velikost kvůli absenci .NET runtime.
-    \item \textbf{Hypotéza 3}: Kompilace AOT poskytuje lepší optimalizaci výkonu díky generování typů a funkcí, jež by museli být dodatečně tvořeny za běhu. Tím pádem je očekáváno, že služby kompilované do nativního kódu budou mít nižší řežii procesoru. Přítomnost staticky generovaných typů a funkcí však může způsobit vyšší paměťovou zátěž. Vytížení I/O operací bude srovnatelné.
+    \item \textbf{Hypotéza 3}: Kompilace AOT poskytuje lepší optimalizaci výkonu díky generování typů a funkcí, jež by museli být dodatečně tvořeny za běhu. Tím pádem je očekáváno, že služby kompilované do nativního kódu budou mít nižší režii procesoru. Přítomnost staticky generovaných typů a funkcí však může způsobit vyšší paměťovou zátěž. Vytížení I/O operací bude srovnatelné.
 \end{itemize}
 
 \n{2}{Cíle porovnání služeb}
@@ -74,7 +74,7 @@ Relevantní služby pro tento scénář jsou všechny služby, které mají defi
 
 \n{3}{Scénář 2 - Přístup k perzistenci}
 
-Cílem tohoto scénáře je otestovat výkonnost při zpracování množství požadavků na přístup k datům v perzistenci. Scénář se pokouší identifikovat dodatečné režie spojené s přístupem k databázi a zjišťuje, jak se služby při něm chovají. Zejména je cílem pozorovat potencionál rozdíl ve využití paměti jednotlivých služeb kompliovaných AOT a JIT.
+Cílem tohoto scénáře je otestovat výkonnost při zpracování množství požadavků na přístup k datům v perzistenci. Scénář se pokouší identifikovat dodatečné režie spojené s přístupem k databázi a zjišťuje, jak se služby při něm chovají. Zejména je cílem pozorovat potencionál rozdíl ve využití paměti jednotlivých služeb kompilovaných AOT a JIT.
 
 \obr{Diagram scénáře 2}{fig:logo}{0.85}{graphics/diagrams/stack-scenario2.png}
 
@@ -82,13 +82,13 @@ Pro scénář je relevantní pouze služba FUS, která poskytuje rozhraní pro z
 
 \begin{itemize}
     \item \textbf{Krok 1} - Služba je spuštěna v rámci stacku ve specifické kompilaci dle konfigurace testu.
-    \item \textbf{Krok 2} - Na službu jsou zasílány požadavky na zápis i čtení dat z perzistentního úložiště. Požadavky zasílá 1 VU po dobu 1 minuty. Soubor použitý pro zápis je pevně stanoven a součástí repositáře testů. Jeho velikost činí 1MB.
-    \item \textbf{Krok 3} - Služba ukončuje svoji činnost a K6 zasílá data o prevedeném testu.
+    \item \textbf{Krok 2} - Na službu jsou zasílány požadavky na zápis i čtení dat z perzistentního úložiště. Požadavky zasílá 1 VU po dobu 1 minuty. Soubor použitý pro zápis je pevně stanoven a součástí repositáře testů. Jeho velikost činí 1 MB.
+    \item \textbf{Krok 3} - Služba ukončuje svoji činnost a K6 zasílá data o provedeném testu.
 \end{itemize}
 
 \n{3}{Scénář 3 - Výpočetní zátěž}
 
-Cílem tohoto scénáře je otestovat schopnost mikroslužeb v jednotlivých kompilacích zpracovat náročnější operace. Scénář se zaměřuje na samotnou podstatu přístupu k vnitřnímu systémového API, efektivitě jeho využití a další režii, která by mohla být odlišná mezi JIT a AOT kompilací. Předmětem scénáře je výpočet 40-tého čísla Fibonacciho posloupnosti rekurzivní metodou. Algoritmus je implementován v rámci služby a volán zvenčí pomocí Rest API. Scénář je vytvořen tak, aby simuloval zátěž na službu a prozkoumal tak potencionální výkonnostní rozdíly v rámci přístupu k systémovému API a vyžížení zdrojů. Vyšší počet požadavků rovněž testuje schopnosti paralelního zpracování.
+Cílem tohoto scénáře je otestovat schopnost mikroslužeb v jednotlivých kompilacích zpracovat náročnější operace. Scénář se zaměřuje na samotnou podstatu přístupu k vnitřnímu systémového API, efektivitě jeho využití a další režii, která by mohla být odlišná mezi JIT a AOT kompilací. Předmětem scénáře je výpočet 40. čísla Fibonacciho posloupnosti rekurzivní metodou. Algoritmus je implementován v rámci služby a volán zvenčí pomocí Rest API. Scénář je vytvořen tak, aby simuloval zátěž na službu a prozkoumal tak potencionální výkonnostní rozdíly v rámci přístupu k systémovému API a vytížení zdrojů. Vyšší počet požadavků rovněž testuje schopnosti paralelního zpracování.
 
 \obr{Diagram scénáře 3}{fig:logo}{0.9}{graphics/diagrams/stack-scenario3.png}
 
@@ -96,8 +96,8 @@ Ve scénáři má význam pouze BPS služba, která poskytuje rozhraní a logiku
 
 \begin{itemize}
     \item \textbf{Krok 1} - Služba je spuštěna v rámci stacku ve specifické kompilaci dle konfigurace testu.
-    \item \textbf{Krok 2} - Na službu jsou zasílány požadavky na výpočet 40-tého čísla Fibonacciho posloupnosti. Testování začíná na 3 VUs, jež jsou zvýšeny o 3 VUs po 5s. Po 10s na maximálním počtu dochází během 5s k vyřazení VUs.
-    \item \textbf{Krok 3} - Činnost služby je ukončena a K6 zasílá data o prevedeném testu.
+    \item \textbf{Krok 2} - Na službu jsou zasílány požadavky na výpočet 40. čísla Fibonacciho posloupnosti. Testování začíná na 3 VUs, jež jsou zvýšeny o 3 VUs po 5 s. Po 10 s na maximálním počtu dochází během 5 s k vyřazení VUs.
+    \item \textbf{Krok 3} - Činnost služby je ukončena a K6 zasílá data o provedeném testu.
 \end{itemize}
 
 \n{3}{Scénář 4 - Vzájemná komunikace služeb}
@@ -113,11 +113,11 @@ Pro tento scénář jsou relevantní tři služby, které spolu komunikují. FUS
 \begin{itemize}
     \item \textbf{Krok 1} - Služby jsou spuštěny v rámci stacku ve specifické kompilaci dle konfigurace testu.
     \item \textbf{Krok 2} - Do služby FUS je nahrán textový soubor o velikosti 1MB pomocí REST API. Z odpovědi je získán identifikátor souboru.
-    \item \textbf{Krok 3} - Do služby EPS jsou zasílány požadavy na zpracování dat pomocí REST API. Vykonává je jediny VU, který zasílá požadavky po dobu 1 minuty v intervalu co 5s.
+    \item \textbf{Krok 3} - Do služby EPS jsou zasílány požadavky na zpracování dat pomocí REST API. Vykonává je jediný VU, který zasílá požadavky po dobu 1 minuty v intervalu co 5 s.
     \item \textbf{Krok 4} - Služba EPS zprávu zasílá do fronty v RabbitMQ, na které naslouchá služba BPS. 
     \item \textbf{Krok 5} - Služba BPS zprávu zpracovává z RabbitMQ fronty a získává data ze vzdáleného volání na službu FUS pomocí rozhraní gRPC. 
     \item \textbf{Krok 6} - Služba FUS získává data z perzistence a zasílá je zpět službě BPS. 
-    \item \textbf{Krok 7} - Služba BPS provádí výpočet 40tého čísla Fibonacciho posloupnosti.
+    \item \textbf{Krok 7} - Služba BPS provádí výpočet 40. čísla Fibonacciho posloupnosti.
     \item \textbf{Krok 8} - Služby jsou ukončeny a v rámci K6 dojde k zaslání dat o provedeném testu do InfluxDB.
 \end{itemize}
 
@@ -131,7 +131,7 @@ Pro scénář je využita pouze SRS. Průběh scénáře je následující:
 
 \begin{itemize}
     \item \textbf{Krok 1} - Dochází k zahájení časového měření a spuštění služby v rámci stacku dle konfigurace.
-    \item \textbf{Krok 2} - V 10ms intervalech je zasílán požadavek na stav služby. Požadavky jsou zasílány po dobu 30s nebo dokud služba nevrátí stav \emph{Helthy}.
+    \item \textbf{Krok 2} - V 10 ms intervalech je zasílán požadavek na stav služby. Požadavky jsou zasílány po dobu 30s nebo dokud služba nevrátí stav \emph{Healthy}.
     \item \textbf{Krok 3} - Je zaslán požadavek na získání 3 generovaných signálů ze služby SRS.
     \item \textbf{Krok 4} - Služba SRS zpracovává požadavek a zprostředkovává data.
     \item \textbf{Krok 5} - Data jsou zaslána zpět klientovi.
@@ -141,7 +141,7 @@ Pro scénář je využita pouze SRS. Průběh scénáře je následující:
 
 \n{2}{Spouštění scénářů}
 
-Jednotlivé scénáře jsou spouštěny formou pomocných runner skriptů v jazyce Bash. Tyto scripty představují zjednodušenný způsob spuštění testů a zajišťují správu orchestrace testů, včetně spouštění a ukončování služeb, označení a exportování výsledků testů. Runner skripty mají jeden obecný parametr, kterým je identifikátor testu. Tento identifikátor je následně použit pro identifikaci výsledků testu a pro zobrazení výsledků v Grafaně. Jednotlivé skripty jsou pojmenovány dle čísla scénáře, který spouští. Pro spuštění testů je nutné mít buď nastavené prostředí s nainstalovanými nástroji K6 a Docker, nebo upravit konfiguraci skriptu pro spuštění testů v rámci kontejneru.
+Jednotlivé scénáře jsou spouštěny formou pomocných runner skriptů v jazyce Bash. Tyto scripty představují zjednodušený způsob spuštění testů a zajišťují správu orchestrace testů, včetně spouštění a ukončování služeb, označení a exportování výsledků testů. Runner skripty mají jeden obecný parametr, kterým je identifikátor testu. Tento identifikátor je následně použit pro identifikaci výsledků testu a pro zobrazení výsledků v Grafaně. Jednotlivé skripty jsou pojmenovány dle čísla scénáře, který spouští. Pro spuštění testů je nutné mít buď nastavené prostředí s nainstalovanými nástroji K6 a Docker, nebo upravit konfiguraci skriptu pro spuštění testů v rámci kontejneru.
 
 \n{2}{Zpracování a vizualizace dat}
 
