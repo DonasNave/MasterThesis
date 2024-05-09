@@ -1,3 +1,4 @@
+# FROM frolvlad/alpine-glibc:alpine-3.19 as base
 FROM mcr.microsoft.com/dotnet/runtime-deps:8.0-jammy-chiseled as base
 WORKDIR /app
 EXPOSE 8080
@@ -16,7 +17,7 @@ COPY . .
 WORKDIR "/src/Services/DTA.BPS"
 
 FROM build AS publish
-RUN dotnet publish "DTA.BPS.csproj" -c Release-AOT -o /app/publish \
+RUN dotnet publish "DTA.BPS.csproj" -r linux-$TARGETARCH -c Release-AOT -o /app/publish \
     -p:DebugType=None \
     -p:ExcludeFilesFromPublish=**/appsettings.Development.json
 
