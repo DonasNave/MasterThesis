@@ -220,9 +220,15 @@ Následující pasáž popisuje náležitosti nasazení aplikace, včetně obecn
 
 \obr{Diagram nasazení aplikace}{fig:app}{0.85}{graphics/images/dta.drawio.png}
 
-\n{3}{Kontejnerizace a orchestrace}
+\n{3}{Kontejnerizace}
 
 Kontejnerizace služeb je zajištěna pomocí nástroje Docker. Docker je open-source platforma poskytující ekosystém pro správu kontejnerů. Jednotlivé služby jsou vytvořeny jako obrazy podle definicí Dockerfile. 
+
+Obrazy JIT služeb jsou založeny na redukovaném (chiseled) OS Ubuntu. Základní obraz tvoří \emph{dotnet/runtime-deps:8.0-jammy-chiseled}, který slouží pro self-contained aplikace. I když o něco menší obraz lze potencionálně získat založením kontejneru na Alpine OS, v rámci práce se nepodařilo úspěšně sestavit službu pro prostředí \emph{linux-musl-arch64}. Alpine je založen na \emph{musl libc}, což je minimalistická implementace tradiční knihovny \emph{glibc} a vyžaduje specifické linkování v procesu sestavení. Přesná definice obrazu je zajištěna souborem Dockerfile-JIT v adresáři každé služby.
+
+Pro AOT služby je využit totožný základní obraz \emph{dotnet/runtime-deps:8.0-jammy-arm64v8}. S ohledem na nemožnost založit kontejner na Alpine, poskytuje tento obraz nejmenší možnou velikost. Z důvodů požadavků na HW, jenž budou podrobněji popsány v následující kapitole, nemohly být zváženy obrazy pro x64 architekturu. V případě x64 jsou známy minimalistické obrazy s \emph{glibc}, jenž by mohly dodatečně zredukovat výslednou velikost, a to v řádu jednotek MB. Konkrétní podoba obrazu je definována v souboru Dockerfile-AOT v adresáři každé služby.
+
+\n{3}{Orchestrace}
 
 Orchestrace aplikace je zprostředkována rovněž nástrojem Docker, konkrétně formou \emph{compose} utility. Ta umožňuje jednoduše nasadit a spravovat větší množství služeb. Definice nasazení aplikace je sepsána v souboru \emph{compose.yaml}. V něm lze nalézt následující části:
 

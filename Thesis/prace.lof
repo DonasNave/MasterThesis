@@ -1,24 +1,24 @@
 \babel@toc {czech}{}\relax 
-\contentsline {figure}{\numberline {1.1}{\ignorespaces .NET platforma\relax }}{13}{figure.caption.5}%
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Monolitická architektura\relax }}{26}{figure.caption.6}%
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Microservice architektura\relax }}{27}{figure.caption.7}%
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Circuit Breaker vzor\relax }}{28}{figure.caption.8}%
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Repository vzor\relax }}{31}{figure.caption.9}%
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Struktura adresáře projektu\relax }}{47}{figure.caption.10}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Struktura adresáře služby\relax }}{48}{figure.caption.11}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Diagram .NET služeb a závislých služeb\relax }}{52}{figure.caption.12}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Diagram nasazení aplikace\relax }}{56}{figure.caption.13}%
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Diagram scénáře 1\relax }}{63}{figure.caption.14}%
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Diagram scénáře 2\relax }}{64}{figure.caption.15}%
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Diagram scénáře 3\relax }}{65}{figure.caption.16}%
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Diagram scénáře 4\relax }}{65}{figure.caption.17}%
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Diagram scénáře 5\relax }}{67}{figure.caption.19}%
-\contentsline {figure}{\numberline {6.1}{\ignorespaces Ukázka kódu s vizualizací direktiv dle konfigurace\relax }}{70}{figure.caption.20}%
-\contentsline {figure}{\numberline {6.2}{\ignorespaces Vizualizace zachycení metody interceptorem v kódu\relax }}{71}{figure.caption.21}%
-\contentsline {figure}{\numberline {6.3}{\ignorespaces Ukázka kódu nové implementace metody vygenerované na pozadí\relax }}{71}{figure.caption.22}%
-\contentsline {figure}{\numberline {1.1}{\ignorespaces Telemetrie ve stacku\relax }}{94}{figure.caption.44}%
-\contentsline {figure}{\numberline {1.2}{\ignorespaces Scénář 1 - Grafana dashboard\relax }}{95}{figure.caption.45}%
-\contentsline {figure}{\numberline {1.3}{\ignorespaces Scénář 2 - Grafana dashboard\relax }}{95}{figure.caption.46}%
-\contentsline {figure}{\numberline {1.4}{\ignorespaces Scénář 3 - Grafana dashboard\relax }}{96}{figure.caption.47}%
-\contentsline {figure}{\numberline {1.5}{\ignorespaces Scénář 4 - Grafana dashboard\relax }}{96}{figure.caption.48}%
-\contentsline {figure}{\numberline {1.6}{\ignorespaces Scénář 5 - Grafana dashboard\relax }}{96}{figure.caption.49}%
+\contentsline {figure}{\numberline {1.1}{\ignorespaces .NET platforma\relax }}{14}{figure.caption.5}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Monolitická architektura\relax }}{27}{figure.caption.6}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Microservice architektura\relax }}{28}{figure.caption.7}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Circuit Breaker vzor\relax }}{29}{figure.caption.8}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Repository vzor\relax }}{32}{figure.caption.9}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Struktura adresáře projektu\relax }}{48}{figure.caption.10}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Struktura adresáře služby\relax }}{49}{figure.caption.11}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Diagram .NET služeb a závislých služeb\relax }}{53}{figure.caption.12}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Diagram nasazení aplikace\relax }}{57}{figure.caption.13}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Diagram scénáře 1\relax }}{65}{figure.caption.14}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Diagram scénáře 2\relax }}{66}{figure.caption.15}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Diagram scénáře 3\relax }}{67}{figure.caption.16}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Diagram scénáře 4\relax }}{67}{figure.caption.17}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Diagram scénáře 5\relax }}{69}{figure.caption.19}%
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Ukázka kódu s vizualizací direktiv dle konfigurace\relax }}{72}{figure.caption.20}%
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Vizualizace zachycení metody interceptorem v kódu\relax }}{73}{figure.caption.21}%
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Ukázka kódu nové implementace metody vygenerované na pozadí\relax }}{73}{figure.caption.22}%
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Telemetrie ve stacku\relax }}{96}{figure.caption.44}%
+\contentsline {figure}{\numberline {1.2}{\ignorespaces Scénář 1 - Grafana dashboard\relax }}{97}{figure.caption.45}%
+\contentsline {figure}{\numberline {1.3}{\ignorespaces Scénář 2 - Grafana dashboard\relax }}{97}{figure.caption.46}%
+\contentsline {figure}{\numberline {1.4}{\ignorespaces Scénář 3 - Grafana dashboard\relax }}{98}{figure.caption.47}%
+\contentsline {figure}{\numberline {1.5}{\ignorespaces Scénář 4 - Grafana dashboard\relax }}{98}{figure.caption.48}%
+\contentsline {figure}{\numberline {1.6}{\ignorespaces Scénář 5 - Grafana dashboard\relax }}{98}{figure.caption.49}%

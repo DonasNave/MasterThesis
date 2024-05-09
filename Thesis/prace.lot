@@ -1,12 +1,12 @@
 \babel@toc {czech}{}\relax 
-\contentsline {table}{\numberline {6.1}{\ignorespaces Čas kompilace služeb\relax }}{73}{table.caption.23}%
-\contentsline {table}{\numberline {6.2}{\ignorespaces Velikost programu služeb pro architekturu osx-arch64\relax }}{74}{table.caption.24}%
-\contentsline {table}{\numberline {6.3}{\ignorespaces Velikost výstupu programu AOT služeb pro různé OS\relax }}{74}{table.caption.25}%
-\contentsline {table}{\numberline {6.4}{\ignorespaces Velikost obrazu služeb\relax }}{75}{table.caption.26}%
-\contentsline {table}{\numberline {6.5}{\ignorespaces Průměrné využití zdrojů a doba odpovědi healthcheck služeb\relax }}{76}{table.caption.27}%
-\contentsline {table}{\numberline {6.6}{\ignorespaces Průměrné využití zdrojů službou FUS a doba odpovědi stažení a nahrání souboru\relax }}{77}{table.caption.28}%
-\contentsline {table}{\numberline {6.7}{\ignorespaces Průměrné využití GC službou FUS\relax }}{77}{table.caption.29}%
-\contentsline {table}{\numberline {6.8}{\ignorespaces Průměrné využití zdrojů službou BPS a doba odpovědi výpočtu Fibonacciho čísla\relax }}{77}{table.caption.30}%
-\contentsline {table}{\numberline {6.9}{\ignorespaces Průměrné využití GC službou BPS\relax }}{78}{table.caption.31}%
-\contentsline {table}{\numberline {6.10}{\ignorespaces Průměrné využití zdrojů službami dle nasazení v kompilačních režimu\relax }}{78}{table.caption.32}%
-\contentsline {table}{\numberline {6.11}{\ignorespaces Průměrné využití zdrojů službou SRS a doba odpovědi včetně startu služby\relax }}{78}{table.caption.33}%
+\contentsline {table}{\numberline {6.1}{\ignorespaces Čas kompilace služeb\relax }}{75}{table.caption.23}%
+\contentsline {table}{\numberline {6.2}{\ignorespaces Velikost programu služeb pro architekturu osx-arch64\relax }}{76}{table.caption.24}%
+\contentsline {table}{\numberline {6.3}{\ignorespaces Velikost výstupu programu AOT služeb pro různé OS\relax }}{76}{table.caption.25}%
+\contentsline {table}{\numberline {6.4}{\ignorespaces Velikost obrazu služeb\relax }}{77}{table.caption.26}%
+\contentsline {table}{\numberline {6.5}{\ignorespaces Průměrné využití zdrojů a doba odpovědi healthcheck služeb\relax }}{78}{table.caption.27}%
+\contentsline {table}{\numberline {6.6}{\ignorespaces Průměrné využití zdrojů službou FUS a doba odpovědi stažení a nahrání souboru\relax }}{79}{table.caption.28}%
+\contentsline {table}{\numberline {6.7}{\ignorespaces Průměrné využití GC službou FUS\relax }}{79}{table.caption.29}%
+\contentsline {table}{\numberline {6.8}{\ignorespaces Průměrné využití zdrojů službou BPS a doba odpovědi výpočtu Fibonacciho čísla\relax }}{79}{table.caption.30}%
+\contentsline {table}{\numberline {6.9}{\ignorespaces Průměrné využití GC službou BPS\relax }}{80}{table.caption.31}%
+\contentsline {table}{\numberline {6.10}{\ignorespaces Průměrné využití zdrojů službami dle nasazení v kompilačních režimu\relax }}{80}{table.caption.32}%
+\contentsline {table}{\numberline {6.11}{\ignorespaces Průměrné využití zdrojů službou SRS a doba odpovědi včetně startu služby\relax }}{80}{table.caption.33}%
