@@ -66,7 +66,7 @@ Relevantní služby pro tento scénář jsou všechny služby, které mají defi
 
 \begin{itemize}
     \item \textbf{Krok 1} - Spuštění služeb v rámci stacku. Každá služba je spouštěna individuálně dle konkrétní služby a specifické kompilace dle konfigurace testu.
-    \item \textbf{Krok 2} - Na služby jsou zasílány požadavky na healthcheck endpoint. Požadavky zasílá 10 VUs po dobu 5s, načež se počet VUs zvyšuje o dalších 10 v průběhu 10s. Po dosažení maximálního počtu VUs se počet snižuje na 0 během 5s.
+    \item \textbf{Krok 2} - Na služby jsou zasílány požadavky na healthcheck endpoint. Požadavky zasílá 10 VUs po dobu 5 s, načež se počet VUs zvyšuje o dalších 10 v průběhu 10 s. Po dosažení maximálního počtu VUs se počet snižuje na 0 během 5 s.
     \item \textbf{Krok 3} - Po skončení všech služeb dochází k ukončení testovacího scénáře a zaslání dat o provedeném testu do InfluxDB.
 \end{itemize}
 
@@ -110,7 +110,7 @@ Pro tento scénář jsou relevantní tři služby, které spolu komunikují. FUS
 
 \begin{itemize}
     \item \textbf{Krok 1} - Služby jsou spuštěny v rámci stacku ve specifické kompilaci dle konfigurace testu.
-    \item \textbf{Krok 2} - Do služby FUS je nahrán textový soubor o velikosti 1MB pomocí REST API. Z odpovědi je získán identifikátor souboru.
+    \item \textbf{Krok 2} - Do služby FUS je nahrán textový soubor o velikosti 1 MB pomocí REST API. Z odpovědi je získán identifikátor souboru.
     \item \textbf{Krok 3} - Do služby EPS jsou zasílány požadavky na zpracování dat pomocí REST API. Vykonává je jediný VU, který zasílá požadavky po dobu 1 minuty v intervalu co 5 s.
     \item \textbf{Krok 4} - Služba EPS zprávu zasílá do fronty v RabbitMQ, na které naslouchá služba BPS. 
     \item \textbf{Krok 5} - Služba BPS zprávu zpracovává z RabbitMQ fronty a získává data ze vzdáleného volání na službu FUS pomocí rozhraní gRPC. 
@@ -129,7 +129,7 @@ Pro scénář je využita pouze SRS. Průběh scénáře je následující:
 
 \begin{itemize}
     \item \textbf{Krok 1} - Dochází k zahájení časového měření a spuštění služby v rámci stacku dle konfigurace.
-    \item \textbf{Krok 2} - V 10 ms intervalech je zasílán požadavek na stav služby. Požadavky jsou zasílány po dobu 30s nebo dokud služba nevrátí stav \emph{Healthy}.
+    \item \textbf{Krok 2} - V 10 ms intervalech je zasílán požadavek na stav služby. Požadavky jsou zasílány po dobu 30 s nebo dokud služba nevrátí stav \emph{Healthy}.
     \item \textbf{Krok 3} - Je zaslán požadavek na získání 3 generovaných signálů ze služby SRS.
     \item \textbf{Krok 4} - Služba SRS zpracovává požadavek a zprostředkovává data.
     \item \textbf{Krok 5} - Data jsou zaslána zpět klientovi.
