@@ -28,7 +28,7 @@ services:
     container_name: srs-jit-service
     build:
       context: ../../DTA
-      dockerfile: Services/DTA.SRS/Dockerfile-JIT
+      dockerfile: Services/DTA.SRS/JIT.Dockerfile
     healthcheck:
       test: ["CMD", "wget", "--spider", "--quiet", "http://localhost:8080/health"]
       interval: 30s
@@ -60,7 +60,7 @@ services:
     container_name: fus-jit-service
     build:
       context: ../../DTA
-      dockerfile: Services/DTA.FUS/Dockerfile-JIT
+      dockerfile: Services/DTA.FUS/JIT.Dockerfile
     healthcheck:
       test: ["CMD", "wget", "--spider", "--quiet", "http://localhost:8080/health"]
       interval: 30s
@@ -96,7 +96,7 @@ services:
     container_name: eps-jit-service
     build:
       context: ../../DTA
-      dockerfile: Services/DTA.EPS/Dockerfile-JIT
+      dockerfile: Services/DTA.EPS/JIT.Dockerfile
     healthcheck:
       test: ["CMD", "wget", "--spider", "--quiet", "http://localhost:8080/health"]
       interval: 30s
@@ -132,7 +132,7 @@ services:
     container_name: bps-jit-service
     build:
       context: ../../DTA
-      dockerfile: Services/DTA.BPS/Dockerfile-JIT
+      dockerfile: Services/DTA.BPS/JIT.Dockerfile
     healthcheck:
       test: ["CMD", "wget", "--spider", "--quiet", "http://localhost:8080/health"]
       interval: 30s
@@ -173,7 +173,7 @@ services:
     container_name: srs-aot-service
     build:
       context: ../../DTA
-      dockerfile: Services/DTA.SRS/Dockerfile-AOT
+      dockerfile: Services/DTA.SRS/AOT.Dockerfile
     ports:
       - "13001:8080"
     environment:
@@ -196,7 +196,7 @@ services:
     container_name: fus-aot-service
     build:
       context: ../../DTA
-      dockerfile: Services/DTA.FUS/Dockerfile-AOT
+      dockerfile: Services/DTA.FUS/AOT.Dockerfile
     ports:
       - "13002:8080"
       - "13102:8081"
@@ -223,7 +223,7 @@ services:
     container_name: eps-aot-service
     build:
       context: ../../DTA
-      dockerfile: Services/DTA.EPS/Dockerfile-AOT
+      dockerfile: Services/DTA.EPS/AOT.Dockerfile
     environment:
       - "DTA_AOT_EPS_Logging__LogLevel__Default=Debug"
       - "DTA_AOT_EPS_Logging__LogLevel__OpenTelemetry=Debug"
@@ -253,7 +253,7 @@ services:
     container_name: bps-aot-service
     build:
       context: ../../DTA
-      dockerfile: Services/DTA.BPS/Dockerfile-AOT
+      dockerfile: Services/DTA.BPS/AOT.Dockerfile
     environment:
       - "DTA_AOT_BPS_Logging__LogLevel__Default=Debug"
       - "DTA_AOT_BPS_Logging__LogLevel__OpenTelemetry=Debug"

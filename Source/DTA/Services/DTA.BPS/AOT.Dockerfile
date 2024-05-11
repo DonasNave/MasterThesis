@@ -1,4 +1,3 @@
-# FROM frolvlad/alpine-glibc:alpine-3.19 as base
 FROM mcr.microsoft.com/dotnet/runtime-deps:8.0-jammy-chiseled as base
 WORKDIR /app
 EXPOSE 8080
