@@ -2,12 +2,8 @@
 // launch with k6 run scenario3.js --env SERVICE_URL=#url# --env SERVICE_NAME=#name# --env COMPILATION_MODE=#mode#
 import http from 'k6/http';
 import { check, sleep } from 'k6';
-import { open } from 'k6/experimental/fs';
 
-let file;
-(async function () {
-  file = await open('../sample-file.txt');
-})();
+const file = open("../sample-file.txt");  
 
 export const options = {
     vus: 1,
@@ -20,24 +16,11 @@ export default async function () {
     const testId = __ENV.TEST_ID;
     const fusUrl = __ENV.FUS_URL;
 
-    const fileinfo = await file.stat();
-    if (fileinfo.name != 'sample-file.txt') {
-        throw new Error('Unexpected file name');
-    }
-
-    // Define the boundary for the multipart form data
-    var boundary = '----WebKitFormBoundaryxyxyxyxyxyxyx';
-    var body = '--' + boundary + '\r\n' +
-               'Content-Disposition: form-data; name="file"; filename="sample.txt"\r\n' +
-               'Content-Type: text/plain\r\n' +
-               '\r\n' +
-               file + '\r\n' +
-               '--' + boundary + '--';
+    const formData = {
+        'file': http.file(file, 'sample-file.txt')
+    };
 
     var params = {
-        headers: {
-            'Content-Type': 'multipart/form-data; boundary=' + boundary
-        },
         tags: {
             dta_service: 'FUS-' + compilationMode,
             test_scenario: 'scenario4',
@@ -47,7 +30,7 @@ export default async function () {
     };
 
     // Perform the upload
-    let uploadResponse = http.post(`${fusUrl}api/file/upload`, body, params);
+    let uploadResponse = http.post(`${fusUrl}api/file/upload`, formData, params);
     check(uploadResponse, {
         'is status 200': (r) => r.status === 200,
     });

@@ -24,7 +24,7 @@ Na základě předběžného přehledu literatury a teoretických výhod každé
 \begin{itemize}
     \item \textbf{Hypotéza 1}: Vývoj služeb bude možný za pomocí obou kompilačních režimů, s minimálními rozdíly v použitém API a systémových knihovnách. Při použití knihoven 3. stran bude dostatečně jasná kompatibilita mezi oběma režimy.
     \item \textbf{Hypotéza 2}: Kompilace AOT má za následek rychlejší spouštění, ale bude vést k větším binárním velikostem aplikace ve srovnání s kompilací JIT. Výsledný virtualizovaný obraz aplikace bude ovšem mít výrazně nižší velikost kvůli absenci .NET runtime.
-    \item \textbf{Hypotéza 3}: Kompilace AOT poskytuje lepší optimalizaci výkonu díky generování typů a funkcí, jež by museli být dodatečně tvořeny za běhu. Tím pádem je očekáváno, že služby kompilované do nativního kódu budou mít nižší režii procesoru. Přítomnost staticky generovaných typů a funkcí však může způsobit vyšší paměťovou zátěž. Vytížení I/O operací bude srovnatelné.
+    \item \textbf{Hypotéza 3}: Kompilace AOT poskytuje lepší optimalizaci výkonu díky generování typů a funkcí, jež by museli být dodatečně tvořeny za běhu. Tím pádem je očekáváno, že služby kompilované do nativního kódu budou mít nižší režii procesoru. Přítomnost staticky generovaných typů a funkcí však může způsobit vyšší paměťovou zátěž. Obecně nebude výkon markatně ovlivněn dle zvoleného kompilačního režimu.
 \end{itemize}
 
 \n{2}{Cíle porovnání služeb}
@@ -80,7 +80,7 @@ Pro scénář je relevantní pouze služba FUS, která poskytuje rozhraní pro z
 
 \begin{itemize}
     \item \textbf{Krok 1} - Služba je spuštěna v rámci stacku ve specifické kompilaci dle konfigurace testu.
-    \item \textbf{Krok 2} - Na službu jsou zasílány požadavky na zápis i čtení dat z perzistentního úložiště. Požadavky zasílá 1 VU po dobu 1 minuty. Soubor použitý pro zápis je pevně stanoven a součástí repositáře testů. Jeho velikost činí 1 MB.
+    \item \textbf{Krok 2} - Na službu jsou zasílány požadavky na zápis i čtení dat z perzistentního úložiště. Požadavky zasílá 1 VU po dobu 1 minuty. Soubor použitý pro zápis je pevně stanoven a součástí repositáře testů. Jedná se o textový blob o velikosti přesně 1 MB.
     \item \textbf{Krok 3} - Služba ukončuje svoji činnost a K6 zasílá data o provedeném testu.
 \end{itemize}
 

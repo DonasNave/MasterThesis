@@ -1,11 +1,7 @@
 import http from 'k6/http';
 import { check, sleep } from 'k6';
-import { open } from 'k6/experimental/fs';
 
-let file;
-(async function () {
-  file = await open('../sample-file.txt');
-})();
+const file = open("../sample-file.txt");  
 
 export let options = {
     vus: 1,
@@ -18,24 +14,11 @@ export default async function () {
     const serviceName = "FUS";
     const testId = __ENV.TEST_ID;
 
-    const fileinfo = await file.stat();
-    if (fileinfo.name != 'sample-file.txt') {
-        throw new Error('Unexpected file name');
-    }
-
-    // Define the boundary for the multipart form data
-    var boundary = '----WebKitFormBoundaryxyxyxyxyxyxyx';
-    var body = '--' + boundary + '\r\n' +
-               'Content-Disposition: form-data; name="file"; filename="sample.txt"\r\n' +
-               'Content-Type: text/plain\r\n' +
-               '\r\n' +
-               file + '\r\n' +
-               '--' + boundary + '--';
+    const formData = {
+        'file': http.file(file, 'sample-file.txt')
+    };
 
     var params = {
-        headers: {
-            'Content-Type': 'multipart/form-data; boundary=' + boundary
-        },
         tags: {
             dta_service: serviceName + '-' + compilationMode,
             test_scenario: 'scenario2',
@@ -45,7 +28,8 @@ export default async function () {
     };
 
     // Perform the upload
-    let uploadResponse = http.post(`${serviceUrl}api/file/upload`, body, params);
+    let uploadResponse = http.post(`${serviceUrl}api/file/upload`, formData, params);
+
     check(uploadResponse, {
         'is status 200': (r) => r.status === 200,
     });
@@ -67,9 +51,6 @@ export default async function () {
     check(downloadResponse, {
         'is status 200': (r) => r.status === 200,
     });
-
-    // Optionally, print the response from download to validate
-    console.log('Downloaded file content:', downloadResponse.body);
 
     // Sleep to avoid hammering the server too hard
     sleep(1);

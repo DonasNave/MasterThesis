@@ -97,7 +97,7 @@ Základní obraz \emph{dotnet/runtime-deps:8.0-jammy-chiseled} teoreticky obsahu
 
 \n{2}{Analýza testování}
 
-Následující sekce se zabývá analýzou testovacích scénářů a výsledků testování. Testování bylo provedeno na základě předem definované metodiky. Podkladem testů byly definované scénáře, které byly vytvořeny s ohledem na funkční a nefunkční požadavky. Při testování byl nezávisle na spuštěný test zaznamenáván stav hostitelského systému s ohledem na spuštěné kontejnery a využití systémových prostředků. Samotné služby využívaly předem definované metry ve frameworku ASP.NET pro dodatečnou diagnostiku a monitorování. Výsledky testování byly zaznamenány a analyzovány.
+Následující sekce se zabývá analýzou testovacích scénářů a výsledků testování. Testování bylo provedeno na základě předem definované metodiky. Testy byly vytvořeny s ohledem na funkční a nefunkční požadavky dle podkladů. Samotné testy a výsledky z nich získané mají spíše informativní charakter a představují vzor pro další testování. Na to má vliv variabilita externích vlivů a přidaná hodnota v testování specifický doménových problémů na konkrétním HW. Při testování byl nezávisle na spuštěný test zaznamenáván stav hostitelského systému s ohledem na spuštěné kontejnery a využití systémových prostředků. Samotné služby využívaly předem definované metry ve frameworku ASP.NET pro dodatečnou diagnostiku a monitorování. Výsledky testování byly zaznamenány a analyzovány.
 
 \n{3}{Scénář 1 - Výkonnost komunikace}
 
@@ -125,20 +125,20 @@ Scénář se zabýval výkonností přístupu k perzistenci, respektive simulac�
 \tab{Průměrné využití zdrojů službou FUS a doba odpovědi stažení a nahrání souboru}{tab:service_metrics}{1.0}{|l|r|r|r|r|}{
   \hline
   Služba - Režim & CPU (ms) & IO (ns) & Paměť (MB) & Doba požadavku (ms) \\ \hline \hline
-  \emph{FUS-AOT} & 1.9 & 2.208 & 29.3 & 4.18 \\ \hline
-  \emph{FUS-JIT} & 16.7 & 2.000 & 60.9 & 8.05 \\ \hline
+  \emph{FUS-AOT} & 7.4 & 2.182 & 46.7 & 49.26 \\ \hline
+  \emph{FUS-JIT} & 17.4 & 1.982 & 78.0 & 63.38 \\ \hline
 }
 
-Ve výsledku je vidět výrazný rozdíl ve využití zdrojů mezi AOT a JIT verzi služby. Oproti předchozímu měření je AOT paměťově efektivnější. Poukazuje na méně efektivní datovou manipulaci při serializaci v přístupu k perzistenci, ale také při serializaci a kompresi souboru na rozhrání REST API. V případě doby odpovědi služby je velmi znatelný rozdíl služby kompilované JIT kdy její hodnota činila 93.6 ms. Následkem JIT kompilace potřebného kódu při prvním volání byla tato doba výrazně vyšší než v dalších voláních. Oproti tomu AOT varianta služby měla i při prvním volání odpověď srovnatelnou s průměrným voláním a to 11.8 ms.
+Ve výsledku je vidět výrazný rozdíl ve využití zdrojů mezi AOT a JIT verzi služby. Oproti předchozímu měření je AOT paměťově efektivnější. Poukazuje na méně efektivní datovou manipulaci při serializaci v přístupu k perzistenci, ale také při serializaci a kompresi souboru na rozhrání REST API. V případě doby odpovědi JIT služby na první požadavek vyžadující generování typů nebo serializace je obecně znatelná prodleva. To je následkem JIT kompilace potřebného kódu při prvním volání. Oproti tomu první volání totožného požadavku na AOT variantě služby má obdobnou rychlost odpovědi jako průměrný požadavek.
 
 \tab{Průměrné využití GC službou FUS}{tab:service_metrics}{1.0}{|l|r|r|r|}{
   \hline
   Služba - Režim & Alokovaná paměť (MB) & Doba běhu (ms) & Velikost objektů (MB) \\ \hline \hline
-  \emph{FUS-AOT} & 25.8 & 25.9 & 15.2 \\ \hline
-  \emph{FUS-JIT} & 14.0 & 5.3 & 12.9  \\ \hline
+  \emph{FUS-AOT} & 253.0 & 107.0 & 15.6 \\ \hline
+  \emph{FUS-JIT} & 237.0 & 134.0 & 16.6  \\ \hline
 }
 
-Přítomnost vygenerovaných typů a funkcionality v nativní AOT verzi služby má za výsledek větší alokace paměti a delší dobu běhu GC.
+Vysoká paměťová režie na zpracování požadavků pro nahrání a stažení souboru má za výsledek výraznou alokaci a běh GC. Nárožnost scénáře odfiltrovala nepatrné rozdíly mezi využití GC dané podstatou jejich běhového prostředí a způsobem zpracování požadavku. Výsledek ukazuje, že při dostatečné zátěži jsou výsledky AOT a JIT služeb srovnatelné.
 
 \n{3}{Scénář 3 - Výpočetní zátěž}
 
@@ -168,9 +168,9 @@ Komplexnější situace pro aplikaci byla simulována ve čtvrtém scénáři. S
 
 \tab{Průměrné využití zdrojů službami dle nasazení v kompilačních režimu}{tab:service_metrics}{1.0}{|l|r|r|r|}{
   \hline
-  Režim & CPU (ms) & IO (ns) & Paměť (MB) \\ \hline \hline
-  \emph{AOT} & 8.1 & 0.683 & 30.4 \\ \hline
-  \emph{JIT} & 24.3 & 1.634 & 36.7 \\ \hline
+  Režim & CPU (\%) & IO (ns) & Paměť (MB) \\ \hline \hline
+  \emph{AOT} & 3.732 & 4.830 & 124.3 \\ \hline
+  \emph{JIT} & 3.035 & 7.560 & 138.5 \\ \hline
 }
 
 Výsledky ukázaly očekávané chování dle předchozích výsledků a hypotéz. Zpracování požadavku skrze více služeb je obdobně náročné pro oba kompilační režimy. Samotné využití zdrojů neposkytuje opověď pro vhodnější kompilační režim pro množinu minimalistických služeb zpracovávajících požadavek v rámci aplikace.
