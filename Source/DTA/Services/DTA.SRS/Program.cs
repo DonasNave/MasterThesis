@@ -34,12 +34,19 @@ builder.Configuration.AddEnvironmentVariables(prefix: $"{serviceName}_");
 var telemetrySettings = new OpenTelemetrySettings()
 {
     ExporterEndpoint = new Uri(builder.Configuration["OpenTelemetrySettings:ExporterEndpoint"] ?? string.Empty),
-    ExporterProtocol = builder.Configuration["OpenTelemetrySettings:ExporterProtocol"] ?? "grpc"
+    ExporterProtocol = builder.Configuration["OpenTelemetrySettings:ExporterProtocol"] ?? "grpc",
+    ServiceNameSuffix = builder.Configuration["OpenTelemetrySettings:ServiceNameSuffix"]
 };
 #elif JIT
 var telemetrySettings =
     builder.Configuration.GetSection(nameof(OpenTelemetrySettings)).Get<OpenTelemetrySettings>()!;
 #endif
+
+// Append service name suffix
+if (!string.IsNullOrEmpty(telemetrySettings.ServiceNameSuffix))
+{
+    serviceName += telemetrySettings.ServiceNameSuffix;
+}
 
 // Setup logging to console
 builder.Logging.AddConsole();

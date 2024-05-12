@@ -8,6 +8,12 @@
     },
     {
       "name": "SRS",
+      "compilation": "JIT-Trimmed",
+      "url": "http://localhost:12001/",
+      "protocol": "http"
+    },
+    {
+      "name": "SRS",
       "compilation": "AOT",
       "url": "http://localhost:13001/",
       "protocol": "http"

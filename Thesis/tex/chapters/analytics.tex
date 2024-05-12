@@ -124,9 +124,9 @@ Scénář se zabýval výkonností přístupu k perzistenci, respektive simulac�
 
 \tab{Průměrné využití zdrojů službou FUS a doba odpovědi stažení a nahrání souboru}{tab:service_metrics}{1.0}{|l|r|r|r|r|}{
   \hline
-  Služba - Režim & CPU (ms) & IO (ns) & Paměť (MB) & Doba požadavku (ms) \\ \hline \hline
-  \emph{FUS-AOT} & 7.4 & 2.182 & 46.7 & 49.26 \\ \hline
-  \emph{FUS-JIT} & 17.4 & 1.982 & 78.0 & 63.38 \\ \hline
+  Služba - Režim & CPU (\%) & IO (ns) & Paměť (MB) & Doba požadavku (ms) \\ \hline \hline
+  \emph{FUS-AOT} & 0.289 & 2.132 & 47.2 & 49.26 \\ \hline
+  \emph{FUS-JIT} & 0.602 & 2.384 & 75.9 & 63.38 \\ \hline
 }
 
 Ve výsledku je vidět výrazný rozdíl ve využití zdrojů mezi AOT a JIT verzi služby. Oproti předchozímu měření je AOT paměťově efektivnější. Poukazuje na méně efektivní datovou manipulaci při serializaci v přístupu k perzistenci, ale také při serializaci a kompresi souboru na rozhrání REST API. V případě doby odpovědi JIT služby na první požadavek vyžadující generování typů nebo serializace je obecně znatelná prodleva. To je následkem JIT kompilace potřebného kódu při prvním volání. Oproti tomu první volání totožného požadavku na AOT variantě služby má obdobnou rychlost odpovědi jako průměrný požadavek.
@@ -146,9 +146,9 @@ Za účelem zjištění výkonnosti služeb, jejich potencionálně odlišné vy
 
 \tab{Průměrné využití zdrojů službou BPS a doba odpovědi výpočtu Fibonacciho čísla}{tab:service_metrics}{1.0}{|l|r|r|r|r|}{
   \hline
-  Služba - Režim & CPU (ms) & IO (ns) & Paměť (MB) & Doba požadavku (s) \\ \hline \hline
-  \emph{BPS-AOT} & 58.4 & 2.940 & 46.1 & 5.80 \\ \hline
-  \emph{BPS-JIT} & 48.8 & 1.164 & 44.8 & 6.07  \\ \hline
+  Služba - Režim & CPU (\%) & IO (ns) & Paměť (MB) & Doba požadavku (s) \\ \hline \hline
+  \emph{BPS-AOT} & 2.596 & 0.550 & 24.5 & 5.80 \\ \hline
+  \emph{BPS-JIT} & 2.783 & 0.637 & 32.1 & 6.07  \\ \hline
 }
 
 Výsledky testování ukázaly že při náročné výpočetní zátěži žádná z kompilací nebyla výrazně výkonnější. Oproti dřívějším situacím využila AOT kompilovaná služba více času CPU než JIT kompilovaná. Tato skutečnost naznačuje, že výkonnostní výhody AOT služeb jsou při větší zátěži srovnány. V ostatních měřených hodnotách byly rozdíly zanedbatelné. 
@@ -177,16 +177,17 @@ Výsledky ukázaly očekávané chování dle předchozích výsledků a hypoté
 
 \n{3}{Scénář 5 - Rychlost odpovědi služby po startu}
 
-V tomto scénáři byla vyvolána simulace Serveless nasazení. Jednotlivé varianty služby SRS byly v rámci testu spuštěny, kontrolovány než se dostaly do stavu \emph{healthy} a následně nad nimi byl zavolán dotaz pro získání generovaných dat. Tabulka níže zobrazuje průměrné využití paměti a dobu odpovědi služby SRS v testovacím scénáři 5 pro oba kompilační režimy. 
+V tomto scénáři byla vyvolána simulace Serveless nasazení. Jednotlivé varianty služby SRS byly v rámci testu spuštěny, kontrolovány než se dostaly do stavu \emph{healthy} a následně nad nimi byl zavolán dotaz pro získání generovaných dat. Pro tento specifický scénář bylo doplněno testování i trimmed verze JIT služby SRS. Tabulka níže zobrazuje průměrné využití paměti a dobu odpovědi služby SRS v testovacím scénáři 5 pro oba kompilační režimy. 
 
 \tab{Průměrné využití zdrojů službou SRS a doba odpovědi včetně startu služby}{tab:service_metrics}{1.0}{|l|r|r|r|r|}{
   \hline
   Služba - Režim & Doba startu služby a požadavku (s) & Paměť (MB) \\ \hline \hline
-  \emph{SRS-AOT} & 0.91 & 9.59 \\ \hline
-  \emph{SRS-JIT} & 1.40 & 8.46 \\ \hline
+  \emph{SRS-AOT} & 0.945 & 12.40 \\ \hline
+  \emph{SRS-JIT} & 2.434 & 33.07 \\ \hline
+  \emph{SRS-JIT-Trimmed} & 2.464 & 35.84 \\ \hline
 }
 
-Výsledky ukázaly, že služba kompilovaná nativním AOT způsobem je rychleji dostupná a odpovídá na požadavky dříve než služba kompilovaná pro CLR. Oproti propagovaným zrychlení v dokumentaci .NET však nebylo dosaženo tak výrazného rozdílu. To je dáno režií kontejneru, tedy jeho OS. Rychlost odpovědi je tedy velkým poměrem závislá na konkrétním prostředí, ve kterém je služba spuštěna a scénáři nasazení. V případě microservice architektury a kontejnerizovaného nasazení je tato hodnota kritickým faktorem. Propagovaný výrazně rychlejší start AOT služby, na již běžícím systému, nehraje sám o sobě roli.
+Výsledky ukázaly, že služba kompilovaná nativním AOT způsobem je výrazně rychleji dostupná a odpovídá na požadavky dříve než služba kompilovaná pro CLR. Celková doba startu kontejneru však nepoměrně odpovídá propagované rychlosti startu samotného programu. To je dáno režií kontejneru, tedy jeho OS. Rychlost odpovědi je tedy velkým poměrem závislá na konkrétním prostředí, ve kterém je služba spuštěna a scénáři nasazení. V případě microservice architektury a kontejnerizovaného nasazení je kritickým faktorem právě doba odpovědi včetně včetně kontejneru. Přesto výsledek ukazuje, že AOT kompilovaná služba je mnohem vhodnější varianta pro scénáře, kdy není vhodné aby odpovídající kontejner neustále běžel. Ať už je důvodem pro tento stav úspora zdrojů nebo bezpečnostní požadavky.
 
 \n{2}{Závěr analýzy}
 
@@ -195,5 +196,5 @@ Na základě výsledků vývoje, výstupu a testování služeb lze zhodnotit de
 \begin{itemize}
   \item \textbf{Hypotéza 1} - Hypotéza, že vývoj služeb s jak AOT, tak JIT kompilací je v rámci podporované funkcionality systémových knihoven a ASP.NET možný s podobným API se ukázal jako ne zcela pravdivý. Při vývoji nastaly komplikace se serializací konfigurace, na které bylo nutné reagovat využitím odlišného API. Další problémy nastaly s využitím Entity Framework. Tento ORM využívá pro provádění operací nad databází tzv. tracking, který zaznamená změny nad aplikačními objekty a podle nich tvoří výsledné databázové operace. Vypnutím trackingu bylo umožněno se na datové entity dotázat a aktualizovat je. Operace vložení nové entity však bez trackingu nebyla možná. Pro knihovny 3. stran lze obecně říci, že podpora AOT kompilace není vždy úplně zřejmá. I v situacích, kdy AOT varování jsou implementovány, neznamenají nutně, že využité API nebude funkční, ale jejich absence ve výpisu kompilace nezaručí bezproblémový běh aplikace.
   \item \textbf{Hypotéza 2} - Výsledky ukazují, že služby kompilované nativně AOT se výrazněji rychleji spouští jak na hostitelských systémech, tak v kontejnerizovaném prostředí. Ovšem při započtení režie startu virtualizovaného OS, není tento rozdíl až tak markantní. Binární velikosti samotných aplikací jsou mnohonásobně větší, než je tomu u služeb vyžadující CLR. Vytvořené obrazy nativních AOT služeb disponují menší velikostí než obrazy JIT služeb s plnohodnotným runtime, ovšem jejich velikost je obdobná jako u specificky zmenšených JIT služeb. Výsledné obrazy AOT služeb jsou ve výsledku ekvivalentní velikostí a rychleji spustitelné. Hypotéza nebyla potvrzena.
-  \item \textbf{Hypotéza 3} - Na základě dostupných metrik bylo potvrzeno, že obecně služby kompilované AOT mají menší využití CPU. Využití paměti a IO se ukázalo být srovnatelné jak u služeb kompilovaných JIT v CLR. Toto chování je způsobeno rozdílem v době, kdy se generují potřebné typy a části funkcionality aplikace. JIT kompilace umožňuje za provozu využít méně paměti, nicméně ani tento fakt nebyl pravidlem ve všech scénářích. Zároveň bylo ale pozorováno zvýšené využití GC v případě služeb kompilovaných AOT. I přes tuto dodatečnou režii byly obecně efektivnější a hypotéza byla potvrzena. Rozdíly však nebyly jednoznačné a signifikantní, aby bylo možné určit, který z kompilačních režimů produkuje výkonnější služby. 
+  \item \textbf{Hypotéza 3} - Na základě dostupných metrik bylo potvrzeno, že obecně služby kompilované AOT mají menší využití CPU. Využití paměti a IO se ukázalo být srovnatelné jak u služeb kompilovaných JIT v CLR. Toto chování je způsobeno rozdílem v době, kdy se generují potřebné typy a části funkcionality aplikace. JIT kompilace umožňuje za provozu využít méně paměti, nicméně ani tento fakt nebyl pravidlem ve všech scénářích. Zároveň bylo ale pozorováno zvýšené využití GC v případě služeb kompilovaných AOT. I přes tuto dodatečnou režii byly obecně efektivnější a hypotéza byla potvrzena. Rozdíly však nebyly tak signifikantní u náročnějších procesů a významný rozdíl mezi kompilacemi byl znatelný primárně při požadavcích s malým zatížením na službu.
 \end{itemize}

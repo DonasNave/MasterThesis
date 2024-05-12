@@ -279,6 +279,44 @@ services:
           cpus: '0.25'
           memory: 200M
 
+
+##################
+#  JIT Services  #
+##################
+
+  srs-jit-trimmed-service:
+    image: dta-srs:jit-trimmed-latest
+    container_name: srs-jit-trimmed-service
+    build:
+      context: ../../DTA
+      dockerfile: Services/DTA.SRS/JIT.Trimmed.Dockerfile
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "--quiet", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    environment:
+      - "DTA_JIT_SRS_Logging__LogLevel__Default=Debug"
+      - "DTA_JIT_SRS_Logging__LogLevel__OpenTelemetry=Debug"
+      - "DTA_JIT_SRS_OpenTelemetrySettings__ExporterEndpoint=http://otel-lgtm:4317"
+      - "DTA_JIT_SRS_OpenTelemetrySettings__ServiceNameSuffix=-trimmed"
+    ports:
+      - "12001:8080"
+    depends_on:
+      otel-lgtm:
+        condition: service_started
+    networks:
+      - stack-network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 400M
+        reservations:
+          cpus: '0.25'
+          memory: 200M
+
 ###################
 #  Communication  #
 ###################

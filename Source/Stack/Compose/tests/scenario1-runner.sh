@@ -23,7 +23,7 @@ run_k6_test() {
 echo "Starting tests for services"
 
 # Loop over services and perform actions
-jq -c '.services[] | select(.protocol == "http")' config.json | while IFS= read -r service; do
+jq -c '.services[] | select(.protocol == "http") and (.compilation != "JIT-Trimmed")' config.json | while IFS= read -r service; do
     name=$(echo "$service" | jq -r '.name')
     url=$(echo "$service" | jq -r '.url')
     compilation=$(echo "$service" | jq -r '.compilation')
