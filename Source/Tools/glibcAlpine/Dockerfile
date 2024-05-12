@@ -1,6 +1,6 @@
 FROM alpine:3.19.0
 
-ENV GLIBC_VERSION 2.35-r1
+ENV GLIBC_VERSION 2.32
 
 # Download and install glibc
 RUN apk add --update curl && \

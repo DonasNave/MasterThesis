@@ -11,3 +11,7 @@ LGTM (Liveness, Giveness, Traffic, Monitoring) is a monitoring stack that is use
 - Loki
 - Tempo
 - OpenTelemetry Collector
+
+## glibcAlpine
+
+glibcAlpine is a Docker image that is based on the Alpine image but with glibc installed. This was an attempt to create a smaller glibc based image for the services.
