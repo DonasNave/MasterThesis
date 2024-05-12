@@ -1,5 +1,8 @@
 namespace DTA.Models.Signal;
 
+/// <summary>
+/// Represents a unit of measurement
+/// </summary>
 public enum UnitEnum
 {
     Volt,

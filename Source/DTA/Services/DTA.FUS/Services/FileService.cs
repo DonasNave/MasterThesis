@@ -12,6 +12,7 @@ namespace DTA.FUS.Services;
 #endif
 public class FileService : IFileService
 {
+    /// <inheritdoc />
     public async Task<IResult> Upload(IFormFile? file)
     {
         if (file == null || file.Length == 0)
@@ -19,7 +20,7 @@ public class FileService : IFileService
 
         await using var stream = new MemoryStream();
         await file.CopyToAsync(stream);
-    
+
         var fileModel = new DtaFile
         {
             FileName = file.FileName,
@@ -29,17 +30,18 @@ public class FileService : IFileService
         const string sql = """INSERT INTO "Files" ("FileName", "Content") VALUES (@FileName, @Content) RETURNING "Id";""";
 
         await using var connection = new NpgsqlConnection(DbConfiguration.DefaultConnectionString);
-    
+
         var id = await connection.ExecuteScalarAsync<int>(sql, fileModel);
         return Results.Ok(new CommonResponse { Id = id });
     }
 
+    /// <inheritdoc />
     public async Task<IResult> Download(int id)
     {
         const string sql = """SELECT "Id", "FileName", "Content" FROM "Files" WHERE "Id" = @Id;""";
 
         await using var connection = new NpgsqlConnection(DbConfiguration.DefaultConnectionString);
-    
+
         var fileModel = await connection.QueryFirstOrDefaultAsync<DtaFile>(sql, new { Id = id });
         if (fileModel == null)
         {
@@ -50,12 +52,13 @@ public class FileService : IFileService
         return Results.Stream(stream, "application/octet-stream", fileModel.FileName);
     }
 
+    /// <inheritdoc />
     public async Task<DtaFile?> GetFile(int id)
     {
         const string sql = """SELECT "Id", "FileName", "Content" FROM "Files" WHERE "Id" = @Id;""";
 
         await using var connection = new NpgsqlConnection(DbConfiguration.DefaultConnectionString);
-    
+
         return await connection.QueryFirstOrDefaultAsync<DtaFile>(sql, new { Id = id });
     }
 }

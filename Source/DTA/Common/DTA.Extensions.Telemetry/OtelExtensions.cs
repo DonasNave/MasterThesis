@@ -11,8 +11,16 @@ using OpenTelemetry.Trace;
 
 namespace DTA.Extensions.Telemetry;
 
+/// <summary>
+/// Extensions meant for application telemetry configuration
+/// </summary>
 public static class OtelExtensions
 {
+    /// <summary>
+    /// Setup OpenTelemetry configuration, with the provided options. Registers logging, metrics, and tracing.
+    /// </summary>
+    /// <param name="builder">The web application builder</param>
+    /// <param name="optionsAction">Telemetry configuration action</param>
     public static void SetupOpenTelemetry(this IHostApplicationBuilder builder,
         Action<TelemetryConfiguration> optionsAction)
     {
@@ -93,6 +101,10 @@ public static class OtelExtensions
         }));
     }
 
+    /// <summary>
+    /// Map default health check endpoints
+    /// </summary>
+    /// <param name="app">The web application</param>
     public static void MapDefaultEndpoints(this WebApplication app)
     {
         app.MapHealthChecks("/health");

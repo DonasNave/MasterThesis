@@ -3,8 +3,12 @@ using DTA.SRS.Services.Interfaces;
 
 namespace DTA.SRS.Services;
 
+/// <summary>
+/// Service for reading signals
+/// </summary>
 public class ReadingService : IReadingService
 {
+    /// <inheritdoc />
     public async Task<IResult> GetRandomSignals(int count)
     {
         try

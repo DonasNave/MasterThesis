@@ -2,10 +2,18 @@ using DTA.Models.Signal;
 
 namespace DTA.SRS.Helpers;
 
+/// <summary>
+/// Signal generator class
+/// </summary>
 public static class SignalGenerator
 {
     private static readonly Random Random = new();
 
+    /// <summary>
+    /// Generates random signals of a given count
+    /// </summary>
+    /// <param name="numberOfSignals">The number of signals to generate</param>
+    /// <returns>The generated signals</returns>
     public static async Task<List<DtaSignal>> GenerateRandomSignalsAsync(int numberOfSignals)
     {
         var signals = new List<DtaSignal>();
@@ -40,6 +48,10 @@ public static class SignalGenerator
         return signals;
     }
 
+    /// <summary>
+    /// Get a random unit
+    /// </summary>
+    /// <returns>The random unit</returns>
     private static UnitEnum GetRandomUnit()
     {
         //AOT: Enum.GetValues<UnitEnum>() is not supported
@@ -47,6 +59,10 @@ public static class SignalGenerator
         return (UnitEnum)(values.GetValue(Random.Next(values.Length)) ?? 0);
     }
 
+    /// <summary>
+    /// Get a random set of tags
+    /// </summary>
+    /// <returns>Collection of random tags</returns>
     private static string[] GetRandomTags()
     {
         var numberOfTags = Random.Next(1, 5);

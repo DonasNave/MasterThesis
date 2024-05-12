@@ -1,5 +1,8 @@
 namespace DTA.Models.Signal;
 
+/// <summary>
+/// Represents a signal
+/// </summary>
 public class DtaSignal
 {
     public float Value { get; set; }

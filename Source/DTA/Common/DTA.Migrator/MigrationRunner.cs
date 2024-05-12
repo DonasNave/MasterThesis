@@ -3,11 +3,18 @@ using Npgsql;
 
 namespace DTA.Migrator;
 
-
+/// <summary>
+/// DTA migration runner
+/// </summary>
 public static class MigrationRunner
 {
     private const string VersioningTableName = "DtaMigrations";
 
+    /// <summary>
+    /// Apply the migrations
+    /// </summary>
+    /// <param name="serviceCollection">The application service collection</param>
+    /// <param name="configureMigrations">The migrations to apply setup via configuration action</param>
     public static void ApplyMigrations(this IServiceCollection serviceCollection, Action<MigrationCollector> configureMigrations)
     {
         var collector = new MigrationCollector();
@@ -46,6 +53,10 @@ public static class MigrationRunner
         connection.Close();
     }
 
+    /// <summary>
+    /// Initiate the migrator
+    /// </summary>
+    /// <param name="serviceCollection">The application service collection</param>
     public static IServiceCollection InitiateMigrator(this IServiceCollection serviceCollection, string connectionString)
     {
         //Create versioning table if it doesn't exist
@@ -64,6 +75,12 @@ public static class MigrationRunner
         return serviceCollection;
     }
 
+    /// <summary>
+    /// Check if migration needs to be applied
+    /// </summary>
+    /// <param name="version">Migration version</param>
+    /// <param name="connectionString">Database connection string</param>
+    /// <returns>Returns true, when migration needs to be applied, false otherwise</returns>
     private static bool NeedsToApplyMigration(long version, string connectionString)
     {
         //Check if migration has already been applied
@@ -74,11 +91,17 @@ public static class MigrationRunner
                                            SELECT 1 FROM "{VersioningTableName}" WHERE "Version" = {version};
                                            """, connection);
         var exists = cmd.ExecuteScalar() != null;
-        
+
         connection.Close();
         return !exists;
     }
 
+    /// <summary>
+    /// Record migration as applied
+    /// </summary>
+    /// <param name="connectionString">Database connection string</param>
+    /// <param name="version">Migration version</param>
+    /// <param name="migrationName">Migration name</param>
     private static void RecordMigrationAsApplied(string connectionString, long version, string migrationName = "Migration")
     {
         using var connection = new NpgsqlConnection(connectionString);
@@ -92,6 +115,9 @@ public static class MigrationRunner
     }
 }
 
+/// <summary>
+/// Migration collector for options action
+/// </summary>
 public class MigrationCollector
 {
     public List<DtaMigration> Migrations { get; } = [];

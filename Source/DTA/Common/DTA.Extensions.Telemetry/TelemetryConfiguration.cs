@@ -1,5 +1,8 @@
 namespace DTA.Extensions.Telemetry;
 
+/// <summary>
+/// Configuration for telemetry
+/// </summary>
 public class TelemetryConfiguration
 {
     public OpenTelemetrySettings OpenTelemetrySettings { get; set; } = null!;

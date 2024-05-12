@@ -7,12 +7,20 @@ using RabbitMQ.Client.Events;
 
 namespace DTA.BPS.Api.Rabbit;
 
+/// <summary>
+/// Represents a RabbitMq consumer service
+/// </summary>
 public class RabbitMqConsumerService : IDisposable
 {
     private readonly RabbitMqOptions _options;
     private readonly IProcessingService _processingService;
     private readonly string _queueName;
 
+    /// <summary>
+    /// Initializes a new instance of <see cref="RabbitMqConsumerService"/>
+    /// </summary>
+    /// <param name="options">The RabbitMq options</param>
+    /// <param name="processingService">The processing service</param>
     public RabbitMqConsumerService(IOptions<RabbitMqOptions> options, IProcessingService processingService)
     {
         _options = options.Value;
@@ -21,6 +29,9 @@ public class RabbitMqConsumerService : IDisposable
         InitializeConsumer();
     }
 
+    /// <summary>
+    /// Initializes the consumer
+    /// </summary>
     private void InitializeConsumer()
     {
         var factory = new ConnectionFactory { HostName = _options.HostName };
@@ -41,6 +52,11 @@ public class RabbitMqConsumerService : IDisposable
             consumer: consumer);
     }
 
+    /// <summary>
+    /// Handles the message received event
+    /// </summary>
+    /// <param name="model">The model</param>
+    /// <param name="ea">The basic deliver event arguments</param>
     private void OnMessageReceived(object? model, BasicDeliverEventArgs ea)
     {
         var body = ea.Body.ToArray();
@@ -50,6 +66,7 @@ public class RabbitMqConsumerService : IDisposable
         AppMonitor.FilesProcessedCounter.Add(1);
     }
 
+    /// <inheritdoc />
     public void Dispose()
     {
         GC.SuppressFinalize(this);
